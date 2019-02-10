@@ -1,16 +1,17 @@
 import yargs from "yargs";
-import { SassError } from "node-sass";
 
-import { fileToClassNames, Aliases } from "./sass/file-to-class-names";
+import { parse, Aliases, NAME_FORMATS, NameFormat } from "./sass";
 
-const { _: files, includePaths, aliases } = yargs
+const nameFormatDefault: NameFormat = "camel";
+
+const { _: files, includePaths, aliases, nameFormat } = yargs
   .demandOption("_")
-  .option("aliases", { coerce: (obj): Aliases => obj })
+  .option("aliases", { coerce: (obj): Aliases => obj, alias: "a" })
+  .option("nameFormat", {
+    choices: NAME_FORMATS,
+    default: nameFormatDefault,
+    alias: "n"
+  })
   .option("includePaths", { array: true, string: true }).argv;
 
-fileToClassNames(files[0], { includePaths, aliases })
-  .then(console.log)
-  .catch((err: SassError) => {
-    console.error(err.message);
-    console.error(`${err.file}[${err.line}:${err.column}]`);
-  });
+parse(files[0], { includePaths, aliases, nameFormat });

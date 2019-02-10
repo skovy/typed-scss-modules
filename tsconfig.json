@@ -4,6 +4,12 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "css-modules-loader-core": [
+        "./typings/css-modules-loader-core/index.d.ts"
+      ]
+    }
   }
 }
