@@ -6,6 +6,16 @@
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/node-sass": "^3.10.32",
+    "@types/yargs": "^12.0.8",
+    "node-sass": "^4.11.0",
     "typescript": "^3.3.3"
+  },
+  "peerDependencies": {
+    "node-sass": "^4.11.0"
+  },
+  "dependencies": {
+    "css-modules-loader-core": "^1.1.0",
+    "yargs": "^12.0.5"
   }
 }
