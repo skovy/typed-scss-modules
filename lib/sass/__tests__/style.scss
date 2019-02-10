@@ -1,0 +1,13 @@
+.some-styles {
+  color: red;
+}
+
+.nested {
+  &-class {
+    background: green;
+  }
+
+  &-another {
+    border: 1px;
+  }
+}
