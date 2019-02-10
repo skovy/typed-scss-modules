@@ -1,7 +1,5 @@
-import sass, { Importer } from "node-sass";
-import Core from "css-modules-loader-core";
-
-const core = new Core();
+import sass from "node-sass";
+import { sourceToClassNames } from "./source-to-class-names";
 
 export type ClassName = string;
 export type ClassNames = ClassName[];
@@ -25,9 +23,9 @@ const importer = (aliases: Aliases) => (url: string) => {
   return null;
 };
 
-export const sassFileToClassNames = (
+export const fileToClassNames = (
   file: string,
-  { includePaths = [], aliases = {} }: Options
+  { includePaths = [], aliases = {} }: Options = {}
 ) => {
   return new Promise<ClassNames>((resolve, reject) => {
     sass.render(
@@ -42,14 +40,10 @@ export const sassFileToClassNames = (
           return;
         }
 
-        sassSourceToClassNames(result.css).then(({ exportTokens }) => {
+        sourceToClassNames(result.css).then(({ exportTokens }) => {
           resolve(Object.keys(exportTokens));
         });
       }
     );
   });
-};
-
-const sassSourceToClassNames = (source: Loadable) => {
-  return core.load(source);
 };

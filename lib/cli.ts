@@ -1,14 +1,14 @@
 import yargs from "yargs";
 import { SassError } from "node-sass";
 
-import { sassFileToClassNames, Aliases } from "./file-parser";
+import { fileToClassNames, Aliases } from "./sass/file-to-class-names";
 
 const { _: files, includePaths, aliases } = yargs
   .demandOption("_")
   .option("aliases", { coerce: (obj): Aliases => obj })
   .option("includePaths", { array: true, string: true }).argv;
 
-sassFileToClassNames(files[0], { includePaths, aliases })
+fileToClassNames(files[0], { includePaths, aliases })
   .then(console.log)
   .catch((err: SassError) => {
     console.error(err.message);
