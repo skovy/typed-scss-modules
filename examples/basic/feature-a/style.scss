@@ -1,0 +1,9 @@
+@import "variables";
+
+.text {
+  color: $blue;
+
+  &-highlighted {
+    color: $yellow;
+  }
+}
