@@ -1,10 +1,11 @@
 import yargs from "yargs";
 
-import { parse, Aliases, NAME_FORMATS, NameFormat } from "./sass";
+import { Aliases, NAME_FORMATS, NameFormat } from "./sass";
+import { main } from "./main";
 
 const nameFormatDefault: NameFormat = "camel";
 
-const { _: files, includePaths, aliases, nameFormat } = yargs
+const { _: patterns, includePaths, aliases, nameFormat } = yargs
   .demandOption("_")
   .option("aliases", { coerce: (obj): Aliases => obj, alias: "a" })
   .option("nameFormat", {
@@ -14,4 +15,4 @@ const { _: files, includePaths, aliases, nameFormat } = yargs
   })
   .option("includePaths", { array: true, string: true }).argv;
 
-parse(files[0], { includePaths, aliases, nameFormat });
+main(patterns[0], { includePaths, aliases, nameFormat });

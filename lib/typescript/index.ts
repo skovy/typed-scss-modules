@@ -1,0 +1,1 @@
+export { classNamesToTypeDefinitions } from "./class-names-to-type-definition"
