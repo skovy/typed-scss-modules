@@ -7,8 +7,13 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "tsm": "ts-node ./lib/cli.ts"
+    "tsm": "ts-node ./lib/cli.ts",
+    "build": "tsc"
   },
+  "files": [
+    "dist/lib/**/*"
+  ],
+  "bin": "./dist/cli.js",
   "devDependencies": {
     "@types/camelcase": "^4.1.0",
     "@types/glob": "^7.1.1",
