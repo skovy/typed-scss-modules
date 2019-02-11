@@ -10,6 +10,10 @@ const { _: patterns, includePaths, aliases, nameFormat } = yargs
     "Generate .scss.d.ts from CSS module .scss files.\nUsage: $0 <glob pattern> [options]"
   )
   .example(
+    "$0 src",
+    "All .scss files at any level in the src directoy"
+  )
+  .example(
     "$0 src/**/*.scss",
     "All .scss files at any level in the src directoy"
   )
