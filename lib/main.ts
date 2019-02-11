@@ -17,7 +17,7 @@ export const main = (pattern: string, options: Options): void => {
   // all .scss files within that directory. Also, add the directory to the
   // included paths so any imported with a path relative to the root of the
   // project still works as expected without adding many include paths.
-  if (fs.lstatSync(pattern).isDirectory()) {
+  if (fs.existsSync(pattern) && fs.lstatSync(pattern).isDirectory()) {
     if (Array.isArray(options.includePaths)) {
       options.includePaths.push(pattern);
     } else {
@@ -30,7 +30,7 @@ export const main = (pattern: string, options: Options): void => {
 
   // Find all the files that match the provied pattern. Always ignore
   // node_modules anywhere in the directory tree.
-  const files = glob.sync(pattern, { ignore: "**/node_modules/**" });
+  const files = glob.sync(pattern);
 
   if (!files || !files.length) {
     error("No files found.");
