@@ -12,6 +12,6 @@ yarn ts-node ./lib/cli.ts "examples/basic/**/*.scss" --includePaths examples/bas
 ```
 
 - The glob pattern is wrapped in quotes to pass it as a string and avoid executing.
-- `includePaths` with `examples/basic/core` so that `@import 'variables';` is found.
+- `includePaths` with `examples/basic/core` so that `@import 'variables'` is found.
 - `aliases` with `~alias: variables` meaning any `@import '~alias'` resolves to `@import 'variables'`.
 - No file will be output for `variables.scss` since there are no classes.

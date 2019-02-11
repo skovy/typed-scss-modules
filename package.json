@@ -6,7 +6,8 @@
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "tsm": "ts-node ./lib/cli.ts"
   },
   "devDependencies": {
     "@types/camelcase": "^4.1.0",
