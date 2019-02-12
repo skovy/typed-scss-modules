@@ -1,6 +1,6 @@
 {
   "name": "typed-scss-modules",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TypeScript type definition generator for SCSS/SASS",
   "main": "index.js",
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
@@ -13,7 +13,9 @@
   "files": [
     "dist/lib/**/*"
   ],
-  "bin": "./dist/cli.js",
+  "bin": {
+    "tsm": "./dist/lib/cli.js"
+  },
   "devDependencies": {
     "@types/camelcase": "^4.1.0",
     "@types/glob": "^7.1.1",
