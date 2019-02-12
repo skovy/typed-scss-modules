@@ -39,6 +39,7 @@ const { _: patterns, includePaths, aliases, nameFormat } = yargs
   .option("includePaths", {
     array: true,
     string: true,
+    alias: "i",
     describe: "Additional paths to include when trying to resolve imports."
   }).argv;
 
