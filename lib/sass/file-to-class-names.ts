@@ -66,15 +66,15 @@ export const fileToClassNames = (
 };
 
 interface Transformer {
-  (value: string): string;
+  (className: string): string;
 }
 
 const classNameTransformer = (nameFormat: NameFormat): Transformer => {
   switch (nameFormat) {
     case "kebab":
     case "param":
-      return paramcase;
+      return className => paramcase(className);
     case "camel":
-      return camelcase;
+      return className => camelcase(className);
   }
 };
