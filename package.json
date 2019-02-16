@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skovy/typed-scss-modules.git"
+  },
   "scripts": {
     "test": "jest",
     "tsm": "ts-node ./lib/cli.ts",
