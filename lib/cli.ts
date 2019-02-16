@@ -3,11 +3,13 @@
 import yargs from "yargs";
 
 import { Aliases, NAME_FORMATS, NameFormat } from "./sass";
+import { ExportType, EXPORT_TYPES } from "./typescript";
 import { main } from "./main";
 
 const nameFormatDefault: NameFormat = "camel";
+const exportTypeDefault: ExportType = "named";
 
-const { _: patterns, includePaths, aliases, nameFormat } = yargs
+const { _: patterns, includePaths, aliases, nameFormat, exportType } = yargs
   .usage(
     "Generate .scss.d.ts from CSS module .scss files.\nUsage: $0 <glob pattern> [options]"
   )
@@ -36,6 +38,12 @@ const { _: patterns, includePaths, aliases, nameFormat } = yargs
     alias: "n",
     describe: "The name format that should be used to transform class names."
   })
+  .option("exportType", {
+    choices: EXPORT_TYPES,
+    default: exportTypeDefault,
+    alias: "e",
+    describe: "The type of export used for defining the type defintions."
+  })
   .option("includePaths", {
     array: true,
     string: true,
@@ -43,4 +51,4 @@ const { _: patterns, includePaths, aliases, nameFormat } = yargs
     describe: "Additional paths to include when trying to resolve imports."
   }).argv;
 
-main(patterns[0], { includePaths, aliases, nameFormat });
+main(patterns[0], { includePaths, aliases, nameFormat, exportType });

@@ -1,0 +1,15 @@
+.i {
+  color: orange;
+
+  &-am {
+    &-kebab {
+      &-cased {
+        color: red;
+      }
+    }
+  }
+}
+
+.while {
+  color: blue;
+}
