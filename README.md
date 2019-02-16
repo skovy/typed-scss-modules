@@ -74,3 +74,9 @@ An object of aliases to map to their corresponding paths. This example will repl
 - **Example**: `tsm src --nameFormat camelCase`
 
 The class naming format to use when converting the classes to type definitions.
+
+## Alternatives
+
+This package was heavily influenced on [typed-css-modules](https://github.com/Quramy/typed-css-modules) which generates TypeScript definitions (`.d.ts`) files for CSS Modules that are written in CSS (`.css`).
+
+This package is currently used as a CLI. There are also [packages that generate types as a webpack loader](https://github.com/Jimdo/typings-for-css-modules-loader).
