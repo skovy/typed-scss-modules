@@ -1,6 +1,6 @@
 {
   "name": "typed-scss-modules",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TypeScript type definition generator for SCSS/SASS",
   "main": "index.js",
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
