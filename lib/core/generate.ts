@@ -10,7 +10,10 @@ import { writeFile } from "./write-file";
  * @param pattern the file pattern to generate type definitions for
  * @param options the CLI options
  */
-export const generate = (pattern: string, options: MainOptions): void => {
+export const generate = async (
+  pattern: string,
+  options: MainOptions
+): Promise<void> => {
   // Find all the files that match the provied pattern.
   const files = glob.sync(pattern);
 
@@ -23,11 +26,12 @@ export const generate = (pattern: string, options: MainOptions): void => {
   // provide a (hopefully) helpful warning.
   if (files.length === 1) {
     alerts.warn(
-      'Only 1 file found. If using a glob pattern (eg: dir/**/*.scss) make sure to wrap in quotes (eg: "dir/**/*.scss").'
+      `Only 1 file found for ${pattern}. If using a glob pattern (eg: dir/**/*.scss) make sure to wrap in quotes (eg: "dir/**/*.scss").`
     );
   }
 
   alerts.success(`Found ${files.length} files. Generating type defintions...`);
 
-  files.map(file => writeFile(file, options));
+  // Wait for all the type definitions to be written.
+  await Promise.all(files.map(file => writeFile(file, options)));
 };

@@ -15,8 +15,11 @@ import { MainOptions } from "./types";
  * @param file the SCSS file to generate types for
  * @param options the CLI options
  */
-export const writeFile = (file: string, options: MainOptions): void => {
-  fileToClassNames(file, options)
+export const writeFile = (
+  file: string,
+  options: MainOptions
+): Promise<void> => {
+  return fileToClassNames(file, options)
     .then(classNames => {
       const typeDefinition = classNamesToTypeDefinitions(
         classNames,
@@ -25,7 +28,7 @@ export const writeFile = (file: string, options: MainOptions): void => {
 
       if (!typeDefinition) {
         alerts.notice(`[NO GENERATED TYPES] ${file}`);
-        return null;
+        return;
       }
 
       const path = getTypeDefinitionPath(file);
