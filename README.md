@@ -5,6 +5,8 @@
 
 Generate TypeScript definitions (`.d.ts`) files for CSS Modules that are written in SCSS (`.scss`).
 
+![Example](/docs/typed-scss-modules-example.gif)
+
 For example, given the following SCSS:
 
 ```scss
@@ -53,6 +55,14 @@ yarn tsm src
 For all possible commands, run `tsm --help`.
 
 The only required argument is the directoy where all SCSS files are located. Running `tsm src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `tsm src/*.scss`
+
+### `--watch` (`-w`)
+
+- **Type**: `boolean`
+- **Default**: `false`
+- **Example**: `tsm src --watch`
+
+Watch for files that get added or are changed and generate the corresponding type definitions.
 
 ### `--includePaths` (`-i`)
 
