@@ -1,4 +1,4 @@
-import { classNamesToTypeDefinitions } from "../class-names-to-type-definition";
+import { classNamesToTypeDefinitions } from "../../lib/typescript";
 
 describe("classNamesToTypeDefinitions", () => {
   it("converts an array of class name strings to type definitions", () => {

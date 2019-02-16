@@ -1,4 +1,4 @@
-import { fileToClassNames } from "../file-to-class-names";
+import { fileToClassNames } from "../../lib/sass";
 
 describe("fileToClassNames", () => {
   test("it converts a file path to an array of class names (default camel cased)", async () => {
