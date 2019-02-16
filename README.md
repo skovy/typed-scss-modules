@@ -69,11 +69,76 @@ An object of aliases to map to their corresponding paths. This example will repl
 
 ### `--nameFormat` (`-n`)
 
-- **Type**: `camelCase`
-- **Default**: `camelCase`
-- **Example**: `tsm src --nameFormat camelCase`
+- **Type**: `"camel" | "kebab" | "param"`
+- **Default**: `"camel"`
+- **Example**: `tsm src --nameFormat camel`
 
 The class naming format to use when converting the classes to type definitions.
+
+### `--exportType` (`-e`)
+
+- **Type**: `"named" | "default"`
+- **Default**: `"named"`
+- **Example**: `tsm src --exportType default`
+
+The export type to use when generating type definitions.
+
+#### `named`
+
+Given the following SCSS:
+
+```scss
+.text {
+  color: blue;
+
+  &-highlighted {
+    color: yellow;
+  }
+}
+```
+
+The following type definitions will be generated:
+
+```typescript
+export const text: string;
+export const textHighlighted: string;
+```
+
+#### `default`
+
+Given the following SCSS:
+
+```scss
+.text {
+  color: blue;
+
+  &-highlighted {
+    color: yellow;
+  }
+}
+```
+
+The following type definitions will be generated:
+
+```typescript
+interface Styles {
+  text: string;
+  textHighlighted: string;
+}
+
+declare const styles: Styles;
+
+export default styles;
+```
+
+This export type is useful when using kebab (param) cased class names since variables with a `-` are not valid variables and will produce invalid types or when a class name is a TypeScript keyword (eg: `while` or `delete`)
+
+## Examples
+
+For examples, see the `examples` directory:
+
+- [Basic Example](/examples/basic)
+- [Default Export Example](/examples/default-export)
 
 ## Alternatives
 
