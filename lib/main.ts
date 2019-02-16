@@ -3,17 +3,24 @@ import fs from "fs";
 import path from "path";
 import glob from "glob";
 import chalk from "chalk";
+import chokidar from "chokidar";
 
 import { Options, fileToClassNames } from "./sass";
-import { classNamesToTypeDefinitions, ExportType } from "./typescript";
+import {
+  classNamesToTypeDefinitions,
+  ExportType,
+  getTypeDefinitionPath
+} from "./typescript";
 
 interface MainOptions extends Options {
   exportType: ExportType;
+  watch: boolean;
 }
 
 const error = (message: string) => console.log(chalk.red(`[ERROR] ${message}`));
 const warn = (message: string) => console.log(chalk.yellowBright(`${message}`));
 const notice = (message: string) => console.log(chalk.gray(`${message}`));
+const info = (message: string) => console.log(chalk.blueBright(`${message}`));
 const success = (message: string) => console.log(chalk.green(message));
 
 export const main = (pattern: string, options: MainOptions): void => {
@@ -32,6 +39,41 @@ export const main = (pattern: string, options: MainOptions): void => {
     pattern = path.resolve(pattern, "**/*.scss");
   }
 
+  if (options.watch) {
+    watch(pattern, options);
+  } else {
+    generate(pattern, options);
+  }
+};
+
+/**
+ * Watch a file glob and generate the corresponding types.
+ *
+ * @param pattern the file pattern to watch for file changes or additions
+ * @param options the CLI options
+ */
+const watch = (pattern: string, options: MainOptions): void => {
+  success("Watching files...");
+
+  chokidar
+    .watch(pattern)
+    .on("change", path => {
+      info(`[CHANGED] ${path}`);
+      writeFile(path, options);
+    })
+    .on("add", path => {
+      info(`[ADDED] ${path}`);
+      writeFile(path, options);
+    });
+};
+
+/**
+ * Given a file glob generate the corresponding types once.
+ *
+ * @param pattern the file pattern to generate type definitions for
+ * @param options the CLI options
+ */
+const generate = (pattern: string, options: MainOptions): void => {
   // Find all the files that match the provied pattern.
   const files = glob.sync(pattern);
 
@@ -50,28 +92,35 @@ export const main = (pattern: string, options: MainOptions): void => {
 
   success(`Found ${files.length} files. Generating type defintions...`);
 
-  for (let index in files) {
-    const file = files[index];
+  files.map(file => writeFile(file, options));
+};
 
-    fileToClassNames(file, options)
-      .then(classNames => {
-        const typeDefinition = classNamesToTypeDefinitions(
-          classNames,
-          options.exportType
-        );
-        const path = `${file}.d.ts`;
+/**
+ * Given a single file generate the proper types.
+ *
+ * @param file the SCSS file to generate types for
+ * @param options the CLI options
+ */
+const writeFile = (file: string, options: MainOptions): void => {
+  fileToClassNames(file, options)
+    .then(classNames => {
+      const typeDefinition = classNamesToTypeDefinitions(
+        classNames,
+        options.exportType
+      );
 
-        if (!typeDefinition) {
-          notice(`No types generated for ${file}`);
-          return null;
-        }
+      if (!typeDefinition) {
+        notice(`[NO GENERATED TYPES] ${file}`);
+        return null;
+      }
 
-        fs.writeFileSync(path, typeDefinition);
-        success(`Generated type defintions: ${path}`);
-      })
-      .catch(({ message, file, line, column }: SassError) => {
-        const location = file ? `(${file}[${line}:${column}])` : "";
-        error(`${message} ${location}`);
-      });
-  }
+      const path = getTypeDefinitionPath(file);
+
+      fs.writeFileSync(path, typeDefinition);
+      success(`[GENERATED TYPES] ${path}`);
+    })
+    .catch(({ message, file, line, column }: SassError) => {
+      const location = file ? `(${file}[${line}:${column}])` : "";
+      error(`${message} ${location}`);
+    });
 };

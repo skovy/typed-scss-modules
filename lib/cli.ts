@@ -9,7 +9,7 @@ import { main } from "./main";
 const nameFormatDefault: NameFormat = "camel";
 const exportTypeDefault: ExportType = "named";
 
-const { _: patterns, includePaths, aliases, nameFormat, exportType } = yargs
+const { _: patterns, ...rest } = yargs
   .usage(
     "Generate .scss.d.ts from CSS module .scss files.\nUsage: $0 <glob pattern> [options]"
   )
@@ -17,6 +17,10 @@ const { _: patterns, includePaths, aliases, nameFormat, exportType } = yargs
   .example(
     "$0 src/**/*.scss",
     "All .scss files at any level in the src directoy"
+  )
+  .example(
+    "$0 src/**/*.scss --watch",
+    "Watch all .scss files at any level in the src directoy that are added or changed"
   )
   .example(
     "$0 src/**/*.scss --includePaths src/core src/variables",
@@ -44,6 +48,13 @@ const { _: patterns, includePaths, aliases, nameFormat, exportType } = yargs
     alias: "e",
     describe: "The type of export used for defining the type defintions."
   })
+  .option("watch", {
+    boolean: true,
+    default: false,
+    alias: "w",
+    describe:
+      "Watch for added or changed files and (re-)generate the type definitions."
+  })
   .option("includePaths", {
     array: true,
     string: true,
@@ -51,4 +62,4 @@ const { _: patterns, includePaths, aliases, nameFormat, exportType } = yargs
     describe: "Additional paths to include when trying to resolve imports."
   }).argv;
 
-main(patterns[0], { includePaths, aliases, nameFormat, exportType });
+main(patterns[0], { ...rest });
