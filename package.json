@@ -1,6 +1,6 @@
 {
   "name": "typed-scss-modules",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TypeScript type definition generator for SCSS/SASS",
   "main": "index.js",
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
@@ -8,7 +8,9 @@
   "scripts": {
     "test": "jest",
     "tsm": "ts-node ./lib/cli.ts",
-    "build": "tsc"
+    "clean": "rm -rf ./dist",
+    "build": "yarn clean && tsc",
+    "prepack": "yarn build"
   },
   "files": [
     "dist/lib/**/*"
