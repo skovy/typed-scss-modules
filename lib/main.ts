@@ -3,7 +3,7 @@ import path from "path";
 
 import { watch, MainOptions, generate } from "./core";
 
-export const main = (pattern: string, options: MainOptions): void => {
+export const main = async (pattern: string, options: MainOptions) => {
   // When the provided pattern is a directory construct the proper glob to find
   // all .scss files within that directory. Also, add the directory to the
   // included paths so any imported with a path relative to the root of the
@@ -22,6 +22,6 @@ export const main = (pattern: string, options: MainOptions): void => {
   if (options.watch) {
     watch(pattern, options);
   } else {
-    generate(pattern, options);
+    await generate(pattern, options);
   }
 };
