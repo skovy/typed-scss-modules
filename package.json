@@ -1,14 +1,23 @@
 {
   "name": "typed-scss-modules",
   "version": "0.0.4",
-  "description": "TypeScript type definition generator for SCSS/SASS",
+  "description": "TypeScript type definition generator for SCSS CSS Modules",
   "main": "index.js",
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skovy/typed-scss-modules.git"
+    "url": "https://github.com/skovy/typed-scss-modules.git"
   },
+  "homepage": "https://github.com/skovy/typed-scss-modules.git#readme",
+  "keywords": [
+    "scss",
+    "css modules",
+    "cli",
+    "typescript",
+    "type generator",
+    "scss modules"
+  ],
   "scripts": {
     "test": "jest",
     "tsm": "ts-node ./lib/cli.ts",
