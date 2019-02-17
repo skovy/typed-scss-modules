@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { watch, MainOptions, generate } from "./core";
+import { watch, MainOptions, generate, listDifferent } from "./core";
 
 export const main = async (pattern: string, options: MainOptions) => {
   // When the provided pattern is a directory construct the proper glob to find
@@ -17,6 +17,11 @@ export const main = async (pattern: string, options: MainOptions) => {
 
     // When the pattern provide is a directory, assume all .scss files within.
     pattern = path.resolve(pattern, "**/*.scss");
+  }
+
+  if (options.listDifferent) {
+    listDifferent(pattern, options);
+    return;
   }
 
   if (options.watch) {

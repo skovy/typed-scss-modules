@@ -14,11 +14,12 @@ describe("main", () => {
 
     await main(pattern, {
       watch: false,
-      exportType: "named"
+      exportType: "named",
+      listDifferent: false
     });
 
     // Three files should match but one is empty
-    expect(fs.writeFileSync).toBeCalledTimes(2);
+    expect(fs.writeFileSync).toBeCalledTimes(3);
 
     expect(fs.writeFileSync).toBeCalledWith(
       `${__dirname}/complex.scss.d.ts`,

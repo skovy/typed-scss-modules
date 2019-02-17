@@ -16,7 +16,8 @@ describe("writeFile", () => {
 
     await writeFile(testFile, {
       watch: false,
-      exportType: "named"
+      exportType: "named",
+      listDifferent: false
     });
 
     expect(fs.writeFileSync).toBeCalledWith(
@@ -34,7 +35,8 @@ describe("writeFile", () => {
 
     await writeFile(testFile, {
       watch: false,
-      exportType: "named"
+      exportType: "named",
+      listDifferent: false
     });
 
     expect(fs.writeFileSync).not.toBeCalled();

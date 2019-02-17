@@ -14,10 +14,11 @@ describe("generate", () => {
 
     await generate(pattern, {
       watch: false,
-      exportType: "named"
+      exportType: "named",
+      listDifferent: false
     });
 
     // Three files should match but one is empty
-    expect(fs.writeFileSync).toBeCalledTimes(2);
+    expect(fs.writeFileSync).toBeCalledTimes(3);
   });
 });
