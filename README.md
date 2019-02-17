@@ -88,6 +88,14 @@ An object of aliases to map to their corresponding paths. This example will repl
 
 The class naming format to use when converting the classes to type definitions.
 
+### `--listDifferent` (`-l`)
+
+- **Type**: `boolean`
+- **Default**: `false`
+- **Example**: `tsm src --listDifferent`
+
+List any type definition files that are different than those that would be generated. If any are different, exit with a status code `1`.
+
 ### `--exportType` (`-e`)
 
 - **Type**: `"named" | "default"`
