@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/skovy/typed-scss-modules.svg?branch=master)](https://travis-ci.com/skovy/typed-scss-modules)
 [![npm version](https://img.shields.io/npm/v/typed-scss-modules.svg?style=flat)](https://www.npmjs.com/package/typed-scss-modules)
 
-Generate TypeScript definitions (`.d.ts`) files for CSS Modules that are written in SCSS (`.scss`).
+Generate TypeScript definitions (`.d.ts`) files for CSS Modules that are written in SCSS (`.scss`). Check out [this post to learn more](https://medium.com/rubber-ducking/generating-typescript-definitions-for-css-modules-using-sass-461e33623ec2?source=friends_link&sk=5de22cc877744ebd8ad55d8dcc1a0894) about the rationale behind this package.
 
 ![Example](/docs/typed-scss-modules-example.gif)
 
