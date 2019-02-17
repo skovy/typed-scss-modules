@@ -55,6 +55,13 @@ const { _: patterns, ...rest } = yargs
     describe:
       "Watch for added or changed files and (re-)generate the type definitions."
   })
+  .option("listDifferent", {
+    boolean: true,
+    default: false,
+    alias: "l",
+    describe:
+      "List any type definitions that are different than those that would be generated."
+  })
   .option("includePaths", {
     array: true,
     string: true,
