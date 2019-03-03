@@ -80,6 +80,15 @@ An array of paths to look in to attempt to resolve your `@import` declarations. 
 
 An object of aliases to map to their corresponding paths. This example will replace any `@import '~alias'` with `@import 'src/core/variables'`.
 
+### `--aliasPrefixes` (`-p`)
+
+- **Type**: `object`
+- **Default**: `{}`
+- **Example**: `tsm src --aliasPrefixes.~ node_modules/`
+
+An object of prefix strings to replace with their corresponding paths. This example will replace any `@import '~bootstrap/lib/bootstrap'` with `@import 'node_modules/bootstrap/lib/bootstrap'`.
+This matches the common use-case for importing scss files from node_modules when `sass-loader` will be used with `webpack` to compile the project.
+
 ### `--nameFormat` (`-n`)
 
 - **Type**: `"camel" | "kebab" | "param"`

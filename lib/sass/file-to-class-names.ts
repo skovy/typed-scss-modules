@@ -16,15 +16,27 @@ export type NameFormat = "camel" | "kebab" | "param";
 export interface Options {
   includePaths?: string[];
   aliases?: Aliases;
+  aliasPrefixes?: Aliases;
   nameFormat?: NameFormat;
 }
 
 export const NAME_FORMATS: NameFormat[] = ["camel", "kebab", "param"];
 
-const importer = (aliases: Aliases) => (url: string) => {
+const importer = (aliases: Aliases, aliasPrefixes: Aliases) => (
+  url: string
+) => {
   if (url in aliases) {
     return {
       file: aliases[url]
+    };
+  }
+
+  const prefixMatch = Object.keys(aliasPrefixes).find(prefix =>
+    url.startsWith(prefix)
+  );
+  if (prefixMatch) {
+    return {
+      file: aliasPrefixes[prefixMatch] + url.substr(prefixMatch.length)
     };
   }
 
@@ -36,6 +48,7 @@ export const fileToClassNames = (
   {
     includePaths = [],
     aliases = {},
+    aliasPrefixes = {},
     nameFormat = "camel"
   }: Options = {} as Options
 ) => {
@@ -46,7 +59,7 @@ export const fileToClassNames = (
       {
         file,
         includePaths,
-        importer: importer(aliases)
+        importer: importer(aliases, aliasPrefixes)
       },
       (err, result) => {
         if (err) {

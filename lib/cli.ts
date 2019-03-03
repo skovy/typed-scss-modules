@@ -30,11 +30,20 @@ const { _: patterns, ...rest } = yargs
     "$0 src/**/*.scss --aliases.~name variables",
     'Replace all imports for "~name" with "variables"'
   )
+  .example(
+    "$0 src/**/*.scss --aliasPrefixes.~ ./node_modules/",
+    'Replace the "~" prefix with "./node_modules/" for all imports beginning with "~"'
+  )
   .demandCommand(1)
   .option("aliases", {
     coerce: (obj): Aliases => obj,
     alias: "a",
     describe: "Alias any import to any other value."
+  })
+  .option("aliasPrefixes", {
+    coerce: (obj): Aliases => obj,
+    alias: "p",
+    describe: "A prefix for any import to rewrite to another value."
   })
   .option("nameFormat", {
     choices: NAME_FORMATS,
