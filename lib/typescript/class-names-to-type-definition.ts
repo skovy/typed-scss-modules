@@ -21,7 +21,7 @@ const isValidName = (className: ClassName) => {
 
   if (!valid) {
     alerts.warn(
-      `[SKIPPING] '${className}' is a reserved javascript keyword. Consider renaming or using --exportType default`
+      `[SKIPPING] '${className}' is a reserved keyword (consider renaming or using --exportType default).`
     );
   }
 
