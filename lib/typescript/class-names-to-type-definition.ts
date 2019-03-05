@@ -1,5 +1,7 @@
-const reserved = require("reserved-words");
+import reserved from "reserved-words";
+
 import { ClassNames, ClassName } from "lib/sass/file-to-class-names";
+import { alerts } from "../core";
 
 export type ExportType = "named" | "default";
 export const EXPORT_TYPES: ExportType[] = ["named", "default"];
@@ -10,16 +12,19 @@ const classNameToNamedTypeDefinition = (className: ClassName) =>
 const classNameToInterfaceKey = (className: ClassName) =>
   `  '${className}': string;`;
 
+const isReservedKeyword = (className: ClassName) =>
+  reserved.check(className, "es5", true) ||
+  reserved.check(className, "es6", true);
+
 const isValidName = (className: ClassName) => {
-  const valid =
-    !reserved.check(className, "es5", true) &&
-    !reserved.check(className, "es6", true);
+  const valid = !isReservedKeyword(className);
+
   if (!valid) {
-    console.log(
-      `Skipping classname '${className}' as it is a reserved javascript keyword - consider either ` +
-        `renaming the scss class or using default exports instead if this classname export is required.`
+    alerts.warn(
+      `[SKIPPING] '${className}' is a reserved javascript keyword. Consider renaming or using --exportType default`
     );
   }
+
   return valid;
 };
 
