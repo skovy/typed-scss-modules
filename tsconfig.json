@@ -13,7 +13,8 @@
     "paths": {
       "css-modules-loader-core": [
         "./typings/css-modules-loader-core/index.d.ts"
-      ]
+      ],
+      "reserved-words": ["./typings/reserved-words/index.d.ts"]
     }
   }
 }
