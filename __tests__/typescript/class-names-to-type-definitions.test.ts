@@ -1,6 +1,10 @@
 import { classNamesToTypeDefinitions, ExportType } from "../../lib/typescript";
 
 describe("classNamesToTypeDefinitions", () => {
+  beforeEach(() => {
+    console.log = jest.fn();
+  });
+
   describe("named", () => {
     it("converts an array of class name strings to type definitions", () => {
       const definition = classNamesToTypeDefinitions(
@@ -17,6 +21,18 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions([], "named");
 
       expect(definition).toBeNull;
+    });
+
+    it("prints a warning if a classname is a reserved keyword and does not include it in the type definitions", () => {
+      const definition = classNamesToTypeDefinitions(
+        ["myClass", "if"],
+        "named"
+      );
+
+      expect(definition).toEqual("export const myClass: string;\n");
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`[SKIPPING] 'if' is a reserved keyword`)
+      );
     });
   });
 
