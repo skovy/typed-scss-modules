@@ -18,8 +18,7 @@ describe("main", () => {
       listDifferent: false
     });
 
-    // Three files should match but one is empty
-    expect(fs.writeFileSync).toBeCalledTimes(3);
+    expect(fs.writeFileSync).toBeCalledTimes(4);
 
     expect(fs.writeFileSync).toBeCalledWith(
       `${__dirname}/complex.scss.d.ts`,

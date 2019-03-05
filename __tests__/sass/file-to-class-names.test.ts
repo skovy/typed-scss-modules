@@ -24,4 +24,47 @@ describe("fileToClassNames", () => {
       expect(result).toEqual(["some-styles", "nested-class", "nested-another"]);
     });
   });
+
+  describe("aliases", () => {
+    test("it converts a file that contains aliases", async () => {
+      const result = await fileToClassNames(`${__dirname}/../aliases.scss`, {
+        aliases: {
+          "~fancy-import": "complex",
+          "~another": "style"
+        }
+      });
+
+      expect(result).toEqual([
+        "someStyles",
+        "nestedClass",
+        "nestedAnother",
+        "someClass",
+        "myCustomClass"
+      ]);
+    });
+  });
+
+  describe("aliasPrefixes", () => {
+    test("it converts a file that contains alias prefixes (but prioritizes aliases)", async () => {
+      const result = await fileToClassNames(
+        `${__dirname}/../alias-prefixes.scss`,
+        {
+          aliases: {
+            "~fancy-import": "complex"
+          },
+          aliasPrefixes: {
+            "~": "nested-styles/"
+          }
+        }
+      );
+
+      expect(result).toEqual([
+        "someStyles",
+        "nestedClass",
+        "nestedAnother",
+        "nestedStyles",
+        "myCustomClass"
+      ]);
+    });
+  });
 });

@@ -18,7 +18,6 @@ describe("generate", () => {
       listDifferent: false
     });
 
-    // Three files should match but one is empty
-    expect(fs.writeFileSync).toBeCalledTimes(3);
+    expect(fs.writeFileSync).toBeCalledTimes(4);
   });
 });

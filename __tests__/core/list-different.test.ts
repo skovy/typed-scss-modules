@@ -18,7 +18,14 @@ describe("writeFile", () => {
     await listDifferent(pattern, {
       watch: false,
       exportType: "named",
-      listDifferent: true
+      listDifferent: true,
+      aliases: {
+        "~fancy-import": "complex",
+        "~another": "style"
+      },
+      aliasPrefixes: {
+        "~": "nested-styles/"
+      }
     });
 
     expect(exit).toHaveBeenCalledWith(1);
