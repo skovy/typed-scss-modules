@@ -23,7 +23,8 @@
     "tsm": "ts-node ./lib/cli.ts",
     "clean": "rm -rf ./dist",
     "build": "yarn clean && tsc",
-    "prepack": "yarn build"
+    "prepack": "yarn build",
+    "check-formatting": "prettier --check '**/*.{js,json,css,md,scss,tsx,ts}'"
   },
   "files": [
     "dist/lib"
