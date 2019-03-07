@@ -24,6 +24,7 @@
     "clean": "rm -rf ./dist",
     "build": "yarn clean && tsc",
     "prepack": "yarn build",
+    "check-types": "tsc --noEmit",
     "check-formatting": "prettier --check '**/*.{js,json,css,md,scss,tsx,ts}'"
   },
   "files": [
