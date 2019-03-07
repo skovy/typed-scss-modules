@@ -1,6 +1,3 @@
 node_modules
 *.log
 dist
-
-# Ignore any decleration files generated for the examples
-examples/**/*.d.ts
