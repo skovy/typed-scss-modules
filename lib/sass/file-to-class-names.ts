@@ -11,7 +11,7 @@ export interface Aliases {
   [index: string]: string;
 }
 
-export type NameFormat = "camel" | "kebab" | "param";
+export type NameFormat = "camel" | "kebab" | "param" | "dashes" | "none";
 
 export interface Options {
   includePaths?: string[];
@@ -20,7 +20,13 @@ export interface Options {
   nameFormat?: NameFormat;
 }
 
-export const NAME_FORMATS: NameFormat[] = ["camel", "kebab", "param"];
+export const NAME_FORMATS: NameFormat[] = [
+  "camel",
+  "kebab",
+  "param",
+  "dashes",
+  "none"
+];
 
 const importer = (aliases: Aliases, aliasPrefixes: Aliases) => (
   url: string
@@ -89,5 +95,10 @@ const classNameTransformer = (nameFormat: NameFormat): Transformer => {
       return className => paramcase(className);
     case "camel":
       return className => camelcase(className);
+    case "dashes":
+      return className =>
+        /-/.test(className) ? camelcase(className) : className;
+    case "none":
+      return className => className;
   }
 };

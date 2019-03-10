@@ -23,6 +23,22 @@ describe("fileToClassNames", () => {
 
       expect(result).toEqual(["some-styles", "nested-class", "nested-another"]);
     });
+
+    test("it converts a file path to an array of class names where only classes with dashes in the names are altered", async () => {
+      const result = await fileToClassNames(`${__dirname}/../dashes.scss`, {
+        nameFormat: "dashes"
+      });
+
+      expect(result).toEqual(["App", "Logo", "appHeader"]);
+    });
+
+    test("it does not change class names when nameFormat is set to none", async () => {
+      const result = await fileToClassNames(`${__dirname}/../dashes.scss`, {
+        nameFormat: "none"
+      });
+
+      expect(result).toEqual(["App", "Logo", "App-Header"]);
+    });
   });
 
   describe("aliases", () => {
