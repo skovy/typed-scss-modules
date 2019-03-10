@@ -17,15 +17,19 @@ const isReservedKeyword = (className: ClassName) =>
   reserved.check(className, "es6", true);
 
 const isValidName = (className: ClassName) => {
-  const valid = !isReservedKeyword(className);
-
-  if (!valid) {
+  if (isReservedKeyword(className)) {
     alerts.warn(
       `[SKIPPING] '${className}' is a reserved keyword (consider renaming or using --exportType default).`
     );
+    return false;
+  } else if (/-/.test(className)) {
+    alerts.warn(
+      `[SKIPPING] '${className}' contains dashes (consider using 'camelCase' or 'dashes' for --nameFormat or using --exportType default).`
+    );
+    return false;
   }
 
-  return valid;
+  return true;
 };
 
 export const classNamesToTypeDefinitions = (

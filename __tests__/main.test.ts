@@ -18,7 +18,7 @@ describe("main", () => {
       listDifferent: false
     });
 
-    expect(fs.writeFileSync).toBeCalledTimes(4);
+    expect(fs.writeFileSync).toBeCalledTimes(5);
 
     expect(fs.writeFileSync).toBeCalledWith(
       `${__dirname}/complex.scss.d.ts`,

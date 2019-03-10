@@ -18,6 +18,6 @@ describe("generate", () => {
       listDifferent: false
     });
 
-    expect(fs.writeFileSync).toBeCalledTimes(4);
+    expect(fs.writeFileSync).toBeCalledTimes(5);
   });
 });
