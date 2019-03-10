@@ -34,6 +34,18 @@ describe("classNamesToTypeDefinitions", () => {
         expect.stringContaining(`[SKIPPING] 'if' is a reserved keyword`)
       );
     });
+
+    it("prints a warning if a classname is invalid and does not include it in the type definitions", () => {
+      const definition = classNamesToTypeDefinitions(
+        ["myClass", "invalid-variable"],
+        "named"
+      );
+
+      expect(definition).toEqual("export const myClass: string;\n");
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`[SKIPPING] 'invalid-variable' contains dashes`)
+      );
+    });
   });
 
   describe("default", () => {
