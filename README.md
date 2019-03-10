@@ -97,11 +97,11 @@ This matches the common use-case for importing scss files from node_modules when
 
 The class naming format to use when converting the classes to type definitions.
 
-- **camel**: convert all classNames to camel-case, e.g. `App-Logo` => `appLogo`.
-- **kebab**/**param**: convert all classNames to kebab/param case, e.g. `App-Logo` => `app-logo` (all lower case with '-' separators).
-- **dashes**: only convert classNames containing dashes to camel-case, leave others alone, e.g. `App` => `App`, `App-Logo` => `appLogo`. Matches the webpack [css-loader camelCase 'dashesOnly'](https://github.com/webpack-contrib/css-loader#camelcase) option.
-- **none**: do not modify the given classNames (you should use `--exportType default` when using `--nameFormat none` as any classes with a `-` in them are invalid as normal variable names).
-  Note: If you are using create-react-app v2.x and have NOT ejected, `--nameFormat none --exportType default` matches the classNames that are generated in CRA's webpack's config.
+- **camel**: convert all class names to camel-case, e.g. `App-Logo` => `appLogo`.
+- **kebab**/**param**: convert all class names to kebab/param case, e.g. `App-Logo` => `app-logo` (all lower case with '-' separators).
+- **dashes**: only convert class names containing dashes to camel-case, leave others alone, e.g. `App` => `App`, `App-Logo` => `appLogo`. Matches the webpack [css-loader camelCase 'dashesOnly'](https://github.com/webpack-contrib/css-loader#camelcase) option.
+- **none**: do not modify the given class names (you should use `--exportType default` when using `--nameFormat none` as any classes with a `-` in them are invalid as normal variable names).
+  Note: If you are using create-react-app v2.x and have NOT ejected, `--nameFormat none --exportType default` matches the class names that are generated in CRA's webpack's config.
 
 ### `--listDifferent` (`-l`)
 
