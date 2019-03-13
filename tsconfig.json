@@ -9,9 +9,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "outDir": "./dist",
-    "paths": {
-      "reserved-words": ["./typings/reserved-words/index.d.ts"]
-    }
+    "outDir": "./dist"
   }
 }
