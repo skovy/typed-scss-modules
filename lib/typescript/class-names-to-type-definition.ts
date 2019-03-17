@@ -41,9 +41,10 @@ export const classNamesToTypeDefinitions = (
 
     switch (exportType) {
       case "default":
-        typeDefinitions = "interface Styles {\n";
+        typeDefinitions = "export interface Styles {\n";
         typeDefinitions += classNames.map(classNameToInterfaceKey).join("\n");
         typeDefinitions += "\n}\n\n";
+        typeDefinitions += "export type ClassNames = keyof Styles;\n\n";
         typeDefinitions += "declare const styles: Styles;\n\n";
         typeDefinitions += "export default styles;\n";
         return typeDefinitions;
