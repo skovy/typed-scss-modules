@@ -157,17 +157,19 @@ Given the following SCSS:
 The following type definitions will be generated:
 
 ```typescript
-interface Styles {
+export interface Styles {
   text: string;
   textHighlighted: string;
 }
+
+export type ClassNames = keyof Styles;
 
 declare const styles: Styles;
 
 export default styles;
 ```
 
-This export type is useful when using kebab (param) cased class names since variables with a `-` are not valid variables and will produce invalid types or when a class name is a TypeScript keyword (eg: `while` or `delete`)
+This export type is useful when using kebab (param) cased class names since variables with a `-` are not valid variables and will produce invalid types or when a class name is a TypeScript keyword (eg: `while` or `delete`). Additionally, the `Styles` and `ClassNames` types are exported which can be useful for properly typing variables, functions, etc. when working with dynamic class names.
 
 ## Examples
 
