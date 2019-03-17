@@ -56,7 +56,7 @@ describe("classNamesToTypeDefinitions", () => {
       );
 
       expect(definition).toEqual(
-        "interface Styles {\n  'myClass': string;\n  'yourClass': string;\n}\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+        "export interface Styles {\n  'myClass': string;\n  'yourClass': string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
       );
     });
 
