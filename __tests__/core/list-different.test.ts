@@ -17,6 +17,7 @@ describe("writeFile", () => {
 
     await listDifferent(pattern, {
       watch: false,
+      ignoreInitial: false,
       exportType: "named",
       listDifferent: true,
       aliases: {
@@ -40,6 +41,7 @@ describe("writeFile", () => {
 
     await listDifferent(pattern, {
       watch: false,
+      ignoreInitial: false,
       exportType: "named",
       listDifferent: true
     });

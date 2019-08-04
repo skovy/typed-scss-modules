@@ -64,6 +64,11 @@ const { _: patterns, ...rest } = yargs
     describe:
       "Watch for added or changed files and (re-)generate the type definitions."
   })
+  .option("ignoreInitial", {
+    boolean: true,
+    default: false,
+    describe: "Skips the initial build when passing the watch flag."
+  })
   .option("listDifferent", {
     boolean: true,
     default: false,
