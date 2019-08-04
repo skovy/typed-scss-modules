@@ -14,6 +14,7 @@ describe("generate", () => {
 
     await generate(pattern, {
       watch: false,
+      ignoreInitial: false,
       exportType: "named",
       listDifferent: false
     });

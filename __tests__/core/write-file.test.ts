@@ -16,6 +16,7 @@ describe("writeFile", () => {
 
     await writeFile(testFile, {
       watch: false,
+      ignoreInitial: false,
       exportType: "named",
       listDifferent: false
     });
@@ -35,6 +36,7 @@ describe("writeFile", () => {
 
     await writeFile(testFile, {
       watch: false,
+      ignoreInitial: false,
       exportType: "named",
       listDifferent: false
     });

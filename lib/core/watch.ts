@@ -14,7 +14,9 @@ export const watch = (pattern: string, options: MainOptions): void => {
   alerts.success("Watching files...");
 
   chokidar
-    .watch(pattern)
+    .watch(pattern, {
+      ignoreInitial: options.ignoreInitial
+    })
     .on("change", path => {
       alerts.info(`[CHANGED] ${path}`);
       writeFile(path, options);

@@ -5,4 +5,5 @@ export interface MainOptions extends Options {
   exportType: ExportType;
   listDifferent: boolean;
   watch: boolean;
+  ignoreInitial: boolean;
 }

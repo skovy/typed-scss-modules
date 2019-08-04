@@ -14,6 +14,7 @@ describe("main", () => {
 
     await main(pattern, {
       watch: false,
+      ignoreInitial: false,
       exportType: "named",
       listDifferent: false
     });

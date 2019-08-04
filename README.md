@@ -64,6 +64,14 @@ The only required argument is the directoy where all SCSS files are located. Run
 
 Watch for files that get added or are changed and generate the corresponding type definitions.
 
+### `--ignoreInitial`
+
+- **Type**: `boolean`
+- **Default**: `false`
+- **Example**: `tsm src --watch --ignoreInitial`
+
+Skips the initial build when passing the watch flag. Use this when running concurrently with another watch, but the initial build should happen first. You would run without watch first, then start off the concurrent runs after.
+
 ### `--includePaths` (`-i`)
 
 - **Type**: `string[]`
