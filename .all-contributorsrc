@@ -4,7 +4,37 @@
   ],
   "imageSize": 100,
   "commit": false,
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat)](#contributors)",
   "contributors": [
+    {
+      "login": "skovy",
+      "name": "Spencer Miskoviak",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5247455?v=4",
+      "profile": "https://skovy.dev",
+      "contributions": [
+        "bug",
+        "blog",
+        "code",
+        "example",
+        "ideas",
+        "infra",
+        "maintenance",
+        "review",
+        "security",
+        "test"
+      ]
+    },
+    {
+      "login": "dawnmist",
+      "name": "Janeene Beeforth",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5810277?v=4",
+      "profile": "https://github.com/dawnmist",
+      "contributions": [
+        "bug",
+        "code",
+        "doc"
+      ]
+    },
     {
       "login": "ericbf",
       "name": "Eric Ferreira",
@@ -20,5 +50,6 @@
   "projectName": "typed-scss-modules",
   "projectOwner": "skovy",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "commitConvention": "angular"
 }

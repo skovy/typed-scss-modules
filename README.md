@@ -1,6 +1,6 @@
 # 🎁 typed-scss-modules
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat)](#contributors)
 [![Build Status](https://travis-ci.com/skovy/typed-scss-modules.svg?branch=master)](https://travis-ci.com/skovy/typed-scss-modules)
 [![npm version](https://img.shields.io/npm/v/typed-scss-modules.svg?style=flat)](https://www.npmjs.com/package/typed-scss-modules)
 
@@ -190,12 +190,18 @@ This package is currently used as a CLI. There are also [packages that generate 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://skovy.dev"><img src="https://avatars1.githubusercontent.com/u/5247455?v=4" width="100px;" alt="Spencer Miskoviak"/><br /><sub><b>Spencer Miskoviak</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/issues?q=author%3Askovy" title="Bug reports">🐛</a> <a href="#blog-skovy" title="Blogposts">📝</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=skovy" title="Code">💻</a> <a href="#example-skovy" title="Examples">💡</a> <a href="#ideas-skovy" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-skovy" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-skovy" title="Maintenance">🚧</a> <a href="#review-skovy" title="Reviewed Pull Requests">👀</a> <a href="#security-skovy" title="Security">🛡️</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=skovy" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/dawnmist"><img src="https://avatars3.githubusercontent.com/u/5810277?v=4" width="100px;" alt="Janeene Beeforth"/><br /><sub><b>Janeene Beeforth</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/issues?q=author%3Adawnmist" title="Bug reports">🐛</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=dawnmist" title="Code">💻</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=dawnmist" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/ericbf"><img src="https://avatars0.githubusercontent.com/u/2483476?v=4" width="100px;" alt="Eric Ferreira"/><br /><sub><b>Eric Ferreira</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/commits?author=ericbf" title="Code">💻</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=ericbf" title="Documentation">📖</a></td>
   </tr>
 </table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
