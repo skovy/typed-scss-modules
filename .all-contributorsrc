@@ -4,7 +4,7 @@
   ],
   "imageSize": 100,
   "commit": false,
-  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat)](#contributors)",
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat)](#contributors-)",
   "contributors": [
     {
       "login": "skovy",
