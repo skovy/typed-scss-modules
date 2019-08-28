@@ -1,4 +1,5 @@
 import fs from "fs";
+import slash from "slash";
 
 import { main } from "../lib/main";
 
@@ -19,14 +20,16 @@ describe("main", () => {
       listDifferent: false
     });
 
+    const expectedDirname = slash(__dirname);
+
     expect(fs.writeFileSync).toBeCalledTimes(5);
 
     expect(fs.writeFileSync).toBeCalledWith(
-      `${__dirname}/complex.scss.d.ts`,
+      `${expectedDirname}/complex.scss.d.ts`,
       "export const someStyles: string;\nexport const nestedClass: string;\nexport const nestedAnother: string;\n"
     );
     expect(fs.writeFileSync).toBeCalledWith(
-      `${__dirname}/style.scss.d.ts`,
+      `${expectedDirname}/style.scss.d.ts`,
       "export const someClass: string;\n"
     );
   });

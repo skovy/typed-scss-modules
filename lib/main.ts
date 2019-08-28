@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import slash from "slash";
 
 import { watch, MainOptions, generate, listDifferent } from "./core";
 
@@ -16,7 +17,7 @@ export const main = async (pattern: string, options: MainOptions) => {
     }
 
     // When the pattern provide is a directory, assume all .scss files within.
-    pattern = path.resolve(pattern, "**/*.scss");
+    pattern = slash(path.resolve(pattern, "**/*.scss"));
   }
 
   if (options.listDifferent) {
