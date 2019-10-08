@@ -18,7 +18,8 @@ describe("main", () => {
       ignoreInitial: false,
       exportType: "named",
       listDifferent: false,
-      logLevel: "verbose"
+      logLevel: "verbose",
+      watchTimeout: 50
     });
 
     const expectedDirname = slash(__dirname);

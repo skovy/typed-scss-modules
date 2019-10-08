@@ -19,7 +19,8 @@ describe("writeFile", () => {
       ignoreInitial: false,
       exportType: "named",
       listDifferent: false,
-      logLevel: "verbose"
+      logLevel: "verbose",
+      watchTimeout: 50
     });
 
     expect(fs.writeFileSync).toBeCalledWith(
@@ -40,7 +41,8 @@ describe("writeFile", () => {
       ignoreInitial: false,
       exportType: "named",
       listDifferent: false,
-      logLevel: "verbose"
+      logLevel: "verbose",
+      watchTimeout: 50
     });
 
     expect(fs.writeFileSync).not.toBeCalled();
