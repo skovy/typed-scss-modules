@@ -1,24 +1,17 @@
 language: node_js
-
 cache: yarn
-
-jobs:
-  include:
-    - stage: test
-      script:
-        - yarn check-types
-        - yarn test
-        - yarn check-formatting
-    - stage: release
-      deploy:
-        - skip_cleanup: true
-        - provider: npm
-          email: $NPM_API_EMAIL
-          api_key: $NPM_API_TOKEN
-          on: 
-            tags: true
-        - provider: releases
-          api_key: $GITHUB_API_TOKEN
-          skip_cleanup: true
-          on: 
-            tags: true
+script:
+  - yarn check-types
+  - yarn test
+  - yarn check-formatting
+deploy:
+  - provider: npm
+    skip_cleanup: true
+    email: $NPM_API_EMAIL
+    api_key: $NPM_API_TOKEN
+    on: 
+      tags: true
+  - provider: releases
+    api_key: $GITHUB_API_TOKEN
+    on: 
+      tags: true
