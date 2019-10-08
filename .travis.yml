@@ -1,6 +1,15 @@
 language: node_js
 cache: yarn
-script:
-  - yarn check-types
-  - yarn test
-  - yarn check-formatting
+jobs:
+  include:
+    - stage: tests
+      script:
+        - yarn check-types
+        - yarn test
+        - yarn check-formatting
+    - stage: npm release
+      script: echo "Deploying to npm ..."
+      deploy:
+        provider: npm
+        api_key: $NPM_API_KEY
+        on: deploy-npm-release

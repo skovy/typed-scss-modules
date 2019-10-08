@@ -1,5 +1,5 @@
 {
-  "name": "typed-scss-modules",
+  "name": "@jabuco/typed-scss-modules",
   "version": "0.1.0",
   "description": "TypeScript type definition generator for SCSS CSS Modules",
   "main": "index.js",
@@ -8,6 +8,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/skovy/typed-scss-modules.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "homepage": "https://github.com/skovy/typed-scss-modules.git#readme",
   "keywords": [
