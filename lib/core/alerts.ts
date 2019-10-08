@@ -11,13 +11,15 @@ const checkLogLevel = (
       return true;
     case "info":
       return requiredLevel !== "notice";
-    case "errors":
+    case "minimal":
+      return requiredLevel !== "notice" && requiredLevel !== "info";
+    case "error":
       return (
         requiredLevel !== "notice" &&
         requiredLevel !== "info" &&
         requiredLevel !== "success"
       );
-    case "silent":
+    default:
       return false;
   }
 };

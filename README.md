@@ -59,7 +59,7 @@ The only required argument is the directoy where all SCSS files are located. Run
 
 ### `--logLevel` (`-v`)
 
-- **Type**: `"verbose" | "info" | "errors" | "silent"`
+- **Type**: `"verbose" | "info" | "minimal" | "error" | "silent"`
 - **Default**: `verbose`
 - **Example**: `tsm --logLevel silent src`
 
