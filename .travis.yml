@@ -12,6 +12,7 @@ jobs:
     - stage: release
       deploy:
         - provider: npm
+          email: $NPM_API_EMAIL
           api_key: $NPM_API_TOKEN
           on: 
             tags: true
