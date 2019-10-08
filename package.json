@@ -47,7 +47,7 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.18.2",
     "ts-jest": "^24.1.0",
-    "ts-node": "^8.4.1",
+    "ts-node-dev": "^1.0.0-pre.43",
     "typescript": "^3.6.3"
   },
   "peerDependencies": {
