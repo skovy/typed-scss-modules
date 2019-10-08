@@ -1,12 +1,10 @@
-import fs from "fs";
 import slash from "slash";
-
 import { main } from "../lib/main";
-
+import fs from "../lib/core/write-file-helper";
 describe("main", () => {
   beforeEach(() => {
     // Only mock the write, so the example files can still be read.
-    fs.writeFileSync = jest.fn();
+    fs.writeFile = jest.fn();
     console.log = jest.fn(); // avoid console logs showing up
   });
 
@@ -24,13 +22,13 @@ describe("main", () => {
 
     const expectedDirname = slash(__dirname);
 
-    expect(fs.writeFileSync).toBeCalledTimes(5);
+    expect(fs.writeFile).toBeCalledTimes(5);
 
-    expect(fs.writeFileSync).toBeCalledWith(
+    expect(fs.writeFile).toBeCalledWith(
       `${expectedDirname}/complex.scss.d.ts`,
       "export const someStyles: string;\nexport const nestedClass: string;\nexport const nestedAnother: string;\n"
     );
-    expect(fs.writeFileSync).toBeCalledWith(
+    expect(fs.writeFile).toBeCalledWith(
       `${expectedDirname}/style.scss.d.ts`,
       "export const someClass: string;\n"
     );

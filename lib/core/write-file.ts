@@ -1,7 +1,5 @@
-import { writeFile as nodeWriteFile } from "fs";
-import { promisify } from "util";
 import { SassError } from "node-sass";
-
+import fs from "./write-file-helper";
 import { alerts } from "./alerts";
 import {
   getTypeDefinitionPath,
@@ -9,8 +7,6 @@ import {
 } from "../typescript";
 import { fileToClassNames } from "../sass";
 import { MainOptions } from "./types";
-
-const writeFileAsync = promisify(nodeWriteFile);
 
 /**
  * Given a single file generate the proper types.
@@ -33,7 +29,7 @@ export const writeFile = (
       }
 
       const path = getTypeDefinitionPath(file);
-      await writeFileAsync(path, typeDefinition);
+      await fs.writeFile(path, typeDefinition);
       return path;
     })
     .then(path => alert.success(`[GENERATED TYPES] ${path}`))
@@ -41,4 +37,9 @@ export const writeFile = (
       const location = file ? `(${file}[${line}:${column}])` : "";
       alert.error(`${message} ${location}`);
     });
+};
+
+export default {
+  writeFileHelper: fs.writeFile,
+  writeFile
 };

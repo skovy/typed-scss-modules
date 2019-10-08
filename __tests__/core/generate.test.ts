@@ -1,11 +1,9 @@
-import fs from "fs";
-
+import fs from "../../lib/core/write-file-helper";
 import { generate } from "../../lib/core";
-
 describe("generate", () => {
   beforeEach(() => {
     // Only mock the write, so the example files can still be read.
-    fs.writeFileSync = jest.fn();
+    fs.writeFile = jest.fn();
     console.log = jest.fn(); // avoid console logs showing up
   });
 
@@ -21,6 +19,6 @@ describe("generate", () => {
       watchTimeout: 50
     });
 
-    expect(fs.writeFileSync).toBeCalledTimes(5);
+    expect(fs.writeFile).toBeCalledTimes(5);
   });
 });

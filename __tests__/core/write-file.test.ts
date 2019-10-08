@@ -1,12 +1,11 @@
-import fs from "fs";
-
+import fs from "../../lib/core/write-file-helper";
 import { writeFile } from "../../lib/core";
 import { getTypeDefinitionPath } from "../../lib/typescript";
 
 describe("writeFile", () => {
   beforeEach(() => {
     // Only mock the write, so the example files can still be read.
-    fs.writeFileSync = jest.fn();
+    fs.writeFile = jest.fn();
     console.log = jest.fn();
   });
 
@@ -23,7 +22,7 @@ describe("writeFile", () => {
       watchTimeout: 50
     });
 
-    expect(fs.writeFileSync).toBeCalledWith(
+    expect(fs.writeFile).toBeCalledWith(
       typesFile,
       "export const someClass: string;\n"
     );
@@ -45,7 +44,7 @@ describe("writeFile", () => {
       watchTimeout: 50
     });
 
-    expect(fs.writeFileSync).not.toBeCalled();
+    expect(fs.writeFile).not.toBeCalled();
 
     expect(console.log).toBeCalledWith(
       expect.stringContaining(`[NO GENERATED TYPES] ${testFile}`)
