@@ -25,7 +25,8 @@
     "build": "yarn clean && tsc",
     "prepack": "yarn build",
     "check-types": "tsc --noEmit",
-    "check-formatting": "prettier --check **/*.{js,json,css,md,scss,tsx,ts}"
+    "check-formatting": "prettier --check **/*.{js,json,css,md,scss,tsx,ts}",
+    "postinstall": "yarn build"
   },
   "files": [
     "dist/lib"
