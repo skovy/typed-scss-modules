@@ -20,10 +20,16 @@ export const watch = (pattern: string, options: MainOptions): void => {
     })
     .on("change", path => {
       alert.info(`[CHANGED] ${path}`);
-      writeFile(path, options);
+      // this is a timeout to ensure files are readable most of the time
+      setTimeout(() => {
+        writeFile(path, options);
+      }, 250);
     })
     .on("add", path => {
       alert.info(`[ADDED] ${path}`);
-      writeFile(path, options);
+      // this is a timeout to ensure files are readable most of the time
+      setTimeout(() => {
+        writeFile(path, options);
+      }, 250);
     });
 };

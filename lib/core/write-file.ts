@@ -1,4 +1,5 @@
-import fs from "fs";
+import { writeFile as nodeWriteFile } from "fs";
+import { promisify } from "util";
 import { SassError } from "node-sass";
 
 import { alerts } from "./alerts";
@@ -8,6 +9,8 @@ import {
 } from "../typescript";
 import { fileToClassNames } from "../sass";
 import { MainOptions } from "./types";
+
+const writeFileAsync = promisify(nodeWriteFile);
 
 /**
  * Given a single file generate the proper types.
@@ -21,7 +24,7 @@ export const writeFile = (
 ): Promise<void> => {
   const alert = alerts(options);
   return fileToClassNames(file, options)
-    .then(classNames => {
+    .then(async classNames => {
       const typeDefinition = classNamesToTypeDefinitions(classNames, options);
 
       if (!typeDefinition) {
@@ -30,10 +33,10 @@ export const writeFile = (
       }
 
       const path = getTypeDefinitionPath(file);
-
-      fs.writeFileSync(path, typeDefinition);
-      alert.success(`[GENERATED TYPES] ${path}`);
+      await writeFileAsync(path, typeDefinition);
+      return path;
     })
+    .then(path => alert.success(`[GENERATED TYPES] ${path}`))
     .catch(({ message, file, line, column }: SassError) => {
       const location = file ? `(${file}[${line}:${column}])` : "";
       alert.error(`${message} ${location}`);
