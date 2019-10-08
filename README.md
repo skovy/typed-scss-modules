@@ -61,7 +61,7 @@ The only required argument is the directoy where all SCSS files are located. Run
 
 - **Type**: `"verbose" | "info" | "errors" | "silent"`
 - **Default**: `verbose`
-- **Example**: `tsm src --logLevel silent`
+- **Example**: `tsm --logLevel silent src`
 
 Set the Log verbosity to a certain level to regulate its output.
 
@@ -69,7 +69,7 @@ Set the Log verbosity to a certain level to regulate its output.
 
 - **Type**: `boolean`
 - **Default**: `false`
-- **Example**: `tsm src --watch`
+- **Example**: `tsm --watch src`
 
 Watch for files that get added or are changed and generate the corresponding type definitions.
 
@@ -77,7 +77,7 @@ Watch for files that get added or are changed and generate the corresponding typ
 
 - **Type**: `boolean`
 - **Default**: `false`
-- **Example**: `tsm src --watch --ignoreInitial`
+- **Example**: `tsm --watch --ignoreInitial src`
 
 Skips the initial build when passing the watch flag. Use this when running concurrently with another watch, but the initial build should happen first. You would run without watch first, then start off the concurrent runs after.
 
@@ -85,7 +85,7 @@ Skips the initial build when passing the watch flag. Use this when running concu
 
 - **Type**: `string[]`
 - **Default**: `[]`
-- **Example**: `tsm src --includePaths src/core`
+- **Example**: `tsm --includePaths src/core -- src`
 
 An array of paths to look in to attempt to resolve your `@import` declarations. This example will search the `src/core` directory when resolving imports.
 
@@ -93,7 +93,7 @@ An array of paths to look in to attempt to resolve your `@import` declarations. 
 
 - **Type**: `object`
 - **Default**: `{}`
-- **Example**: `tsm src --aliases.~some-alias src/core/variables`
+- **Example**: `tsm --aliases.~some-alias src/core/variables -- src`
 
 An object of aliases to map to their corresponding paths. This example will replace any `@import '~alias'` with `@import 'src/core/variables'`.
 
@@ -101,7 +101,7 @@ An object of aliases to map to their corresponding paths. This example will repl
 
 - **Type**: `object`
 - **Default**: `{}`
-- **Example**: `tsm src --aliasPrefixes.~ node_modules/`
+- **Example**: `tsm --aliasPrefixes.~ node_modules/ -- src`
 
 An object of prefix strings to replace with their corresponding paths. This example will replace any `@import '~bootstrap/lib/bootstrap'` with `@import 'node_modules/bootstrap/lib/bootstrap'`.
 This matches the common use-case for importing scss files from node_modules when `sass-loader` will be used with `webpack` to compile the project.
@@ -110,7 +110,7 @@ This matches the common use-case for importing scss files from node_modules when
 
 - **Type**: `"camel" | "kebab" | "param" | "dashes" | "none"`
 - **Default**: `"camel"`
-- **Example**: `tsm src --nameFormat camel`
+- **Example**: `tsm --nameFormat camel src`
 
 The class naming format to use when converting the classes to type definitions.
 
@@ -124,7 +124,7 @@ The class naming format to use when converting the classes to type definitions.
 
 - **Type**: `boolean`
 - **Default**: `false`
-- **Example**: `tsm src --listDifferent`
+- **Example**: `tsm --listDifferent src`
 
 List any type definition files that are different than those that would be generated. If any are different, exit with a status code `1`.
 
@@ -132,7 +132,7 @@ List any type definition files that are different than those that would be gener
 
 - **Type**: `"named" | "default"`
 - **Default**: `"named"`
-- **Example**: `tsm src --exportType default`
+- **Example**: `tsm --exportType default src`
 
 The export type to use when generating type definitions.
 

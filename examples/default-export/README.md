@@ -8,5 +8,5 @@ This example contains:
 The command to generate the proper type files would look like this (_in the root of this repository_):
 
 ```bash
-yarn tsm "examples/default-export/**/*.scss" --exportType default --nameFormat kebab
+yarn tsm --exportType default --nameFormat kebab "examples/default-export/**/*.scss"
 ```
