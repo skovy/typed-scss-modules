@@ -2,14 +2,20 @@ language: node_js
 cache: yarn
 jobs:
   include:
-    - stage: tests
+    - stage: test
       script:
         - yarn check-types
         - yarn test
         - yarn check-formatting
-    - stage: npm release
-      script: echo "Deploying to npm ..."
-      deploy:
-        provider: npm
-        api_key: $NPM_API_KEY
-        on: deploy-npm-release
+    - stage: release
+        - deploy:
+            provider: npm
+            api_key: $NPM_API_TOKEN
+            on: 
+              tags: true
+        - deploy:
+            provider: releases
+            api_key: $GITHUB_API_TOKEN
+            skip_cleanup: true
+            on: 
+              tags: true
