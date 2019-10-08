@@ -53,11 +53,23 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "peanutbother",
+      "name": "Jared Gesser",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6437182?v=4",
+      "profile": "https://github.com/peanutbother",
+      "contributions": [
+        "review",
+        "code",
+        "doc",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "typed-scss-modules",
-  "projectOwner": "skovy",
+  "projectOwner": "peanutbother",
   "repoType": "github",
   "repoHost": "https://github.com",
   "commitConvention": "angular"
