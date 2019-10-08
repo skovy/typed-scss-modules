@@ -11,7 +11,7 @@ const exportTypeDefault: ExportType = "named";
 
 const { _: patterns, ...rest } = yargs
   .usage(
-    "Generate .scss.d.ts from CSS module .scss files.\nUsage: $0 <glob pattern> [options]"
+    "Generate .scss.d.ts from CSS module .scss files.\nUsage: $0 [options] <glob pattern>"
   )
   .example("$0 src", "All .scss files at any level in the src directoy")
   .example(
@@ -19,19 +19,19 @@ const { _: patterns, ...rest } = yargs
     "All .scss files at any level in the src directoy"
   )
   .example(
-    "$0 src/**/*.scss --watch",
+    "$0 --watch src/**/*.scss",
     "Watch all .scss files at any level in the src directoy that are added or changed"
   )
   .example(
-    "$0 src/**/*.scss --includePaths src/core src/variables",
+    "$0 --includePaths src/core src/variables -- src/**/*.scss",
     'Search the "core" and "variables" directory when resolving imports'
   )
   .example(
-    "$0 src/**/*.scss --aliases.~name variables",
+    "$0 --aliases.~name variables -- src/**/*.scss",
     'Replace all imports for "~name" with "variables"'
   )
   .example(
-    "$0 src/**/*.scss --aliasPrefixes.~ ./node_modules/",
+    "$0 --aliasPrefixes.~ ./node_modules/ -- src/**/*.scss",
     'Replace the "~" prefix with "./node_modules/" for all imports beginning with "~"'
   )
   .demandCommand(1)
