@@ -5,6 +5,7 @@ export interface MainOptions extends Options {
   exportType: ExportType;
   listDifferent: boolean;
   watch: boolean;
+  watchTimeout: number;
   ignoreInitial: boolean;
   logLevel: LogLevel;
 }

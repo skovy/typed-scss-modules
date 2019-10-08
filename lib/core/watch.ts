@@ -23,13 +23,13 @@ export const watch = (pattern: string, options: MainOptions): void => {
       // this is a timeout to ensure files are readable most of the time
       setTimeout(() => {
         writeFile(path, options);
-      }, 250);
+      }, options.watchTimeout);
     })
     .on("add", path => {
       alert.info(`[ADDED] ${path}`);
       // this is a timeout to ensure files are readable most of the time
       setTimeout(() => {
         writeFile(path, options);
-      }, 250);
+      }, options.watchTimeout);
     });
 };

@@ -73,6 +73,14 @@ Set the Log verbosity to a certain level to regulate its output.
 
 Watch for files that get added or are changed and generate the corresponding type definitions.
 
+### `--watchTimeout` (`-t`)
+
+- **Type**: `number`
+- **Default**: `50`
+- **Example**: `tsm --watchTimeout 250 src`
+
+Wait x miliseconds before writing the changes when watching. This is useful if file access is slow.
+
 ### `--ignoreInitial`
 
 - **Type**: `boolean`

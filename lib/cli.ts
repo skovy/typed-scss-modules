@@ -9,6 +9,7 @@ import { main } from "./main";
 const nameFormatDefault: NameFormat = "camel";
 const exportTypeDefault: ExportType = "named";
 const logLevelDefault: LogLevel = "verbose";
+const watchTimeout: number = 50;
 
 const { _: patterns, ...rest } = yargs
   .usage(
@@ -22,6 +23,10 @@ const { _: patterns, ...rest } = yargs
   .example(
     "$0 --watch src/**/*.scss",
     "Watch all .scss files at any level in the src directoy that are added or changed"
+  )
+  .example(
+    "$0 --watch -t 250 src/**/*.scss",
+    "Watch all .scss files at any level in the src directoy that are added or changed and wait 250ms before writing files."
   )
   .example(
     "$0 --includePaths src/core src/variables -- src/**/*.scss",
@@ -69,6 +74,13 @@ const { _: patterns, ...rest } = yargs
     describe:
       "Watch for added or changed files and (re-)generate the type definitions."
   })
+  .option("watchTimeout", {
+    default: watchTimeout,
+    type: "number",
+    alias: "t",
+    describe:
+      "Wait x miliseconds before writing the changes when watching. This is useful if file access is slow."
+  })
   .option("ignoreInitial", {
     boolean: true,
     default: false,
@@ -94,4 +106,8 @@ const { _: patterns, ...rest } = yargs
     describe: "Change the log output level."
   }).argv;
 
-main(patterns[0], { ...rest });
+main(patterns[0], {
+  ...rest,
+  // parse number / use fallback if incorrect format used.
+  watchTimeout: isNaN(rest.watchTimeout) ? watchTimeout : rest.watchTimeout
+});
