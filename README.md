@@ -57,13 +57,13 @@ For all possible commands, run `tsm --help`.
 
 The only required argument is the directoy where all SCSS files are located. Running `tsm src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `tsm src/*.scss`
 
-### `--logLevel` (`-l`)
+### `--logLevel` (`-v`)
 
 - **Type**: `"verbose" | "info" | "errors" | "silent"`
 - **Default**: `verbose`
 - **Example**: `tsm src --logLevel silent`
 
-Set the Log output to a certain level to regulate its output.
+Set the Log verbosity to a certain level to regulate its output.
 
 ### `--watch` (`-w`)
 

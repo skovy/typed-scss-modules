@@ -90,7 +90,7 @@ const { _: patterns, ...rest } = yargs
   .option("logLevel", {
     choices: LOG_LEVELS,
     default: logLevelDefault,
-    alias: "l",
+    alias: "v",
     describe: "Change the log output level."
   }).argv;
 
