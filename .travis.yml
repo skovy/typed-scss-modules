@@ -12,6 +12,7 @@ deploy:
     on: 
       tags: true
   - provider: releases
+    skip_cleanup: true
     api_key: $GITHUB_API_TOKEN
     on: 
       tags: true
