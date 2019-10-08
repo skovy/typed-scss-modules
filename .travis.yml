@@ -11,6 +11,7 @@ jobs:
         - yarn check-formatting
     - stage: release
       deploy:
+        - skip_cleanup: true
         - provider: npm
           email: $NPM_API_EMAIL
           api_key: $NPM_API_TOKEN
