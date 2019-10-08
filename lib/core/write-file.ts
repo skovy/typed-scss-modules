@@ -19,25 +19,23 @@ export const writeFile = (
   file: string,
   options: MainOptions
 ): Promise<void> => {
+  const alert = alerts(options);
   return fileToClassNames(file, options)
     .then(classNames => {
-      const typeDefinition = classNamesToTypeDefinitions(
-        classNames,
-        options.exportType
-      );
+      const typeDefinition = classNamesToTypeDefinitions(classNames, options);
 
       if (!typeDefinition) {
-        alerts.notice(`[NO GENERATED TYPES] ${file}`);
+        alert.notice(`[NO GENERATED TYPES] ${file}`);
         return;
       }
 
       const path = getTypeDefinitionPath(file);
 
       fs.writeFileSync(path, typeDefinition);
-      alerts.success(`[GENERATED TYPES] ${path}`);
+      alert.success(`[GENERATED TYPES] ${path}`);
     })
     .catch(({ message, file, line, column }: SassError) => {
       const location = file ? `(${file}[${line}:${column}])` : "";
-      alerts.error(`${message} ${location}`);
+      alert.error(`${message} ${location}`);
     });
 };

@@ -26,7 +26,8 @@ describe("writeFile", () => {
       },
       aliasPrefixes: {
         "~": "nested-styles/"
-      }
+      },
+      logLevel: "verbose"
     });
 
     expect(exit).toHaveBeenCalledWith(1);
@@ -43,7 +44,8 @@ describe("writeFile", () => {
       watch: false,
       ignoreInitial: false,
       exportType: "named",
-      listDifferent: true
+      listDifferent: true,
+      logLevel: "verbose"
     });
 
     expect(exit).not.toHaveBeenCalled();

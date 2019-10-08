@@ -11,18 +11,19 @@ import { MainOptions } from "./types";
  * @param options the CLI options
  */
 export const watch = (pattern: string, options: MainOptions): void => {
-  alerts.success("Watching files...");
+  const alert = alerts(options);
+  alert.success("Watching files...");
 
   chokidar
     .watch(pattern, {
       ignoreInitial: options.ignoreInitial
     })
     .on("change", path => {
-      alerts.info(`[CHANGED] ${path}`);
+      alert.info(`[CHANGED] ${path}`);
       writeFile(path, options);
     })
     .on("add", path => {
-      alerts.info(`[ADDED] ${path}`);
+      alert.info(`[ADDED] ${path}`);
       writeFile(path, options);
     });
 };

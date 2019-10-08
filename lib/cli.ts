@@ -3,11 +3,12 @@
 import yargs from "yargs";
 
 import { Aliases, NAME_FORMATS, NameFormat } from "./sass";
-import { ExportType, EXPORT_TYPES } from "./typescript";
+import { ExportType, EXPORT_TYPES, LogLevel, LOG_LEVELS } from "./typescript";
 import { main } from "./main";
 
 const nameFormatDefault: NameFormat = "camel";
 const exportTypeDefault: ExportType = "named";
+const logLevelDefault: LogLevel = "verbose";
 
 const { _: patterns, ...rest } = yargs
   .usage(
@@ -33,6 +34,10 @@ const { _: patterns, ...rest } = yargs
   .example(
     "$0 --aliasPrefixes.~ ./node_modules/ -- src/**/*.scss",
     'Replace the "~" prefix with "./node_modules/" for all imports beginning with "~"'
+  )
+  .example(
+    "$0 --logLevel silent src",
+    "All .scss files at any level in the src directoy and logging is disabled"
   )
   .demandCommand(1)
   .option("aliases", {
@@ -81,6 +86,12 @@ const { _: patterns, ...rest } = yargs
     string: true,
     alias: "i",
     describe: "Additional paths to include when trying to resolve imports."
+  })
+  .option("logLevel", {
+    choices: LOG_LEVELS,
+    default: logLevelDefault,
+    alias: "l",
+    describe: "Change the log output level."
   }).argv;
 
 main(patterns[0], { ...rest });

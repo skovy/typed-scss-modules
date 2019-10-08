@@ -1,7 +1,7 @@
 import reserved from "reserved-words";
 
 import { ClassNames, ClassName } from "lib/sass/file-to-class-names";
-import { alerts } from "../core";
+import { alerts, MainOptions, SlimOptions } from "../core";
 
 export type ExportType = "named" | "default";
 export const EXPORT_TYPES: ExportType[] = ["named", "default"];
@@ -16,14 +16,17 @@ const isReservedKeyword = (className: ClassName) =>
   reserved.check(className, "es5", true) ||
   reserved.check(className, "es6", true);
 
-const isValidName = (className: ClassName) => {
+const isValidName = (options: MainOptions | SlimOptions) => (
+  className: ClassName
+) => {
+  const alert = alerts(options);
   if (isReservedKeyword(className)) {
-    alerts.warn(
+    alert.warn(
       `[SKIPPING] '${className}' is a reserved keyword (consider renaming or using --exportType default).`
     );
     return false;
   } else if (/-/.test(className)) {
-    alerts.warn(
+    alert.warn(
       `[SKIPPING] '${className}' contains dashes (consider using 'camelCase' or 'dashes' for --nameFormat or using --exportType default).`
     );
     return false;
@@ -34,8 +37,9 @@ const isValidName = (className: ClassName) => {
 
 export const classNamesToTypeDefinitions = (
   classNames: ClassNames,
-  exportType: ExportType
+  options: MainOptions | SlimOptions
 ): string | null => {
+  const { exportType } = options;
   if (classNames.length) {
     let typeDefinitions;
 
@@ -50,7 +54,7 @@ export const classNamesToTypeDefinitions = (
         return typeDefinitions;
       case "named":
         typeDefinitions = classNames
-          .filter(isValidName)
+          .filter(isValidName(options))
           .map(classNameToNamedTypeDefinition);
 
         // Sepearte all type definitions be a newline with a trailing newline.

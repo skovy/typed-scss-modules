@@ -18,7 +18,8 @@ describe("writeFile", () => {
       watch: false,
       ignoreInitial: false,
       exportType: "named",
-      listDifferent: false
+      listDifferent: false,
+      logLevel: "verbose"
     });
 
     expect(fs.writeFileSync).toBeCalledWith(
@@ -38,7 +39,8 @@ describe("writeFile", () => {
       watch: false,
       ignoreInitial: false,
       exportType: "named",
-      listDifferent: false
+      listDifferent: false,
+      logLevel: "verbose"
     });
 
     expect(fs.writeFileSync).not.toBeCalled();
