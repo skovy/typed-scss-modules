@@ -63,7 +63,10 @@
         "review",
         "code",
         "doc",
-        "test"
+        "test",
+        "maintenance",
+        "security",
+        "ideas"
       ]
     }
   ],
