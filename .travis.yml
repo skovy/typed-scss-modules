@@ -13,6 +13,7 @@ jobs:
         - yarn test
         - yarn check-formatting
         - yarn build
+        - yarn commitlint-travis
     - stage: release
       name: "Release on npm"
       deploy:
