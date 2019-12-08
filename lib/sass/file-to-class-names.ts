@@ -1,6 +1,6 @@
 import sass from "node-sass";
 import camelcase from "camelcase";
-import paramcase from "param-case";
+import { paramCase } from "param-case";
 
 import { sourceToClassNames } from "./source-to-class-names";
 
@@ -92,7 +92,7 @@ const classNameTransformer = (nameFormat: NameFormat): Transformer => {
   switch (nameFormat) {
     case "kebab":
     case "param":
-      return className => paramcase(className);
+      return className => paramCase(className);
     case "camel":
       return className => camelcase(className);
     case "dashes":
