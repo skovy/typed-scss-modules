@@ -1,6 +1,21 @@
+if: tag IS blank
+
 language: node_js
-cache: yarn
-script:
-  - yarn check-types
-  - yarn test
-  - yarn check-formatting
+node_js: stable
+
+jobs:
+  include:
+    - stage: test
+      name: "Unit tests, type checking, linting, etc."
+      script:
+        - yarn check-types
+        - yarn test
+        - yarn check-formatting
+        - yarn build
+    - stage: release
+      name: "Release on npm"
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - yarn semantic-release
