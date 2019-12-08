@@ -34,6 +34,10 @@ const { _: patterns, ...rest } = yargs
     "$0 src/**/*.scss --aliasPrefixes.~ ./node_modules/",
     'Replace the "~" prefix with "./node_modules/" for all imports beginning with "~"'
   )
+  .example(
+    "$0 src/**/*.scss --ignore **/secret.scss",
+    'Ignore any file names "secret.scss"'
+  )
   .demandCommand(1)
   .option("aliases", {
     coerce: (obj): Aliases => obj,
@@ -81,6 +85,12 @@ const { _: patterns, ...rest } = yargs
     string: true,
     alias: "i",
     describe: "Additional paths to include when trying to resolve imports."
+  })
+  .option("ignore", {
+    string: true,
+    array: true,
+    default: [],
+    describe: "Add a pattern or an array of glob patterns to exclude matches."
   }).argv;
 
 main(patterns[0], { ...rest });
