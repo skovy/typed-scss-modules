@@ -15,7 +15,8 @@ export const watch = (pattern: string, options: MainOptions): void => {
 
   chokidar
     .watch(pattern, {
-      ignoreInitial: options.ignoreInitial
+      ignoreInitial: options.ignoreInitial,
+      ignored: options.ignore
     })
     .on("change", path => {
       alerts.info(`[CHANGED] ${path}`);
