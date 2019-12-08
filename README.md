@@ -73,6 +73,14 @@ Watch for files that get added or are changed and generate the corresponding typ
 
 Skips the initial build when passing the watch flag. Use this when running concurrently with another watch, but the initial build should happen first. You would run without watch first, then start off the concurrent runs after.
 
+### `--ignore`
+
+- **Type**: `string[]`
+- **Default**: `[]`
+- **Example**: `tsm src --watch --ignore "**/secret.scss"`
+
+A pattern or an array of glob patterns to exclude files that match and avoid generating type definitions.
+
 ### `--includePaths` (`-i`)
 
 - **Type**: `string[]`
