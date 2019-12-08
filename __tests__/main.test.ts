@@ -18,7 +18,7 @@ describe("main", () => {
       ignoreInitial: false,
       exportType: "named",
       listDifferent: false,
-      ignore: null
+      ignore: []
     });
 
     const expectedDirname = slash(__dirname);
@@ -43,7 +43,7 @@ describe("main", () => {
       ignoreInitial: false,
       exportType: "named",
       listDifferent: false,
-      ignore: "**/style.scss"
+      ignore: ["**/style.scss"]
     });
 
     expect(fs.writeFileSync).toBeCalledTimes(3);

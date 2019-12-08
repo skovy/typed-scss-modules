@@ -16,7 +16,8 @@ describe("generate", () => {
       watch: false,
       ignoreInitial: false,
       exportType: "named",
-      listDifferent: false
+      listDifferent: false,
+      ignore: []
     });
 
     expect(fs.writeFileSync).toBeCalledTimes(5);
