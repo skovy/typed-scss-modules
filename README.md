@@ -31,10 +31,10 @@ export const textHighlighted: string;
 
 ## Basic Usage
 
-Run with npm package runner:
+Run without installing:
 
 ```bash
-npx tsm src
+npx -p node-sass -p typed-scss-modules tsm src
 ```
 
 Or, install globally:
