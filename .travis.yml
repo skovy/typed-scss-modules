@@ -11,6 +11,7 @@ jobs:
       script:
         - yarn check-types
         - yarn test
+        - git reset --hard HEAD
         - yarn check-formatting
         - yarn build
         - yarn commitlint-travis
