@@ -5,6 +5,7 @@ import yargs from "yargs";
 import { Aliases, NAME_FORMATS, NameFormat } from "./sass";
 import { ExportType, EXPORT_TYPES } from "./typescript";
 import { main } from "./main";
+import { IMPLEMENTATIONS, getDefaultImplementation } from "./implementations";
 
 const nameFormatDefault: NameFormat = "camel";
 const exportTypeDefault: ExportType = "named";
@@ -38,6 +39,10 @@ const { _: patterns, ...rest } = yargs
     "$0 src/**/*.scss --ignore **/secret.scss",
     'Ignore any file names "secret.scss"'
   )
+  .example(
+    "$0 src/**/*.scss --implementation sass",
+    "Use the Dart SASS package"
+  )
   .demandCommand(1)
   .option("aliases", {
     coerce: (obj): Aliases => obj,
@@ -55,11 +60,17 @@ const { _: patterns, ...rest } = yargs
     alias: "n",
     describe: "The name format that should be used to transform class names."
   })
+  .option("implementation", {
+    choices: IMPLEMENTATIONS,
+    default: getDefaultImplementation(),
+    describe:
+      "The SASS package to used to compile. This will default to the sass implementation you have installed."
+  })
   .option("exportType", {
     choices: EXPORT_TYPES,
     default: exportTypeDefault,
     alias: "e",
-    describe: "The type of export used for defining the type defintions."
+    describe: "The type of export used for defining the type definitions."
   })
   .option("watch", {
     boolean: true,

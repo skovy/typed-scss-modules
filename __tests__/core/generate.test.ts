@@ -1,25 +1,29 @@
 import fs from "fs";
 
 import { generate } from "../../lib/core";
+import { describeAllImplementations } from "../helpers";
 
-describe("generate", () => {
-  beforeEach(() => {
-    // Only mock the write, so the example files can still be read.
-    fs.writeFileSync = jest.fn();
-    console.log = jest.fn(); // avoid console logs showing up
-  });
-
-  test("generates types for all files matching the pattern", async () => {
-    const pattern = `${__dirname}/../**/*.scss`;
-
-    await generate(pattern, {
-      watch: false,
-      ignoreInitial: false,
-      exportType: "named",
-      listDifferent: false,
-      ignore: []
+describeAllImplementations(implementation => {
+  describe("generate", () => {
+    beforeEach(() => {
+      // Only mock the write, so the example files can still be read.
+      fs.writeFileSync = jest.fn();
+      console.log = jest.fn(); // avoid console logs showing up
     });
 
-    expect(fs.writeFileSync).toBeCalledTimes(5);
+    test("generates types for all files matching the pattern", async () => {
+      const pattern = `${__dirname}/../**/*.scss`;
+
+      await generate(pattern, {
+        watch: false,
+        ignoreInitial: false,
+        exportType: "named",
+        listDifferent: false,
+        ignore: [],
+        implementation
+      });
+
+      expect(fs.writeFileSync).toBeCalledTimes(5);
+    });
   });
 });
