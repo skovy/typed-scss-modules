@@ -12,6 +12,12 @@ export type Implementations = typeof IMPLEMENTATIONS[number];
 
 type Implementation = typeof nodeSass | typeof sass;
 
+/**
+ * Determine which default implementation to use by checking which packages
+ * are actually installed and available to use.
+ *
+ * @param resolver DO NOT USE - this is unfortunately necessary only for testing.
+ */
 export const getDefaultImplementation = (
   resolver: RequireResolve = require.resolve
 ): Implementations => {
