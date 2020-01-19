@@ -89,6 +89,12 @@ A pattern or an array of glob patterns to exclude files that match and avoid gen
 
 An array of paths to look in to attempt to resolve your `@import` declarations. This example will search the `src/core` directory when resolving imports.
 
+### `--implementation`
+
+- **Type**: `"node-sass" | "sass"`
+- **Default**: If an option is passed, it will always use the provided package implementation. If an option is not passed, it will first check if `node-sass` is installed. If it is, it will be used. Otherwise, it will then check if `sass` is installed. If it is, it will be used. Finally, falling back to `node-sass` if all checks and validations fail.
+- **Example**: `tsm src --implementation sass`
+
 ### `--aliases` (`-a`)
 
 - **Type**: `object`
