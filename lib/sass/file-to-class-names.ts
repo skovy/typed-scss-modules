@@ -1,8 +1,8 @@
-import sass from "node-sass";
 import camelcase from "camelcase";
 import { paramCase } from "param-case";
 
 import { sourceToClassNames } from "./source-to-class-names";
+import { Implementations, getImplementation } from "../implementations";
 
 export type ClassName = string;
 export type ClassNames = ClassName[];
@@ -18,6 +18,7 @@ export interface Options {
   aliases?: Aliases;
   aliasPrefixes?: Aliases;
   nameFormat?: NameFormat;
+  implementation: Implementations;
 }
 
 export const NAME_FORMATS: NameFormat[] = [
@@ -55,32 +56,31 @@ export const fileToClassNames = (
     includePaths = [],
     aliases = {},
     aliasPrefixes = {},
-    nameFormat = "camel"
+    nameFormat = "camel",
+    implementation
   }: Options = {} as Options
 ) => {
   const transformer = classNameTransformer(nameFormat);
+  const { renderSync } = getImplementation(implementation);
 
   return new Promise<ClassNames>((resolve, reject) => {
-    sass.render(
-      {
+    try {
+      const result = renderSync({
         file,
         includePaths,
         importer: importer(aliases, aliasPrefixes)
-      },
-      (err, result) => {
-        if (err) {
-          reject(err);
-          return;
-        }
+      });
 
-        sourceToClassNames(result.css).then(({ exportTokens }) => {
-          const classNames = Object.keys(exportTokens);
-          const transformedClassNames = classNames.map(transformer);
+      sourceToClassNames(result.css).then(({ exportTokens }) => {
+        const classNames = Object.keys(exportTokens);
+        const transformedClassNames = classNames.map(transformer);
 
-          resolve(transformedClassNames);
-        });
-      }
-    );
+        resolve(transformedClassNames);
+      });
+    } catch (err) {
+      reject(err);
+      return;
+    }
   });
 };
 

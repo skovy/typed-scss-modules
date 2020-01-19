@@ -3,50 +3,56 @@ import fs from "fs";
 import { writeFile } from "../../lib/core";
 import { getTypeDefinitionPath } from "../../lib/typescript";
 
-describe("writeFile", () => {
-  beforeEach(() => {
-    // Only mock the write, so the example files can still be read.
-    fs.writeFileSync = jest.fn();
-    console.log = jest.fn();
-  });
+import { describeAllImplementations } from "../helpers";
 
-  test("writes the corresponding type definitions for a file and logs", async () => {
-    const testFile = `${__dirname}/../style.scss`;
-    const typesFile = getTypeDefinitionPath(testFile);
-
-    await writeFile(testFile, {
-      watch: false,
-      ignoreInitial: false,
-      exportType: "named",
-      listDifferent: false,
-      ignore: []
+describeAllImplementations(implementation => {
+  describe("writeFile", () => {
+    beforeEach(() => {
+      // Only mock the write, so the example files can still be read.
+      fs.writeFileSync = jest.fn();
+      console.log = jest.fn();
     });
 
-    expect(fs.writeFileSync).toBeCalledWith(
-      typesFile,
-      "export const someClass: string;\n"
-    );
+    test("writes the corresponding type definitions for a file and logs", async () => {
+      const testFile = `${__dirname}/../style.scss`;
+      const typesFile = getTypeDefinitionPath(testFile);
 
-    expect(console.log).toBeCalledWith(
-      expect.stringContaining(`[GENERATED TYPES] ${typesFile}`)
-    );
-  });
+      await writeFile(testFile, {
+        watch: false,
+        ignoreInitial: false,
+        exportType: "named",
+        listDifferent: false,
+        ignore: [],
+        implementation
+      });
 
-  test("it skips files with no classes", async () => {
-    const testFile = `${__dirname}/../empty.scss`;
+      expect(fs.writeFileSync).toBeCalledWith(
+        typesFile,
+        "export const someClass: string;\n"
+      );
 
-    await writeFile(testFile, {
-      watch: false,
-      ignoreInitial: false,
-      exportType: "named",
-      listDifferent: false,
-      ignore: []
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`[GENERATED TYPES] ${typesFile}`)
+      );
     });
 
-    expect(fs.writeFileSync).not.toBeCalled();
+    test("it skips files with no classes", async () => {
+      const testFile = `${__dirname}/../empty.scss`;
 
-    expect(console.log).toBeCalledWith(
-      expect.stringContaining(`[NO GENERATED TYPES] ${testFile}`)
-    );
+      await writeFile(testFile, {
+        watch: false,
+        ignoreInitial: false,
+        exportType: "named",
+        listDifferent: false,
+        ignore: [],
+        implementation
+      });
+
+      expect(fs.writeFileSync).not.toBeCalled();
+
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`[NO GENERATED TYPES] ${testFile}`)
+      );
+    });
   });
 });

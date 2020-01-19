@@ -30,7 +30,11 @@ export const generate = async (
     );
   }
 
-  alerts.success(`Found ${files.length} files. Generating type definitions...`);
+  alerts.success(
+    `Found ${files.length} file${
+      files.length === 1 ? `` : `s`
+    }. Generating type definitions...`
+  );
 
   // Wait for all the type definitions to be written.
   await Promise.all(files.map(file => writeFile(file, options)));
