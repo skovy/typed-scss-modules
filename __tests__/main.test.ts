@@ -21,7 +21,8 @@ describeAllImplementations(implementation => {
         exportType: "named",
         listDifferent: false,
         ignore: [],
-        implementation
+        implementation,
+        quoteType: "single"
       });
 
       const expectedDirname = slash(__dirname);
@@ -47,7 +48,8 @@ describeAllImplementations(implementation => {
         exportType: "named",
         listDifferent: false,
         ignore: ["**/style.scss"],
-        implementation
+        implementation,
+        quoteType: "single"
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(3);

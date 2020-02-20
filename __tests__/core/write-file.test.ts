@@ -23,7 +23,8 @@ describeAllImplementations(implementation => {
         exportType: "named",
         listDifferent: false,
         ignore: [],
-        implementation
+        implementation,
+        quoteType: "single"
       });
 
       expect(fs.writeFileSync).toBeCalledWith(
@@ -45,7 +46,8 @@ describeAllImplementations(implementation => {
         exportType: "named",
         listDifferent: false,
         ignore: [],
-        implementation
+        implementation,
+        quoteType: "single"
       });
 
       expect(fs.writeFileSync).not.toBeCalled();

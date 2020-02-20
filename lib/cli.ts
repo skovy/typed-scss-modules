@@ -3,12 +3,13 @@
 import yargs from "yargs";
 
 import { Aliases, NAME_FORMATS, NameFormat } from "./sass";
-import { ExportType, EXPORT_TYPES } from "./typescript";
+import { ExportType, EXPORT_TYPES, QuoteType, QUOTE_TYPES } from "./typescript";
 import { main } from "./main";
 import { IMPLEMENTATIONS, getDefaultImplementation } from "./implementations";
 
 const nameFormatDefault: NameFormat = "camel";
 const exportTypeDefault: ExportType = "named";
+const quoteTypeDefault: QuoteType = "single";
 
 const { _: patterns, ...rest } = yargs
   .usage(
@@ -42,6 +43,10 @@ const { _: patterns, ...rest } = yargs
   .example(
     "$0 src/**/*.scss --implementation sass",
     "Use the Dart SASS package"
+  )
+  .example(
+    "$0 src/**/*.scss -e default --quoteType double",
+    "Use double quotes around class name definitions rather than single quotes."
   )
   .demandCommand(1)
   .option("aliases", {
@@ -102,6 +107,14 @@ const { _: patterns, ...rest } = yargs
     array: true,
     default: [],
     describe: "Add a pattern or an array of glob patterns to exclude matches."
+  })
+  .options("quoteType", {
+    string: true,
+    choices: QUOTE_TYPES,
+    default: quoteTypeDefault,
+    alias: "q",
+    describe:
+      "Specify the quote type so that generated files adhere to your TypeScript rules."
   }).argv;
 
 main(patterns[0], { ...rest });

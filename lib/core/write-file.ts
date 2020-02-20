@@ -23,7 +23,8 @@ export const writeFile = (
     .then(classNames => {
       const typeDefinition = classNamesToTypeDefinitions(
         classNames,
-        options.exportType
+        options.exportType,
+        options.quoteType
       );
 
       if (!typeDefinition) {

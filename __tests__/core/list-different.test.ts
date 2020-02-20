@@ -31,7 +31,8 @@ describeAllImplementations(implementation => {
           "~": "nested-styles/"
         },
         ignore: [],
-        implementation
+        implementation,
+        quoteType: "single"
       });
 
       expect(exit).toHaveBeenCalledWith(1);
@@ -52,7 +53,8 @@ describeAllImplementations(implementation => {
         exportType: "named",
         listDifferent: true,
         ignore: [],
-        implementation
+        implementation,
+        quoteType: "single"
       });
 
       expect(exit).not.toHaveBeenCalled();
