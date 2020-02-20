@@ -37,7 +37,8 @@ export const checkFile = (
     fileToClassNames(file, options).then(classNames => {
       const typeDefinition = classNamesToTypeDefinitions(
         classNames,
-        options.exportType
+        options.exportType,
+        options.quoteType
       );
 
       if (!typeDefinition) {

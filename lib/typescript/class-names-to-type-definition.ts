@@ -6,11 +6,19 @@ import { alerts } from "../core";
 export type ExportType = "named" | "default";
 export const EXPORT_TYPES: ExportType[] = ["named", "default"];
 
+export type QuoteType = "single" | "double";
+export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
+
 const classNameToNamedTypeDefinition = (className: ClassName) =>
   `export const ${className}: string;`;
 
-const classNameToInterfaceKey = (className: ClassName) =>
-  `  '${className}': string;`;
+const classNameToInterfaceKey = (
+  className: ClassName,
+  quoteType: QuoteType
+) => {
+  const quote = quoteType === "single" ? "'" : '"';
+  return `  ${quote}${className}${quote}: string;`;
+};
 
 const isReservedKeyword = (className: ClassName) =>
   reserved.check(className, "es5", true) ||
@@ -34,7 +42,8 @@ const isValidName = (className: ClassName) => {
 
 export const classNamesToTypeDefinitions = (
   classNames: ClassNames,
-  exportType: ExportType
+  exportType: ExportType,
+  quoteType: QuoteType = "single"
 ): string | null => {
   if (classNames.length) {
     let typeDefinitions;
@@ -42,7 +51,11 @@ export const classNamesToTypeDefinitions = (
     switch (exportType) {
       case "default":
         typeDefinitions = "export interface Styles {\n";
-        typeDefinitions += classNames.map(classNameToInterfaceKey).join("\n");
+        typeDefinitions += classNames
+          .map((className: ClassName) => {
+            return classNameToInterfaceKey(className, quoteType);
+          })
+          .join("\n");
         typeDefinitions += "\n}\n\n";
         typeDefinitions += "export type ClassNames = keyof Styles;\n\n";
         typeDefinitions += "declare const styles: Styles;\n\n";

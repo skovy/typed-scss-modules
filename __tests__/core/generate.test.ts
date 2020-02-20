@@ -20,7 +20,8 @@ describeAllImplementations(implementation => {
         exportType: "named",
         listDifferent: false,
         ignore: [],
-        implementation
+        implementation,
+        quoteType: "single"
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(5);

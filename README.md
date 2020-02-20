@@ -194,6 +194,14 @@ export default styles;
 
 This export type is useful when using kebab (param) cased class names since variables with a `-` are not valid variables and will produce invalid types or when a class name is a TypeScript keyword (eg: `while` or `delete`). Additionally, the `Styles` and `ClassNames` types are exported which can be useful for properly typing variables, functions, etc. when working with dynamic class names.
 
+### `--quoteType` (`-q`)
+
+- **Type**: `string`
+- **Default**: `single`
+- **Example**: `tsm src --exportType default --quoteType double`
+
+Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes (").
+
 ## Examples
 
 For examples, see the `examples` directory:

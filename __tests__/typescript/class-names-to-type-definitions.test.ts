@@ -77,4 +77,29 @@ describe("classNamesToTypeDefinitions", () => {
       expect(definition).toBeNull;
     });
   });
+
+  describe("quoteType", () => {
+    it("uses double quotes for default exports when specified", () => {
+      const definition = classNamesToTypeDefinitions(
+        ["myClass", "yourClass"],
+        "default",
+        "double"
+      );
+
+      expect(definition).toEqual(
+        'export interface Styles {\n  "myClass": string;\n  "yourClass": string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n'
+      );
+    });
+    it("does not affect named exports", () => {
+      const definition = classNamesToTypeDefinitions(
+        ["myClass", "yourClass"],
+        "named",
+        "double"
+      );
+
+      expect(definition).toEqual(
+        "export const myClass: string;\nexport const yourClass: string;\n"
+      );
+    });
+  });
 });
