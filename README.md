@@ -196,8 +196,8 @@ This export type is useful when using kebab (param) cased class names since vari
 
 ### `--quoteType` (`-q`)
 
-- **Type**: `string`
-- **Default**: `single`
+- **Type**: `"single" | "double"`
+- **Default**: `"single"`
 - **Example**: `tsm src --exportType default --quoteType double`
 
 Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes (").

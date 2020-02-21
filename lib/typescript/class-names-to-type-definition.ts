@@ -52,9 +52,7 @@ export const classNamesToTypeDefinitions = (
       case "default":
         typeDefinitions = "export interface Styles {\n";
         typeDefinitions += classNames
-          .map((className: ClassName) => {
-            return classNameToInterfaceKey(className, quoteType);
-          })
+          .map(className => classNameToInterfaceKey(className, quoteType))
           .join("\n");
         typeDefinitions += "\n}\n\n";
         typeDefinitions += "export type ClassNames = keyof Styles;\n\n";
