@@ -64,6 +64,15 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "peanutbother",
+      "name": "Jared Gesser",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6437182?v=4",
+      "profile": "https://github.com/peanutbother",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
