@@ -18,6 +18,8 @@ describeAllImplementations(implementation => {
         watch: false,
         ignoreInitial: false,
         exportType: "named",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
         listDifferent: false,
         ignore: [],
         implementation,

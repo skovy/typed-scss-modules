@@ -35,11 +35,10 @@ export const checkFile = (
 ): Promise<boolean> => {
   return new Promise(resolve =>
     fileToClassNames(file, options).then(classNames => {
-      const typeDefinition = classNamesToTypeDefinitions(
-        classNames,
-        options.exportType,
-        options.quoteType
-      );
+      const typeDefinition = classNamesToTypeDefinitions({
+        classNames: classNames,
+        ...options
+      });
 
       if (!typeDefinition) {
         // Assume if no type defs are necessary it's fine

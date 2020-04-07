@@ -22,6 +22,8 @@ describeAllImplementations(implementation => {
         watch: false,
         ignoreInitial: false,
         exportType: "named",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
         listDifferent: true,
         aliases: {
           "~fancy-import": "complex",
@@ -51,6 +53,8 @@ describeAllImplementations(implementation => {
         watch: false,
         ignoreInitial: false,
         exportType: "named",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
         listDifferent: true,
         ignore: [],
         implementation,

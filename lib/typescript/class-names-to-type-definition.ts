@@ -9,6 +9,19 @@ export const EXPORT_TYPES: ExportType[] = ["named", "default"];
 export type QuoteType = "single" | "double";
 export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
 
+export interface TypeDefinitionOptions {
+  classNames: ClassNames;
+  exportType: ExportType;
+  exportTypeName?: string;
+  exportTypeInterface?: string;
+  quoteType?: QuoteType;
+}
+
+export const exportTypeDefault: ExportType = "named";
+export const exportTypeNameDefault: string = "ClassNames";
+export const exportTypeInterfaceDefault: string = "Styles";
+export const quoteTypeDefault: QuoteType = "single";
+
 const classNameToNamedTypeDefinition = (className: ClassName) =>
   `export const ${className}: string;`;
 
@@ -41,26 +54,34 @@ const isValidName = (className: ClassName) => {
 };
 
 export const classNamesToTypeDefinitions = (
-  classNames: ClassNames,
-  exportType: ExportType,
-  quoteType: QuoteType = "single"
+  options: TypeDefinitionOptions
 ): string | null => {
-  if (classNames.length) {
+  if (options.classNames.length) {
     let typeDefinitions;
 
-    switch (exportType) {
+    const {
+      exportTypeName: ClassNames = exportTypeNameDefault,
+      exportTypeInterface: Styles = exportTypeInterfaceDefault
+    } = options;
+
+    switch (options.exportType) {
       case "default":
-        typeDefinitions = "export interface Styles {\n";
-        typeDefinitions += classNames
-          .map(className => classNameToInterfaceKey(className, quoteType))
+        typeDefinitions = `export interface ${Styles} {\n`;
+        typeDefinitions += options.classNames
+          .map(className =>
+            classNameToInterfaceKey(
+              className,
+              options.quoteType || quoteTypeDefault
+            )
+          )
           .join("\n");
         typeDefinitions += "\n}\n\n";
-        typeDefinitions += "export type ClassNames = keyof Styles;\n\n";
-        typeDefinitions += "declare const styles: Styles;\n\n";
+        typeDefinitions += `export type ${ClassNames} = keyof ${Styles};\n\n`;
+        typeDefinitions += `declare const styles: ${Styles};\n\n`;
         typeDefinitions += "export default styles;\n";
         return typeDefinitions;
       case "named":
-        typeDefinitions = classNames
+        typeDefinitions = options.classNames
           .filter(isValidName)
           .map(classNameToNamedTypeDefinition);
 
