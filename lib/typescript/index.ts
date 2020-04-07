@@ -1,5 +1,9 @@
 export {
   classNamesToTypeDefinitions,
+  exportTypeDefault,
+  exportTypeInterfaceDefault,
+  exportTypeNameDefault,
+  quoteTypeDefault,
   ExportType,
   QuoteType,
   EXPORT_TYPES,

@@ -2,14 +2,17 @@
 
 import yargs from "yargs";
 
-import { Aliases, NAME_FORMATS, NameFormat } from "./sass";
-import { ExportType, EXPORT_TYPES, QuoteType, QUOTE_TYPES } from "./typescript";
+import { nameFormatDefault, Aliases, NAME_FORMATS } from "./sass";
+import {
+  exportTypeDefault,
+  exportTypeInterfaceDefault,
+  exportTypeNameDefault,
+  quoteTypeDefault,
+  EXPORT_TYPES,
+  QUOTE_TYPES
+} from "./typescript";
 import { main } from "./main";
 import { IMPLEMENTATIONS, getDefaultImplementation } from "./implementations";
-
-const nameFormatDefault: NameFormat = "camel";
-const exportTypeDefault: ExportType = "named";
-const quoteTypeDefault: QuoteType = "single";
 
 const { _: patterns, ...rest } = yargs
   .usage(
@@ -76,6 +79,18 @@ const { _: patterns, ...rest } = yargs
     default: exportTypeDefault,
     alias: "e",
     describe: "The type of export used for defining the type definitions."
+  })
+  .option("exportTypeName", {
+    string: true,
+    default: exportTypeNameDefault,
+    describe:
+      'Set a custom type name for styles when --exportType is "default."'
+  })
+  .option("exportTypeInterface", {
+    string: true,
+    default: exportTypeInterfaceDefault,
+    describe:
+      'Set a custom interface name for styles when --exportType is "default."'
   })
   .option("watch", {
     boolean: true,

@@ -29,6 +29,8 @@ export const NAME_FORMATS: NameFormat[] = [
   "none"
 ];
 
+export const nameFormatDefault: NameFormat = "camel";
+
 const importer = (aliases: Aliases, aliasPrefixes: Aliases) => (
   url: string
 ) => {

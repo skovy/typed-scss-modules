@@ -1,7 +1,8 @@
 export {
+  nameFormatDefault,
+  fileToClassNames,
   Aliases,
   NameFormat,
-  NAME_FORMATS,
   Options,
-  fileToClassNames
+  NAME_FORMATS
 } from "./file-to-class-names";
