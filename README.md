@@ -194,6 +194,34 @@ export default styles;
 
 This export type is useful when using kebab (param) cased class names since variables with a `-` are not valid variables and will produce invalid types or when a class name is a TypeScript keyword (eg: `while` or `delete`). Additionally, the `Styles` and `ClassNames` types are exported which can be useful for properly typing variables, functions, etc. when working with dynamic class names.
 
+### `--exportTypeName`
+
+- **Type**: `string`
+- **Default**: `"ClassNames"`
+- **Example**: `tsm src --exportType default --exportTypeName ClassesType`
+
+Customize the type name exported in the generated file when `--exportType` is set to `"default"`.
+Only default exports are affected by this command. This example will change the export type line to:
+
+```typescript
+export type ClassesType = keyof Styles;
+```
+
+### `--exportTypeInterface`
+
+- **Type**: `string`
+- **Default**: `"Styles"`
+- **Example**: `tsm src --exportType default --exportTypeInterface IStyles`
+
+Customize the interface name exported in the generated file when `--exportType` is set to `"default"`.
+Only default exports are affected by this command. This example will change the export interface line to:
+
+```typescript
+export interface IStyles {
+  // ...
+}
+```
+
 ### `--quoteType` (`-q`)
 
 - **Type**: `"single" | "double"`
@@ -229,6 +257,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
