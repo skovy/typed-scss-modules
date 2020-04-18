@@ -97,6 +97,35 @@ describe("classNamesToTypeDefinitions", () => {
       );
     });
 
+    it("uses no quotes for default exports when specified", () => {
+      const definition = classNamesToTypeDefinitions({
+        classNames: ["myClass", "yourClass"],
+        exportType: "default",
+        quoteType: "none"
+      });
+
+      expect(definition).toEqual(
+        "export interface Styles {\n  myClass: string;\n  yourClass: string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+      );
+    });
+
+    it("prints a warning if a classname is invalid and does not include it in the type definitions", () => {
+      const definition = classNamesToTypeDefinitions({
+        classNames: ["myClass", "yourClass", "invalid-variable"],
+        exportType: "default",
+        quoteType: "none"
+      });
+
+      expect(definition).toEqual(
+        "export interface Styles {\n  myClass: string;\n  yourClass: string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+      );
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(
+          `[SKIPPING] 'invalid-variable' contains dashes but --quoteType is none (consider using 'camel' for --nameFormat or choosing an other --quoteType).`
+        )
+      );
+    });
+
     it("does not affect named exports", () => {
       const definition = classNamesToTypeDefinitions({
         classNames: ["myClass", "yourClass"],

@@ -224,7 +224,7 @@ export interface IStyles {
 
 ### `--quoteType` (`-q`)
 
-- **Type**: `"single" | "double"`
+- **Type**: `"single" | "double" | "none"`
 - **Default**: `"single"`
 - **Example**: `tsm src --exportType default --quoteType double`
 

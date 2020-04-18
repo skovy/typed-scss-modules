@@ -1,13 +1,17 @@
 import reserved from "reserved-words";
 
-import { ClassNames, ClassName } from "lib/sass/file-to-class-names";
+import {
+  ClassNames,
+  ClassName,
+  NameFormat
+} from "lib/sass/file-to-class-names";
 import { alerts } from "../core";
 
 export type ExportType = "named" | "default";
 export const EXPORT_TYPES: ExportType[] = ["named", "default"];
 
-export type QuoteType = "single" | "double";
-export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
+export type QuoteType = "single" | "double" | "none";
+export const QUOTE_TYPES: QuoteType[] = ["single", "double", "none"];
 
 export interface TypeDefinitionOptions {
   classNames: ClassNames;
@@ -15,6 +19,7 @@ export interface TypeDefinitionOptions {
   exportTypeName?: string;
   exportTypeInterface?: string;
   quoteType?: QuoteType;
+  nameFormat?: NameFormat;
 }
 
 export const exportTypeDefault: ExportType = "named";
@@ -29,7 +34,20 @@ const classNameToInterfaceKey = (
   className: ClassName,
   quoteType: QuoteType
 ) => {
-  const quote = quoteType === "single" ? "'" : '"';
+  let quote = "";
+  switch (quoteType) {
+    case "none":
+      quote = "";
+      break;
+    case "double":
+      quote = '"';
+      break;
+    default:
+    case "single":
+      quote = "'";
+      break;
+  }
+
   return `  ${quote}${className}${quote}: string;`;
 };
 
@@ -37,7 +55,27 @@ const isReservedKeyword = (className: ClassName) =>
   reserved.check(className, "es5", true) ||
   reserved.check(className, "es6", true);
 
-const isValidName = (className: ClassName) => {
+const isValidNameForDefaultExport = (
+  className: ClassName,
+  quoteType: QuoteType,
+  nameFormat: NameFormat
+) => {
+  const nameFormatsThatMayNeedQuotes: NameFormat[] = ["kebab", "param"];
+  const nameFormatMayNeedQuotes = nameFormatsThatMayNeedQuotes.indexOf(
+    nameFormat
+  );
+
+  if (quoteType === "none" && nameFormatMayNeedQuotes && /-/.test(className)) {
+    alerts.warn(
+      `[SKIPPING] '${className}' contains dashes but --quoteType is none (consider using 'camel' for --nameFormat or choosing an other --quoteType).`
+    );
+    return false;
+  }
+
+  return true;
+};
+
+const isValidNameForExport = (className: ClassName) => {
   if (isReservedKeyword(className)) {
     alerts.warn(
       `[SKIPPING] '${className}' is a reserved keyword (consider renaming or using --exportType default).`
@@ -45,7 +83,7 @@ const isValidName = (className: ClassName) => {
     return false;
   } else if (/-/.test(className)) {
     alerts.warn(
-      `[SKIPPING] '${className}' contains dashes (consider using 'camelCase' or 'dashes' for --nameFormat or using --exportType default).`
+      `[SKIPPING] '${className}' contains dashes (consider using 'camel' or 'dashes' for --nameFormat or using --exportType default).`
     );
     return false;
   }
@@ -60,6 +98,8 @@ export const classNamesToTypeDefinitions = (
     let typeDefinitions;
 
     const {
+      nameFormat = "camel",
+      quoteType = quoteTypeDefault,
       exportTypeName: ClassNames = exportTypeNameDefault,
       exportTypeInterface: Styles = exportTypeInterfaceDefault
     } = options;
@@ -68,12 +108,10 @@ export const classNamesToTypeDefinitions = (
       case "default":
         typeDefinitions = `export interface ${Styles} {\n`;
         typeDefinitions += options.classNames
-          .map(className =>
-            classNameToInterfaceKey(
-              className,
-              options.quoteType || quoteTypeDefault
-            )
+          .filter(className =>
+            isValidNameForDefaultExport(className, quoteType, nameFormat)
           )
+          .map(className => classNameToInterfaceKey(className, quoteType))
           .join("\n");
         typeDefinitions += "\n}\n\n";
         typeDefinitions += `export type ${ClassNames} = keyof ${Styles};\n\n`;
@@ -82,7 +120,7 @@ export const classNamesToTypeDefinitions = (
         return typeDefinitions;
       case "named":
         typeDefinitions = options.classNames
-          .filter(isValidName)
+          .filter(isValidNameForExport)
           .map(classNameToNamedTypeDefinition);
 
         // Sepearte all type definitions be a newline with a trailing newline.
