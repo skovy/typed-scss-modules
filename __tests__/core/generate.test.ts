@@ -23,7 +23,8 @@ describeAllImplementations(implementation => {
         listDifferent: false,
         ignore: [],
         implementation,
-        quoteType: "single"
+        quoteType: "single",
+        logLevel: "verbose"
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(5);

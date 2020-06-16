@@ -26,7 +26,8 @@ describeAllImplementations(implementation => {
         listDifferent: false,
         ignore: [],
         implementation,
-        quoteType: "single"
+        quoteType: "single",
+        logLevel: "verbose"
       });
 
       expect(fs.writeFileSync).toBeCalledWith(
@@ -51,7 +52,8 @@ describeAllImplementations(implementation => {
         listDifferent: false,
         ignore: [],
         implementation,
-        quoteType: "single"
+        quoteType: "single",
+        logLevel: "verbose"
       });
 
       expect(fs.writeFileSync).not.toBeCalled();

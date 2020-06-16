@@ -8,8 +8,10 @@ import {
   exportTypeInterfaceDefault,
   exportTypeNameDefault,
   quoteTypeDefault,
+  logLevelDefault,
   EXPORT_TYPES,
-  QUOTE_TYPES
+  QUOTE_TYPES,
+  LOG_LEVELS
 } from "./typescript";
 import { main } from "./main";
 import { IMPLEMENTATIONS, getDefaultImplementation } from "./implementations";
@@ -130,6 +132,13 @@ const { _: patterns, ...rest } = yargs
     alias: "q",
     describe:
       "Specify the quote type so that generated files adhere to your TypeScript rules."
+  })
+  .option("logLevel", {
+    string: true,
+    choices: LOG_LEVELS,
+    default: logLevelDefault,
+    alias: "l",
+    describe: "Verbosity level of console output"
   }).argv;
 
 main(patterns[0], { ...rest });

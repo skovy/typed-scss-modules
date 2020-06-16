@@ -230,6 +230,30 @@ export interface IStyles {
 
 Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes (").
 
+### `--logLevel` (`-l`)
+
+- **Type**: `"verbose" | "error" | "info" | "silent"`
+- **Default**: `"verbose"`
+- **Example**: `tsm src --logLevel error`
+
+Sets verbosity level of console output.
+
+#### `verbose`
+
+Print all messages
+
+#### `error`
+
+Print only errors
+
+#### `info`
+
+Print only some messages
+
+#### `silent`
+
+Print nothing
+
 ## Examples
 
 For examples, see the `examples` directory:

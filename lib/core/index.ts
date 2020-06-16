@@ -1,4 +1,4 @@
-export { alerts } from "./alerts";
+export { alerts, setAlertsLogLevel } from "./alerts";
 export { generate } from "./generate";
 export { listDifferent } from "./list-different";
 export { MainOptions } from "./types";

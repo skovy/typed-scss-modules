@@ -2,9 +2,17 @@ import fs from "fs";
 import path from "path";
 import slash from "slash";
 
-import { watch, MainOptions, generate, listDifferent } from "./core";
+import {
+  watch,
+  MainOptions,
+  generate,
+  listDifferent,
+  setAlertsLogLevel
+} from "./core";
 
 export const main = async (pattern: string, options: MainOptions) => {
+  setAlertsLogLevel(options.logLevel);
+
   // When the provided pattern is a directory construct the proper glob to find
   // all .scss files within that directory. Also, add the directory to the
   // included paths so any imported with a path relative to the root of the

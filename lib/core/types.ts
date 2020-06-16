@@ -1,5 +1,5 @@
 import { Options } from "../sass";
-import { ExportType, QuoteType } from "../typescript";
+import { ExportType, QuoteType, LogLevel } from "../typescript";
 
 export interface MainOptions extends Options {
   ignore: string[];
@@ -10,4 +10,5 @@ export interface MainOptions extends Options {
   listDifferent: boolean;
   quoteType: QuoteType;
   watch: boolean;
+  logLevel: LogLevel;
 }

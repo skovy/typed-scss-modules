@@ -24,7 +24,8 @@ describeAllImplementations(implementation => {
         listDifferent: false,
         ignore: [],
         implementation,
-        quoteType: "single"
+        quoteType: "single",
+        logLevel: "verbose"
       });
 
       const expectedDirname = slash(__dirname);
@@ -53,7 +54,8 @@ describeAllImplementations(implementation => {
         listDifferent: false,
         ignore: ["**/style.scss"],
         implementation,
-        quoteType: "single"
+        quoteType: "single",
+        logLevel: "verbose"
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(3);
