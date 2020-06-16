@@ -34,7 +34,8 @@ describeAllImplementations(implementation => {
         },
         ignore: [],
         implementation,
-        quoteType: "single"
+        quoteType: "single",
+        logLevel: "verbose"
       });
 
       expect(exit).toHaveBeenCalledWith(1);
@@ -58,7 +59,8 @@ describeAllImplementations(implementation => {
         listDifferent: true,
         ignore: [],
         implementation,
-        quoteType: "single"
+        quoteType: "single",
+        logLevel: "verbose"
       });
 
       expect(exit).not.toHaveBeenCalled();
