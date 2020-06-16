@@ -137,7 +137,7 @@ const { _: patterns, ...rest } = yargs
     string: true,
     choices: LOG_LEVELS,
     default: logLevelDefault,
-    alias: "l",
+    alias: "L",
     describe: "Verbosity level of console output"
   }).argv;
 
