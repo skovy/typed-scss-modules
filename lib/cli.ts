@@ -53,6 +53,7 @@ const { _: patterns, ...rest } = yargs
     "$0 src/**/*.scss -e default --quoteType double",
     "Use double quotes around class name definitions rather than single quotes."
   )
+  .example("$0 src/**/*.scss --logLevel error", "Output only errors")
   .demandCommand(1)
   .option("aliases", {
     coerce: (obj): Aliases => obj,
