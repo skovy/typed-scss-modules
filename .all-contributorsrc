@@ -73,6 +73,16 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "raphael-leger",
+      "name": "Raphaël L",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12732777?v=4",
+      "profile": "https://github.com/raphael-leger",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
