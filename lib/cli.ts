@@ -123,6 +123,11 @@ const { _: patterns, ...rest } = yargs
     default: [],
     describe: "Add a pattern or an array of glob patterns to exclude matches."
   })
+  .options("header", {
+    string: true,
+    default: "",
+    describe: "Header to insert at the top of every generated file."
+  })
   .options("quoteType", {
     string: true,
     choices: QUOTE_TYPES,

@@ -32,8 +32,9 @@ export const writeFile = (
       }
 
       const path = getTypeDefinitionPath(file);
+      const header = options.header ? options.header + "\n" : "";
 
-      fs.writeFileSync(path, typeDefinition);
+      fs.writeFileSync(path, header + typeDefinition);
       alerts.success(`[GENERATED TYPES] ${path}`);
     })
     .catch(({ message, file, line, column }: SassError) => {

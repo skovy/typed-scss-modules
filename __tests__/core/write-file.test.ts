@@ -39,6 +39,33 @@ describeAllImplementations(implementation => {
       );
     });
 
+    test("writes the corresponding type definitions for a file and logs, with header", async () => {
+      const testFile = `${__dirname}/../style.scss`;
+      const typesFile = getTypeDefinitionPath(testFile);
+
+      await writeFile(testFile, {
+        watch: false,
+        ignoreInitial: false,
+        exportType: "named",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
+        listDifferent: false,
+        ignore: [],
+        implementation,
+        header: "// abc\n// def",
+        quoteType: "single"
+      });
+
+      expect(fs.writeFileSync).toBeCalledWith(
+        typesFile,
+        "// abc\n// def\nexport const someClass: string;\n"
+      );
+
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`[GENERATED TYPES] ${typesFile}`)
+      );
+    });
+
     test("it skips files with no classes", async () => {
       const testFile = `${__dirname}/../empty.scss`;
 

@@ -222,6 +222,14 @@ export interface IStyles {
 }
 ```
 
+### `--header`
+
+- **Type**: `string`
+- **Default**: `""`
+- **Example**: `tsm src --header "// @generated"`
+
+A header to insert at the top of every generated file.
+
 ### `--quoteType` (`-q`)
 
 - **Type**: `"single" | "double"`

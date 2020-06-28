@@ -8,6 +8,7 @@ export interface MainOptions extends Options {
   exportTypeName: string;
   exportTypeInterface: string;
   listDifferent: boolean;
+  header?: string;
   quoteType: QuoteType;
   watch: boolean;
 }
