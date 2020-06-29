@@ -1,8 +1,14 @@
 import { alerts, setAlertsLogLevel } from "../../lib/core";
 
 describe("alerts", () => {
+  let logSpy: jest.SpyInstance;
+
   beforeEach(() => {
-    console.log = jest.fn();
+    logSpy = jest.spyOn(console, "log").mockImplementation();
+  });
+
+  afterEach(() => {
+    logSpy.mockRestore();
   });
 
   const TEST_ALERT_MSG = "TEST ALERT MESSAGE";
