@@ -23,7 +23,7 @@
     "tsm": "ts-node ./lib/cli.ts",
     "clean": "rm -rf ./dist",
     "build": "yarn clean && tsc && chmod +x dist/lib/cli.js",
-    "prepack": "yarn build",
+    "prepare": "yarn build",
     "check-types": "tsc --noEmit",
     "check-formatting": "prettier --check '**/*.{js,json,css,md,scss,tsx,ts}'",
     "commit": "commit"
