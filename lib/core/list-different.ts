@@ -13,7 +13,7 @@ export const listDifferent = async (
   pattern: string,
   options: MainOptions
 ): Promise<void> => {
-  // Find all the files that match the provied pattern.
+  // Find all the files that match the provided pattern.
   const files = glob.sync(pattern);
 
   if (!files || !files.length) {

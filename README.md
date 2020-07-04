@@ -55,7 +55,7 @@ yarn tsm src
 
 For all possible commands, run `tsm --help`.
 
-The only required argument is the directoy where all SCSS files are located. Running `tsm src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `tsm src/*.scss`
+The only required argument is the directory where all SCSS files are located. Running `tsm src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `tsm src/*.scss`
 
 ### `--watch` (`-w`)
 
@@ -180,10 +180,10 @@ Given the following SCSS:
 The following type definitions will be generated:
 
 ```typescript
-export interface Styles {
+export type Styles = {
   text: string;
   textHighlighted: string;
-}
+};
 
 export type ClassNames = keyof Styles;
 
@@ -217,9 +217,9 @@ Customize the interface name exported in the generated file when `--exportType` 
 Only default exports are affected by this command. This example will change the export interface line to:
 
 ```typescript
-export interface IStyles {
+export type IStyles = {
   // ...
-}
+};
 ```
 
 ### `--quoteType` (`-q`)

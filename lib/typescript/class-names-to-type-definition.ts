@@ -25,10 +25,7 @@ export const quoteTypeDefault: QuoteType = "single";
 const classNameToNamedTypeDefinition = (className: ClassName) =>
   `export const ${className}: string;`;
 
-const classNameToInterfaceKey = (
-  className: ClassName,
-  quoteType: QuoteType
-) => {
+const classNameToType = (className: ClassName, quoteType: QuoteType) => {
   const quote = quoteType === "single" ? "'" : '"';
   return `  ${quote}${className}${quote}: string;`;
 };
@@ -66,13 +63,10 @@ export const classNamesToTypeDefinitions = (
 
     switch (options.exportType) {
       case "default":
-        typeDefinitions = `export interface ${Styles} {\n`;
+        typeDefinitions = `export type ${Styles} = {\n`;
         typeDefinitions += options.classNames
           .map(className =>
-            classNameToInterfaceKey(
-              className,
-              options.quoteType || quoteTypeDefault
-            )
+            classNameToType(className, options.quoteType || quoteTypeDefault)
           )
           .join("\n");
         typeDefinitions += "\n}\n\n";
@@ -85,7 +79,7 @@ export const classNamesToTypeDefinitions = (
           .filter(isValidName)
           .map(classNameToNamedTypeDefinition);
 
-        // Sepearte all type definitions be a newline with a trailing newline.
+        // Separate all type definitions be a newline with a trailing newline.
         return typeDefinitions.join("\n") + "\n";
       default:
         return null;
