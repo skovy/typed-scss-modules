@@ -1,8 +1,8 @@
-export interface Styles {
+export type Styles = {
   i: string;
   "i-am-kebab-cased": string;
   while: string;
-}
+};
 
 export type ClassNames = keyof Styles;
 
