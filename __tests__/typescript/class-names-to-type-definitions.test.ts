@@ -59,7 +59,7 @@ describe("classNamesToTypeDefinitions", () => {
       });
 
       expect(definition).toEqual(
-        "export interface Styles {\n  'myClass': string;\n  'yourClass': string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+        "export type Styles = {\n  'myClass': string;\n  'yourClass': string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
       );
     });
 
@@ -93,7 +93,7 @@ describe("classNamesToTypeDefinitions", () => {
       });
 
       expect(definition).toEqual(
-        'export interface Styles {\n  "myClass": string;\n  "yourClass": string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n'
+        'export type Styles = {\n  "myClass": string;\n  "yourClass": string;\n}\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n'
       );
     });
 
@@ -110,7 +110,7 @@ describe("classNamesToTypeDefinitions", () => {
     });
   });
 
-  describe("exportType name and interface options", () => {
+  describe("exportType name and type attributes", () => {
     it("uses custom value for ClassNames type name", () => {
       const definition = classNamesToTypeDefinitions({
         classNames: ["myClass", "yourClass"],
@@ -119,11 +119,11 @@ describe("classNamesToTypeDefinitions", () => {
       });
 
       expect(definition).toEqual(
-        "export interface Styles {\n  'myClass': string;\n  'yourClass': string;\n}\n\nexport type Classes = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+        "export type Styles = {\n  'myClass': string;\n  'yourClass': string;\n}\n\nexport type Classes = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
       );
     });
 
-    it("uses custom value for Styles interface name", () => {
+    it("uses custom value for Styles type name", () => {
       const definition = classNamesToTypeDefinitions({
         classNames: ["myClass", "yourClass"],
         exportType: "default",
@@ -131,7 +131,7 @@ describe("classNamesToTypeDefinitions", () => {
       });
 
       expect(definition).toEqual(
-        "export interface IStyles {\n  'myClass': string;\n  'yourClass': string;\n}\n\nexport type ClassNames = keyof IStyles;\n\ndeclare const styles: IStyles;\n\nexport default styles;\n"
+        "export type IStyles = {\n  'myClass': string;\n  'yourClass': string;\n}\n\nexport type ClassNames = keyof IStyles;\n\ndeclare const styles: IStyles;\n\nexport default styles;\n"
       );
     });
   });
