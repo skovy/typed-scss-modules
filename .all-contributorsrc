@@ -83,6 +83,16 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "nperez0111",
+      "name": "Nick Perez",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1852538?v=4",
+      "profile": "https://NickTheSick.com",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
