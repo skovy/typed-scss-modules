@@ -278,11 +278,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/peanutbother"><img src="https://avatars3.githubusercontent.com/u/6437182?v=4" width="100px;" alt=""/><br /><sub><b>Jared Gesser</b></sub></a><br /><a href="#ideas-peanutbother" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/raphael-leger"><img src="https://avatars1.githubusercontent.com/u/12732777?v=4" width="100px;" alt=""/><br /><sub><b>Raphaël L</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/commits?author=raphael-leger" title="Code">💻</a> <a href="#ideas-raphael-leger" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://NickTheSick.com"><img src="https://avatars1.githubusercontent.com/u/1852538?v=4" width="100px;" alt=""/><br /><sub><b>Nick Perez</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/issues?q=author%3Anperez0111" title="Bug reports">🐛</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=nperez0111" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
