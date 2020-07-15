@@ -229,7 +229,7 @@ export type IStyles = {
 
 Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes (").
 
-### `--logLevel` (`-l`)
+### `--logLevel` (`-L`)
 
 - **Type**: `"verbose" | "error" | "info" | "silent"`
 - **Default**: `"verbose"`
