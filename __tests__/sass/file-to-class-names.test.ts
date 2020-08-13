@@ -101,4 +101,15 @@ describeAllImplementations(implementation => {
       });
     });
   });
+
+  describe("sortClassNames option", () => {
+    test("it sorts the results given a sort option", async () => {
+      const result = await fileToClassNames(`${__dirname}/../complex.scss`, {
+        implementation,
+        sortClassNames: true
+      });
+
+      expect(result).toEqual(["nestedAnother", "nestedClass", "someStyles"]);
+    });
+  });
 });

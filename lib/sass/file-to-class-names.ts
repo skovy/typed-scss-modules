@@ -19,6 +19,7 @@ export interface Options {
   aliasPrefixes?: Aliases;
   nameFormat?: NameFormat;
   implementation: Implementations;
+  sortClassNames?: boolean;
 }
 
 export const NAME_FORMATS: NameFormat[] = [
@@ -59,7 +60,8 @@ export const fileToClassNames = (
     aliases = {},
     aliasPrefixes = {},
     nameFormat = "camel",
-    implementation
+    implementation,
+    sortClassNames = false
   }: Options = {} as Options
 ) => {
   const transformer = classNameTransformer(nameFormat);
@@ -76,6 +78,10 @@ export const fileToClassNames = (
       sourceToClassNames(result.css).then(({ exportTokens }) => {
         const classNames = Object.keys(exportTokens);
         const transformedClassNames = classNames.map(transformer);
+
+        if (sortClassNames) {
+          transformedClassNames.sort((a, b) => a.localeCompare(b));
+        }
 
         resolve(transformedClassNames);
       });

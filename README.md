@@ -253,6 +253,14 @@ Print only some messages
 
 Print nothing
 
+### `--sortClassNames` (`-s`)
+
+- **Type**: `boolean`
+- **Default**: `false`
+- **Example**: `tsm src --sortClassNames`
+
+Sort classNames alphabetically.
+
 ## Examples
 
 For examples, see the `examples` directory:

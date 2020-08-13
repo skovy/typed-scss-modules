@@ -140,6 +140,12 @@ const { _: patterns, ...rest } = yargs
     default: logLevelDefault,
     alias: "L",
     describe: "Verbosity level of console output"
+  })
+  .option("sortClassNames", {
+    boolean: true,
+    default: false,
+    alias: "s",
+    describe: "Sort classNames alphabetically"
   }).argv;
 
 main(patterns[0], { ...rest });
