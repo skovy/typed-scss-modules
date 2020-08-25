@@ -93,6 +93,17 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "deificx",
+      "name": "Even Alander",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1771462?v=4",
+      "profile": "https://alander.org",
+      "contributions": [
+        "code",
+        "test",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
