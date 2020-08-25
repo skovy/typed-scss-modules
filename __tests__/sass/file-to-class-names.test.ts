@@ -7,7 +7,7 @@ describeAllImplementations(implementation => {
     test("it converts a file path to an array of class names (default camel cased)", async () => {
       const result = await fileToClassNames(`${__dirname}/../complex.scss`);
 
-      expect(result).toEqual(["someStyles", "nestedClass", "nestedAnother"]);
+      expect(result).toEqual(["nestedAnother", "nestedClass", "someStyles"]);
     });
 
     describe("nameFormat", () => {
@@ -18,9 +18,9 @@ describeAllImplementations(implementation => {
         });
 
         expect(result).toEqual([
-          "some-styles",
+          "nested-another",
           "nested-class",
-          "nested-another"
+          "some-styles"
         ]);
       });
 
@@ -31,9 +31,9 @@ describeAllImplementations(implementation => {
         });
 
         expect(result).toEqual([
-          "some-styles",
+          "nested-another",
           "nested-class",
-          "nested-another"
+          "some-styles"
         ]);
       });
 
@@ -43,7 +43,7 @@ describeAllImplementations(implementation => {
           implementation
         });
 
-        expect(result).toEqual(["App", "Logo", "appHeader"]);
+        expect(result).toEqual(["App", "appHeader", "Logo"]);
       });
 
       test("it does not change class names when nameFormat is set to none", async () => {
@@ -52,7 +52,7 @@ describeAllImplementations(implementation => {
           implementation
         });
 
-        expect(result).toEqual(["App", "Logo", "App-Header"]);
+        expect(result).toEqual(["App", "App-Header", "Logo"]);
       });
     });
 
@@ -67,11 +67,11 @@ describeAllImplementations(implementation => {
         });
 
         expect(result).toEqual([
-          "someStyles",
-          "nestedClass",
+          "myCustomClass",
           "nestedAnother",
+          "nestedClass",
           "someClass",
-          "myCustomClass"
+          "someStyles"
         ]);
       });
     });
@@ -92,11 +92,11 @@ describeAllImplementations(implementation => {
         );
 
         expect(result).toEqual([
-          "someStyles",
-          "nestedClass",
+          "myCustomClass",
           "nestedAnother",
+          "nestedClass",
           "nestedStyles",
-          "myCustomClass"
+          "someStyles"
         ]);
       });
     });

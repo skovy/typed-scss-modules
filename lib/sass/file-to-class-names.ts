@@ -75,7 +75,9 @@ export const fileToClassNames = (
 
       sourceToClassNames(result.css).then(({ exportTokens }) => {
         const classNames = Object.keys(exportTokens);
-        const transformedClassNames = classNames.map(transformer);
+        const transformedClassNames = classNames
+          .map(transformer)
+          .sort((a, b) => a.localeCompare(b));
 
         resolve(transformedClassNames);
       });
