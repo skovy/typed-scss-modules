@@ -264,9 +264,8 @@ For examples, see the `examples` directory:
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <table>
   <tr>
     <td align="center"><a href="https://skovy.dev"><img src="https://avatars1.githubusercontent.com/u/5247455?v=4" width="100px;" alt=""/><br /><sub><b>Spencer Miskoviak</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/issues?q=author%3Askovy" title="Bug reports">🐛</a> <a href="#blog-skovy" title="Blogposts">📝</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=skovy" title="Code">💻</a> <a href="#example-skovy" title="Examples">💡</a> <a href="#ideas-skovy" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-skovy" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-skovy" title="Maintenance">🚧</a> <a href="https://github.com/skovy/typed-scss-modules/pulls?q=is%3Apr+reviewed-by%3Askovy" title="Reviewed Pull Requests">👀</a> <a href="#security-skovy" title="Security">🛡️</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=skovy" title="Tests">⚠️</a></td>
@@ -282,11 +281,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://alander.org"><img src="https://avatars3.githubusercontent.com/u/1771462?v=4" width="100px;" alt=""/><br /><sub><b>Even Alander</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/commits?author=deificx" title="Code">💻</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=deificx" title="Tests">⚠️</a> <a href="#ideas-deificx" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore-end -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
