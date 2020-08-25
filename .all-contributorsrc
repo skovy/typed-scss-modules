@@ -112,5 +112,5 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "commitConvention": "angular",
-  "skipCi": true
+  "skipCi": false
 }
