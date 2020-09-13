@@ -227,7 +227,7 @@ export type IStyles = {
 - **Default**: `"single"`
 - **Example**: `tsm src --exportType default --quoteType double`
 
-Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes (").
+Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes ("). If prettier is installed and configured in the project, it will be used and is likely to override the effect of this setting.
 
 ### `--logLevel` (`-L`)
 
