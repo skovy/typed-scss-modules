@@ -1,5 +1,4 @@
 import { attemptPrettier } from "../../lib/core/attemptPrettier";
-import { fileToClassNames } from "../../lib/sass";
 import { classNamesToTypeDefinitions } from "../../lib/typescript";
 
 import prettier from "prettier";
@@ -14,9 +13,8 @@ describe("attemptPrettier", () => {
   });
 
   it("should match snapshot", async () => {
-    const classNames = await fileToClassNames(`${__dirname}/../complex.scss`);
     const typeDefinition = classNamesToTypeDefinitions({
-      classNames,
+      classNames: ["nestedAnother", "nestedClass", "someStyles"],
       exportType: "default"
     });
 
