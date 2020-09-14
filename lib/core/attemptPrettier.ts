@@ -39,10 +39,7 @@ export const attemptPrettier = async (input: string) => {
       editorconfig: true
     });
     // try to return formatted output
-    return prettier.format(
-      input,
-      Object.assign({}, config, { parser: "typescript" })
-    );
+    return prettier.format(input, { ...config, parser: "typescript" });
   } catch (error) {
     alerts.notice(`Tried using prettier, but failed with error: ${error}`);
   }
