@@ -135,4 +135,16 @@ describe("classNamesToTypeDefinitions", () => {
       );
     });
   });
+
+  describe("Banner support", () => {
+    it("appends the banner to the top of the output file", () => {
+      const banner = "// Example banner";
+      const definition = classNamesToTypeDefinitions({
+        banner,
+        classNames: ["myClass", "yourClass"],
+        exportType: "default"
+      });
+      expect(definition).toContain(banner);
+    });
+  });
 });
