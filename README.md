@@ -253,6 +253,21 @@ Print only some messages
 
 Print nothing
 
+### `--banner`
+
+- **Type**: `string`
+- **Default**: `undefined`
+- **Example**: `tsm src --banner '// This is an example banner\n'`
+
+Will prepend a string to the top of your output files
+
+```typescript
+// This is an example banner
+export type Styles = {
+  // ...
+};
+```
+
 ## Examples
 
 For examples, see the `examples` directory:
