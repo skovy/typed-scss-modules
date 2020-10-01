@@ -10,6 +10,7 @@ export type QuoteType = "single" | "double";
 export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
 
 export interface TypeDefinitionOptions {
+  banner?: string;
   classNames: ClassNames;
   exportType: ExportType;
   exportTypeName?: string;
@@ -63,7 +64,8 @@ export const classNamesToTypeDefinitions = (
 
     switch (options.exportType) {
       case "default":
-        typeDefinitions = `export type ${Styles} = {\n`;
+        typeDefinitions = options.banner || "";
+        typeDefinitions += `export type ${Styles} = {\n`;
         typeDefinitions += options.classNames
           .map(className =>
             classNameToType(className, options.quoteType || quoteTypeDefault)
@@ -78,6 +80,10 @@ export const classNamesToTypeDefinitions = (
         typeDefinitions = options.classNames
           .filter(isValidName)
           .map(classNameToNamedTypeDefinition);
+
+        if (options.banner) {
+          typeDefinitions.unshift(options.banner);
+        }
 
         // Separate all type definitions be a newline with a trailing newline.
         return typeDefinitions.join("\n") + "\n";
