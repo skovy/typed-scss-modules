@@ -15,6 +15,7 @@ describeAllImplementations(implementation => {
       const pattern = `${__dirname}/../**/*.scss`;
 
       await generate(pattern, {
+        banner: "",
         watch: false,
         ignoreInitial: false,
         exportType: "named",

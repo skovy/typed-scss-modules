@@ -10,7 +10,7 @@ export type QuoteType = "single" | "double";
 export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
 
 export interface TypeDefinitionOptions {
-  banner?: string;
+  banner: string;
   classNames: ClassNames;
   exportType: ExportType;
   exportTypeName?: string;
@@ -22,6 +22,7 @@ export const exportTypeDefault: ExportType = "named";
 export const exportTypeNameDefault: string = "ClassNames";
 export const exportTypeInterfaceDefault: string = "Styles";
 export const quoteTypeDefault: QuoteType = "single";
+export const bannerTypeDefault: string = "";
 
 const classNameToNamedTypeDefinition = (className: ClassName) =>
   `export const ${className}: string;`;

@@ -4,6 +4,7 @@ import yargs from "yargs";
 
 import { nameFormatDefault, Aliases, NAME_FORMATS } from "./sass";
 import {
+  bannerTypeDefault,
   exportTypeDefault,
   exportTypeInterfaceDefault,
   exportTypeNameDefault,
@@ -140,6 +141,12 @@ const { _: patterns, ...rest } = yargs
     default: logLevelDefault,
     alias: "L",
     describe: "Verbosity level of console output"
+  })
+  .options("banner", {
+    string: true,
+    default: bannerTypeDefault,
+    describe:
+      "Inserts text at the top of every output file for documentation purposes."
   }).argv;
 
 main(patterns[0], { ...rest });
