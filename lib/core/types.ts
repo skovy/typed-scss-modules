@@ -2,7 +2,7 @@ import { Options } from "../sass";
 import { ExportType, QuoteType, LogLevel } from "../typescript";
 
 export interface MainOptions extends Options {
-  banner?: string;
+  banner: string;
   ignore: string[];
   ignoreInitial: boolean;
   exportType: ExportType;

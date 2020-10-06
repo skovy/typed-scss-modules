@@ -1,3 +1,4 @@
+// example banner
 export type Styles = {
   i: string;
   "i-am-kebab-cased": string;

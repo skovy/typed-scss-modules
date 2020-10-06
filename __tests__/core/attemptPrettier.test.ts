@@ -14,6 +14,7 @@ describe("attemptPrettier", () => {
 
   it("should match snapshot", async () => {
     const typeDefinition = classNamesToTypeDefinitions({
+      banner: "",
       classNames: ["nestedAnother", "nestedClass", "someStyles"],
       exportType: "default"
     });

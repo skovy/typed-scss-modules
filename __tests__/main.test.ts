@@ -16,6 +16,7 @@ describeAllImplementations(implementation => {
       const pattern = `${__dirname}`;
 
       await main(pattern, {
+        banner: "",
         watch: false,
         ignoreInitial: false,
         exportType: "named",
@@ -46,6 +47,7 @@ describeAllImplementations(implementation => {
       const pattern = `${__dirname}`;
 
       await main(pattern, {
+        banner: "",
         watch: false,
         ignoreInitial: false,
         exportType: "named",

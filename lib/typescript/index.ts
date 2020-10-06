@@ -1,4 +1,5 @@
 export {
+  bannerTypeDefault,
   classNamesToTypeDefinitions,
   exportTypeDefault,
   exportTypeInterfaceDefault,

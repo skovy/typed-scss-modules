@@ -18,6 +18,7 @@ describeAllImplementations(implementation => {
       const typesFile = getTypeDefinitionPath(testFile);
 
       await writeFile(testFile, {
+        banner: "",
         watch: false,
         ignoreInitial: false,
         exportType: "named",
@@ -44,6 +45,7 @@ describeAllImplementations(implementation => {
       const testFile = `${__dirname}/../empty.scss`;
 
       await writeFile(testFile, {
+        banner: "",
         watch: false,
         ignoreInitial: false,
         exportType: "named",

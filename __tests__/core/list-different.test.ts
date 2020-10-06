@@ -19,6 +19,7 @@ describeAllImplementations(implementation => {
       const pattern = `${__dirname}/../**/*.scss`;
 
       await listDifferent(pattern, {
+        banner: "",
         watch: false,
         ignoreInitial: false,
         exportType: "named",
@@ -51,6 +52,7 @@ describeAllImplementations(implementation => {
       const pattern = `${__dirname}/../**/style.scss`;
 
       await listDifferent(pattern, {
+        banner: "",
         watch: false,
         ignoreInitial: false,
         exportType: "named",
