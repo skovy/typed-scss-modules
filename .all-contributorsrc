@@ -104,6 +104,17 @@
         "test",
         "ideas"
       ]
+    },
+    {
+      "login": "inkblotty",
+      "name": "Katie Foster",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/14206003?v=4",
+      "profile": "http://inkblotty.github.io",
+      "contributions": [
+        "code",
+        "test",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
