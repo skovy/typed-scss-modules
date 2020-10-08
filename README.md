@@ -281,6 +281,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align="center"><a href="https://skovy.dev"><img src="https://avatars1.githubusercontent.com/u/5247455?v=4" width="100px;" alt=""/><br /><sub><b>Spencer Miskoviak</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/issues?q=author%3Askovy" title="Bug reports">🐛</a> <a href="#blog-skovy" title="Blogposts">📝</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=skovy" title="Code">💻</a> <a href="#example-skovy" title="Examples">💡</a> <a href="#ideas-skovy" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-skovy" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-skovy" title="Maintenance">🚧</a> <a href="https://github.com/skovy/typed-scss-modules/pulls?q=is%3Apr+reviewed-by%3Askovy" title="Reviewed Pull Requests">👀</a> <a href="#security-skovy" title="Security">🛡️</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=skovy" title="Tests">⚠️</a></td>
@@ -294,8 +296,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://NickTheSick.com"><img src="https://avatars1.githubusercontent.com/u/1852538?v=4" width="100px;" alt=""/><br /><sub><b>Nick Perez</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/issues?q=author%3Anperez0111" title="Bug reports">🐛</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=nperez0111" title="Code">💻</a></td>
     <td align="center"><a href="https://alander.org"><img src="https://avatars3.githubusercontent.com/u/1771462?v=4" width="100px;" alt=""/><br /><sub><b>Even Alander</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/commits?author=deificx" title="Code">💻</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=deificx" title="Tests">⚠️</a> <a href="#ideas-deificx" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://inkblotty.github.io"><img src="https://avatars3.githubusercontent.com/u/14206003?v=4" width="100px;" alt=""/><br /><sub><b>Katie Foster</b></sub></a><br /><a href="https://github.com/skovy/typed-scss-modules/commits?author=inkblotty" title="Code">💻</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=inkblotty" title="Tests">⚠️</a> <a href="https://github.com/skovy/typed-scss-modules/commits?author=inkblotty" title="Documentation">📖</a></td>
   </tr>
 </table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-end -->
 
