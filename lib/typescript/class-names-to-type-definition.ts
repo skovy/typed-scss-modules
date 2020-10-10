@@ -1,3 +1,5 @@
+import os from "os";
+
 import reserved from "reserved-words";
 
 import { ClassNames, ClassName } from "lib/sass/file-to-class-names";
@@ -66,16 +68,16 @@ export const classNamesToTypeDefinitions = (
     switch (options.exportType) {
       case "default":
         typeDefinitions = options.banner || "";
-        typeDefinitions += `export type ${Styles} = {\n`;
+        typeDefinitions += `export type ${Styles} = {${os.EOL}`;
         typeDefinitions += options.classNames
           .map(className =>
             classNameToType(className, options.quoteType || quoteTypeDefault)
           )
-          .join("\n");
-        typeDefinitions += "\n}\n\n";
-        typeDefinitions += `export type ${ClassNames} = keyof ${Styles};\n\n`;
-        typeDefinitions += `declare const styles: ${Styles};\n\n`;
-        typeDefinitions += "export default styles;\n";
+          .join(`${os.EOL}`);
+        typeDefinitions += `${os.EOL}}${os.EOL}${os.EOL}`;
+        typeDefinitions += `export type ${ClassNames} = keyof ${Styles};${os.EOL}${os.EOL}`;
+        typeDefinitions += `declare const styles: ${Styles};${os.EOL}${os.EOL}`;
+        typeDefinitions += `export default styles;${os.EOL}`;
         return typeDefinitions;
       case "named":
         typeDefinitions = options.classNames
@@ -87,7 +89,7 @@ export const classNamesToTypeDefinitions = (
         }
 
         // Separate all type definitions be a newline with a trailing newline.
-        return typeDefinitions.join("\n") + "\n";
+        return typeDefinitions.join(`${os.EOL}`) + `${os.EOL}`;
       default:
         return null;
     }
