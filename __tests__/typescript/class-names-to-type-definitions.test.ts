@@ -1,13 +1,17 @@
 import { classNamesToTypeDefinitions, ExportType } from "../../lib/typescript";
 
-describe("classNamesToTypeDefinitions", () => {
+jest.mock("../../lib/prettier/can-resolve", () => ({
+  canResolvePrettier: () => false,
+}));
+
+describe("classNamesToTypeDefinitions (without Prettier)", () => {
   beforeEach(() => {
     console.log = jest.fn();
   });
 
   describe("named", () => {
-    it("converts an array of class name strings to type definitions", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("converts an array of class name strings to type definitions", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "named",
@@ -18,18 +22,18 @@ describe("classNamesToTypeDefinitions", () => {
       );
     });
 
-    it("returns null if there are no class names", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("returns null if there are no class names", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: [],
         exportType: "named",
       });
 
-      expect(definition).toBeNull;
+      expect(definition).toBeNull();
     });
 
-    it("prints a warning if a classname is a reserved keyword and does not include it in the type definitions", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("prints a warning if a classname is a reserved keyword and does not include it in the type definitions", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "if"],
         exportType: "named",
@@ -41,8 +45,8 @@ describe("classNamesToTypeDefinitions", () => {
       );
     });
 
-    it("prints a warning if a classname is invalid and does not include it in the type definitions", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("prints a warning if a classname is invalid and does not include it in the type definitions", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "invalid-variable"],
         exportType: "named",
@@ -56,8 +60,8 @@ describe("classNamesToTypeDefinitions", () => {
   });
 
   describe("default", () => {
-    it("converts an array of class name strings to type definitions", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("converts an array of class name strings to type definitions", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
@@ -68,32 +72,32 @@ describe("classNamesToTypeDefinitions", () => {
       );
     });
 
-    it("returns null if there are no class names", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("returns null if there are no class names", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: [],
         exportType: "default",
       });
 
-      expect(definition).toBeNull;
+      expect(definition).toBeNull();
     });
   });
 
   describe("invalid export type", () => {
-    it("returns null", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("returns null", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass"],
         exportType: "invalid" as ExportType,
       });
 
-      expect(definition).toBeNull;
+      expect(definition).toBeNull();
     });
   });
 
   describe("quoteType", () => {
-    it("uses double quotes for default exports when specified", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("uses double quotes for default exports when specified", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
@@ -105,8 +109,8 @@ describe("classNamesToTypeDefinitions", () => {
       );
     });
 
-    it("does not affect named exports", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("does not affect named exports", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "named",
@@ -120,8 +124,8 @@ describe("classNamesToTypeDefinitions", () => {
   });
 
   describe("exportType name and type attributes", () => {
-    it("uses custom value for ClassNames type name", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("uses custom value for ClassNames type name", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
@@ -133,8 +137,8 @@ describe("classNamesToTypeDefinitions", () => {
       );
     });
 
-    it("uses custom value for Styles type name", () => {
-      const definition = classNamesToTypeDefinitions({
+    it("uses custom value for Styles type name", async () => {
+      const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
@@ -148,9 +152,9 @@ describe("classNamesToTypeDefinitions", () => {
   });
 
   describe("Banner support", () => {
-    it("appends the banner to the top of the output file: default", () => {
+    it("appends the banner to the top of the output file: default", async () => {
       const banner = "// Example banner";
-      const definition = classNamesToTypeDefinitions({
+      const definition = await classNamesToTypeDefinitions({
         banner,
         classNames: ["myClass", "yourClass"],
         exportType: "default",
@@ -158,9 +162,9 @@ describe("classNamesToTypeDefinitions", () => {
       expect(definition).toContain(banner);
     });
 
-    it("appends the banner to the top of the output file: named", () => {
+    it("appends the banner to the top of the output file: named", async () => {
       const banner = "// Example banner";
-      const definition = classNamesToTypeDefinitions({
+      const definition = await classNamesToTypeDefinitions({
         banner,
         classNames: ["myClass", "yourClass"],
         exportType: "named",

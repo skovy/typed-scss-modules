@@ -1,5 +1,5 @@
-import { alerts } from "./alerts";
-import { canResolvePrettier } from "./canResolvePrettier";
+import { alerts } from "../core";
+import { canResolvePrettier } from "./can-resolve";
 
 import { format, resolveConfig } from "prettier";
 

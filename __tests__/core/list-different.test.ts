@@ -48,8 +48,30 @@ describeAllImplementations((implementation) => {
       );
     });
 
+    test("logs nothing and does not exit when formatted using Prettier", async () => {
+      const pattern = `${__dirname}/list-different/formatted.scss`;
+
+      await listDifferent(pattern, {
+        banner: "",
+        watch: false,
+        ignoreInitial: false,
+        exportType: "default",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
+        listDifferent: true,
+        ignore: [],
+        implementation,
+        quoteType: "single",
+        logLevel: "verbose",
+        nameFormat: "kebab",
+      });
+
+      expect(console.log).not.toHaveBeenCalled();
+      expect(exit).not.toHaveBeenCalled();
+    });
+
     test("logs nothing and does not exit if all files are valid", async () => {
-      const pattern = `${__dirname}/../**/style.scss`;
+      const pattern = `${__dirname}/../dummy-styles/**/style.scss`;
 
       await listDifferent(pattern, {
         banner: "",

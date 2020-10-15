@@ -4,6 +4,7 @@ import reserved from "reserved-words";
 
 import { ClassNames, ClassName } from "lib/sass/file-to-class-names";
 import { alerts } from "../core";
+import { attemptPrettier } from "../prettier";
 
 export type ExportType = "named" | "default";
 export const EXPORT_TYPES: ExportType[] = ["named", "default"];
@@ -54,9 +55,9 @@ const isValidName = (className: ClassName) => {
   return true;
 };
 
-export const classNamesToTypeDefinitions = (
+export const classNamesToTypeDefinitions = async (
   options: TypeDefinitionOptions
-): string | null => {
+): Promise<string | null> => {
   if (options.classNames.length) {
     let typeDefinitions;
 
@@ -78,7 +79,7 @@ export const classNamesToTypeDefinitions = (
         typeDefinitions += `export type ${ClassNames} = keyof ${Styles};${os.EOL}${os.EOL}`;
         typeDefinitions += `declare const styles: ${Styles};${os.EOL}${os.EOL}`;
         typeDefinitions += `export default styles;${os.EOL}`;
-        return typeDefinitions;
+        break;
       case "named":
         typeDefinitions = options.classNames
           .filter(isValidName)
@@ -89,9 +90,14 @@ export const classNamesToTypeDefinitions = (
         }
 
         // Separate all type definitions be a newline with a trailing newline.
-        return typeDefinitions.join(`${os.EOL}`) + `${os.EOL}`;
-      default:
-        return null;
+        typeDefinitions = typeDefinitions.join(`${os.EOL}`) + `${os.EOL}`;
+        break;
+    }
+
+    if (typeDefinitions) {
+      return await attemptPrettier(typeDefinitions);
+    } else {
+      return null;
     }
   } else {
     return null;
