@@ -12,7 +12,7 @@ describeAllImplementations((implementation) => {
     });
 
     test("generates types for all files matching the pattern", async () => {
-      const pattern = `${__dirname}/../**/*.scss`;
+      const pattern = `${__dirname}/../dummy-styles/**/*.scss`;
 
       await generate(pattern, {
         banner: "",

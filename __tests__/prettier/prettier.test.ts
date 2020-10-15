@@ -1,4 +1,4 @@
-import { attemptPrettier } from "../../lib/core/attemptPrettier";
+import { attemptPrettier } from "../../lib/prettier";
 import { classNamesToTypeDefinitions } from "../../lib/typescript";
 
 import prettier from "prettier";
@@ -13,7 +13,7 @@ describe("attemptPrettier", () => {
   });
 
   it("should match snapshot", async () => {
-    const typeDefinition = classNamesToTypeDefinitions({
+    const typeDefinition = await classNamesToTypeDefinitions({
       banner: "",
       classNames: ["nestedAnother", "nestedClass", "someStyles"],
       exportType: "default",
@@ -41,9 +41,9 @@ describe("attemptPrettier - mock prettier", () => {
   });
 });
 
-describe("attemptPrettier - mock canResolvePrettier", () => {
+describe("attemptPrettier - mock resolution check", () => {
   beforeAll(() => {
-    jest.mock("../../lib/core/canResolvePrettier");
+    jest.mock("../../lib/prettier/can-resolve");
   });
 
   it("should fail to resolve prettier and return input", async () => {

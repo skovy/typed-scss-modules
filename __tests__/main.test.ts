@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import slash from "slash";
 
 import { main } from "../lib/main";
@@ -13,7 +14,7 @@ describeAllImplementations((implementation) => {
     });
 
     test("generates types for all .scss files when the pattern is a directory", async () => {
-      const pattern = `${__dirname}`;
+      const pattern = `${__dirname}/dummy-styles`;
 
       await main(pattern, {
         banner: "",
@@ -29,9 +30,9 @@ describeAllImplementations((implementation) => {
         logLevel: "verbose",
       });
 
-      const expectedDirname = slash(__dirname);
-
       expect(fs.writeFileSync).toBeCalledTimes(5);
+
+      const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
 
       expect(fs.writeFileSync).toBeCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
@@ -44,7 +45,7 @@ describeAllImplementations((implementation) => {
     });
 
     test("generates types for all .scss files and ignores files that match the ignore pattern", async () => {
-      const pattern = `${__dirname}`;
+      const pattern = `${__dirname}/dummy-styles`;
 
       await main(pattern, {
         banner: "",
@@ -62,7 +63,8 @@ describeAllImplementations((implementation) => {
 
       expect(fs.writeFileSync).toBeCalledTimes(3);
 
-      const expectedDirname = slash(__dirname);
+      const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
+
       expect(fs.writeFileSync).toBeCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
         "export const nestedAnother: string;\nexport const nestedClass: string;\nexport const someStyles: string;\n"

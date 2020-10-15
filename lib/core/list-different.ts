@@ -34,8 +34,8 @@ export const checkFile = (
   options: MainOptions
 ): Promise<boolean> => {
   return new Promise((resolve) =>
-    fileToClassNames(file, options).then((classNames) => {
-      const typeDefinition = classNamesToTypeDefinitions({
+    fileToClassNames(file, options).then(async (classNames) => {
+      const typeDefinition = await classNamesToTypeDefinitions({
         classNames: classNames,
         ...options,
       });

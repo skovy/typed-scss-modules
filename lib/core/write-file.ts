@@ -8,7 +8,6 @@ import {
 } from "../typescript";
 import { fileToClassNames } from "../sass";
 import { MainOptions } from "./types";
-import { attemptPrettier } from "./attemptPrettier";
 
 /**
  * Given a single file generate the proper types.
@@ -21,9 +20,9 @@ export const writeFile = (
   options: MainOptions
 ): Promise<void> => {
   return fileToClassNames(file, options)
-    .then((classNames) => {
-      const typeDefinition = classNamesToTypeDefinitions({
-        classNames: classNames,
+    .then(async (classNames) => {
+      const typeDefinition = await classNamesToTypeDefinitions({
+        classNames,
         ...options,
       });
 
@@ -33,11 +32,8 @@ export const writeFile = (
       }
 
       const path = getTypeDefinitionPath(file);
-
-      return attemptPrettier(typeDefinition).then((output) => {
-        fs.writeFileSync(path, output);
-        alerts.success(`[GENERATED TYPES] ${path}`);
-      });
+      fs.writeFileSync(path, typeDefinition);
+      alerts.success(`[GENERATED TYPES] ${path}`);
     })
     .catch(({ message, file, line, column }: SassError) => {
       const location = file ? `(${file}[${line}:${column}])` : "";

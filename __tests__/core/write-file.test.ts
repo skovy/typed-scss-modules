@@ -14,7 +14,7 @@ describeAllImplementations((implementation) => {
     });
 
     test("writes the corresponding type definitions for a file and logs", async () => {
-      const testFile = `${__dirname}/../style.scss`;
+      const testFile = `${__dirname}/../dummy-styles/style.scss`;
       const typesFile = getTypeDefinitionPath(testFile);
 
       await writeFile(testFile, {
@@ -42,7 +42,7 @@ describeAllImplementations((implementation) => {
     });
 
     test("it skips files with no classes", async () => {
-      const testFile = `${__dirname}/../empty.scss`;
+      const testFile = `${__dirname}/../dummy-styles/empty.scss`;
 
       await writeFile(testFile, {
         banner: "",
