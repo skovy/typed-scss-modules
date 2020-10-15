@@ -37,5 +37,5 @@ export const generate = async (
   );
 
   // Wait for all the type definitions to be written.
-  await Promise.all(files.map(file => writeFile(file, options)));
+  await Promise.all(files.map((file) => writeFile(file, options)));
 };

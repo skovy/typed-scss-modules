@@ -12,7 +12,7 @@ import {
   logLevelDefault,
   EXPORT_TYPES,
   QUOTE_TYPES,
-  LOG_LEVELS
+  LOG_LEVELS,
 } from "./typescript";
 import { main } from "./main";
 import { IMPLEMENTATIONS, getDefaultImplementation } from "./implementations";
@@ -59,73 +59,73 @@ const { _: patterns, ...rest } = yargs
   .option("aliases", {
     coerce: (obj): Aliases => obj,
     alias: "a",
-    describe: "Alias any import to any other value."
+    describe: "Alias any import to any other value.",
   })
   .option("aliasPrefixes", {
     coerce: (obj): Aliases => obj,
     alias: "p",
-    describe: "A prefix for any import to rewrite to another value."
+    describe: "A prefix for any import to rewrite to another value.",
   })
   .option("nameFormat", {
     choices: NAME_FORMATS,
     default: nameFormatDefault,
     alias: "n",
-    describe: "The name format that should be used to transform class names."
+    describe: "The name format that should be used to transform class names.",
   })
   .option("implementation", {
     choices: IMPLEMENTATIONS,
     default: getDefaultImplementation(),
     describe:
-      "The SASS package to used to compile. This will default to the sass implementation you have installed."
+      "The SASS package to used to compile. This will default to the sass implementation you have installed.",
   })
   .option("exportType", {
     choices: EXPORT_TYPES,
     default: exportTypeDefault,
     alias: "e",
-    describe: "The type of export used for defining the type definitions."
+    describe: "The type of export used for defining the type definitions.",
   })
   .option("exportTypeName", {
     string: true,
     default: exportTypeNameDefault,
     describe:
-      'Set a custom type name for styles when --exportType is "default."'
+      'Set a custom type name for styles when --exportType is "default."',
   })
   .option("exportTypeInterface", {
     string: true,
     default: exportTypeInterfaceDefault,
     describe:
-      'Set a custom interface name for styles when --exportType is "default."'
+      'Set a custom interface name for styles when --exportType is "default."',
   })
   .option("watch", {
     boolean: true,
     default: false,
     alias: "w",
     describe:
-      "Watch for added or changed files and (re-)generate the type definitions."
+      "Watch for added or changed files and (re-)generate the type definitions.",
   })
   .option("ignoreInitial", {
     boolean: true,
     default: false,
-    describe: "Skips the initial build when passing the watch flag."
+    describe: "Skips the initial build when passing the watch flag.",
   })
   .option("listDifferent", {
     boolean: true,
     default: false,
     alias: "l",
     describe:
-      "List any type definitions that are different than those that would be generated."
+      "List any type definitions that are different than those that would be generated.",
   })
   .option("includePaths", {
     array: true,
     string: true,
     alias: "i",
-    describe: "Additional paths to include when trying to resolve imports."
+    describe: "Additional paths to include when trying to resolve imports.",
   })
   .option("ignore", {
     string: true,
     array: true,
     default: [],
-    describe: "Add a pattern or an array of glob patterns to exclude matches."
+    describe: "Add a pattern or an array of glob patterns to exclude matches.",
   })
   .options("quoteType", {
     string: true,
@@ -133,20 +133,20 @@ const { _: patterns, ...rest } = yargs
     default: quoteTypeDefault,
     alias: "q",
     describe:
-      "Specify the quote type so that generated files adhere to your TypeScript rules."
+      "Specify the quote type so that generated files adhere to your TypeScript rules.",
   })
   .option("logLevel", {
     string: true,
     choices: LOG_LEVELS,
     default: logLevelDefault,
     alias: "L",
-    describe: "Verbosity level of console output"
+    describe: "Verbosity level of console output",
   })
   .options("banner", {
     string: true,
     default: bannerTypeDefault,
     describe:
-      "Inserts text at the top of every output file for documentation purposes."
+      "Inserts text at the top of every output file for documentation purposes.",
   }).argv;
 
 main(patterns[0], { ...rest });

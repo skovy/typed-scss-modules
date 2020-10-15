@@ -7,7 +7,7 @@ import {
   MainOptions,
   generate,
   listDifferent,
-  setAlertsLogLevel
+  setAlertsLogLevel,
 } from "./core";
 
 export const main = async (pattern: string, options: MainOptions) => {

@@ -62,7 +62,7 @@ export const classNamesToTypeDefinitions = (
 
     const {
       exportTypeName: ClassNames = exportTypeNameDefault,
-      exportTypeInterface: Styles = exportTypeInterfaceDefault
+      exportTypeInterface: Styles = exportTypeInterfaceDefault,
     } = options;
 
     switch (options.exportType) {
@@ -70,7 +70,7 @@ export const classNamesToTypeDefinitions = (
         typeDefinitions = options.banner || "";
         typeDefinitions += `export type ${Styles} = {${os.EOL}`;
         typeDefinitions += options.classNames
-          .map(className =>
+          .map((className) =>
             classNameToType(className, options.quoteType || quoteTypeDefault)
           )
           .join(`${os.EOL}`);

@@ -26,7 +26,7 @@ export const NAME_FORMATS: NameFormat[] = [
   "kebab",
   "param",
   "dashes",
-  "none"
+  "none",
 ];
 
 export const nameFormatDefault: NameFormat = "camel";
@@ -36,16 +36,16 @@ const importer = (aliases: Aliases, aliasPrefixes: Aliases) => (
 ) => {
   if (url in aliases) {
     return {
-      file: aliases[url]
+      file: aliases[url],
     };
   }
 
-  const prefixMatch = Object.keys(aliasPrefixes).find(prefix =>
+  const prefixMatch = Object.keys(aliasPrefixes).find((prefix) =>
     url.startsWith(prefix)
   );
   if (prefixMatch) {
     return {
-      file: aliasPrefixes[prefixMatch] + url.substr(prefixMatch.length)
+      file: aliasPrefixes[prefixMatch] + url.substr(prefixMatch.length),
     };
   }
 
@@ -59,7 +59,7 @@ export const fileToClassNames = (
     aliases = {},
     aliasPrefixes = {},
     nameFormat = "camel",
-    implementation
+    implementation,
   }: Options = {} as Options
 ) => {
   const transformer = classNameTransformer(nameFormat);
@@ -70,7 +70,7 @@ export const fileToClassNames = (
       const result = renderSync({
         file,
         includePaths,
-        importer: importer(aliases, aliasPrefixes)
+        importer: importer(aliases, aliasPrefixes),
       });
 
       sourceToClassNames(result.css).then(({ exportTokens }) => {
@@ -96,13 +96,13 @@ const classNameTransformer = (nameFormat: NameFormat): Transformer => {
   switch (nameFormat) {
     case "kebab":
     case "param":
-      return className => paramCase(className);
+      return (className) => paramCase(className);
     case "camel":
-      return className => camelcase(className);
+      return (className) => camelcase(className);
     case "dashes":
-      return className =>
+      return (className) =>
         /-/.test(className) ? camelcase(className) : className;
     case "none":
-      return className => className;
+      return (className) => className;
   }
 };

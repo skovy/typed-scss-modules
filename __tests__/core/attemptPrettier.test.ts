@@ -16,7 +16,7 @@ describe("attemptPrettier", () => {
     const typeDefinition = classNamesToTypeDefinitions({
       banner: "",
       classNames: ["nestedAnother", "nestedClass", "someStyles"],
-      exportType: "default"
+      exportType: "default",
     });
 
     if (!typeDefinition) {
@@ -31,7 +31,7 @@ describe("attemptPrettier", () => {
 describe("attemptPrettier - mock prettier", () => {
   beforeAll(() => {
     jest.mock("prettier", () => ({
-      format: undefined
+      format: undefined,
     }));
   });
 

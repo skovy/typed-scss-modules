@@ -2,7 +2,7 @@ import { fileToClassNames } from "../../lib/sass";
 
 import { describeAllImplementations } from "../helpers";
 
-describeAllImplementations(implementation => {
+describeAllImplementations((implementation) => {
   describe("fileToClassNames", () => {
     test("it converts a file path to an array of class names (default camel cased)", async () => {
       const result = await fileToClassNames(`${__dirname}/../complex.scss`);
@@ -14,33 +14,33 @@ describeAllImplementations(implementation => {
       test("it converts a file path to an array of class names with kebab as the name format", async () => {
         const result = await fileToClassNames(`${__dirname}/../complex.scss`, {
           nameFormat: "kebab",
-          implementation
+          implementation,
         });
 
         expect(result).toEqual([
           "nested-another",
           "nested-class",
-          "some-styles"
+          "some-styles",
         ]);
       });
 
       test("it converts a file path to an array of class names with param as the name format", async () => {
         const result = await fileToClassNames(`${__dirname}/../complex.scss`, {
           nameFormat: "param",
-          implementation
+          implementation,
         });
 
         expect(result).toEqual([
           "nested-another",
           "nested-class",
-          "some-styles"
+          "some-styles",
         ]);
       });
 
       test("it converts a file path to an array of class names where only classes with dashes in the names are altered", async () => {
         const result = await fileToClassNames(`${__dirname}/../dashes.scss`, {
           nameFormat: "dashes",
-          implementation
+          implementation,
         });
 
         expect(result).toEqual(["App", "appHeader", "Logo"]);
@@ -49,7 +49,7 @@ describeAllImplementations(implementation => {
       test("it does not change class names when nameFormat is set to none", async () => {
         const result = await fileToClassNames(`${__dirname}/../dashes.scss`, {
           nameFormat: "none",
-          implementation
+          implementation,
         });
 
         expect(result).toEqual(["App", "App-Header", "Logo"]);
@@ -61,9 +61,9 @@ describeAllImplementations(implementation => {
         const result = await fileToClassNames(`${__dirname}/../aliases.scss`, {
           aliases: {
             "~fancy-import": "complex",
-            "~another": "style"
+            "~another": "style",
           },
-          implementation
+          implementation,
         });
 
         expect(result).toEqual([
@@ -71,7 +71,7 @@ describeAllImplementations(implementation => {
           "nestedAnother",
           "nestedClass",
           "someClass",
-          "someStyles"
+          "someStyles",
         ]);
       });
     });
@@ -82,12 +82,12 @@ describeAllImplementations(implementation => {
           `${__dirname}/../alias-prefixes.scss`,
           {
             aliases: {
-              "~fancy-import": "complex"
+              "~fancy-import": "complex",
             },
             aliasPrefixes: {
-              "~": "nested-styles/"
+              "~": "nested-styles/",
             },
-            implementation
+            implementation,
           }
         );
 
@@ -96,7 +96,7 @@ describeAllImplementations(implementation => {
           "nestedAnother",
           "nestedClass",
           "nestedStyles",
-          "someStyles"
+          "someStyles",
         ]);
       });
     });

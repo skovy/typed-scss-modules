@@ -4,7 +4,7 @@ import slash from "slash";
 import { main } from "../lib/main";
 import { describeAllImplementations } from "./helpers";
 
-describeAllImplementations(implementation => {
+describeAllImplementations((implementation) => {
   describe("main", () => {
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.
@@ -26,7 +26,7 @@ describeAllImplementations(implementation => {
         ignore: [],
         implementation,
         quoteType: "single",
-        logLevel: "verbose"
+        logLevel: "verbose",
       });
 
       const expectedDirname = slash(__dirname);
@@ -57,7 +57,7 @@ describeAllImplementations(implementation => {
         ignore: ["**/style.scss"],
         implementation,
         quoteType: "single",
-        logLevel: "verbose"
+        logLevel: "verbose",
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(3);
