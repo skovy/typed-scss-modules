@@ -9,5 +9,5 @@ const className: ClassNames = "i-am-kebab-cased";
 // Using the Styles type for reconstructing a subset.
 export const classNames: Partial<Styles> = {
   [className]: "something",
-  i: "a-string"
+  i: "a-string",
 };

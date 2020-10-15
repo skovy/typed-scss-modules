@@ -6,7 +6,7 @@ describe("getDefaultImplementation", () => {
   });
 
   it("returns sass if node-sass does not exist", () => {
-    const resolver = (jest.fn(implementation => {
+    const resolver = (jest.fn((implementation) => {
       if (implementation === "node-sass") {
         throw new Error("Not Found");
       }

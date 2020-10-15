@@ -36,7 +36,7 @@ export const attemptPrettier = async (input: string) => {
 
   try {
     const config = await prettier.resolveConfig(process.cwd(), {
-      editorconfig: true
+      editorconfig: true,
     });
     // try to return formatted output
     return prettier.format(input, { ...config, parser: "typescript" });

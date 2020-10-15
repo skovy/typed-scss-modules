@@ -10,7 +10,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
-        exportType: "named"
+        exportType: "named",
       });
 
       expect(definition).toEqual(
@@ -22,7 +22,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner: "",
         classNames: [],
-        exportType: "named"
+        exportType: "named",
       });
 
       expect(definition).toBeNull;
@@ -32,7 +32,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "if"],
-        exportType: "named"
+        exportType: "named",
       });
 
       expect(definition).toEqual("export const myClass: string;\n");
@@ -45,7 +45,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "invalid-variable"],
-        exportType: "named"
+        exportType: "named",
       });
 
       expect(definition).toEqual("export const myClass: string;\n");
@@ -60,7 +60,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass", "yourClass"],
-        exportType: "default"
+        exportType: "default",
       });
 
       expect(definition).toEqual(
@@ -72,7 +72,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner: "",
         classNames: [],
-        exportType: "default"
+        exportType: "default",
       });
 
       expect(definition).toBeNull;
@@ -84,7 +84,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass"],
-        exportType: "invalid" as ExportType
+        exportType: "invalid" as ExportType,
       });
 
       expect(definition).toBeNull;
@@ -97,7 +97,7 @@ describe("classNamesToTypeDefinitions", () => {
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
-        quoteType: "double"
+        quoteType: "double",
       });
 
       expect(definition).toEqual(
@@ -110,7 +110,7 @@ describe("classNamesToTypeDefinitions", () => {
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "named",
-        quoteType: "double"
+        quoteType: "double",
       });
 
       expect(definition).toEqual(
@@ -125,7 +125,7 @@ describe("classNamesToTypeDefinitions", () => {
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
-        exportTypeName: "Classes"
+        exportTypeName: "Classes",
       });
 
       expect(definition).toEqual(
@@ -138,7 +138,7 @@ describe("classNamesToTypeDefinitions", () => {
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
-        exportTypeInterface: "IStyles"
+        exportTypeInterface: "IStyles",
       });
 
       expect(definition).toEqual(
@@ -153,7 +153,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner,
         classNames: ["myClass", "yourClass"],
-        exportType: "default"
+        exportType: "default",
       });
       expect(definition).toContain(banner);
     });
@@ -163,7 +163,7 @@ describe("classNamesToTypeDefinitions", () => {
       const definition = classNamesToTypeDefinitions({
         banner,
         classNames: ["myClass", "yourClass"],
-        exportType: "named"
+        exportType: "named",
       });
       expect(definition).toContain(banner);
     });

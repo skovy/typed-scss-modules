@@ -16,13 +16,13 @@ export const watch = (pattern: string, options: MainOptions): void => {
   chokidar
     .watch(pattern, {
       ignoreInitial: options.ignoreInitial,
-      ignored: options.ignore
+      ignored: options.ignore,
     })
-    .on("change", path => {
+    .on("change", (path) => {
       alerts.info(`[CHANGED] ${path}`);
       writeFile(path, options);
     })
-    .on("add", path => {
+    .on("add", (path) => {
       alerts.info(`[ADDED] ${path}`);
       writeFile(path, options);
     });

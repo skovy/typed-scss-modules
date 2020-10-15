@@ -2,7 +2,7 @@ import { listDifferent } from "../../lib/core";
 
 import { describeAllImplementations } from "../helpers";
 
-describeAllImplementations(implementation => {
+describeAllImplementations((implementation) => {
   describe("writeFile", () => {
     let exit: jest.SpyInstance;
 
@@ -28,15 +28,15 @@ describeAllImplementations(implementation => {
         listDifferent: true,
         aliases: {
           "~fancy-import": "complex",
-          "~another": "style"
+          "~another": "style",
         },
         aliasPrefixes: {
-          "~": "nested-styles/"
+          "~": "nested-styles/",
         },
         ignore: [],
         implementation,
         quoteType: "single",
-        logLevel: "verbose"
+        logLevel: "verbose",
       });
 
       expect(exit).toHaveBeenCalledWith(1);
@@ -62,7 +62,7 @@ describeAllImplementations(implementation => {
         ignore: [],
         implementation,
         quoteType: "single",
-        logLevel: "verbose"
+        logLevel: "verbose",
       });
 
       expect(exit).not.toHaveBeenCalled();

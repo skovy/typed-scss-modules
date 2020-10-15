@@ -5,7 +5,7 @@ import { getTypeDefinitionPath } from "../../lib/typescript";
 
 import { describeAllImplementations } from "../helpers";
 
-describeAllImplementations(implementation => {
+describeAllImplementations((implementation) => {
   describe("writeFile", () => {
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.
@@ -28,7 +28,7 @@ describeAllImplementations(implementation => {
         ignore: [],
         implementation,
         quoteType: "single",
-        logLevel: "verbose"
+        logLevel: "verbose",
       });
 
       expect(fs.writeFileSync).toBeCalledWith(
@@ -55,7 +55,7 @@ describeAllImplementations(implementation => {
         ignore: [],
         implementation,
         quoteType: "single",
-        logLevel: "verbose"
+        logLevel: "verbose",
       });
 
       expect(fs.writeFileSync).not.toBeCalled();

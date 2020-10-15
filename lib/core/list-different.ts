@@ -6,7 +6,7 @@ import { MainOptions } from "./types";
 import { fileToClassNames } from "../sass";
 import {
   classNamesToTypeDefinitions,
-  getTypeDefinitionPath
+  getTypeDefinitionPath,
 } from "../typescript";
 
 export const listDifferent = async (
@@ -22,8 +22,8 @@ export const listDifferent = async (
   }
 
   // Wait for all the files to be checked.
-  await Promise.all(files.map(file => checkFile(file, options))).then(
-    results => {
+  await Promise.all(files.map((file) => checkFile(file, options))).then(
+    (results) => {
       results.includes(false) && process.exit(1);
     }
   );
@@ -33,11 +33,11 @@ export const checkFile = (
   file: string,
   options: MainOptions
 ): Promise<boolean> => {
-  return new Promise(resolve =>
-    fileToClassNames(file, options).then(classNames => {
+  return new Promise((resolve) =>
+    fileToClassNames(file, options).then((classNames) => {
       const typeDefinition = classNamesToTypeDefinitions({
         classNames: classNames,
-        ...options
+        ...options,
       });
 
       if (!typeDefinition) {

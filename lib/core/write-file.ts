@@ -4,7 +4,7 @@ import { SassError } from "node-sass";
 import { alerts } from "./alerts";
 import {
   getTypeDefinitionPath,
-  classNamesToTypeDefinitions
+  classNamesToTypeDefinitions,
 } from "../typescript";
 import { fileToClassNames } from "../sass";
 import { MainOptions } from "./types";
@@ -21,10 +21,10 @@ export const writeFile = (
   options: MainOptions
 ): Promise<void> => {
   return fileToClassNames(file, options)
-    .then(classNames => {
+    .then((classNames) => {
       const typeDefinition = classNamesToTypeDefinitions({
         classNames: classNames,
-        ...options
+        ...options,
       });
 
       if (!typeDefinition) {
@@ -34,7 +34,7 @@ export const writeFile = (
 
       const path = getTypeDefinitionPath(file);
 
-      return attemptPrettier(typeDefinition).then(output => {
+      return attemptPrettier(typeDefinition).then((output) => {
         fs.writeFileSync(path, output);
         alerts.success(`[GENERATED TYPES] ${path}`);
       });

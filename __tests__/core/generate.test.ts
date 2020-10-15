@@ -3,7 +3,7 @@ import fs from "fs";
 import { generate } from "../../lib/core";
 import { describeAllImplementations } from "../helpers";
 
-describeAllImplementations(implementation => {
+describeAllImplementations((implementation) => {
   describe("generate", () => {
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.
@@ -25,7 +25,7 @@ describeAllImplementations(implementation => {
         ignore: [],
         implementation,
         quoteType: "single",
-        logLevel: "verbose"
+        logLevel: "verbose",
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(5);
