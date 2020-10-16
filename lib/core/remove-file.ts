@@ -13,7 +13,7 @@ const removeFile = (file: string): void => {
   try {
     if (fs.existsSync(file)) {
       fs.unlinkSync(file);
-      alerts.success(`[REMOVED TYPES] ${file}`);
+      alerts.success(`[REMOVED] ${file}`);
     }
   } catch (error) {
     alerts.error(
