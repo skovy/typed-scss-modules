@@ -1,7 +1,7 @@
 import fs from "fs";
 
 import { alerts } from "../../lib/core/alerts";
-import { removeFile } from "../../lib/core/remove-file";
+import { removeSCSSTypeDefinitionFile } from "../../lib/core/remove-file";
 import { getTypeDefinitionPath } from "../../lib/typescript";
 
 jest.mock("fs");
@@ -25,7 +25,7 @@ describe("removeFile", () => {
     const existsSyncSpy = fs.existsSync;
     const unlinkSyncSpy = fs.unlinkSync;
     const existingTypes = getTypeDefinitionPath(existingFile);
-    removeFile(existingFile);
+    removeSCSSTypeDefinitionFile(existingFile);
     expect(existsSyncSpy).toBeCalledWith(expect.stringMatching(existingFile));
     expect(existsSyncSpy).not.toBeCalledWith(
       expect.stringMatching(existingTypes)
@@ -38,7 +38,7 @@ describe("removeFile", () => {
     const unlinkSyncSpy = fs.unlinkSync;
     const nonExistingFile = `${__dirname}/../deleted.scss`;
     const nonExistingTypes = getTypeDefinitionPath(nonExistingFile);
-    removeFile(nonExistingFile);
+    removeSCSSTypeDefinitionFile(nonExistingFile);
     expect(existsSyncSpy).toBeCalledWith(
       expect.stringMatching(nonExistingFile)
     );
@@ -51,7 +51,7 @@ describe("removeFile", () => {
   it("removes *.scss.d.ts types file for *.scss", () => {
     const existsSyncSpy = fs.existsSync;
     const unlinkSyncSpy = fs.unlinkSync;
-    removeFile(originalTestFile);
+    removeSCSSTypeDefinitionFile(originalTestFile);
     expect(existsSyncSpy).toBeCalledWith(expect.stringMatching(existingTypes));
     expect(unlinkSyncSpy).toBeCalled();
     expect(unlinkSyncSpy).toBeCalledWith(expect.stringMatching(existingTypes));

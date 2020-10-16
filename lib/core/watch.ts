@@ -1,7 +1,7 @@
 import chokidar from "chokidar";
 
 import { alerts } from "./alerts";
-import { removeFile } from "./remove-file";
+import { removeSCSSTypeDefinitionFile } from "./remove-file";
 import { writeFile } from "./write-file";
 import { MainOptions } from "./types";
 
@@ -29,6 +29,6 @@ export const watch = (pattern: string, options: MainOptions): void => {
     })
     .on("unlink", (path) => {
       alerts.info(`[REMOVED] ${path}`);
-      removeFile(path);
+      removeSCSSTypeDefinitionFile(path);
     });
 };
