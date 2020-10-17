@@ -21,18 +21,6 @@ describe("removeFile", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it("does nothing if *.scss file style exists", async () => {
-    const existsSyncSpy = fs.existsSync;
-    const unlinkSyncSpy = fs.unlinkSync;
-    const existingTypes = getTypeDefinitionPath(existingFile);
-    removeSCSSTypeDefinitionFile(existingFile);
-    expect(existsSyncSpy).toBeCalledWith(expect.stringMatching(existingFile));
-    expect(existsSyncSpy).not.toBeCalledWith(
-      expect.stringMatching(existingTypes)
-    );
-    expect(unlinkSyncSpy).not.toBeCalled();
-    expect(alerts.success).not.toBeCalled();
-  });
   it("does nothing if types file doesn't exist", async () => {
     const existsSyncSpy = fs.existsSync;
     const unlinkSyncSpy = fs.unlinkSync;

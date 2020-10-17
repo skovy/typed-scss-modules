@@ -28,9 +28,6 @@ const removeFile = (file: string): void => {
  * @param file the SCSS file to generate types for
  */
 export const removeSCSSTypeDefinitionFile = (file: string): void => {
-  if (fs.existsSync(file)) {
-    return;
-  }
   const path = getTypeDefinitionPath(file);
   removeFile(path);
 };
