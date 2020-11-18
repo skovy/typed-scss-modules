@@ -3,7 +3,7 @@ import { listDifferent } from "../../lib/core";
 import { describeAllImplementations } from "../helpers";
 
 describeAllImplementations((implementation) => {
-  describe("writeFile", () => {
+  describe("listDifferent", () => {
     let exit: jest.SpyInstance;
 
     beforeEach(() => {
@@ -36,6 +36,7 @@ describeAllImplementations((implementation) => {
         ignore: [],
         implementation,
         quoteType: "single",
+        updateStaleOnly: false,
         logLevel: "verbose",
       });
 
@@ -62,6 +63,7 @@ describeAllImplementations((implementation) => {
         ignore: [],
         implementation,
         quoteType: "single",
+        updateStaleOnly: false,
         logLevel: "verbose",
         nameFormat: "kebab",
       });
@@ -84,6 +86,7 @@ describeAllImplementations((implementation) => {
         ignore: [],
         implementation,
         quoteType: "single",
+        updateStaleOnly: false,
         logLevel: "verbose",
       });
 

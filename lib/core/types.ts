@@ -10,6 +10,7 @@ export interface MainOptions extends Options {
   exportTypeInterface: string;
   listDifferent: boolean;
   quoteType: QuoteType;
+  updateStaleOnly: boolean;
   watch: boolean;
   logLevel: LogLevel;
 }

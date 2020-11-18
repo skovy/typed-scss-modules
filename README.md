@@ -229,6 +229,16 @@ export type IStyles = {
 
 Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes ("). If [Prettier](https://prettier.io) is installed and configured in the project, it will be used and is likely to override the effect of this setting.
 
+### `--updateStaleOnly` (`-u`)
+
+- **Type**: `boolean`
+- **Default**: `false`
+- **Example**: `tsm src --updateStaleOnly`
+
+Overwrite generated files only if the source file has more recent changes. This can be useful if you want to avoid extraneous file updates, which can cause watcher processes to trigger unnecessarily (e.g. `tsc --watch`).
+
+Caveat: If a generated type definition file is updated manually, it won't be re-generated until the corresponding scss file is also updated.
+
 ### `--logLevel` (`-L`)
 
 - **Type**: `"verbose" | "error" | "info" | "silent"`

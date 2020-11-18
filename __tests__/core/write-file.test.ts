@@ -28,6 +28,7 @@ describeAllImplementations((implementation) => {
         ignore: [],
         implementation,
         quoteType: "single",
+        updateStaleOnly: false,
         logLevel: "verbose",
       });
 
@@ -55,6 +56,7 @@ describeAllImplementations((implementation) => {
         ignore: [],
         implementation,
         quoteType: "single",
+        updateStaleOnly: false,
         logLevel: "verbose",
       });
 
@@ -63,6 +65,63 @@ describeAllImplementations((implementation) => {
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[NO GENERATED TYPES] ${testFile}`)
       );
+    });
+
+    describe("when --updateStaleOnly is passed", () => {
+      const testFile = `${__dirname}/../dummy-styles/style.scss`;
+      const typesFile = getTypeDefinitionPath(testFile);
+
+      beforeEach(() => {
+        jest.spyOn(fs, "statSync");
+      });
+
+      afterEach(() => (fs.statSync as jest.Mock).mockRestore());
+
+      test("it skips stale files", async () => {
+        (fs.statSync as jest.Mock).mockImplementation((p) => ({
+          mtime: p === typesFile ? new Date(2020, 0, 2) : new Date(2020, 0, 1),
+        }));
+
+        await writeFile(testFile, {
+          banner: "",
+          watch: false,
+          ignoreInitial: false,
+          exportType: "named",
+          exportTypeName: "ClassNames",
+          exportTypeInterface: "Styles",
+          listDifferent: false,
+          ignore: [],
+          implementation,
+          quoteType: "single",
+          updateStaleOnly: true,
+          logLevel: "verbose",
+        });
+
+        expect(fs.writeFileSync).not.toBeCalled();
+      });
+
+      test("it updates files that aren't stale", async () => {
+        (fs.statSync as jest.Mock).mockImplementation(
+          () => new Date(2020, 0, 1)
+        );
+
+        await writeFile(testFile, {
+          banner: "",
+          watch: false,
+          ignoreInitial: false,
+          exportType: "named",
+          exportTypeName: "ClassNames",
+          exportTypeInterface: "Styles",
+          listDifferent: false,
+          ignore: [],
+          implementation,
+          quoteType: "single",
+          updateStaleOnly: true,
+          logLevel: "verbose",
+        });
+
+        expect(fs.writeFileSync).toBeCalled();
+      });
     });
   });
 });

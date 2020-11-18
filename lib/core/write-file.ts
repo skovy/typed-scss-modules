@@ -32,6 +32,16 @@ export const writeFile = (
       }
 
       const path = getTypeDefinitionPath(file);
+
+      if (options.updateStaleOnly) {
+        const fileModified = fs.statSync(file).mtime;
+        const typeDefinitionModified = fs.statSync(path).mtime;
+
+        if (fileModified < typeDefinitionModified) {
+          return;
+        }
+      }
+
       fs.writeFileSync(path, typeDefinition);
       alerts.success(`[GENERATED TYPES] ${path}`);
     })

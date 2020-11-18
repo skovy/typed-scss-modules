@@ -48,7 +48,7 @@ export const checkFile = (
 
       const path = getTypeDefinitionPath(file);
 
-      const content = fs.readFileSync(path, { encoding: "UTF8" });
+      const content = fs.readFileSync(path, { encoding: "utf8" });
 
       if (content === typeDefinition) {
         resolve(true);
