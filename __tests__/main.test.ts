@@ -27,6 +27,7 @@ describeAllImplementations((implementation) => {
         ignore: [],
         implementation,
         quoteType: "single",
+        updateStaleOnly: false,
         logLevel: "verbose",
       });
 
@@ -58,6 +59,7 @@ describeAllImplementations((implementation) => {
         ignore: ["**/style.scss"],
         implementation,
         quoteType: "single",
+        updateStaleOnly: false,
         logLevel: "verbose",
       });
 

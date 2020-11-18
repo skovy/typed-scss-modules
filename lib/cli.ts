@@ -135,6 +135,13 @@ const { _: patterns, ...rest } = yargs
     describe:
       "Specify the quote type so that generated files adhere to your TypeScript rules.",
   })
+  .options("updateStaleOnly", {
+    boolean: true,
+    default: false,
+    alias: "u",
+    describe:
+      "Overwrite generated files only if the source file has more recent changes.",
+  })
   .option("logLevel", {
     string: true,
     choices: LOG_LEVELS,
