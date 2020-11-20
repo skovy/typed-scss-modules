@@ -106,6 +106,18 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "craigrmccown",
+      "name": "Craig McCown",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2373979?v=4",
+      "profile": "https://github.com/craigrmccown",
+      "contributions": [
+        "ideas",
+        "code",
+        "test",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
