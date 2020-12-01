@@ -30,10 +30,11 @@ export const textHighlighted: string;
 
 ## Basic Usage
 
-Run with npm package runner:
+Install and run as a `devDependency`:
 
 ```bash
-npx tsm src
+yarn add -D typed-scss-modules
+yarn tsm src
 ```
 
 Or, install globally:
@@ -41,13 +42,6 @@ Or, install globally:
 ```bash
 yarn global add typed-scss-modules
 tsm src
-```
-
-Or, install and run as a `devDependency`:
-
-```bash
-yarn add -D typed-scss-modules
-yarn tsm src
 ```
 
 ## Advanced Usage
