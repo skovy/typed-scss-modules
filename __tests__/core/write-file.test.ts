@@ -73,9 +73,14 @@ describeAllImplementations((implementation) => {
 
       beforeEach(() => {
         jest.spyOn(fs, "statSync");
+        jest.spyOn(fs, "existsSync");
+        (fs.existsSync as jest.Mock).mockImplementation(() => true);
       });
 
-      afterEach(() => (fs.statSync as jest.Mock).mockRestore());
+      afterEach(() => {
+        (fs.statSync as jest.Mock).mockRestore();
+        (fs.existsSync as jest.Mock).mockRestore();
+      });
 
       test("it skips stale files", async () => {
         (fs.statSync as jest.Mock).mockImplementation((p) => ({
@@ -121,6 +126,27 @@ describeAllImplementations((implementation) => {
         });
 
         expect(fs.writeFileSync).toBeCalled();
+      });
+
+      test("it doesn't attempt to access a non-existent file", async () => {
+        (fs.existsSync as jest.Mock).mockImplementation(() => false);
+
+        await writeFile(testFile, {
+          banner: "",
+          watch: false,
+          ignoreInitial: false,
+          exportType: "named",
+          exportTypeName: "ClassNames",
+          exportTypeInterface: "Styles",
+          listDifferent: false,
+          ignore: [],
+          implementation,
+          quoteType: "single",
+          updateStaleOnly: true,
+          logLevel: "verbose",
+        });
+
+        expect(fs.statSync).not.toBeCalled();
       });
     });
   });
