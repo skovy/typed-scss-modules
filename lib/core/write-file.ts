@@ -33,7 +33,7 @@ export const writeFile = (
 
       const path = getTypeDefinitionPath(file);
 
-      if (options.updateStaleOnly) {
+      if (options.updateStaleOnly && fs.existsSync(path)) {
         const fileModified = fs.statSync(file).mtime;
         const typeDefinitionModified = fs.statSync(path).mtime;
 
