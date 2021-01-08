@@ -44,6 +44,13 @@ yarn global add typed-scss-modules
 tsm src
 ```
 
+Or, with npm:
+
+```bash
+npm install -D typed-scss-modules
+./node_modules/.bin/tsm src
+```
+
 ## Advanced Usage
 
 For all possible commands, run `tsm --help`.
