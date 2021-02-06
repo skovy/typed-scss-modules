@@ -75,7 +75,7 @@ export const classNamesToTypeDefinitions = async (
             classNameToType(className, options.quoteType || quoteTypeDefault)
           )
           .join(`${os.EOL}`);
-        typeDefinitions += `${os.EOL}}${os.EOL}${os.EOL}`;
+        typeDefinitions += `${os.EOL}};${os.EOL}${os.EOL}`;
         typeDefinitions += `export type ${ClassNames} = keyof ${Styles};${os.EOL}${os.EOL}`;
         typeDefinitions += `declare const styles: ${Styles};${os.EOL}${os.EOL}`;
         typeDefinitions += `export default styles;${os.EOL}`;
