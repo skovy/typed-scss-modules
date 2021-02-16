@@ -29,7 +29,7 @@ describeAllImplementations((implementation) => {
         logLevel: "verbose",
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(5);
+      expect(fs.writeFileSync).toBeCalledTimes(6);
     });
   });
 });
