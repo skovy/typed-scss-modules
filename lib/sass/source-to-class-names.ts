@@ -6,4 +6,4 @@ export const sourceToClassNames = (source: Source) => {
   return core.load(source, undefined, undefined, noOpPathFetcher);
 };
 
-const noOpPathFetcher = () => Promise.resolve([]);
+const noOpPathFetcher = () => Promise.resolve({});
