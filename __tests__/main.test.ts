@@ -31,7 +31,7 @@ describeAllImplementations((implementation) => {
         logLevel: "verbose",
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(5);
+      expect(fs.writeFileSync).toBeCalledTimes(6);
 
       const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
 
@@ -63,7 +63,7 @@ describeAllImplementations((implementation) => {
         logLevel: "verbose",
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(3);
+      expect(fs.writeFileSync).toBeCalledTimes(4);
 
       const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
 
