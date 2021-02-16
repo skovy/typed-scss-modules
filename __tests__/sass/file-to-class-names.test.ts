@@ -117,5 +117,18 @@ describeAllImplementations((implementation) => {
         ]);
       });
     });
+
+    describe("composes", () => {
+      test("it converts a file that contains a composes dependency from another file", async () => {
+        const result = await fileToClassNames(
+          `${__dirname}/../dummy-styles/composes.scss`,
+          {
+            implementation,
+          }
+        );
+
+        expect(result).toEqual(["composedClass"]);
+      });
+    });
   });
 });
