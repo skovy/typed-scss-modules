@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 
-describe.only("cli", () => {
+describe("cli", () => {
   it("should run when no files are found", () => {
     const result = execSync("yarn tsm src").toString();
 
@@ -10,14 +10,15 @@ describe.only("cli", () => {
   describe("examples", () => {
     it("should run the basic example without errors", () => {
       const result = execSync(
-        `yarn tsm "examples/basic/**/*.scss" --includePaths examples/basic/core --aliases.~alias variables --banner '// example banner\n'`
+        `yarn tsm "examples/basic/**/*.scss" --includePaths examples/basic/core --aliases.~alias variables --banner '// example banner'`
       ).toString();
 
       expect(result).toContain("Found 3 files. Generating type definitions...");
     });
+
     it("should run the default-export example without errors", () => {
       const result = execSync(
-        `yarn tsm "examples/default-export/**/*.scss" --exportType default --nameFormat kebab --banner '// example banner\n'`
+        `yarn tsm "examples/default-export/**/*.scss" --exportType default --nameFormat kebab --banner '// example banner'`
       ).toString();
 
       expect(result).toContain("Found 1 file. Generating type definitions...");

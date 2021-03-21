@@ -59,7 +59,7 @@ export const classNamesToTypeDefinitions = async (
   options: TypeDefinitionOptions
 ): Promise<string | null> => {
   if (options.classNames.length) {
-    let typeDefinitions;
+    const lines: string[] = [];
 
     const {
       exportTypeName: ClassNames = exportTypeNameDefault,
@@ -68,34 +68,36 @@ export const classNamesToTypeDefinitions = async (
 
     switch (options.exportType) {
       case "default":
-        typeDefinitions = options.banner || "";
-        typeDefinitions += `export type ${Styles} = {${os.EOL}`;
-        typeDefinitions += options.classNames
-          .map((className) =>
+        if (options.banner) lines.push(options.banner);
+
+        lines.push(`export type ${Styles} = {`);
+        lines.push(
+          ...options.classNames.map((className) =>
             classNameToType(className, options.quoteType || quoteTypeDefault)
           )
-          .join(`${os.EOL}`);
-        typeDefinitions += `${os.EOL}};${os.EOL}${os.EOL}`;
-        typeDefinitions += `export type ${ClassNames} = keyof ${Styles};${os.EOL}${os.EOL}`;
-        typeDefinitions += `declare const styles: ${Styles};${os.EOL}${os.EOL}`;
-        typeDefinitions += `export default styles;${os.EOL}`;
+        );
+        lines.push(`};${os.EOL}`);
+
+        lines.push(`export type ${ClassNames} = keyof ${Styles};${os.EOL}`);
+        lines.push(`declare const styles: ${Styles};${os.EOL}`);
+        lines.push(`export default styles;`);
+
         break;
       case "named":
-        typeDefinitions = options.classNames
-          .filter(isValidName)
-          .map(classNameToNamedTypeDefinition);
+        if (options.banner) lines.push(options.banner);
 
-        if (options.banner) {
-          typeDefinitions.unshift(options.banner);
-        }
+        lines.push(
+          ...options.classNames
+            .filter(isValidName)
+            .map(classNameToNamedTypeDefinition)
+        );
 
-        // Separate all type definitions be a newline with a trailing newline.
-        typeDefinitions = typeDefinitions.join(`${os.EOL}`) + `${os.EOL}`;
         break;
     }
 
-    if (typeDefinitions) {
-      return await attemptPrettier(typeDefinitions);
+    if (lines.length) {
+      const typeDefinition = lines.join(`${os.EOL}`) + `${os.EOL}`;
+      return await attemptPrettier(typeDefinition);
     } else {
       return null;
     }

@@ -1,3 +1,4 @@
+import os from "os";
 import { classNamesToTypeDefinitions, ExportType } from "../../lib/typescript";
 
 jest.mock("../../lib/prettier/can-resolve", () => ({
@@ -152,6 +153,8 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
   });
 
   describe("Banner support", () => {
+    const firstLine = (str: string): string => str.split(os.EOL)[0];
+
     it("appends the banner to the top of the output file: default", async () => {
       const banner = "// Example banner";
       const definition = await classNamesToTypeDefinitions({
@@ -159,7 +162,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         classNames: ["myClass", "yourClass"],
         exportType: "default",
       });
-      expect(definition).toContain(banner);
+      expect(firstLine(definition!)).toBe(banner);
     });
 
     it("appends the banner to the top of the output file: named", async () => {
@@ -169,7 +172,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         classNames: ["myClass", "yourClass"],
         exportType: "named",
       });
-      expect(definition).toContain(banner);
+      expect(firstLine(definition!)).toBe(banner);
     });
   });
 });
