@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/skovy/typed-scss-modules.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "homepage": "https://github.com/skovy/typed-scss-modules.git#readme",
   "keywords": [
     "scss",
