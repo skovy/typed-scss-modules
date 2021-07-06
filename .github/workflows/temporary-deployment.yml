@@ -33,5 +33,6 @@ jobs:
       - name: Publish
         run: yarn semantic-release --r https://github.com/Nickhoyer/typed-scss-modules
         env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
