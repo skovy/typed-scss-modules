@@ -48,6 +48,14 @@ export const checkFile = (
 
       const path = getTypeDefinitionPath(file);
 
+      if (!fs.existsSync(path)) {
+        alerts.error(
+          `[INVALID TYPES] Type file needs to be generated for ${file} `
+        );
+        resolve(false);
+        return;
+      }
+
       const content = fs.readFileSync(path, { encoding: "utf8" });
 
       if (content === typeDefinition) {
