@@ -58,12 +58,13 @@ export const checkFile = (
 
       const content = fs.readFileSync(path, { encoding: "utf8" });
 
-      if (content === typeDefinition) {
-        resolve(true);
-      } else {
+      if (content !== typeDefinition) {
         alerts.error(`[INVALID TYPES] Check type definitions for ${file}`);
         resolve(false);
+        return;
       }
+
+      resolve(true);
     })
   );
 };
