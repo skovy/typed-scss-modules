@@ -93,5 +93,34 @@ describeAllImplementations((implementation) => {
       expect(exit).not.toHaveBeenCalled();
       expect(console.log).not.toHaveBeenCalled();
     });
+
+    test("logs not generated type file and exits with 1", async () => {
+      const pattern = `${__dirname}/list-different/no-generated.scss`;
+
+      await listDifferent(pattern, {
+        banner: "",
+        watch: false,
+        ignoreInitial: false,
+        exportType: "named",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
+        listDifferent: true,
+        ignore: [],
+        implementation,
+        quoteType: "single",
+        updateStaleOnly: false,
+        logLevel: "verbose",
+      });
+
+      expect(exit).toHaveBeenCalledWith(1);
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(
+          `[INVALID TYPES] Type file needs to be generated for`
+        )
+      );
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`no-generated.scss`)
+      );
+    });
   });
 });
