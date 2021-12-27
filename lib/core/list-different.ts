@@ -34,37 +34,44 @@ export const checkFile = (
   options: MainOptions
 ): Promise<boolean> => {
   return new Promise((resolve) =>
-    fileToClassNames(file, options).then(async (classNames) => {
-      const typeDefinition = await classNamesToTypeDefinitions({
-        classNames: classNames,
-        ...options,
-      });
+    fileToClassNames(file, options)
+      .then(async (classNames) => {
+        const typeDefinition = await classNamesToTypeDefinitions({
+          classNames: classNames,
+          ...options,
+        });
 
-      if (!typeDefinition) {
-        // Assume if no type defs are necessary it's fine
+        if (!typeDefinition) {
+          // Assume if no type defs are necessary it's fine
+          resolve(true);
+          return;
+        }
+
+        const path = getTypeDefinitionPath(file);
+
+        if (!fs.existsSync(path)) {
+          alerts.error(
+            `[INVALID TYPES] Type file needs to be generated for ${file} `
+          );
+          resolve(false);
+          return;
+        }
+
+        const content = fs.readFileSync(path, { encoding: "utf8" });
+
+        if (content !== typeDefinition) {
+          alerts.error(`[INVALID TYPES] Check type definitions for ${file}`);
+          resolve(false);
+          return;
+        }
+
         resolve(true);
-        return;
-      }
-
-      const path = getTypeDefinitionPath(file);
-
-      if (!fs.existsSync(path)) {
+      })
+      .catch((error) => {
         alerts.error(
-          `[INVALID TYPES] Type file needs to be generated for ${file} `
+          `An error occurred checking ${file}:\n${JSON.stringify(error)}`
         );
         resolve(false);
-        return;
-      }
-
-      const content = fs.readFileSync(path, { encoding: "utf8" });
-
-      if (content !== typeDefinition) {
-        alerts.error(`[INVALID TYPES] Check type definitions for ${file}`);
-        resolve(false);
-        return;
-      }
-
-      resolve(true);
-    })
+      })
   );
 };
