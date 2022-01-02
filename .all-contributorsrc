@@ -118,6 +118,17 @@
         "test",
         "doc"
       ]
+    },
+    {
+      "login": "capsuleman",
+      "name": "Guillaume Vagner",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34281913?v=4",
+      "profile": "https://github.com/capsuleman",
+      "contributions": [
+        "code",
+        "test",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
