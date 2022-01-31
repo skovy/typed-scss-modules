@@ -34,34 +34,34 @@ Install and run as a `devDependency`:
 
 ```bash
 yarn add -D typed-scss-modules
-yarn tsm src
+yarn typed-scss-modules src
 ```
 
 Or, install globally:
 
 ```bash
 yarn global add typed-scss-modules
-tsm src
+typed-scss-modules src
 ```
 
 Or, with npm:
 
 ```bash
 npm install -D typed-scss-modules
-./node_modules/.bin/tsm src
+./node_modules/.bin/typed-scss-modules src
 ```
 
 ## Advanced Usage
 
-For all possible commands, run `tsm --help`.
+For all possible commands, run `typed-scss-modules --help`.
 
-The only required argument is the directory where all SCSS files are located. Running `tsm src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `tsm src/*.scss`
+The only required argument is the directory where all SCSS files are located. Running `typed-scss-modules src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `typed-scss-modules src/*.scss`
 
 ### `--watch` (`-w`)
 
 - **Type**: `boolean`
 - **Default**: `false`
-- **Example**: `tsm src --watch`
+- **Example**: `typed-scss-modules src --watch`
 
 Watch for files that get added or are changed and generate the corresponding type definitions.
 
@@ -69,7 +69,7 @@ Watch for files that get added or are changed and generate the corresponding typ
 
 - **Type**: `boolean`
 - **Default**: `false`
-- **Example**: `tsm src --watch --ignoreInitial`
+- **Example**: `typed-scss-modules src --watch --ignoreInitial`
 
 Skips the initial build when passing the watch flag. Use this when running concurrently with another watch, but the initial build should happen first. You would run without watch first, then start off the concurrent runs after.
 
@@ -77,7 +77,7 @@ Skips the initial build when passing the watch flag. Use this when running concu
 
 - **Type**: `string[]`
 - **Default**: `[]`
-- **Example**: `tsm src --watch --ignore "**/secret.scss"`
+- **Example**: `typed-scss-modules src --watch --ignore "**/secret.scss"`
 
 A pattern or an array of glob patterns to exclude files that match and avoid generating type definitions.
 
@@ -85,7 +85,7 @@ A pattern or an array of glob patterns to exclude files that match and avoid gen
 
 - **Type**: `string[]`
 - **Default**: `[]`
-- **Example**: `tsm src --includePaths src/core`
+- **Example**: `typed-scss-modules src --includePaths src/core`
 
 An array of paths to look in to attempt to resolve your `@import` declarations. This example will search the `src/core` directory when resolving imports.
 
@@ -93,13 +93,13 @@ An array of paths to look in to attempt to resolve your `@import` declarations. 
 
 - **Type**: `"node-sass" | "sass"`
 - **Default**: If an option is passed, it will always use the provided package implementation. If an option is not passed, it will first check if `node-sass` is installed. If it is, it will be used. Otherwise, it will then check if `sass` is installed. If it is, it will be used. Finally, falling back to `node-sass` if all checks and validations fail.
-- **Example**: `tsm src --implementation sass`
+- **Example**: `typed-scss-modules src --implementation sass`
 
 ### `--aliases` (`-a`)
 
 - **Type**: `object`
 - **Default**: `{}`
-- **Example**: `tsm src --aliases.~some-alias src/core/variables`
+- **Example**: `typed-scss-modules src --aliases.~some-alias src/core/variables`
 
 An object of aliases to map to their corresponding paths. This example will replace any `@import '~alias'` with `@import 'src/core/variables'`.
 
@@ -107,7 +107,7 @@ An object of aliases to map to their corresponding paths. This example will repl
 
 - **Type**: `object`
 - **Default**: `{}`
-- **Example**: `tsm src --aliasPrefixes.~ node_modules/`
+- **Example**: `typed-scss-modules src --aliasPrefixes.~ node_modules/`
 
 An object of prefix strings to replace with their corresponding paths. This example will replace any `@import '~bootstrap/lib/bootstrap'` with `@import 'node_modules/bootstrap/lib/bootstrap'`.
 This matches the common use-case for importing scss files from node_modules when `sass-loader` will be used with `webpack` to compile the project.
@@ -116,7 +116,7 @@ This matches the common use-case for importing scss files from node_modules when
 
 - **Type**: `"camel" | "kebab" | "param" | "dashes" | "none"`
 - **Default**: `"camel"`
-- **Example**: `tsm src --nameFormat camel`
+- **Example**: `typed-scss-modules src --nameFormat camel`
 
 The class naming format to use when converting the classes to type definitions.
 
@@ -130,7 +130,7 @@ The class naming format to use when converting the classes to type definitions.
 
 - **Type**: `boolean`
 - **Default**: `false`
-- **Example**: `tsm src --listDifferent`
+- **Example**: `typed-scss-modules src --listDifferent`
 
 List any type definition files that are different than those that would be generated. If any are different, exit with a status code `1`.
 
@@ -138,7 +138,7 @@ List any type definition files that are different than those that would be gener
 
 - **Type**: `"named" | "default"`
 - **Default**: `"named"`
-- **Example**: `tsm src --exportType default`
+- **Example**: `typed-scss-modules src --exportType default`
 
 The export type to use when generating type definitions.
 
@@ -198,7 +198,7 @@ This export type is useful when using kebab (param) cased class names since vari
 
 - **Type**: `string`
 - **Default**: `"ClassNames"`
-- **Example**: `tsm src --exportType default --exportTypeName ClassesType`
+- **Example**: `typed-scss-modules src --exportType default --exportTypeName ClassesType`
 
 Customize the type name exported in the generated file when `--exportType` is set to `"default"`.
 Only default exports are affected by this command. This example will change the export type line to:
@@ -211,7 +211,7 @@ export type ClassesType = keyof Styles;
 
 - **Type**: `string`
 - **Default**: `"Styles"`
-- **Example**: `tsm src --exportType default --exportTypeInterface IStyles`
+- **Example**: `typed-scss-modules src --exportType default --exportTypeInterface IStyles`
 
 Customize the interface name exported in the generated file when `--exportType` is set to `"default"`.
 Only default exports are affected by this command. This example will change the export interface line to:
@@ -226,7 +226,7 @@ export type IStyles = {
 
 - **Type**: `"single" | "double"`
 - **Default**: `"single"`
-- **Example**: `tsm src --exportType default --quoteType double`
+- **Example**: `typed-scss-modules src --exportType default --quoteType double`
 
 Specify a quote type to match your TypeScript configuration. Only default exports are affected by this command. This example will wrap class names with double quotes ("). If [Prettier](https://prettier.io) is installed and configured in the project, it will be used and is likely to override the effect of this setting.
 
@@ -234,7 +234,7 @@ Specify a quote type to match your TypeScript configuration. Only default export
 
 - **Type**: `boolean`
 - **Default**: `false`
-- **Example**: `tsm src --updateStaleOnly`
+- **Example**: `typed-scss-modules src --updateStaleOnly`
 
 Overwrite generated files only if the source file has more recent changes. This can be useful if you want to avoid extraneous file updates, which can cause watcher processes to trigger unnecessarily (e.g. `tsc --watch`).
 
@@ -244,7 +244,7 @@ Caveat: If a generated type definition file is updated manually, it won't be re-
 
 - **Type**: `"verbose" | "error" | "info" | "silent"`
 - **Default**: `"verbose"`
-- **Example**: `tsm src --logLevel error`
+- **Example**: `typed-scss-modules src --logLevel error`
 
 Sets verbosity level of console output.
 
@@ -268,7 +268,7 @@ Print nothing
 
 - **Type**: `string`
 - **Default**: `undefined`
-- **Example**: `tsm src --banner '// This is an example banner\n'`
+- **Example**: `typed-scss-modules src --banner '// This is an example banner\n'`
 
 Will prepend a string to the top of your output files
 
