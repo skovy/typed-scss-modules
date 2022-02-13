@@ -7,9 +7,11 @@ import { describeAllImplementations } from "./helpers";
 
 describeAllImplementations((implementation) => {
   describe("main", () => {
+    let writeFileSyncSpy: jest.SpyInstance;
+
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.
-      fs.writeFileSync = jest.fn();
+      writeFileSyncSpy = jest.spyOn(fs, "writeFileSync").mockImplementation();
       console.log = jest.fn(); // avoid console logs showing up
     });
 
@@ -81,6 +83,26 @@ describeAllImplementations((implementation) => {
         `${expectedDirname}/nested-styles/style.scss.d.ts`,
         expect.anything()
       );
+    });
+
+    test("reads options from the configuration file", async () => {
+      const pattern = `${__dirname}/dummy-styles`;
+
+      jest.spyOn(process, "cwd").mockReturnValue(path.resolve(pattern));
+
+      await main(pattern, {
+        exportType: "default",
+      });
+
+      expect(fs.writeFileSync).toBeCalledTimes(6);
+      // Transform the calls into a more readable format for the snapshot.
+      const contents = writeFileSyncSpy.mock.calls.map(
+        ([fullFilePath, contents]) => ({
+          path: path.relative(__dirname, fullFilePath),
+          contents,
+        })
+      );
+      expect(contents).toMatchSnapshot();
     });
   });
 });
