@@ -1,16 +1,20 @@
 import fs from "fs";
 import path from "path";
 import slash from "slash";
+import { loadConfig, mergeOptions } from "./load";
 
 import {
   watch,
-  MainOptions,
+  CLIOptions,
   generate,
   listDifferent,
   setAlertsLogLevel,
 } from "./core";
 
-export const main = async (pattern: string, options: MainOptions) => {
+export const main = async (pattern: string, cliOptions: CLIOptions) => {
+  const configOptions = await loadConfig();
+  const options = mergeOptions(cliOptions, configOptions);
+
   setAlertsLogLevel(options.logLevel);
 
   // When the provided pattern is a directory construct the proper glob to find

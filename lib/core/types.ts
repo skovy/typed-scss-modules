@@ -1,7 +1,9 @@
-import { Options } from "../sass";
+import { SASSOptions } from "../sass";
 import { ExportType, QuoteType, LogLevel } from "../typescript";
 
-export interface MainOptions extends Options {
+type CLIOnlyOptions = Extract<keyof SASSOptions, "importer">;
+
+export interface CLIOptions extends Exclude<SASSOptions, CLIOnlyOptions> {
   banner: string;
   ignore: string[];
   ignoreInitial: boolean;
@@ -14,3 +16,5 @@ export interface MainOptions extends Options {
   watch: boolean;
   logLevel: LogLevel;
 }
+
+export interface ConfigOptions extends CLIOptions, SASSOptions {}

@@ -3,20 +3,15 @@ import { paramCase } from "param-case";
 
 import { sourceToClassNames } from "./source-to-class-names";
 import { Implementations, getImplementation } from "../implementations";
+import { customImporters, Aliases, SASSImporterOptions } from "./importer";
 
 export type ClassName = string;
 export type ClassNames = ClassName[];
 
-export interface Aliases {
-  [index: string]: string;
-}
-
 export type NameFormat = "camel" | "kebab" | "param" | "dashes" | "none";
 
-export interface Options {
+export interface SASSOptions extends SASSImporterOptions {
   includePaths?: string[];
-  aliases?: Aliases;
-  aliasPrefixes?: Aliases;
   nameFormat?: NameFormat;
   implementation: Implementations;
 }
@@ -31,36 +26,18 @@ export const NAME_FORMATS: NameFormat[] = [
 
 export const nameFormatDefault: NameFormat = "camel";
 
-const importer = (aliases: Aliases, aliasPrefixes: Aliases) => (
-  url: string
-) => {
-  if (url in aliases) {
-    return {
-      file: aliases[url],
-    };
-  }
-
-  const prefixMatch = Object.keys(aliasPrefixes).find((prefix) =>
-    url.startsWith(prefix)
-  );
-  if (prefixMatch) {
-    return {
-      file: aliasPrefixes[prefixMatch] + url.substr(prefixMatch.length),
-    };
-  }
-
-  return null;
-};
+export { Aliases };
 
 export const fileToClassNames = (
   file: string,
   {
     includePaths = [],
-    aliases = {},
-    aliasPrefixes = {},
     nameFormat = "camel",
     implementation,
-  }: Options = {} as Options
+    aliases,
+    aliasPrefixes,
+    importer,
+  }: SASSOptions = {} as SASSOptions
 ) => {
   const transformer = classNameTransformer(nameFormat);
   const { renderSync } = getImplementation(implementation);
@@ -70,7 +47,7 @@ export const fileToClassNames = (
       const result = renderSync({
         file,
         includePaths,
-        importer: importer(aliases, aliasPrefixes),
+        importer: customImporters({ aliases, aliasPrefixes, importer }),
       });
 
       sourceToClassNames(result.css).then(({ exportTokens }) => {

@@ -7,7 +7,7 @@ import {
   classNamesToTypeDefinitions,
 } from "../typescript";
 import { fileToClassNames } from "../sass";
-import { MainOptions } from "./types";
+import { CLIOptions } from "./types";
 
 /**
  * Given a single file generate the proper types.
@@ -15,10 +15,7 @@ import { MainOptions } from "./types";
  * @param file the SCSS file to generate types for
  * @param options the CLI options
  */
-export const writeFile = (
-  file: string,
-  options: MainOptions
-): Promise<void> => {
+export const writeFile = (file: string, options: CLIOptions): Promise<void> => {
   return fileToClassNames(file, options)
     .then(async (classNames) => {
       const typeDefinition = await classNamesToTypeDefinitions({
