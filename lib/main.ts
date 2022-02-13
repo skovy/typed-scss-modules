@@ -11,7 +11,10 @@ import {
   setAlertsLogLevel,
 } from "./core";
 
-export const main = async (pattern: string, cliOptions: CLIOptions) => {
+export const main = async (
+  pattern: string,
+  cliOptions: Partial<CLIOptions>
+) => {
   const configOptions = await loadConfig();
   const options = mergeOptions(cliOptions, configOptions);
 
