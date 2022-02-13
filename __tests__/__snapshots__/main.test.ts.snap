@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`node-sass implementation main reads options from the configuration file 1`] = `
+Array [
+  Object {
+    "contents": "export type Styles = {
+  nestedAnother: string;
+  nestedClass: string;
+  someStyles: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/complex.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  app: string;
+  appHeader: string;
+  logo: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/dashes.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  randomClass: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/invalid.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  nestedStyles: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/nested-styles/style.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  someClass: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/style.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  composedClass: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/composes.scss.d.ts",
+  },
+]
+`;
+
+exports[`sass implementation main reads options from the configuration file 1`] = `
+Array [
+  Object {
+    "contents": "export type Styles = {
+  nestedAnother: string;
+  nestedClass: string;
+  someStyles: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/complex.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  app: string;
+  appHeader: string;
+  logo: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/dashes.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  randomClass: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/invalid.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  nestedStyles: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/nested-styles/style.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  someClass: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/style.scss.d.ts",
+  },
+  Object {
+    "contents": "export type Styles = {
+  composedClass: string;
+};
+
+export type ClassNames = keyof Styles;
+
+declare const styles: Styles;
+
+export default styles;
+",
+    "path": "dummy-styles/composes.scss.d.ts",
+  },
+]
+`;
