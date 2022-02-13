@@ -15,6 +15,10 @@ describeAllImplementations((implementation) => {
       console.log = jest.fn(); // avoid console logs showing up
     });
 
+    afterEach(() => {
+      writeFileSyncSpy.mockReset();
+    });
+
     test("generates types for all .scss files when the pattern is a directory", async () => {
       const pattern = `${__dirname}/dummy-styles`;
 
