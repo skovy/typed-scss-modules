@@ -3,7 +3,7 @@ import chokidar from "chokidar";
 import { alerts } from "./alerts";
 import { removeSCSSTypeDefinitionFile } from "./remove-file";
 import { writeFile } from "./write-file";
-import { MainOptions } from "./types";
+import { CLIOptions } from "./types";
 
 /**
  * Watch a file glob and generate the corresponding types.
@@ -11,7 +11,7 @@ import { MainOptions } from "./types";
  * @param pattern the file pattern to watch for file changes or additions
  * @param options the CLI options
  */
-export const watch = (pattern: string, options: MainOptions): void => {
+export const watch = (pattern: string, options: CLIOptions): void => {
   alerts.success("Watching files...");
 
   chokidar

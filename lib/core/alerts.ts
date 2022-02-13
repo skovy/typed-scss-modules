@@ -11,7 +11,7 @@ export const setAlertsLogLevel = (logLevel: LogLevel) => {
   currentLogLevel = logLevel;
 };
 
-type CbFunc = (...args: any) => any;
+type CbFunc = (...args: any[]) => any;
 type WrappedCbFunc<T extends CbFunc> = (
   ...args: Parameters<T>
 ) => ReturnType<T> | void;

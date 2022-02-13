@@ -1,4 +1,4 @@
-# Basic Example
+# Basic example
 
 This example contains:
 

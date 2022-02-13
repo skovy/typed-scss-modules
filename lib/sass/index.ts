@@ -3,6 +3,6 @@ export {
   fileToClassNames,
   Aliases,
   NameFormat,
-  Options,
+  SASSOptions,
   NAME_FORMATS,
 } from "./file-to-class-names";
