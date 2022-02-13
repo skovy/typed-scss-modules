@@ -14,7 +14,6 @@ import {
 } from "./typescript";
 import { getDefaultImplementation } from "./implementations";
 
-const CURRENT_WORKING_DIRECTORY = process.cwd();
 const VALID_CONFIG_FILES = [
   "typed-scss-modules.config.ts",
   "typed-scss-modules.config.js",
@@ -24,11 +23,14 @@ const joycon = new JoyCon();
 /**
  * Load a custom config file in the project root directory with any options for this package.
  *
- * This support config files with the format:
+ * This supports config files in the following formats and order:
  *  - Named `config` export: `export const config = {}`
  *  - Default export: `export default {}`
+ *  - `module.exports = {}`
  */
 export const loadConfig = async (): Promise<{} | ConfigOptions> => {
+  const CURRENT_WORKING_DIRECTORY = process.cwd();
+
   const configPath = await joycon.resolve(
     VALID_CONFIG_FILES,
     CURRENT_WORKING_DIRECTORY,
@@ -58,7 +60,7 @@ export const loadConfig = async (): Promise<{} | ConfigOptions> => {
 };
 
 // Default values for all options that need defaults.
-const DEFAULT_OPTIONS: CLIOptions = {
+export const DEFAULT_OPTIONS: CLIOptions = {
   nameFormat: nameFormatDefault,
   implementation: getDefaultImplementation(),
   exportType: exportTypeDefault,
