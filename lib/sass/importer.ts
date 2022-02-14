@@ -61,10 +61,8 @@ export const customImporters = ({
 
   if (typeof importer === "function") {
     importers.push(importer);
-    alerts.info(`Added custom SASS importer.`);
   } else if (Array.isArray(importer)) {
     importers.push(...importer);
-    alerts.info(`Added custom SASS importers.`);
   }
 
   return importers;
