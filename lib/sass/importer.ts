@@ -15,9 +15,10 @@ interface AliasImporterOptions {
 /**
  * Construct a SASS importer to create aliases for imports.
  */
-const aliasImporter = ({ aliases, aliasPrefixes }: AliasImporterOptions) => (
-  url: string
-) => {
+export const aliasImporter = ({
+  aliases,
+  aliasPrefixes,
+}: AliasImporterOptions): Importer => (url: string) => {
   if (url in aliases) {
     const file = aliases[url];
 
