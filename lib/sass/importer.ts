@@ -1,5 +1,4 @@
 import { Importer } from "sass";
-import { alerts } from "../core";
 
 export { Importer };
 
