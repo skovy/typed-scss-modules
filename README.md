@@ -48,7 +48,7 @@ Or, with npm:
 
 ```bash
 npm install -D typed-scss-modules
-./node_modules/.bin/typed-scss-modules src
+npx typed-scss-modules src
 ```
 
 ## CLI Options
