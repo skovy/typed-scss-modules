@@ -51,7 +51,7 @@ npm install -D typed-scss-modules
 ./node_modules/.bin/typed-scss-modules src
 ```
 
-## Advanced Usage
+## CLI Options
 
 For all possible commands, run `typed-scss-modules --help`.
 
@@ -279,12 +279,53 @@ export type Styles = {
 };
 ```
 
+## Config options
+
+All options above are also supported as a configuration file in the root of the project. The following configuration file names are supported:
+
+- `typed-scss-modules.config.ts`
+- `typed-scss-modules.config.js`
+
+The file can provide either a named `config` export or a default export.
+
+```js
+// Example of a named export with some of the options sets.
+export const config = {
+  banner: "// customer banner",
+  exportType: "default",
+  exportTypeName: "TheClasses",
+  logLevel: "error",
+};
+
+// Example of a default export with some of the options sets.
+export default {
+  banner: "// customer banner",
+  exportType: "default",
+  exportTypeName: "TheClasses",
+  logLevel: "error",
+};
+```
+
+> Note: the configuration options are the same as the CLI options without the leading dashes (`--`). Only the full option name is supported (not aliases) in the configuration file.
+
+CLI options will take precedence over configuration file options.
+
+In addition to all CLI options, the following are options only available with the configuration file:
+
+### `importer`
+
+- **Type**: `Importer | Importer[]`
+- **Default**: _none_
+
+Define a [single custom SASS importer or an array of SASS importers](https://github.com/sass/sass/blob/f355f602fc15f55b0a0a795ebe6eb819963e08a5/js-api-doc/legacy/importer.d.ts#L51-L149). This should only be necessary if custom SASS importers are already being used in the build process. This is used internally to implement `aliases` and `aliasPrefixes`.
+
 ## Examples
 
-For examples, see the `examples` directory:
+For examples of how this tool can be used and configured, see the `examples` directory:
 
-- [Basic Example](/examples/basic)
-- [Default Export Example](/examples/default-export)
+- [Basic example](/examples/basic)
+- [Default export example](/examples/default-export)
+- [Config file (with custom importer) example](/examples/config-file)
 
 ## Contributors ✨
 

@@ -7,7 +7,6 @@ export const config = {
   exportTypeInterface: "Styles",
   listDifferent: false,
   ignore: [],
-  implementation,
   quoteType: "single",
   updateStaleOnly: false,
   logLevel: "verbose",
