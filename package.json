@@ -43,7 +43,6 @@
     "@commitlint/config-conventional": "^9.1.2",
     "@commitlint/prompt-cli": "^9.1.2",
     "@commitlint/travis-cli": "^9.1.2",
-    "@types/camelcase": "^4.1.0",
     "@types/css-modules-loader-core": "^1.1.0",
     "@types/glob": "^7.1.1",
     "@types/jest": "^24.0.0",
@@ -80,8 +79,8 @@
   },
   "dependencies": {
     "bundle-require": "^3.0.4",
-    "camelcase": "^5.0.0",
-    "chalk": "^3.0.0",
+    "camelcase": "^6.3.0",
+    "chalk": "4.1.2",
     "chokidar": "^3.3.0",
     "css-modules-loader-core": "^1.1.0",
     "esbuild": "^0.14.21",
