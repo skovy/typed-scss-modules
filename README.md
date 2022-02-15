@@ -319,6 +319,8 @@ In addition to all CLI options, the following are options only available with th
 
 Define a [single custom SASS importer or an array of SASS importers](https://github.com/sass/sass/blob/f355f602fc15f55b0a0a795ebe6eb819963e08a5/js-api-doc/legacy/importer.d.ts#L51-L149). This should only be necessary if custom SASS importers are already being used in the build process. This is used internally to implement `aliases` and `aliasPrefixes`.
 
+Refer to [`lib/sass/importer.ts`](/blob/master/lib/sass/importer.ts) for more details and the `node-sass` and `sass` importer type definitions.
+
 ## Examples
 
 For examples of how this tool can be used and configured, see the `examples` directory:
