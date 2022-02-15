@@ -100,12 +100,13 @@ describeAllImplementations((implementation) => {
 
       expect(fs.writeFileSync).toBeCalledTimes(6);
       // Transform the calls into a more readable format for the snapshot.
-      const contents = writeFileSyncSpy.mock.calls.map(
-        ([fullFilePath, contents]) => ({
+      const contents = writeFileSyncSpy.mock.calls
+        .map(([fullFilePath, contents]) => ({
           path: path.relative(__dirname, fullFilePath),
           contents,
-        })
-      );
+        }))
+        // Sort to avoid flakey snapshot tests if call order changes.
+        .sort((a, b) => a.path.localeCompare(b.path));
       expect(contents).toMatchSnapshot();
     });
   });
