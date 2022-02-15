@@ -8,7 +8,7 @@ interface Prettier {
   resolveConfig: typeof resolveConfig;
 }
 
-const isPrettier = (t: unknown): t is Prettier =>
+const isPrettier = (t: any): t is Prettier =>
   t &&
   typeof t === "object" &&
   t !== null &&

@@ -129,6 +129,7 @@ const { _: patterns, ...rest } = yargs
     string: true,
     describe:
       "Inserts text at the top of every output file for documentation purposes.",
-  }).argv;
+  })
+  .parseSync();
 
-main(patterns[0], { ...rest });
+main(patterns[0] as string, { ...rest });
