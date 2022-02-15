@@ -1,8 +1,11 @@
+import { SyncContext } from "node-sass";
+import { LegacyImporterThis } from "sass";
 import { aliasImporter, customImporters } from "../../lib/sass/importer";
 
 // SASS importers receive two other arguments that this package doesn't care about.
+// Fake `this` which the type definitions both define for importers.
+const fakeImporterThis = {} as LegacyImporterThis & SyncContext;
 const fakePrev = "";
-const fakeDone = () => {};
 
 describe("#aliasImporter", () => {
   it("should create an importer to replace aliases and otherwise return null", () => {
@@ -11,13 +14,17 @@ describe("#aliasImporter", () => {
       aliasPrefixes: {},
     });
 
-    expect(importer("input", fakePrev, fakeDone)).toEqual({ file: "output" });
-    expect(importer("~alias", fakePrev, fakeDone)).toEqual({
+    expect(importer.call(fakeImporterThis, "input", fakePrev)).toEqual({
+      file: "output",
+    });
+    expect(importer.call(fakeImporterThis, "~alias", fakePrev)).toEqual({
       file: "node_modules",
     });
-    expect(importer("output", fakePrev, fakeDone)).toBeNull();
-    expect(importer("input-substring", fakePrev, fakeDone)).toBeNull();
-    expect(importer("other", fakePrev, fakeDone)).toBeNull();
+    expect(importer.call(fakeImporterThis, "output", fakePrev)).toBeNull();
+    expect(
+      importer.call(fakeImporterThis, "input-substring", fakePrev)
+    ).toBeNull();
+    expect(importer.call(fakeImporterThis, "other", fakePrev)).toBeNull();
   });
 
   it("should create an importer to replace alias prefixes and otherwise return null", () => {
@@ -26,15 +33,17 @@ describe("#aliasImporter", () => {
       aliasPrefixes: { "~": "node_modules/", abc: "def" },
     });
 
-    expect(importer("abc-123", fakePrev, fakeDone)).toEqual({
+    expect(importer.call(fakeImporterThis, "abc-123", fakePrev)).toEqual({
       file: "def-123",
     });
-    expect(importer("~package", fakePrev, fakeDone)).toEqual({
+    expect(importer.call(fakeImporterThis, "~package", fakePrev)).toEqual({
       file: "node_modules/package",
     });
-    expect(importer("output~", fakePrev, fakeDone)).toBeNull();
-    expect(importer("input-substring-abc", fakePrev, fakeDone)).toBeNull();
-    expect(importer("other", fakePrev, fakeDone)).toBeNull();
+    expect(importer.call(fakeImporterThis, "output~", fakePrev)).toBeNull();
+    expect(
+      importer.call(fakeImporterThis, "input-substring-abc", fakePrev)
+    ).toBeNull();
+    expect(importer.call(fakeImporterThis, "other", fakePrev)).toBeNull();
   });
 });
 
@@ -52,13 +61,13 @@ describe("#customImporters", () => {
     expect(importers).toHaveLength(1);
 
     const [aliasImporter] = importers;
-    expect(aliasImporter("~package", fakePrev, fakeDone)).toEqual({
+    expect(aliasImporter.call(fakeImporterThis, "~package", fakePrev)).toEqual({
       file: "node_modules/package",
     });
-    expect(aliasImporter("~alias", fakePrev, fakeDone)).toEqual({
+    expect(aliasImporter.call(fakeImporterThis, "~alias", fakePrev)).toEqual({
       file: "secret/path",
     });
-    expect(aliasImporter("other", fakePrev, fakeDone)).toBeNull();
+    expect(aliasImporter.call(fakeImporterThis, "other", fakePrev)).toBeNull();
   });
 
   it("should add additional importers if passed a function", () => {

@@ -1,5 +1,5 @@
 import nodeSass from "node-sass";
-import sass from "node-sass";
+import sass from "sass";
 
 /**
  * A list of all possible SASS package implementations that can be used to

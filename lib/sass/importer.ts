@@ -1,4 +1,8 @@
-import { Importer } from "sass";
+import { LegacySyncImporter } from "sass";
+import { SyncImporter } from "node-sass";
+
+// Hacky way to merge both dart-sass and node-sass importer definitions.
+type Importer = LegacySyncImporter & SyncImporter;
 
 export { Importer };
 
