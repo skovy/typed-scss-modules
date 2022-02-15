@@ -6,11 +6,11 @@ describe("getDefaultImplementation", () => {
   });
 
   it("returns sass if node-sass does not exist", () => {
-    const resolver = (jest.fn((implementation) => {
+    const resolver = jest.fn((implementation) => {
       if (implementation === "node-sass") {
         throw new Error("Not Found");
       }
-    }) as unknown) as RequireResolve;
+    }) as unknown as RequireResolve;
 
     expect(getDefaultImplementation(resolver)).toBe("sass");
     expect(resolver).toHaveBeenCalledTimes(2);
@@ -19,9 +19,9 @@ describe("getDefaultImplementation", () => {
   });
 
   it("returns node-sass even if both sass and node-sass do not exist", () => {
-    const resolver = (jest.fn(() => {
+    const resolver = jest.fn(() => {
       throw new Error("Not Found");
-    }) as unknown) as RequireResolve;
+    }) as unknown as RequireResolve;
 
     expect(getDefaultImplementation(resolver)).toBe("node-sass");
     expect(resolver).toHaveBeenCalledTimes(2);

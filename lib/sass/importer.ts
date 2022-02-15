@@ -14,30 +14,29 @@ interface AliasImporterOptions {
 /**
  * Construct a SASS importer to create aliases for imports.
  */
-export const aliasImporter = ({
-  aliases,
-  aliasPrefixes,
-}: AliasImporterOptions): Importer => (url: string) => {
-  if (url in aliases) {
-    const file = aliases[url];
+export const aliasImporter =
+  ({ aliases, aliasPrefixes }: AliasImporterOptions): Importer =>
+  (url: string) => {
+    if (url in aliases) {
+      const file = aliases[url];
 
-    return {
-      file,
-    };
-  }
+      return {
+        file,
+      };
+    }
 
-  const prefixMatch = Object.keys(aliasPrefixes).find((prefix) =>
-    url.startsWith(prefix)
-  );
+    const prefixMatch = Object.keys(aliasPrefixes).find((prefix) =>
+      url.startsWith(prefix)
+    );
 
-  if (prefixMatch) {
-    return {
-      file: aliasPrefixes[prefixMatch] + url.substr(prefixMatch.length),
-    };
-  }
+    if (prefixMatch) {
+      return {
+        file: aliasPrefixes[prefixMatch] + url.substr(prefixMatch.length),
+      };
+    }
 
-  return null;
-};
+    return null;
+  };
 
 export interface SASSImporterOptions {
   aliases?: Aliases;

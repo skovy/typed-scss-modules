@@ -20,17 +20,16 @@ type WrappedCbFunc<T extends CbFunc> = (
  * @param permittedLogLevels list of log levels. callbacks will only be called if current log level is listed here
  * @param cb callback
  */
-const withLogLevelsRestriction = <T extends CbFunc>(
-  permittedLogLevels: LogLevel[],
-  cb: T
-): WrappedCbFunc<T> => (...args: Parameters<T>): ReturnType<T> | void => {
-  const shouldCall =
-    !currentLogLevel || permittedLogLevels.includes(currentLogLevel);
+const withLogLevelsRestriction =
+  <T extends CbFunc>(permittedLogLevels: LogLevel[], cb: T): WrappedCbFunc<T> =>
+  (...args: Parameters<T>): ReturnType<T> | void => {
+    const shouldCall =
+      !currentLogLevel || permittedLogLevels.includes(currentLogLevel);
 
-  if (shouldCall) {
-    return cb(...args);
-  }
-};
+    if (shouldCall) {
+      return cb(...args);
+    }
+  };
 
 const error = withLogLevelsRestriction(
   ["verbose", "error", "info"],
