@@ -78,7 +78,7 @@ describe("#mergeOptions", () => {
   });
 
   it("should allow overriding all default options via the config options", () => {
-    const importer = () => {};
+    const importer = jest.fn();
 
     expect(
       mergeOptions(
@@ -119,7 +119,7 @@ describe("#mergeOptions", () => {
   });
 
   it("should give precedence to CLI options and still merge config-only options", () => {
-    const importer = () => {};
+    const importer = jest.fn();
 
     expect(
       mergeOptions(
