@@ -1,7 +1,7 @@
 import glob from "glob";
 
 import { alerts } from "./alerts";
-import { CLIOptions } from "./types";
+import { ConfigOptions } from "./types";
 import { writeFile } from "./write-file";
 
 /**
@@ -12,7 +12,7 @@ import { writeFile } from "./write-file";
  */
 export const generate = async (
   pattern: string,
-  options: CLIOptions
+  options: ConfigOptions
 ): Promise<void> => {
   // Find all the files that match the provided pattern.
   const files = glob.sync(pattern, { ignore: options.ignore });

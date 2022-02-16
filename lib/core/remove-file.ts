@@ -2,6 +2,7 @@ import fs from "fs";
 
 import { alerts } from "./alerts";
 import { getTypeDefinitionPath } from "../typescript";
+import { ConfigOptions } from ".";
 
 /**
  * Given a single file remove the file
@@ -27,7 +28,10 @@ const removeFile = (file: string): void => {
  *
  * @param file the SCSS file to generate types for
  */
-export const removeSCSSTypeDefinitionFile = (file: string): void => {
-  const path = getTypeDefinitionPath(file);
+export const removeSCSSTypeDefinitionFile = (
+  file: string,
+  options: ConfigOptions
+): void => {
+  const path = getTypeDefinitionPath(file, options);
   removeFile(path);
 };

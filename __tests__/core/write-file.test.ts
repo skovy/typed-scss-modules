@@ -2,6 +2,7 @@ import fs from "fs";
 
 import { writeFile } from "../../lib/core";
 import { getTypeDefinitionPath } from "../../lib/typescript";
+import { ConfigOptions } from "../../lib/core";
 
 import { describeAllImplementations } from "../helpers";
 
@@ -15,7 +16,7 @@ describeAllImplementations((implementation) => {
 
     test("writes the corresponding type definitions for a file and logs", async () => {
       const testFile = `${__dirname}/../dummy-styles/style.scss`;
-      const typesFile = getTypeDefinitionPath(testFile);
+      const typesFile = getTypeDefinitionPath(testFile, {} as ConfigOptions);
 
       await writeFile(testFile, {
         banner: "",
@@ -69,7 +70,7 @@ describeAllImplementations((implementation) => {
 
     describe("when --updateStaleOnly is passed", () => {
       const testFile = `${__dirname}/../dummy-styles/style.scss`;
-      const typesFile = getTypeDefinitionPath(testFile);
+      const typesFile = getTypeDefinitionPath(testFile, {} as ConfigOptions);
 
       beforeEach(() => {
         jest.spyOn(fs, "statSync");
