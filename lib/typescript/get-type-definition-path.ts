@@ -21,6 +21,7 @@ export const getTypeDefinitionPath = (
       options.outputFolder,
       relativePath
     );
+
     return `${resolvedPath}.d.ts`;
   } else {
     return `${file}.d.ts`;
