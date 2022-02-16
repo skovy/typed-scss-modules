@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import { SassError } from "node-sass";
 
 import { alerts } from "./alerts";
@@ -28,19 +29,27 @@ export const writeFile = (file: string, options: CLIOptions): Promise<void> => {
         return;
       }
 
-      const path = getTypeDefinitionPath(file);
+      const typesPath = getTypeDefinitionPath(file, options);
 
-      if (options.updateStaleOnly && fs.existsSync(path)) {
+      if (options.updateStaleOnly && fs.existsSync(typesPath)) {
         const fileModified = fs.statSync(file).mtime;
-        const typeDefinitionModified = fs.statSync(path).mtime;
+        const typeDefinitionModified = fs.statSync(typesPath).mtime;
 
         if (fileModified < typeDefinitionModified) {
           return;
         }
       }
 
-      fs.writeFileSync(path, typeDefinition);
-      alerts.success(`[GENERATED TYPES] ${path}`);
+      // Files can be written to arbitrary directories and need to
+      // be nested to match the project structure so it's possible
+      // there are multiple directories that need to be created.
+      const dirname = path.dirname(typesPath);
+      if (!fs.existsSync(dirname)) {
+        fs.mkdirSync(dirname, { recursive: true });
+      }
+
+      fs.writeFileSync(typesPath, typeDefinition);
+      alerts.success(`[GENERATED TYPES] ${typesPath}`);
     })
     .catch(({ message, file, line, column }: SassError) => {
       const location = file ? `(${file}[${line}:${column}])` : "";

@@ -2,7 +2,7 @@ import glob from "glob";
 import fs from "fs";
 
 import { alerts } from "./alerts";
-import { CLIOptions } from "./types";
+import { ConfigOptions } from "./types";
 import { fileToClassNames } from "../sass";
 import {
   classNamesToTypeDefinitions,
@@ -11,7 +11,7 @@ import {
 
 export const listDifferent = async (
   pattern: string,
-  options: CLIOptions
+  options: ConfigOptions
 ): Promise<void> => {
   // Find all the files that match the provided pattern.
   const files = glob.sync(pattern);
@@ -31,7 +31,7 @@ export const listDifferent = async (
 
 export const checkFile = (
   file: string,
-  options: CLIOptions
+  options: ConfigOptions
 ): Promise<boolean> => {
   return new Promise((resolve) =>
     fileToClassNames(file, options)
@@ -47,7 +47,7 @@ export const checkFile = (
           return;
         }
 
-        const path = getTypeDefinitionPath(file);
+        const path = getTypeDefinitionPath(file, options);
 
         if (!fs.existsSync(path)) {
           alerts.error(
