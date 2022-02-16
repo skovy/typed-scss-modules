@@ -16,7 +16,6 @@ export interface CLIOptions extends Exclude<SASSOptions, CLIOnlyOptions> {
   watch: boolean;
   logLevel: LogLevel;
   outputFolder?: string;
-  outputFile?(file: string): string;
 }
 
 export interface ConfigOptions extends CLIOptions, SASSOptions {}
