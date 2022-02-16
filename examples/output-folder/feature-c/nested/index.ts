@@ -1,3 +1,3 @@
-import styles from "./c.scss";
+import styles from "./nested.scss";
 
-console.log(styles.c);
+console.log(styles.nested);
