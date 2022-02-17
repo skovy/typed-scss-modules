@@ -1,55 +1,84 @@
 import fs from "fs";
+import path from "path";
 
-import { ConfigOptions } from "../../lib/core";
+import { DEFAULT_OPTIONS } from "../../lib/load";
 import { alerts } from "../../lib/core/alerts";
 import { removeSCSSTypeDefinitionFile } from "../../lib/core/remove-file";
-import { getTypeDefinitionPath } from "../../lib/typescript";
-
-jest.mock("fs");
-jest.mock("../../lib/core/alerts");
 
 describe("removeFile", () => {
-  const originalTestFile = `${__dirname}/../removable.scss`;
-  const existingFile = `${__dirname}/../style.scss`;
-  const existingTypes = getTypeDefinitionPath(
-    originalTestFile,
-    {} as ConfigOptions
+  const originalTestFile = path.resolve(__dirname, "..", "removable.scss");
+  const existingFile = path.resolve(__dirname, "..", "style.scss");
+  const existingTypes = path.join(
+    process.cwd(),
+    "__tests__/removable.scss.d.ts"
+  );
+  const outputFolderExistingTypes = path.resolve(
+    process.cwd(),
+    "__generated__/__tests__/removable.scss.d.ts"
   );
 
+  let existsSpy: jest.SpyInstance;
+  let unlinkSpy: jest.SpyInstance;
+  let alertsSpy: jest.SpyInstance;
+
   beforeEach(() => {
-    (fs.existsSync as jest.Mock).mockImplementation(
-      (path: fs.PathLike): boolean =>
-        path === existingTypes || path === existingFile
-    );
+    existsSpy = jest
+      .spyOn(fs, "existsSync")
+      .mockImplementation(
+        (path) =>
+          path === existingTypes ||
+          path === existingFile ||
+          path === outputFolderExistingTypes
+      );
+
+    unlinkSpy = jest.spyOn(fs, "unlinkSync").mockImplementation();
+
+    alertsSpy = jest.spyOn(alerts, "success").mockImplementation();
   });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
+
   it("does nothing if types file doesn't exist", async () => {
-    const existsSyncSpy = fs.existsSync;
-    const unlinkSyncSpy = fs.unlinkSync;
-    const nonExistingFile = `${__dirname}/../deleted.scss`;
-    const nonExistingTypes = getTypeDefinitionPath(
-      nonExistingFile,
-      {} as ConfigOptions
+    const nonExistingFile = path.resolve(__dirname, "..", "deleted.scss");
+    const nonExistingTypes = path.join(
+      process.cwd(),
+      "__tests__/deleted.scss.d.ts"
     );
-    removeSCSSTypeDefinitionFile(nonExistingFile, {} as ConfigOptions);
-    expect(existsSyncSpy).toBeCalledWith(
-      expect.stringMatching(nonExistingFile)
-    );
-    expect(existsSyncSpy).toBeCalledWith(
-      expect.stringMatching(nonExistingTypes)
-    );
-    expect(unlinkSyncSpy).not.toBeCalled();
-    expect(alerts.success).not.toBeCalled();
+
+    removeSCSSTypeDefinitionFile(nonExistingFile, DEFAULT_OPTIONS);
+
+    expect(existsSpy).toBeCalledWith(expect.stringMatching(nonExistingFile));
+    expect(existsSpy).toBeCalledWith(expect.stringMatching(nonExistingTypes));
+    expect(unlinkSpy).not.toBeCalled();
+    expect(alertsSpy).not.toBeCalled();
   });
+
   it("removes *.scss.d.ts types file for *.scss", () => {
-    const existsSyncSpy = fs.existsSync;
-    const unlinkSyncSpy = fs.unlinkSync;
-    removeSCSSTypeDefinitionFile(originalTestFile, {} as ConfigOptions);
-    expect(existsSyncSpy).toBeCalledWith(expect.stringMatching(existingTypes));
-    expect(unlinkSyncSpy).toBeCalled();
-    expect(unlinkSyncSpy).toBeCalledWith(expect.stringMatching(existingTypes));
-    expect(alerts.success).toBeCalled();
+    removeSCSSTypeDefinitionFile(originalTestFile, DEFAULT_OPTIONS);
+
+    expect(existsSpy).toBeCalledWith(expect.stringMatching(existingTypes));
+    expect(unlinkSpy).toBeCalled();
+    expect(unlinkSpy).toBeCalledWith(expect.stringMatching(existingTypes));
+    expect(alertsSpy).toBeCalled();
+  });
+
+  describe("when outputFolder is passed", () => {
+    it("removes the correct files", async () => {
+      removeSCSSTypeDefinitionFile(originalTestFile, {
+        ...DEFAULT_OPTIONS,
+        outputFolder: "__generated__",
+      });
+
+      expect(existsSpy).toBeCalledWith(
+        expect.stringMatching(outputFolderExistingTypes)
+      );
+      expect(unlinkSpy).toBeCalled();
+      expect(unlinkSpy).toBeCalledWith(
+        expect.stringMatching(outputFolderExistingTypes)
+      );
+      expect(alertsSpy).toBeCalled();
+    });
   });
 });

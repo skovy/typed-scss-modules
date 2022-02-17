@@ -1,8 +1,7 @@
 import fs from "fs";
+import path from "path";
 
 import { writeFile } from "../../lib/core";
-import { getTypeDefinitionPath } from "../../lib/typescript";
-import { ConfigOptions } from "../../lib/core";
 
 import { describeAllImplementations } from "../helpers";
 
@@ -15,8 +14,7 @@ describeAllImplementations((implementation) => {
     });
 
     test("writes the corresponding type definitions for a file and logs", async () => {
-      const testFile = `${__dirname}/../dummy-styles/style.scss`;
-      const typesFile = getTypeDefinitionPath(testFile, {} as ConfigOptions);
+      const testFile = path.resolve(__dirname, "..", "dummy-styles/style.scss");
 
       await writeFile(testFile, {
         banner: "",
@@ -33,18 +31,21 @@ describeAllImplementations((implementation) => {
         logLevel: "verbose",
       });
 
+      const expectedPath = path.join(
+        process.cwd(),
+        "__tests__/dummy-styles/style.scss.d.ts"
+      );
       expect(fs.writeFileSync).toBeCalledWith(
-        typesFile,
+        expectedPath,
         "export const someClass: string;\n"
       );
-
       expect(console.log).toBeCalledWith(
-        expect.stringContaining(`[GENERATED TYPES] ${typesFile}`)
+        expect.stringContaining(`[GENERATED TYPES] ${expectedPath}`)
       );
     });
 
     test("it skips files with no classes", async () => {
-      const testFile = `${__dirname}/../dummy-styles/empty.scss`;
+      const testFile = path.resolve(__dirname, "..", "dummy-styles/empty.scss");
 
       await writeFile(testFile, {
         banner: "",
@@ -62,16 +63,55 @@ describeAllImplementations((implementation) => {
       });
 
       expect(fs.writeFileSync).not.toBeCalled();
-
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[NO GENERATED TYPES] ${testFile}`)
       );
     });
 
-    describe("when --updateStaleOnly is passed", () => {
-      const testFile = `${__dirname}/../dummy-styles/style.scss`;
-      const typesFile = getTypeDefinitionPath(testFile, {} as ConfigOptions);
+    describe("when outputFolder is passed", () => {
+      it("should write to the correct path", async () => {
+        const testFile = path.resolve(
+          __dirname,
+          "..",
+          "dummy-styles/style.scss"
+        );
 
+        await writeFile(testFile, {
+          banner: "",
+          watch: false,
+          ignoreInitial: false,
+          exportType: "named",
+          exportTypeName: "ClassNames",
+          exportTypeInterface: "Styles",
+          listDifferent: false,
+          ignore: [],
+          implementation,
+          quoteType: "single",
+          updateStaleOnly: false,
+          logLevel: "verbose",
+          outputFolder: "__generated__",
+        });
+
+        const expectedPath = path.join(
+          process.cwd(),
+          "__generated__/__tests__/dummy-styles/style.scss.d.ts"
+        );
+        expect(fs.writeFileSync).toBeCalledWith(
+          expectedPath,
+          "export const someClass: string;\n"
+        );
+        expect(console.log).toBeCalledWith(
+          expect.stringContaining(`[GENERATED TYPES] ${expectedPath}`)
+        );
+      });
+    });
+
+    describe("when --updateStaleOnly is passed", () => {
+      const testFile = path.resolve(__dirname, "..", "dummy-styles/style.scss");
+      const expectedPath = path.join(
+        process.cwd(),
+        "__tests__/dummy-styles/style.scss.d.ts"
+      );
       beforeEach(() => {
         jest.spyOn(fs, "statSync");
         jest.spyOn(fs, "existsSync");
@@ -85,7 +125,8 @@ describeAllImplementations((implementation) => {
 
       test("it skips stale files", async () => {
         (fs.statSync as jest.Mock).mockImplementation((p) => ({
-          mtime: p === typesFile ? new Date(2020, 0, 2) : new Date(2020, 0, 1),
+          mtime:
+            p === expectedPath ? new Date(2020, 0, 2) : new Date(2020, 0, 1),
         }));
 
         await writeFile(testFile, {
