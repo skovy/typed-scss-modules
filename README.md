@@ -299,6 +299,14 @@ It will use the relative path to the SCSS module from where this tool is execute
 }
 ```
 
+### `--additionalData` (`-d`)
+
+- **Type**: `string`
+- **Default**: _none_
+- **Example**: `typed-scss-modules src --additionalData '$global-var: green;'`
+
+Prepend the provided SCSS code before each file. This is useful for injecting globals into every file, such as adding an import to load global variables for each file.
+
 ## Config options
 
 All options above are also supported as a configuration file in the root of the project. The following configuration file names are supported:
