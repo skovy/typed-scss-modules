@@ -108,6 +108,12 @@ const { _: patterns, ...rest } = yargs
     array: true,
     describe: "Add a pattern or an array of glob patterns to exclude matches.",
   })
+  .option("outputFolder", {
+    string: true,
+    alias: "o",
+    describe:
+      "Define a (relative) folder to output the generated type definitions. Note this requires adding the output folder to tsconfig.json `rootDirs`.",
+  })
   .options("quoteType", {
     choices: QUOTE_TYPES,
     alias: "q",

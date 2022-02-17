@@ -56,6 +56,7 @@ describe("#mergeOptions", () => {
           quoteType: "double",
           updateStaleOnly: true,
           logLevel: "silent",
+          outputFolder: "__generated__",
           banner: "// override",
         },
         {}
@@ -73,6 +74,7 @@ describe("#mergeOptions", () => {
       quoteType: "double",
       updateStaleOnly: true,
       logLevel: "silent",
+      outputFolder: "__generated__",
       banner: "// override",
     });
   });
@@ -97,6 +99,7 @@ describe("#mergeOptions", () => {
           updateStaleOnly: true,
           logLevel: "silent",
           banner: "// override",
+          outputFolder: "__generated__",
           importer,
         }
       )
@@ -114,6 +117,7 @@ describe("#mergeOptions", () => {
       updateStaleOnly: true,
       logLevel: "silent",
       banner: "// override",
+      outputFolder: "__generated__",
       importer,
     });
   });
@@ -137,6 +141,7 @@ describe("#mergeOptions", () => {
           updateStaleOnly: true,
           logLevel: "silent",
           banner: "// override",
+          outputFolder: "__cli-generated__",
         },
         {
           nameFormat: "param",
@@ -152,6 +157,7 @@ describe("#mergeOptions", () => {
           updateStaleOnly: false,
           logLevel: "info",
           banner: "// not override",
+          outputFolder: "__generated__",
           importer,
         }
       )
@@ -169,6 +175,7 @@ describe("#mergeOptions", () => {
       updateStaleOnly: true,
       logLevel: "silent",
       banner: "// override",
+      outputFolder: "__cli-generated__",
       importer,
     });
   });

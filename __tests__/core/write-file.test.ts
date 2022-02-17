@@ -9,7 +9,11 @@ describeAllImplementations((implementation) => {
   describe("writeFile", () => {
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.
-      fs.writeFileSync = jest.fn();
+      jest.spyOn(fs, "writeFileSync").mockImplementation();
+
+      // Avoid creating new directories while running tests.
+      jest.spyOn(fs, "mkdirSync").mockImplementation();
+
       console.log = jest.fn();
     });
 
@@ -29,6 +33,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        outputFolder: null,
       });
 
       const expectedPath = path.join(
@@ -60,6 +65,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        outputFolder: null,
       });
 
       expect(fs.writeFileSync).not.toBeCalled();
@@ -142,6 +148,7 @@ describeAllImplementations((implementation) => {
           quoteType: "single",
           updateStaleOnly: true,
           logLevel: "verbose",
+          outputFolder: null,
         });
 
         expect(fs.writeFileSync).not.toBeCalled();
@@ -165,6 +172,7 @@ describeAllImplementations((implementation) => {
           quoteType: "single",
           updateStaleOnly: true,
           logLevel: "verbose",
+          outputFolder: null,
         });
 
         expect(fs.writeFileSync).toBeCalled();
@@ -186,6 +194,7 @@ describeAllImplementations((implementation) => {
           quoteType: "single",
           updateStaleOnly: true,
           logLevel: "verbose",
+          outputFolder: null,
         });
 
         expect(fs.statSync).not.toBeCalled();

@@ -279,6 +279,26 @@ export type Styles = {
 };
 ```
 
+### `--outputFolder` (`-o`)
+
+- **Type**: `string`
+- **Default**: _none_
+- **Example**: `typed-scss-modules src --outputFolder __generated__`
+
+Set a relative folder to output the generated type definitions. Instead of writing the type definitions directly next to each SCSS module (sibling file), it will write to the output folder with the same path.
+
+It will use the relative path to the SCSS module from where this tool is executed. This same path (including any directories) will be constructed in the output folder. This is important for this to work properly with TypeScript.
+
+**Important**: for this to work as expected the `tsconfig.json` needs to have [`rootDirs`](https://www.typescriptlang.org/tsconfig#rootDirs) added with the same output folder. This will allow TypeScript to pick up these type definitions and map them to the actual SCSS modules.
+
+```json
+{
+  "compilerOptions": {
+    "rootDirs": [".", "__generated__"]
+  }
+}
+```
+
 ## Config options
 
 All options above are also supported as a configuration file in the root of the project. The following configuration file names are supported:
