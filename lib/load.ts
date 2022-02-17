@@ -74,6 +74,7 @@ export const DEFAULT_OPTIONS: CLIOptions = {
   updateStaleOnly: false,
   logLevel: logLevelDefault,
   banner: bannerTypeDefault,
+  outputFolder: null,
 };
 
 /**

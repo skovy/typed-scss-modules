@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`node-sass implementation main outputs the correct files when outputFolder is passed 1`] = `
+Array [
+  Object {
+    "contents": "export const nestedAnother: string;
+export const nestedClass: string;
+export const someStyles: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
+  },
+  Object {
+    "contents": "export const composedClass: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/composes.scss.d.ts",
+  },
+  Object {
+    "contents": "export const app: string;
+export const appHeader: string;
+export const logo: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/dashes.scss.d.ts",
+  },
+  Object {
+    "contents": "export const randomClass: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/invalid.scss.d.ts",
+  },
+  Object {
+    "contents": "export const nestedStyles: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/nested-styles/style.scss.d.ts",
+  },
+  Object {
+    "contents": "export const someClass: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/style.scss.d.ts",
+  },
+]
+`;
+
 exports[`node-sass implementation main reads options from the configuration file 1`] = `
 Array [
   Object {
@@ -83,6 +122,45 @@ declare const styles: Styles;
 export default styles;
 ",
     "path": "dummy-styles/style.scss.d.ts",
+  },
+]
+`;
+
+exports[`sass implementation main outputs the correct files when outputFolder is passed 1`] = `
+Array [
+  Object {
+    "contents": "export const nestedAnother: string;
+export const nestedClass: string;
+export const someStyles: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
+  },
+  Object {
+    "contents": "export const composedClass: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/composes.scss.d.ts",
+  },
+  Object {
+    "contents": "export const app: string;
+export const appHeader: string;
+export const logo: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/dashes.scss.d.ts",
+  },
+  Object {
+    "contents": "export const randomClass: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/invalid.scss.d.ts",
+  },
+  Object {
+    "contents": "export const nestedStyles: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/nested-styles/style.scss.d.ts",
+  },
+  Object {
+    "contents": "export const someClass: string;
+",
+    "path": "../__generated__/__tests__/dummy-styles/style.scss.d.ts",
   },
 ]
 `;

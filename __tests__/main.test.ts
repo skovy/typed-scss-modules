@@ -10,9 +10,14 @@ describeAllImplementations((implementation) => {
     let writeFileSyncSpy: jest.SpyInstance;
 
     beforeEach(() => {
-      // Only mock the write, so the example files can still be read.
+      // Only mock the writes, so the example files can still be read.
       writeFileSyncSpy = jest.spyOn(fs, "writeFileSync").mockImplementation();
-      console.log = jest.fn(); // avoid console logs showing up
+
+      // Avoid creating directories while running tests.
+      jest.spyOn(fs, "mkdirSync").mockImplementation();
+
+      // Avoid console logs showing up.
+      jest.spyOn(console, "log").mockImplementation();
     });
 
     afterEach(() => {
@@ -99,6 +104,26 @@ describeAllImplementations((implementation) => {
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(6);
+      // Transform the calls into a more readable format for the snapshot.
+      const contents = writeFileSyncSpy.mock.calls
+        .map(([fullFilePath, contents]) => ({
+          path: path.relative(__dirname, fullFilePath),
+          contents,
+        }))
+        // Sort to avoid flakey snapshot tests if call order changes.
+        .sort((a, b) => a.path.localeCompare(b.path));
+      expect(contents).toMatchSnapshot();
+    });
+
+    test("outputs the correct files when outputFolder is passed", async () => {
+      const pattern = path.resolve(__dirname, "dummy-styles");
+
+      await main(pattern, {
+        outputFolder: "__generated__",
+      });
+
+      expect(fs.writeFileSync).toBeCalledTimes(6);
+      expect(fs.mkdirSync).toBeCalledTimes(6);
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
         .map(([fullFilePath, contents]) => ({
