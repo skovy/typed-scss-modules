@@ -1,3 +1,4 @@
+import fs from "fs";
 import camelcase from "camelcase";
 import { paramCase } from "param-case";
 
@@ -11,6 +12,7 @@ export type ClassNames = ClassName[];
 export type NameFormat = "camel" | "kebab" | "param" | "dashes" | "none";
 
 export interface SASSOptions extends SASSImporterOptions {
+  additionalData?: string;
   includePaths?: string[];
   nameFormat?: NameFormat;
   implementation: Implementations;
@@ -31,6 +33,7 @@ export { Aliases };
 export const fileToClassNames = (
   file: string,
   {
+    additionalData,
     includePaths = [],
     nameFormat = "camel",
     implementation,
@@ -44,8 +47,10 @@ export const fileToClassNames = (
 
   return new Promise<ClassNames>((resolve, reject) => {
     try {
+      const data = fs.readFileSync(file).toString();
       const result = renderSync({
         file,
+        data: additionalData ? `${additionalData}\n${data}` : data,
         includePaths,
         importer: customImporters({ aliases, aliasPrefixes, importer }),
       });

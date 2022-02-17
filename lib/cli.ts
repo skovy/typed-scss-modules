@@ -46,6 +46,11 @@ const { _: patterns, ...rest } = yargs
   )
   .example("$0 src/**/*.scss --logLevel error", "Output only errors")
   .demandCommand(1)
+  .option("additionalData", {
+    string: true,
+    alias: "d",
+    describe: "Prepends the SCSS code before each file.",
+  })
   .option("aliases", {
     coerce: (obj): Aliases => obj,
     alias: "a",

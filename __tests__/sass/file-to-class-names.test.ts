@@ -130,5 +130,19 @@ describeAllImplementations((implementation) => {
         expect(result).toEqual(["composedClass"]);
       });
     });
+
+    describe("additionalData", () => {
+      test("adds additional data to enable adding any necessary context", async () => {
+        const result = await fileToClassNames(
+          `${__dirname}/../dummy-styles/global-variables.scss`,
+          {
+            implementation,
+            additionalData: "$global-red: red;",
+          }
+        );
+
+        expect(result).toEqual(["globalStyle"]);
+      });
+    });
   });
 });
