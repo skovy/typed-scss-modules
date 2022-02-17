@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import slash from "slash";
 
+import { alerts } from "../lib/core";
 import { main } from "../lib/main";
 import { describeAllImplementations } from "./helpers";
 
@@ -18,6 +19,8 @@ describeAllImplementations((implementation) => {
 
       // Avoid console logs showing up.
       jest.spyOn(console, "log").mockImplementation();
+
+      jest.spyOn(alerts, "error").mockImplementation();
     });
 
     afterEach(() => {
@@ -40,9 +43,18 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        additionalData: "$global-red: red;",
+        aliases: {
+          "~fancy-import": "complex",
+          "~another": "style",
+        },
+        aliasPrefixes: {
+          "~": "nested-styles/",
+        },
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(6);
+      expect(alerts.error).not.toHaveBeenCalled();
+      expect(fs.writeFileSync).toBeCalledTimes(9);
 
       const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
 
@@ -72,9 +84,18 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        additionalData: "$global-red: red;",
+        aliases: {
+          "~fancy-import": "complex",
+          "~another": "style",
+        },
+        aliasPrefixes: {
+          "~": "nested-styles/",
+        },
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(4);
+      expect(alerts.error).not.toHaveBeenCalled();
+      expect(fs.writeFileSync).toBeCalledTimes(7);
 
       const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
 
@@ -100,10 +121,19 @@ describeAllImplementations((implementation) => {
       jest.spyOn(process, "cwd").mockReturnValue(path.resolve(pattern));
 
       await main(pattern, {
+        additionalData: "$global-red: red;",
+        aliases: {
+          "~fancy-import": "complex",
+          "~another": "style",
+        },
+        aliasPrefixes: {
+          "~": "nested-styles/",
+        },
         exportType: "default",
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(6);
+      expect(alerts.error).not.toHaveBeenCalled();
+      expect(fs.writeFileSync).toBeCalledTimes(9);
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
         .map(([fullFilePath, contents]) => ({
@@ -119,11 +149,20 @@ describeAllImplementations((implementation) => {
       const pattern = path.resolve(__dirname, "dummy-styles");
 
       await main(pattern, {
+        additionalData: "$global-red: red;",
+        aliases: {
+          "~fancy-import": "complex",
+          "~another": "style",
+        },
+        aliasPrefixes: {
+          "~": "nested-styles/",
+        },
         outputFolder: "__generated__",
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(6);
-      expect(fs.mkdirSync).toBeCalledTimes(6);
+      expect(alerts.error).not.toHaveBeenCalled();
+      expect(fs.writeFileSync).toBeCalledTimes(9);
+      expect(fs.mkdirSync).toBeCalledTimes(9);
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
         .map(([fullFilePath, contents]) => ({
