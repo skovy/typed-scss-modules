@@ -80,14 +80,13 @@
   },
   "dependencies": {
     "bundle-require": "^3.0.4",
-    "camelcase": "^6.3.0",
     "chalk": "4.1.2",
+    "change-case": "^4.1.2",
     "chokidar": "^3.5.3",
     "css-modules-loader-core": "^1.1.0",
     "esbuild": "^0.14.21",
     "glob": "^7.2.0",
     "joycon": "^3.1.1",
-    "param-case": "^3.0.4",
     "reserved-words": "^0.1.2",
     "slash": "^3.0.0",
     "yargs": "^17.3.1"

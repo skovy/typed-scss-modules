@@ -1,6 +1,5 @@
 import fs from "fs";
-import camelcase from "camelcase";
-import { paramCase } from "param-case";
+import { camelCase, paramCase } from "change-case";
 
 import { sourceToClassNames } from "./source-to-class-names";
 import { Implementations, getImplementation } from "../implementations";
@@ -80,10 +79,10 @@ const classNameTransformer = (nameFormat: NameFormat): Transformer => {
     case "param":
       return (className) => paramCase(className);
     case "camel":
-      return (className) => camelcase(className);
+      return (className) => camelCase(className);
     case "dashes":
       return (className) =>
-        /-/.test(className) ? camelcase(className) : className;
+        /-/.test(className) ? camelCase(className) : className;
     case "none":
       return (className) => className;
   }
