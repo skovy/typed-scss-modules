@@ -45,6 +45,22 @@ describeAllImplementations((implementation) => {
         ]);
       });
 
+      test("it converts a file path to an array of class names with snake as the name format", async () => {
+        const result = await fileToClassNames(
+          `${__dirname}/../dummy-styles/complex.scss`,
+          {
+            nameFormat: "snake",
+            implementation,
+          }
+        );
+
+        expect(result).toEqual([
+          "nested_another",
+          "nested_class",
+          "some_styles",
+        ]);
+      });
+
       test("it converts a file path to an array of class names where only classes with dashes in the names are altered", async () => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/dashes.scss`,

@@ -1,5 +1,5 @@
 import fs from "fs";
-import { camelCase, paramCase } from "change-case";
+import { camelCase, paramCase, snakeCase } from "change-case";
 
 import { sourceToClassNames } from "./source-to-class-names";
 import { Implementations, getImplementation } from "../implementations";
@@ -8,7 +8,13 @@ import { customImporters, Aliases, SASSImporterOptions } from "./importer";
 export type ClassName = string;
 export type ClassNames = ClassName[];
 
-export type NameFormat = "camel" | "kebab" | "param" | "dashes" | "none";
+export type NameFormat =
+  | "camel"
+  | "kebab"
+  | "snake"
+  | "param"
+  | "dashes"
+  | "none";
 
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
@@ -80,6 +86,8 @@ const classNameTransformer = (nameFormat: NameFormat): Transformer => {
       return (className) => paramCase(className);
     case "camel":
       return (className) => camelCase(className);
+    case "snake":
+      return (className) => snakeCase(className);
     case "dashes":
       return (className) =>
         /-/.test(className) ? camelCase(className) : className;
