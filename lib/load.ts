@@ -77,6 +77,16 @@ export const DEFAULT_OPTIONS: CLIOptions = {
   outputFolder: null,
 };
 
+const removedUndefinedValues = <Obj extends {}>(obj: Obj): Obj => {
+  for (let key in obj) {
+    if (obj[key] === undefined) {
+      delete obj[key];
+    }
+  }
+
+  return obj;
+};
+
 /**
  * Given both the CLI and config file options merge into a single options object.
  *
@@ -92,6 +102,6 @@ export const mergeOptions = (
   return {
     ...DEFAULT_OPTIONS,
     ...configOptions,
-    ...cliOptions,
+    ...removedUndefinedValues(cliOptions),
   };
 };
