@@ -179,4 +179,68 @@ describe("#mergeOptions", () => {
       importer,
     });
   });
+
+  it("should give ignore undefined CLI options", () => {
+    const importer = jest.fn();
+
+    expect(
+      mergeOptions(
+        {
+          aliases: undefined,
+          aliasPrefixes: undefined,
+          nameFormat: "kebab",
+          implementation: "sass",
+          exportType: "default",
+          exportTypeName: "Classes",
+          exportTypeInterface: "AllStyles",
+          watch: true,
+          ignoreInitial: true,
+          listDifferent: true,
+          ignore: ["path"],
+          quoteType: "double",
+          updateStaleOnly: true,
+          logLevel: "silent",
+          banner: undefined,
+          outputFolder: "__cli-generated__",
+        },
+        {
+          aliases: {},
+          aliasPrefixes: {},
+          nameFormat: "param",
+          implementation: "node-sass",
+          exportType: "named",
+          exportTypeName: "Classnames",
+          exportTypeInterface: "TheStyles",
+          watch: false,
+          ignoreInitial: false,
+          listDifferent: false,
+          ignore: ["another/path"],
+          quoteType: "single",
+          updateStaleOnly: false,
+          logLevel: "info",
+          banner: "// banner",
+          outputFolder: "__generated__",
+          importer,
+        }
+      )
+    ).toEqual({
+      aliases: {},
+      aliasPrefixes: {},
+      nameFormat: "kebab",
+      implementation: "sass",
+      exportType: "default",
+      exportTypeName: "Classes",
+      exportTypeInterface: "AllStyles",
+      watch: true,
+      ignoreInitial: true,
+      listDifferent: true,
+      ignore: ["path"],
+      quoteType: "double",
+      updateStaleOnly: true,
+      logLevel: "silent",
+      banner: "// banner",
+      outputFolder: "__cli-generated__",
+      importer,
+    });
+  });
 });

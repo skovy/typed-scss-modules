@@ -2,7 +2,8 @@
   "name": "typed-scss-modules",
   "version": "0.0.0",
   "description": "TypeScript type definition generator for SCSS CSS Modules",
-  "main": "index.js",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
   "license": "MIT",
   "repository": {
