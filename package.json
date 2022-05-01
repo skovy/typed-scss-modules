@@ -58,7 +58,7 @@
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.4",
-    "node-sass": "4.12.0",
+    "node-sass": "7.0.0",
     "node-sass-json-importer": "^4.3.0",
     "prettier": "^2.5.1",
     "sass": "^1.49.7",
