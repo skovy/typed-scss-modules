@@ -6,27 +6,41 @@ import { Implementations, getImplementation } from "../implementations";
 import { customImporters, Aliases, SASSImporterOptions } from "./importer";
 
 export type ClassName = string;
-export type ClassNames = ClassName[];
+interface Transformer {
+  (className: ClassName): string;
+}
 
-export type NameFormat = typeof NAME_FORMATS[number];
+export const NAME_FORMATS = [
+  "all",
+  "camel",
+  "dashes",
+  "kebab",
+  "none",
+  "param",
+  "snake",
+] as const;
+
+export type NameFormatInput = typeof NAME_FORMATS[number];
+
+type NameFormatsWithTransformer = Exclude<NameFormatInput, "all">;
+
+const transformersMap: Record<NameFormatsWithTransformer, Transformer> = {
+  camel: (className) => camelCase(className),
+  dashes: (className) =>
+    /-/.test(className) ? camelCase(className) : className,
+  kebab: (className) => transformersMap.param(className),
+  none: (className) => className,
+  param: (className) => paramCase(className),
+  snake: (className) => snakeCase(className),
+};
 
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
   includePaths?: string[];
-  nameFormat?: NameFormat;
+  nameFormat?: NameFormatInput[];
   implementation: Implementations;
 }
-
-export const NAME_FORMATS = [
-  "camel",
-  "kebab",
-  "snake",
-  "param",
-  "dashes",
-  "none",
-] as const;
-
-export const nameFormatDefault: NameFormat = "camel";
+export const nameFormatDefault: NameFormatInput = "camel";
 
 export { Aliases };
 
@@ -35,17 +49,28 @@ export const fileToClassNames = (
   {
     additionalData,
     includePaths = [],
-    nameFormat = "camel",
+    nameFormat,
     implementation,
     aliases,
     aliasPrefixes,
     importer,
   }: SASSOptions = {} as SASSOptions
 ) => {
-  const transformer = classNameTransformer(nameFormat);
+  let nameFormats: NameFormatsWithTransformer[] = [nameFormatDefault];
+
+  if (nameFormat) {
+    nameFormats = (
+      nameFormat.includes("all")
+        ? NAME_FORMATS.filter((item) => item !== "all")
+        : nameFormat
+    ) as NameFormatsWithTransformer[];
+  }
+
+  const transformers = nameFormats.map((item) => transformersMap[item]);
+
   const { renderSync } = getImplementation(implementation);
 
-  return new Promise<ClassNames>((resolve, reject) => {
+  return new Promise<ClassName[]>((resolve, reject) => {
     try {
       const data = fs.readFileSync(file).toString();
       const result = renderSync({
@@ -57,9 +82,30 @@ export const fileToClassNames = (
 
       sourceToClassNames(result.css).then(({ exportTokens }) => {
         const classNames = Object.keys(exportTokens);
-        const transformedClassNames = classNames
-          .map(transformer)
-          .sort((a, b) => a.localeCompare(b));
+        const transformedClassNames = classNames.reduce(
+          (output: string[], className: string) => {
+            return [
+              ...output,
+              ...transformers.reduce(
+                (transformedClasses: string[], transformer: Transformer) => {
+                  const transformedClass = transformer(className);
+                  if (
+                    output.includes(transformedClass) ||
+                    transformedClasses.includes(transformedClass)
+                  ) {
+                    return transformedClasses;
+                  }
+
+                  return [...transformedClasses, transformedClass];
+                },
+                []
+              ),
+            ];
+          },
+          []
+        );
+
+        transformedClassNames.sort((a, b) => a.localeCompare(b));
 
         resolve(transformedClassNames);
       });
@@ -68,25 +114,4 @@ export const fileToClassNames = (
       return;
     }
   });
-};
-
-interface Transformer {
-  (className: string): string;
-}
-
-const classNameTransformer = (nameFormat: NameFormat): Transformer => {
-  switch (nameFormat) {
-    case "kebab":
-    case "param":
-      return (className) => paramCase(className);
-    case "camel":
-      return (className) => camelCase(className);
-    case "snake":
-      return (className) => snakeCase(className);
-    case "dashes":
-      return (className) =>
-        /-/.test(className) ? camelCase(className) : className;
-    case "none":
-      return (className) => className;
-  }
 };
