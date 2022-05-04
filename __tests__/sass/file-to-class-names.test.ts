@@ -84,6 +84,47 @@ describeAllImplementations((implementation) => {
 
         expect(result).toEqual(["App", "App-Header", "Logo"]);
       });
+
+      test("it applies all transformers when is set to all", async () => {
+        const result = await fileToClassNames(
+          `${__dirname}/../dummy-styles/complex.scss`,
+          {
+            nameFormat: "all",
+            implementation,
+          }
+        );
+
+        expect(result).toEqual([
+          "nested_another",
+          "nested_class",
+          "nested-another",
+          "nested-class",
+          "nestedAnother",
+          "nestedClass",
+          "some_styles",
+          "some-styles",
+          "someStyles",
+        ]);
+      });
+
+      test("it applies multiple transformers when sent as an array", async () => {
+        const result = await fileToClassNames(
+          `${__dirname}/../dummy-styles/complex.scss`,
+          {
+            nameFormat: ["kebab", "snake"],
+            implementation,
+          }
+        );
+
+        expect(result).toEqual([
+          "nested_another",
+          "nested_class",
+          "nested-another",
+          "nested-class",
+          "some_styles",
+          "some-styles",
+        ]);
+      });
     });
 
     describe("aliases", () => {
