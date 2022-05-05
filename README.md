@@ -114,12 +114,15 @@ This matches the common use-case for importing scss files from node_modules when
 
 ### `--nameFormat` (`-n`)
 
-- **Type**: `"camel" | "kebab" | "param" | "snake" | "dashes" | "none"`
+- **Type**: `"all" | "camel" | "kebab" | "param" | "snake" | "dashes" | "none"`
 - **Default**: `"camel"`
-- **Example**: `typed-scss-modules src --nameFormat camel`
+- **Examples**:
+  - `typed-scss-modules src --nameFormat camel`
+  - `typed-scss-modules src --nameFormat kebab --nameFormat dashes --exportType default`. In order to use multiple formatters, you must use `--exportType default`.
 
 The class naming format to use when converting the classes to type definitions.
 
+- **all**: makes use of all formatters (except `all` and `none`) and converts all class names to their respective formats, with no duplication. In order to use this option, you must use `--exportType default`.
 - **camel**: convert all class names to camel-case, e.g. `App-Logo` => `appLogo`.
 - **kebab**/**param**: convert all class names to kebab/param case, e.g. `App-Logo` => `app-logo` (all lower case with '-' separators).
 - **dashes**: only convert class names containing dashes to camel-case, leave others alone, e.g. `App` => `App`, `App-Logo` => `appLogo`. Matches the webpack [css-loader camelCase 'dashesOnly'](https://github.com/webpack-contrib/css-loader#camelcase) option.
