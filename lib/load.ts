@@ -61,7 +61,7 @@ export const loadConfig = async (): Promise<{} | ConfigOptions> => {
 
 // Default values for all options that need defaults.
 export const DEFAULT_OPTIONS: CLIOptions = {
-  nameFormat: nameFormatDefault,
+  nameFormat: [nameFormatDefault],
   implementation: getDefaultImplementation(),
   exportType: exportTypeDefault,
   exportTypeName: exportTypeNameDefault,

@@ -2,7 +2,7 @@ export {
   nameFormatDefault,
   fileToClassNames,
   Aliases,
-  NameFormat,
+  NameFormatInput,
   SASSOptions,
   NAME_FORMATS,
 } from "./file-to-class-names";

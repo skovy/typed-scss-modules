@@ -66,7 +66,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
-        nameFormat: "kebab",
+        nameFormat: ["kebab"],
         outputFolder: null,
       });
 

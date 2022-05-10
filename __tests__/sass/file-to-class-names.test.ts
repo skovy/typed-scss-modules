@@ -17,7 +17,7 @@ describeAllImplementations((implementation) => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/complex.scss`,
           {
-            nameFormat: "kebab",
+            nameFormat: ["kebab"],
             implementation,
           }
         );
@@ -33,7 +33,7 @@ describeAllImplementations((implementation) => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/complex.scss`,
           {
-            nameFormat: "param",
+            nameFormat: ["param"],
             implementation,
           }
         );
@@ -49,7 +49,7 @@ describeAllImplementations((implementation) => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/complex.scss`,
           {
-            nameFormat: "snake",
+            nameFormat: ["snake"],
             implementation,
           }
         );
@@ -65,7 +65,7 @@ describeAllImplementations((implementation) => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/dashes.scss`,
           {
-            nameFormat: "dashes",
+            nameFormat: ["dashes"],
             implementation,
           }
         );
@@ -77,7 +77,7 @@ describeAllImplementations((implementation) => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/dashes.scss`,
           {
-            nameFormat: "none",
+            nameFormat: ["none"],
             implementation,
           }
         );
@@ -89,7 +89,7 @@ describeAllImplementations((implementation) => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/complex.scss`,
           {
-            nameFormat: "all",
+            nameFormat: ["all"],
             implementation,
           }
         );

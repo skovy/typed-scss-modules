@@ -44,7 +44,7 @@ describe("#mergeOptions", () => {
     expect(
       mergeOptions(
         {
-          nameFormat: "kebab",
+          nameFormat: ["kebab"],
           implementation: "sass",
           exportType: "default",
           exportTypeName: "Classes",
@@ -62,7 +62,7 @@ describe("#mergeOptions", () => {
         {}
       )
     ).toEqual({
-      nameFormat: "kebab",
+      nameFormat: ["kebab"],
       implementation: "sass",
       exportType: "default",
       exportTypeName: "Classes",
@@ -86,7 +86,7 @@ describe("#mergeOptions", () => {
       mergeOptions(
         {},
         {
-          nameFormat: "kebab",
+          nameFormat: ["kebab"],
           implementation: "sass",
           exportType: "default",
           exportTypeName: "Classes",
@@ -104,7 +104,7 @@ describe("#mergeOptions", () => {
         }
       )
     ).toEqual({
-      nameFormat: "kebab",
+      nameFormat: ["kebab"],
       implementation: "sass",
       exportType: "default",
       exportTypeName: "Classes",
@@ -128,7 +128,7 @@ describe("#mergeOptions", () => {
     expect(
       mergeOptions(
         {
-          nameFormat: "kebab",
+          nameFormat: ["kebab"],
           implementation: "sass",
           exportType: "default",
           exportTypeName: "Classes",
@@ -144,7 +144,7 @@ describe("#mergeOptions", () => {
           outputFolder: "__cli-generated__",
         },
         {
-          nameFormat: "param",
+          nameFormat: ["param"],
           implementation: "node-sass",
           exportType: "named",
           exportTypeName: "Classnames",
@@ -162,7 +162,7 @@ describe("#mergeOptions", () => {
         }
       )
     ).toEqual({
-      nameFormat: "kebab",
+      nameFormat: ["kebab"],
       implementation: "sass",
       exportType: "default",
       exportTypeName: "Classes",
@@ -188,7 +188,7 @@ describe("#mergeOptions", () => {
         {
           aliases: undefined,
           aliasPrefixes: undefined,
-          nameFormat: "kebab",
+          nameFormat: ["kebab"],
           implementation: "sass",
           exportType: "default",
           exportTypeName: "Classes",
@@ -206,7 +206,7 @@ describe("#mergeOptions", () => {
         {
           aliases: {},
           aliasPrefixes: {},
-          nameFormat: "param",
+          nameFormat: ["param"],
           implementation: "node-sass",
           exportType: "named",
           exportTypeName: "Classnames",
@@ -226,7 +226,7 @@ describe("#mergeOptions", () => {
     ).toEqual({
       aliases: {},
       aliasPrefixes: {},
-      nameFormat: "kebab",
+      nameFormat: ["kebab"],
       implementation: "sass",
       exportType: "default",
       exportTypeName: "Classes",

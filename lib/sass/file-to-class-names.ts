@@ -61,7 +61,7 @@ export const fileToClassNames = (
   if (nameFormat) {
     nameFormats = (
       nameFormat.includes("all")
-        ? NAME_FORMATS.filter((item) => item !== "all")
+        ? NAME_FORMATS.filter((item) => item !== "all" && item !== "none")
         : nameFormat
     ) as NameFormatsWithTransformer[];
   }
