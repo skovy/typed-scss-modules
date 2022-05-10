@@ -2,7 +2,7 @@ import os from "os";
 
 import reserved from "reserved-words";
 
-import { ClassNames, ClassName } from "lib/sass/file-to-class-names";
+import { ClassName } from "lib/sass/file-to-class-names";
 import { alerts } from "../core";
 import { attemptPrettier } from "../prettier";
 
@@ -14,7 +14,7 @@ export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
 
 export interface TypeDefinitionOptions {
   banner: string;
-  classNames: ClassNames;
+  classNames: ClassName[];
   exportType: ExportType;
   exportTypeName?: string;
   exportTypeInterface?: string;
