@@ -8,13 +8,7 @@ import { customImporters, Aliases, SASSImporterOptions } from "./importer";
 export type ClassName = string;
 export type ClassNames = ClassName[];
 
-export type NameFormat =
-  | "camel"
-  | "kebab"
-  | "snake"
-  | "param"
-  | "dashes"
-  | "none";
+export type NameFormat = typeof NAME_FORMATS[number];
 
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
@@ -23,13 +17,14 @@ export interface SASSOptions extends SASSImporterOptions {
   implementation: Implementations;
 }
 
-export const NAME_FORMATS: NameFormat[] = [
+export const NAME_FORMATS = [
   "camel",
   "kebab",
+  "snake",
   "param",
   "dashes",
   "none",
-];
+] as const;
 
 export const nameFormatDefault: NameFormat = "camel";
 
