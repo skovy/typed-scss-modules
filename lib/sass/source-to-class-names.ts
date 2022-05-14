@@ -1,4 +1,4 @@
-import Core, { Source } from "css-modules-loader-core";
+import Core, { Source } from "@demching113/css-modules-loader-core";
 
 const core = new Core();
 
