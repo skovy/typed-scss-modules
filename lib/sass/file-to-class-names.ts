@@ -10,29 +10,23 @@ interface Transformer {
   (className: ClassName): string;
 }
 
-export const NAME_FORMATS = [
-  "all",
-  "camel",
-  "dashes",
-  "kebab",
-  "none",
-  "param",
-  "snake",
-] as const;
+const transformersMap = {
+  camel: (className: string) => camelCase(className),
+  dashes: (className: string) =>
+    /-/.test(className) ? camelCase(className) : className,
+  kebab: (className: string) => transformersMap.param(className),
+  none: (className: string) => className,
+  param: (className: string) => paramCase(className),
+  snake: (className: string) => snakeCase(className),
+} as const;
 
-export type NameFormatInput = typeof NAME_FORMATS[number];
+export type NameFormatInput = keyof typeof transformersMap | "all" | "none";
+
+export const NAME_FORMATS = Object.keys(transformersMap).concat([
+  "all",
+]) as NameFormatInput[];
 
 type NameFormatsWithTransformer = Exclude<NameFormatInput, "all">;
-
-const transformersMap: Record<NameFormatsWithTransformer, Transformer> = {
-  camel: (className) => camelCase(className),
-  dashes: (className) =>
-    /-/.test(className) ? camelCase(className) : className,
-  kebab: (className) => transformersMap.param(className),
-  none: (className) => className,
-  param: (className) => paramCase(className),
-  snake: (className) => snakeCase(className),
-};
 
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
