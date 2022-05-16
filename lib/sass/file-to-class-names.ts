@@ -5,19 +5,20 @@ import { sourceToClassNames } from "./source-to-class-names";
 import { Implementations, getImplementation } from "../implementations";
 import { customImporters, Aliases, SASSImporterOptions } from "./importer";
 
+export { Aliases };
 export type ClassName = string;
 interface Transformer {
   (className: ClassName): string;
 }
 
 const transformersMap = {
-  camel: (className: string) => camelCase(className),
-  dashes: (className: string) =>
+  camel: (className: ClassName) => camelCase(className),
+  dashes: (className: ClassName) =>
     /-/.test(className) ? camelCase(className) : className,
-  kebab: (className: string) => transformersMap.param(className),
-  none: (className: string) => className,
-  param: (className: string) => paramCase(className),
-  snake: (className: string) => snakeCase(className),
+  kebab: (className: ClassName) => transformersMap.param(className),
+  none: (className: ClassName) => className,
+  param: (className: ClassName) => paramCase(className),
+  snake: (className: ClassName) => snakeCase(className),
 } as const;
 
 export type NameFormatInput = keyof typeof transformersMap | "all" | "none";
@@ -36,9 +37,7 @@ export interface SASSOptions extends SASSImporterOptions {
 }
 export const nameFormatDefault: NameFormatInput = "camel";
 
-export { Aliases };
-
-export const fileToClassNames = (
+export const fileToClassNames = async (
   file: string,
   {
     additionalData,
@@ -50,62 +49,32 @@ export const fileToClassNames = (
     importer,
   }: SASSOptions = {} as SASSOptions
 ) => {
-  let nameFormats: NameFormatsWithTransformer[] = [nameFormatDefault];
-
-  if (nameFormat) {
-    nameFormats = (
-      nameFormat.includes("all")
-        ? NAME_FORMATS.filter((item) => item !== "all" && item !== "none")
-        : nameFormat
-    ) as NameFormatsWithTransformer[];
-  }
-
-  const transformers = nameFormats.map((item) => transformersMap[item]);
-
   const { renderSync } = getImplementation(implementation);
 
-  return new Promise<ClassName[]>((resolve, reject) => {
-    try {
-      const data = fs.readFileSync(file).toString();
-      const result = renderSync({
-        file,
-        data: additionalData ? `${additionalData}\n${data}` : data,
-        includePaths,
-        importer: customImporters({ aliases, aliasPrefixes, importer }),
-      });
+  let nameFormats: NameFormatsWithTransformer[] = nameFormat
+    ? ((nameFormat.includes("all")
+        ? NAME_FORMATS.filter((item) => item !== "all")
+        : nameFormat) as NameFormatsWithTransformer[])
+    : [nameFormatDefault];
 
-      sourceToClassNames(result.css).then(({ exportTokens }) => {
-        const classNames = Object.keys(exportTokens);
-        const transformedClassNames = classNames.reduce(
-          (output: string[], className: string) => {
-            return [
-              ...output,
-              ...transformers.reduce(
-                (transformedClasses: string[], transformer: Transformer) => {
-                  const transformedClass = transformer(className);
-                  if (
-                    output.includes(transformedClass) ||
-                    transformedClasses.includes(transformedClass)
-                  ) {
-                    return transformedClasses;
-                  }
-
-                  return [...transformedClasses, transformedClass];
-                },
-                []
-              ),
-            ];
-          },
-          []
-        );
-
-        transformedClassNames.sort((a, b) => a.localeCompare(b));
-
-        resolve(transformedClassNames);
-      });
-    } catch (err) {
-      reject(err);
-      return;
-    }
+  const data = fs.readFileSync(file).toString();
+  const result = renderSync({
+    file,
+    data: additionalData ? `${additionalData}\n${data}` : data,
+    includePaths,
+    importer: customImporters({ aliases, aliasPrefixes, importer }),
   });
+
+  const { exportTokens } = await sourceToClassNames(result.css);
+
+  const classNames = Object.keys(exportTokens);
+  const transformers = nameFormats.map((item) => transformersMap[item]);
+  const transformedClassNames = new Set<ClassName>([]);
+  classNames.forEach((className: ClassName) => {
+    transformers.forEach((transformer: Transformer) => {
+      transformedClassNames.add(transformer(className));
+    });
+  });
+
+  return Array.from(transformedClassNames).sort((a, b) => a.localeCompare(b));
 };
