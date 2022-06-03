@@ -21,21 +21,20 @@ const transformersMap = {
   snake: (className: ClassName) => snakeCase(className),
 } as const;
 
-export type NameFormatInput = keyof typeof transformersMap | "all" | "none";
+type NameFormatsWithTransformer = keyof typeof transformersMap;
+type NameFormatInput = NameFormatsWithTransformer | "all";
 
 export const NAME_FORMATS = Object.keys(transformersMap).concat([
   "all",
 ]) as NameFormatInput[];
 
-type NameFormatsWithTransformer = Exclude<NameFormatInput, "all">;
-
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
   includePaths?: string[];
-  nameFormat?: NameFormatInput[];
+  nameFormat?: (string | number)[];
   implementation: Implementations;
 }
-export const nameFormatDefault: NameFormatInput = "camel";
+export const nameFormatDefault: NameFormatsWithTransformer = "camel";
 
 export const fileToClassNames = async (
   file: string,
