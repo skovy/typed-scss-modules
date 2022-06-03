@@ -22,11 +22,8 @@ const transformersMap = {
 } as const;
 
 type NameFormatsWithTransformer = keyof typeof transformersMap;
-type NameFormatInput = NameFormatsWithTransformer | "all";
 
-export const NAME_FORMATS = Object.keys(transformersMap).concat([
-  "all",
-]) as NameFormatInput[];
+export const NAME_FORMATS = Object.keys(transformersMap).concat(["all"]);
 
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
