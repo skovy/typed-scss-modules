@@ -2,11 +2,10 @@
 
 import yargs from "yargs";
 
-import { Aliases, NameFormatInput, NAME_FORMATS } from "./sass";
+import { Aliases, NAME_FORMATS } from "./sass";
 import { EXPORT_TYPES, QUOTE_TYPES, LOG_LEVELS } from "./typescript";
 import { main } from "./main";
 import { IMPLEMENTATIONS } from "./implementations";
-import { CLIOptions } from "./core";
 
 const { _: patterns, ...rest } = yargs
   .usage(
@@ -66,9 +65,7 @@ const { _: patterns, ...rest } = yargs
     alias: "n",
     array: true,
     choices: NAME_FORMATS,
-    coerce: (arr: NameFormatInput[] | undefined) => arr,
     describe: "The name format that should be used to transform class names.",
-    type: "array",
   })
   .option("implementation", {
     choices: IMPLEMENTATIONS,
@@ -147,4 +144,4 @@ const { _: patterns, ...rest } = yargs
   })
   .parseSync();
 
-main(patterns[0] as string, { ...rest } as Partial<CLIOptions>);
+main(patterns[0] as string, { ...rest });
