@@ -55,7 +55,7 @@ npx typed-scss-modules src
 
 For all possible commands, run `typed-scss-modules --help`.
 
-The only required argument is the directory where all SCSS files are located. Running `typed-scss-modules src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `typed-scss-modules src/*.scss`
+The only required argument is the directory where all SCSS files are located. Running `typed-scss-modules src` will search for all files matching `src/**/*.scss`. This can be overridden by providing a [glob](https://github.com/isaacs/node-glob#glob-primer) pattern instead of a directory. For example, `typed-scss-modules 'src/*.scss'`. Any custom glob patterns needs to be wrapped in quotes.
 
 ### `--watch` (`-w`)
 
