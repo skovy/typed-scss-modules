@@ -1,6 +1,5 @@
-import glob from "glob";
-
 import { alerts } from "./alerts";
+import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks";
 import { ConfigOptions } from "./types";
 import { writeFile } from "./write-file";
 
@@ -14,20 +13,10 @@ export const generate = async (
   pattern: string,
   options: ConfigOptions
 ): Promise<void> => {
-  // Find all the files that match the provided pattern.
-  const files = glob.sync(pattern, { ignore: options.ignore });
+  const files = listFilesAndPerformSanityChecks(pattern, options);
 
-  if (!files || !files.length) {
-    alerts.error("No files found.");
+  if (files.length === 0) {
     return;
-  }
-
-  // This case still works as expected but it's easy to do on accident so
-  // provide a (hopefully) helpful warning.
-  if (files.length === 1) {
-    alerts.warn(
-      `Only 1 file found for ${pattern}. If using a glob pattern (eg: dir/**/*.scss) make sure to wrap in quotes (eg: "dir/**/*.scss").`
-    );
   }
 
   alerts.success(

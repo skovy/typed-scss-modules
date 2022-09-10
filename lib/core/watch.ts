@@ -4,6 +4,7 @@ import { alerts } from "./alerts";
 import { removeSCSSTypeDefinitionFile } from "./remove-file";
 import { writeFile } from "./write-file";
 import { ConfigOptions } from "./types";
+import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks";
 
 /**
  * Watch a file glob and generate the corresponding types.
@@ -12,6 +13,10 @@ import { ConfigOptions } from "./types";
  * @param options the CLI options
  */
 export const watch = (pattern: string, options: ConfigOptions): void => {
+  // This is called so that we print a warning instead if no files matched the
+  // pattern
+  listFilesAndPerformSanityChecks(pattern, options);
+
   alerts.success("Watching files...");
 
   chokidar
