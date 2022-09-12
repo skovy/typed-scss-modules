@@ -13,8 +13,6 @@ import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity
  * @param options the CLI options
  */
 export const watch = (pattern: string, options: ConfigOptions): void => {
-  // This is called so that we print a warning instead if no files matched the
-  // pattern
   listFilesAndPerformSanityChecks(pattern, options);
 
   alerts.success("Watching files...");
