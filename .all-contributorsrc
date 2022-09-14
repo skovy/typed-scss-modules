@@ -129,6 +129,16 @@
         "test",
         "bug"
       ]
+    },
+    {
+      "login": "srmagura",
+      "name": "Sam Magura",
+      "avatar_url": "https://avatars.githubusercontent.com/u/801549?v=4",
+      "profile": "https://dev.to/srmagura",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
