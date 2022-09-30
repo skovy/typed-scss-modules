@@ -64,6 +64,7 @@ const { _: patterns, ...rest } = yargs
   .option("nameFormat", {
     alias: "n",
     array: true,
+    string: true,
     choices: NAME_FORMATS,
     describe: "The name format that should be used to transform class names.",
   })

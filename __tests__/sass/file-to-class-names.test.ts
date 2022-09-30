@@ -125,6 +125,22 @@ describeAllImplementations((implementation) => {
           "some-styles",
         ]);
       });
+
+      test("it handles only a string", async () => {
+        const result = await fileToClassNames(
+          `${__dirname}/../dummy-styles/complex.scss`,
+          {
+            nameFormat: "snake",
+            implementation,
+          }
+        );
+
+        expect(result).toEqual([
+          "nested_another",
+          "nested_class",
+          "some_styles",
+        ]);
+      });
     });
 
     describe("aliases", () => {

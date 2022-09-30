@@ -21,24 +21,28 @@ const transformersMap = {
   snake: (className: ClassName) => snakeCase(className),
 } as const;
 
-type NameFormatsWithTransformer = keyof typeof transformersMap;
+type NameFormatWithTransformer = keyof typeof transformersMap;
+const NAME_FORMATS_WITH_TRANSFORMER = Object.keys(
+  transformersMap
+) as NameFormatWithTransformer[];
 
-export const NAME_FORMATS = Object.keys(transformersMap).concat(["all"]);
+export const NAME_FORMATS = [...NAME_FORMATS_WITH_TRANSFORMER, "all"] as const;
+export type NameFormat = typeof NAME_FORMATS[number];
 
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
   includePaths?: string[];
-  nameFormat?: (string | number)[];
+  nameFormat?: string | string[];
   implementation: Implementations;
 }
-export const nameFormatDefault: NameFormatsWithTransformer = "camel";
+export const nameFormatDefault: NameFormatWithTransformer = "camel";
 
 export const fileToClassNames = async (
   file: string,
   {
     additionalData,
     includePaths = [],
-    nameFormat,
+    nameFormat: rawNameFormat,
     implementation,
     aliases,
     aliasPrefixes,
@@ -47,10 +51,14 @@ export const fileToClassNames = async (
 ) => {
   const { renderSync } = getImplementation(implementation);
 
-  let nameFormats: NameFormatsWithTransformer[] = nameFormat
-    ? ((nameFormat.includes("all")
-        ? NAME_FORMATS.filter((item) => item !== "all")
-        : nameFormat) as NameFormatsWithTransformer[])
+  const nameFormat = (
+    typeof rawNameFormat === "string" ? [rawNameFormat] : rawNameFormat
+  ) as NameFormat[];
+
+  let nameFormats: NameFormatWithTransformer[] = nameFormat
+    ? nameFormat.includes("all")
+      ? NAME_FORMATS_WITH_TRANSFORMER
+      : (nameFormat as NameFormatWithTransformer[])
     : [nameFormatDefault];
 
   const data = fs.readFileSync(file).toString();
