@@ -9,7 +9,12 @@ describeAllImplementations((implementation) => {
         `${__dirname}/../dummy-styles/complex.scss`
       );
 
-      expect(result).toEqual(["nestedAnother", "nestedClass", "someStyles"]);
+      expect(result).toEqual([
+        "nestedAnother",
+        "nestedClass",
+        "number1",
+        "someStyles",
+      ]);
     });
 
     describe("nameFormat", () => {
@@ -25,6 +30,7 @@ describeAllImplementations((implementation) => {
         expect(result).toEqual([
           "nested-another",
           "nested-class",
+          "number-1",
           "some-styles",
         ]);
       });
@@ -41,6 +47,7 @@ describeAllImplementations((implementation) => {
         expect(result).toEqual([
           "nested-another",
           "nested-class",
+          "number-1",
           "some-styles",
         ]);
       });
@@ -57,6 +64,7 @@ describeAllImplementations((implementation) => {
         expect(result).toEqual([
           "nested_another",
           "nested_class",
+          "number_1",
           "some_styles",
         ]);
       });
@@ -101,6 +109,9 @@ describeAllImplementations((implementation) => {
           "nested-class",
           "nestedAnother",
           "nestedClass",
+          "number_1",
+          "number-1",
+          "number1",
           "some_styles",
           "some-styles",
           "someStyles",
@@ -121,6 +132,8 @@ describeAllImplementations((implementation) => {
           "nested_class",
           "nested-another",
           "nested-class",
+          "number_1",
+          "number-1",
           "some_styles",
           "some-styles",
         ]);
@@ -138,6 +151,7 @@ describeAllImplementations((implementation) => {
         expect(result).toEqual([
           "nested_another",
           "nested_class",
+          "number_1",
           "some_styles",
         ]);
       });
@@ -160,6 +174,7 @@ describeAllImplementations((implementation) => {
           "myCustomClass",
           "nestedAnother",
           "nestedClass",
+          "number1",
           "someClass",
           "someStyles",
         ]);
@@ -186,6 +201,7 @@ describeAllImplementations((implementation) => {
           "nestedAnother",
           "nestedClass",
           "nestedStyles",
+          "number1",
           "someStyles",
         ]);
       });

@@ -80,8 +80,8 @@
   },
   "dependencies": {
     "bundle-require": "^3.0.4",
+    "case-anything": "^2.1.10",
     "chalk": "4.1.2",
-    "change-case": "^4.1.2",
     "chokidar": "^3.5.3",
     "css-modules-loader-core": "^1.1.0",
     "esbuild": "^0.14.21",

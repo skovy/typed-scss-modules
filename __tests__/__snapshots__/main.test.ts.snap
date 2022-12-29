@@ -7,6 +7,7 @@ Array [
 export const nestedAnother: string;
 export const nestedClass: string;
 export const nestedStyles: string;
+export const number1: string;
 export const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/alias-prefixes.scss.d.ts",
@@ -15,6 +16,7 @@ export const someStyles: string;
     "contents": "export const myCustomClass: string;
 export const nestedAnother: string;
 export const nestedClass: string;
+export const number1: string;
 export const someClass: string;
 export const someStyles: string;
 ",
@@ -23,6 +25,7 @@ export const someStyles: string;
   Object {
     "contents": "export const nestedAnother: string;
 export const nestedClass: string;
+export const number1: string;
 export const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
@@ -70,6 +73,7 @@ Array [
   nestedAnother: string;
   nestedClass: string;
   nestedStyles: string;
+  number1: string;
   someStyles: string;
 };
 
@@ -86,6 +90,7 @@ export default styles;
   myCustomClass: string;
   nestedAnother: string;
   nestedClass: string;
+  number1: string;
   someClass: string;
   someStyles: string;
 };
@@ -102,6 +107,7 @@ export default styles;
     "contents": "export type Styles = {
   nestedAnother: string;
   nestedClass: string;
+  number1: string;
   someStyles: string;
 };
 
@@ -203,6 +209,7 @@ Array [
 export const nestedAnother: string;
 export const nestedClass: string;
 export const nestedStyles: string;
+export const number1: string;
 export const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/alias-prefixes.scss.d.ts",
@@ -211,6 +218,7 @@ export const someStyles: string;
     "contents": "export const myCustomClass: string;
 export const nestedAnother: string;
 export const nestedClass: string;
+export const number1: string;
 export const someClass: string;
 export const someStyles: string;
 ",
@@ -219,6 +227,7 @@ export const someStyles: string;
   Object {
     "contents": "export const nestedAnother: string;
 export const nestedClass: string;
+export const number1: string;
 export const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
@@ -266,6 +275,7 @@ Array [
   nestedAnother: string;
   nestedClass: string;
   nestedStyles: string;
+  number1: string;
   someStyles: string;
 };
 
@@ -282,6 +292,7 @@ export default styles;
   myCustomClass: string;
   nestedAnother: string;
   nestedClass: string;
+  number1: string;
   someClass: string;
   someStyles: string;
 };
@@ -298,6 +309,7 @@ export default styles;
     "contents": "export type Styles = {
   nestedAnother: string;
   nestedClass: string;
+  number1: string;
   someStyles: string;
 };
 
