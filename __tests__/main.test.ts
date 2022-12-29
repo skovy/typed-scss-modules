@@ -60,7 +60,7 @@ describeAllImplementations((implementation) => {
 
       expect(fs.writeFileSync).toBeCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
-        "export const nestedAnother: string;\nexport const nestedClass: string;\nexport const someStyles: string;\n"
+        "export const nestedAnother: string;\nexport const nestedClass: string;\nexport const number1: string;\nexport const someStyles: string;\n"
       );
       expect(fs.writeFileSync).toBeCalledWith(
         `${expectedDirname}/style.scss.d.ts`,
@@ -101,7 +101,7 @@ describeAllImplementations((implementation) => {
 
       expect(fs.writeFileSync).toBeCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
-        "export const nestedAnother: string;\nexport const nestedClass: string;\nexport const someStyles: string;\n"
+        "export const nestedAnother: string;\nexport const nestedClass: string;\nexport const number1: string;\nexport const someStyles: string;\n"
       );
 
       // Files that should match the ignore pattern.

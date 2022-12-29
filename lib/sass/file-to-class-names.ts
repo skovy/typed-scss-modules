@@ -1,5 +1,5 @@
 import fs from "fs";
-import { camelCase, paramCase, snakeCase } from "change-case";
+import { camelCase, kebabCase, snakeCase } from "case-anything";
 
 import { sourceToClassNames } from "./source-to-class-names";
 import { Implementations, getImplementation } from "../implementations";
@@ -17,7 +17,7 @@ const transformersMap = {
     /-/.test(className) ? camelCase(className) : className,
   kebab: (className: ClassName) => transformersMap.param(className),
   none: (className: ClassName) => className,
-  param: (className: ClassName) => paramCase(className),
+  param: (className: ClassName) => kebabCase(className),
   snake: (className: ClassName) => snakeCase(className),
 } as const;
 
