@@ -139,6 +139,17 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "MichaelGregory",
+      "name": "Mike Gregory",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1435960?v=4",
+      "profile": "https://github.com/MichaelGregory",
+      "contributions": [
+        "bug",
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
