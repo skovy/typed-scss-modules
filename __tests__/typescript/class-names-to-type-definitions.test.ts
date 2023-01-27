@@ -1,9 +1,15 @@
 import os from "os";
-import { classNamesToTypeDefinitions, ExportType } from "../../lib/typescript";
+import {
+  classNamesToTypeDefinitions,
+  ExportType,
+} from "../../lib/typescript/index.js";
+import { jest } from "@jest/globals";
 
-jest.mock("../../lib/prettier/can-resolve", () => ({
-  canResolvePrettier: () => false,
-}));
+import { createRequire } from "node:module";
+
+const newRequire = createRequire(import.meta.url);
+
+newRequire("./mock.js");
 
 describe("classNamesToTypeDefinitions (without Prettier)", () => {
   beforeEach(() => {

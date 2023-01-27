@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -9,8 +9,16 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node16",
     "declaration": true,
     "outDir": "./dist",
     "rootDirs": [".", "examples/output-folder/__generated__"]
-  }
+  },
+  "include": [
+    "./typings/declarations.d.ts",
+    "./lib/**/*.ts",
+    "./examples/**/*.ts",
+    "./__tests__/**/*.ts",
+    "./jest.config.ts"
+  ]
 }

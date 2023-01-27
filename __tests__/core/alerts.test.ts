@@ -1,9 +1,12 @@
-import { alerts, setAlertsLogLevel } from "../../lib/core";
+import { alerts, setAlertsLogLevel } from "../../lib/core/index.js";
+import { jest } from "@jest/globals";
+import { type SpyInstance } from "jest-mock";
 
 describe("alerts", () => {
-  let logSpy: jest.SpyInstance;
+  let logSpy: SpyInstance;
 
   beforeEach(() => {
+    // @ts-expect-error mockImplementation expects 1 argument
     logSpy = jest.spyOn(console, "log").mockImplementation();
   });
 

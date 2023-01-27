@@ -1,8 +1,10 @@
-import { fileToClassNames } from "../../lib/sass";
+import { fileToClassNames } from "../../lib/sass/index.js";
 
-import { describeAllImplementations } from "../helpers";
-
-describeAllImplementations((implementation) => {
+import { describeAllImplementations } from "../helpers/index.js";
+import { fileURLToPath } from "url";
+import { Implementations } from "lib/implementations/index.js";
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+describeAllImplementations((implementation: Implementations) => {
   describe("fileToClassNames", () => {
     test("it converts a file path to an array of class names (default camel cased)", async () => {
       const result = await fileToClassNames(

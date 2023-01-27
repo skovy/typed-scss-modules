@@ -1,7 +1,7 @@
-import chalk from "chalk";
+import { yellowBright, blueBright, green, gray, red } from "colorette";
 
 export const LOG_LEVELS = ["verbose", "error", "info", "silent"] as const;
-export type LogLevel = typeof LOG_LEVELS[number];
+export type LogLevel = (typeof LOG_LEVELS)[number];
 
 export const logLevelDefault: LogLevel = "verbose";
 
@@ -12,7 +12,7 @@ export const setAlertsLogLevel = (logLevel: LogLevel) => {
 };
 
 type CbFunc = (...args: any[]) => any;
-type WrappedCbFunc<T extends CbFunc> = (
+export type WrappedCbFunc<T extends CbFunc> = (
   ...args: Parameters<T>
 ) => ReturnType<T> | void;
 /**
@@ -33,21 +33,21 @@ const withLogLevelsRestriction =
 
 const error = withLogLevelsRestriction(
   ["verbose", "error", "info"],
-  (message: string) => console.log(chalk.red(message))
+  (message: string) => console.log(red(message))
 );
 const warn = withLogLevelsRestriction(["verbose"], (message: string) =>
-  console.log(chalk.yellowBright(message))
+  console.log(yellowBright(message))
 );
 const notice = withLogLevelsRestriction(
   ["verbose", "info"],
-  (message: string) => console.log(chalk.gray(message))
+  (message: string) => console.log(gray(message))
 );
 const info = withLogLevelsRestriction(["verbose", "info"], (message: string) =>
-  console.log(chalk.blueBright(message))
+  console.log(blueBright(message))
 );
 const success = withLogLevelsRestriction(
   ["verbose", "info"],
-  (message: string) => console.log(chalk.green(message))
+  (message: string) => console.log(green(message))
 );
 
 export const alerts = { error, warn, notice, info, success };

@@ -2,13 +2,13 @@ import fs from "fs";
 import path from "path";
 import { SassError } from "node-sass";
 
-import { alerts } from "./alerts";
+import { alerts } from "./alerts.js";
 import {
   getTypeDefinitionPath,
   classNamesToTypeDefinitions,
-} from "../typescript";
-import { fileToClassNames } from "../sass";
-import { CLIOptions } from "./types";
+} from "../typescript/index.js";
+import { fileToClassNames } from "../sass/index.js";
+import { CLIOptions } from "./types.js";
 
 /**
  * Given a single file generate the proper types.
@@ -18,7 +18,7 @@ import { CLIOptions } from "./types";
  */
 export const writeFile = (file: string, options: CLIOptions): Promise<void> => {
   return fileToClassNames(file, options)
-    .then(async (classNames) => {
+    .then(async (classNames: string[]) => {
       const typeDefinition = await classNamesToTypeDefinitions({
         classNames,
         ...options,

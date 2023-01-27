@@ -1,13 +1,13 @@
-import glob from "glob";
+import glob from "fast-glob";
 import fs from "fs";
 
-import { alerts } from "./alerts";
-import { ConfigOptions } from "./types";
-import { fileToClassNames } from "../sass";
+import { alerts } from "./alerts.js";
+import { ConfigOptions } from "./types.js";
+import { fileToClassNames } from "../sass/index.js";
 import {
   classNamesToTypeDefinitions,
   getTypeDefinitionPath,
-} from "../typescript";
+} from "../typescript/index.js";
 
 export const listDifferent = async (
   pattern: string,

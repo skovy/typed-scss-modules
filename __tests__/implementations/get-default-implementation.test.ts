@@ -1,5 +1,5 @@
-import { getDefaultImplementation } from "../../lib/implementations";
-
+import { getDefaultImplementation } from "../../lib/implementations/index.js";
+import { jest } from "@jest/globals";
 describe("getDefaultImplementation", () => {
   it("returns node-sass if it exists", () => {
     expect(getDefaultImplementation()).toBe("node-sass");

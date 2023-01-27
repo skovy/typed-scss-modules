@@ -6,11 +6,18 @@ import {
   snakeCase,
 } from "change-case";
 
-import { sourceToClassNames } from "./source-to-class-names";
-import { Implementations, getImplementation } from "../implementations";
-import { customImporters, Aliases, SASSImporterOptions } from "./importer";
+import { sourceToClassNames } from "./source-to-class-names.js";
+import {
+  Implementations,
+  getImplementation,
+} from "../implementations/index.js";
+import {
+  customImporters,
+  type Aliases,
+  type SASSImporterOptions,
+} from "./importer.js";
 
-export { Aliases };
+export type { Aliases };
 export type ClassName = string;
 interface Transformer {
   (className: ClassName): string;
@@ -33,7 +40,7 @@ const NAME_FORMATS_WITH_TRANSFORMER = Object.keys(
 ) as NameFormatWithTransformer[];
 
 export const NAME_FORMATS = [...NAME_FORMATS_WITH_TRANSFORMER, "all"] as const;
-export type NameFormat = typeof NAME_FORMATS[number];
+export type NameFormat = (typeof NAME_FORMATS)[number];
 
 export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;

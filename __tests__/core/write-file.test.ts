@@ -1,17 +1,21 @@
 import fs from "fs";
 import path from "path";
+import { jest } from "@jest/globals";
+import { writeFile } from "../../lib/core/index.js";
+import { fileURLToPath } from "url";
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+import { describeAllImplementations } from "../helpers/index.js";
+import { Implementations } from "lib/implementations/index.js";
 
-import { writeFile } from "../../lib/core";
-
-import { describeAllImplementations } from "../helpers";
-
-describeAllImplementations((implementation) => {
+describeAllImplementations((implementation: Implementations) => {
   describe("writeFile", () => {
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.
+      // @ts-expect-error - mockImplementation expects 1 argument
       jest.spyOn(fs, "writeFileSync").mockImplementation();
 
       // Avoid creating new directories while running tests.
+      // @ts-expect-error - mockImplementation expects 1 argument
       jest.spyOn(fs, "mkdirSync").mockImplementation();
 
       console.log = jest.fn();

@@ -1,6 +1,7 @@
 import { SyncContext } from "node-sass";
-import { LegacyImporterThis } from "sass";
-import { aliasImporter, customImporters } from "../../lib/sass/importer";
+import { LegacyImporterThis, LegacySyncImporter } from "sass";
+import { aliasImporter, customImporters } from "../../lib/sass/importer.js";
+import { jest } from "@jest/globals";
 
 // SASS importers receive two other arguments that this package doesn't care about.
 // Fake `this` which the type definitions both define for importers.
@@ -71,7 +72,7 @@ describe("#customImporters", () => {
   });
 
   it("should add additional importers if passed a function", () => {
-    const importer = jest.fn();
+    const importer = jest.fn<LegacySyncImporter>();
 
     const importers = customImporters({
       aliases: {},
@@ -84,9 +85,9 @@ describe("#customImporters", () => {
   });
 
   it("should add multiple importers if passed an array", () => {
-    const importer1 = jest.fn();
-    const importer2 = jest.fn();
-    const importer3 = jest.fn();
+    const importer1 = jest.fn<LegacySyncImporter>();
+    const importer2 = jest.fn<LegacySyncImporter>();
+    const importer3 = jest.fn<LegacySyncImporter>();
 
     const importers = customImporters({
       aliases: {},

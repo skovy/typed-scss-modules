@@ -1,4 +1,4 @@
-import { ConfigOptions } from "../core";
+import { ConfigOptions } from "../core/index.js";
 
 import path from "path";
 

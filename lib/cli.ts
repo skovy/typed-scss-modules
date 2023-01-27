@@ -2,12 +2,13 @@
 
 import yargs from "yargs";
 
-import { Aliases, NAME_FORMATS } from "./sass";
-import { EXPORT_TYPES, QUOTE_TYPES, LOG_LEVELS } from "./typescript";
-import { main } from "./main";
-import { IMPLEMENTATIONS } from "./implementations";
+import { Aliases, NAME_FORMATS } from "./sass/index.js";
+import { EXPORT_TYPES, QUOTE_TYPES, LOG_LEVELS } from "./typescript/index.js";
+import { main } from "./main.js";
+import { IMPLEMENTATIONS } from "./implementations/index.js";
+import { hideBin } from "yargs/helpers";
 
-const { _: patterns, ...rest } = yargs
+const { _: patterns, ...rest } = yargs(hideBin(process.argv))
   .usage(
     "Generate .scss.d.ts from CSS module .scss files.\nUsage: $0 <glob pattern> [options]"
   )

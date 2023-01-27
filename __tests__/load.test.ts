@@ -1,5 +1,7 @@
 import path from "path";
-import { loadConfig, mergeOptions, DEFAULT_OPTIONS } from "../lib/load";
+import { jest } from "@jest/globals";
+import { loadConfig, mergeOptions, DEFAULT_OPTIONS } from "../lib/load.js";
+import { type LegacySyncImporter } from "sass";
 
 const CONFIG_CASES = [
   "js-default-export",
@@ -80,7 +82,7 @@ describe("#mergeOptions", () => {
   });
 
   it("should allow overriding all default options via the config options", () => {
-    const importer = jest.fn();
+    const importer = jest.fn<LegacySyncImporter>();
 
     expect(
       mergeOptions(
@@ -123,7 +125,7 @@ describe("#mergeOptions", () => {
   });
 
   it("should give precedence to CLI options and still merge config-only options", () => {
-    const importer = jest.fn();
+    const importer = jest.fn<LegacySyncImporter>();
 
     expect(
       mergeOptions(
@@ -181,7 +183,7 @@ describe("#mergeOptions", () => {
   });
 
   it("should give ignore undefined CLI options", () => {
-    const importer = jest.fn();
+    const importer = jest.fn<LegacySyncImporter>();
 
     expect(
       mergeOptions(

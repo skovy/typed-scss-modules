@@ -2,8 +2,8 @@ import path from "path";
 import JoyCon from "joycon";
 import { bundleRequire } from "bundle-require";
 
-import { alerts, CLIOptions, ConfigOptions } from "./core";
-import { nameFormatDefault } from "./sass";
+import { alerts, CLIOptions, ConfigOptions } from "./core/index.js";
+import { nameFormatDefault } from "./sass/index.js";
 import {
   bannerTypeDefault,
   exportTypeDefault,
@@ -11,13 +11,14 @@ import {
   exportTypeNameDefault,
   quoteTypeDefault,
   logLevelDefault,
-} from "./typescript";
-import { getDefaultImplementation } from "./implementations";
+} from "./typescript/index.js";
+import { getDefaultImplementation } from "./implementations/index.js";
 
 const VALID_CONFIG_FILES = [
   "typed-scss-modules.config.ts",
   "typed-scss-modules.config.js",
 ];
+//@ts-expect-error - JoyCon is not typed.
 const joycon = new JoyCon();
 
 /**

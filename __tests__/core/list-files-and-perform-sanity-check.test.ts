@@ -1,6 +1,8 @@
-import { ConfigOptions } from "../../lib/core";
-import { listFilesAndPerformSanityChecks } from "../../lib/core/list-files-and-perform-sanity-checks";
-
+import { ConfigOptions } from "../../lib/core/index.js";
+import { listFilesAndPerformSanityChecks } from "../../lib/core/list-files-and-perform-sanity-checks.js";
+import { jest } from "@jest/globals";
+import { fileURLToPath } from "url";
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const options: ConfigOptions = {
   banner: "",
   watch: false,

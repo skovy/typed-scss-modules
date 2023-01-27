@@ -1,12 +1,14 @@
 if: tag IS blank
 
 language: node_js
-node_js:
-  - "12"
 
 jobs:
   include:
     - stage: test
+      node_js:
+        - "14"
+        - "16"
+        - "18"
       name: "Unit tests, type checking, linting, etc."
       script:
         - yarn check-types
@@ -16,9 +18,12 @@ jobs:
         - yarn build
         - yarn commitlint-travis
     - stage: release
+      branches:
+        only:
+          - master
+      node_js: 18
       name: "Release on npm"
       deploy:
         provider: script
         skip_cleanup: true
-        script:
-          - yarn semantic-release
+        script: yarn semantic-release

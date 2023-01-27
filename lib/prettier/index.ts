@@ -1,5 +1,6 @@
-import { alerts } from "../core";
-import { canResolvePrettier } from "./can-resolve";
+import { alerts } from "../core/index.js";
+import { canResolvePrettier } from "./can-resolve.js";
+import { createRequire } from "node:module";
 
 import { format, resolveConfig } from "prettier";
 
@@ -27,8 +28,8 @@ export const attemptPrettier = async (input: string) => {
   if (!canResolvePrettier()) {
     return input;
   }
-
-  const prettier = require("prettier");
+  const newRequire = createRequire(import.meta.url);
+  const prettier = newRequire("prettier");
   if (!isPrettier(prettier)) {
     // doesn't look like prettier
     return input;

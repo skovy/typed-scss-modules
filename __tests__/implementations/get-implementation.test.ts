@@ -1,7 +1,7 @@
 import sass from "sass";
 import nodeSass from "node-sass";
 
-import { getImplementation } from "../../lib/implementations";
+import { getImplementation } from "../../lib/implementations/index.js";
 
 describe("getImplementation", () => {
   it("returns the correct implementation when explicitly passed", () => {

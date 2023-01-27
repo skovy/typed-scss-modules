@@ -1,13 +1,17 @@
-import { listDifferent } from "../../lib/core";
-
-import { describeAllImplementations } from "../helpers";
-
-describeAllImplementations((implementation) => {
+import { listDifferent } from "../../lib/core/index.js";
+import { jest } from "@jest/globals";
+import { describeAllImplementations } from "../helpers/index.js";
+import { fileURLToPath } from "url";
+import { Implementations } from "lib/implementations/index.js";
+import { type SpyInstance } from "jest-mock";
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+describeAllImplementations((implementation: Implementations) => {
   describe("listDifferent", () => {
-    let exit: jest.SpyInstance;
+    let exit: SpyInstance<(code?: number | undefined) => never>;
 
     beforeEach(() => {
       console.log = jest.fn();
+      // @ts-expect-error mockImplementation expects 1 argument
       exit = jest.spyOn(process, "exit").mockImplementation();
     });
 

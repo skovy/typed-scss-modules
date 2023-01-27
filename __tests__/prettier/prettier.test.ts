@@ -1,6 +1,6 @@
-import { attemptPrettier } from "../../lib/prettier";
-import { classNamesToTypeDefinitions } from "../../lib/typescript";
-
+import { attemptPrettier } from "../../lib/prettier/index.js";
+import { classNamesToTypeDefinitions } from "../../lib/typescript/index.js";
+import { jest } from "@jest/globals";
 import prettier from "prettier";
 
 const input =
@@ -43,7 +43,7 @@ describe("attemptPrettier - mock prettier", () => {
 
 describe("attemptPrettier - mock resolution check", () => {
   beforeAll(() => {
-    jest.mock("../../lib/prettier/can-resolve");
+    jest.mock("../../lib/prettier/can-resolve.js");
   });
 
   it("should fail to resolve prettier and return input", async () => {

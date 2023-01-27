@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import slash from "slash";
-import { loadConfig, mergeOptions } from "./load";
+import { loadConfig, mergeOptions } from "./load.js";
 
 import {
   watch,
@@ -9,7 +9,7 @@ import {
   generate,
   listDifferent,
   setAlertsLogLevel,
-} from "./core";
+} from "./core/index.js";
 
 export const main = async (
   pattern: string,

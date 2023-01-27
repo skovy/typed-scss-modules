@@ -1,25 +1,31 @@
 import fs from "fs";
 import path from "path";
 import slash from "slash";
-
-import { alerts } from "../lib/core";
-import { main } from "../lib/main";
-import { describeAllImplementations } from "./helpers";
-
-describeAllImplementations((implementation) => {
+import { fileURLToPath } from "url";
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+import { alerts } from "../lib/core/index.js";
+import { main } from "../lib/main.js";
+import { describeAllImplementations } from "./helpers/index.js";
+import { jest } from "@jest/globals";
+import { Implementations } from "lib/implementations/index.js";
+import { type SpiedFunction } from "jest-mock";
+describeAllImplementations((implementation: Implementations) => {
   describe("main", () => {
-    let writeFileSyncSpy: jest.SpyInstance;
+    let writeFileSyncSpy: SpiedFunction;
 
     beforeEach(() => {
       // Only mock the writes, so the example files can still be read.
+      //@ts-expect-error - mockImplementation expects 1 argument
       writeFileSyncSpy = jest.spyOn(fs, "writeFileSync").mockImplementation();
 
       // Avoid creating directories while running tests.
+      //@ts-expect-error - mockImplementation expects 1 argument
       jest.spyOn(fs, "mkdirSync").mockImplementation();
 
       // Avoid console logs showing up.
+      //@ts-expect-error - mockImplementation expects 1 argument
       jest.spyOn(console, "log").mockImplementation();
-
+      //@ts-expect-error - mockImplementation expects 1 argument
       jest.spyOn(alerts, "error").mockImplementation();
     });
 
@@ -137,11 +143,13 @@ describeAllImplementations((implementation) => {
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
         .map(([fullFilePath, contents]) => ({
-          path: path.relative(__dirname, fullFilePath),
+          path: path.relative(__dirname, fullFilePath as string),
           contents,
         }))
         // Sort to avoid flakey snapshot tests if call order changes.
-        .sort((a, b) => a.path.localeCompare(b.path));
+        .sort((a: { path: string }, b: { path: any }) =>
+          a.path.localeCompare(b.path)
+        );
       expect(contents).toMatchSnapshot();
     });
 
@@ -166,11 +174,13 @@ describeAllImplementations((implementation) => {
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
         .map(([fullFilePath, contents]) => ({
-          path: path.relative(__dirname, fullFilePath),
+          path: path.relative(__dirname, fullFilePath as string),
           contents,
         }))
         // Sort to avoid flakey snapshot tests if call order changes.
-        .sort((a, b) => a.path.localeCompare(b.path));
+        .sort((a: { path: string }, b: { path: any }) =>
+          a.path.localeCompare(b.path)
+        );
       expect(contents).toMatchSnapshot();
     });
   });

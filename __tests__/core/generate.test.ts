@@ -1,9 +1,11 @@
 import fs from "fs";
-
-import { generate } from "../../lib/core";
-import { describeAllImplementations } from "../helpers";
-
-describeAllImplementations((implementation) => {
+import { jest } from "@jest/globals";
+import { generate } from "../../lib/core/index.js";
+import { describeAllImplementations } from "../helpers/index.js";
+import { fileURLToPath } from "url";
+import { Implementations } from "lib/implementations/index.js";
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+describeAllImplementations((implementation: Implementations) => {
   describe("generate", () => {
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.

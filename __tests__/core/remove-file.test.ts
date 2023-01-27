@@ -1,10 +1,13 @@
-import fs from "fs";
+import fs, { type PathLike } from "fs";
 import path from "path";
+import { jest } from "@jest/globals";
+import { DEFAULT_OPTIONS } from "../../lib/load.js";
+import { alerts, type WrappedCbFunc } from "../../lib/core/alerts.js";
+import { removeSCSSTypeDefinitionFile } from "../../lib/core/remove-file.js";
+import { fileURLToPath } from "url";
+import { type SpyInstance } from "jest-mock";
 
-import { DEFAULT_OPTIONS } from "../../lib/load";
-import { alerts } from "../../lib/core/alerts";
-import { removeSCSSTypeDefinitionFile } from "../../lib/core/remove-file";
-
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 describe("removeFile", () => {
   const originalTestFile = path.resolve(__dirname, "..", "removable.scss");
   const existingFile = path.resolve(__dirname, "..", "style.scss");
@@ -17,9 +20,9 @@ describe("removeFile", () => {
     "__generated__/__tests__/removable.scss.d.ts"
   );
 
-  let existsSpy: jest.SpyInstance;
-  let unlinkSpy: jest.SpyInstance;
-  let alertsSpy: jest.SpyInstance;
+  let existsSpy: SpyInstance<(path: PathLike) => boolean>;
+  let unlinkSpy: SpyInstance<(path: PathLike) => void>;
+  let alertsSpy: SpyInstance<WrappedCbFunc<(message: string) => void>>;
 
   beforeEach(() => {
     existsSpy = jest
@@ -31,8 +34,9 @@ describe("removeFile", () => {
           path === outputFolderExistingTypes
       );
 
+    // @ts-expect-error - mockImplementation expects 1 argument
     unlinkSpy = jest.spyOn(fs, "unlinkSync").mockImplementation();
-
+    // @ts-expect-error - mockImplementation expects 1 argument
     alertsSpy = jest.spyOn(alerts, "success").mockImplementation();
   });
 

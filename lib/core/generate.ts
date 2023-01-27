@@ -1,7 +1,7 @@
-import { alerts } from "./alerts";
-import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks";
-import { ConfigOptions } from "./types";
-import { writeFile } from "./write-file";
+import { alerts } from "./alerts.js";
+import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks.js";
+import { ConfigOptions } from "./types.js";
+import { writeFile } from "./write-file.js";
 
 /**
  * Given a file glob generate the corresponding types once.

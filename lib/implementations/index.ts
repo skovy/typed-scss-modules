@@ -1,6 +1,8 @@
 import nodeSass from "node-sass";
 import sass from "sass";
+import { createRequire } from "node:module";
 
+const newRequire = createRequire(import.meta.url);
 /**
  * A list of all possible SASS package implementations that can be used to
  * perform the compilation and parsing of the SASS files. The expectation is
@@ -8,7 +10,7 @@ import sass from "sass";
  * all of the same logic can be reused.
  */
 export const IMPLEMENTATIONS = ["node-sass", "sass"] as const;
-export type Implementations = typeof IMPLEMENTATIONS[number];
+export type Implementations = (typeof IMPLEMENTATIONS)[number];
 
 type Implementation = typeof nodeSass | typeof sass;
 
@@ -19,7 +21,7 @@ type Implementation = typeof nodeSass | typeof sass;
  * @param resolver DO NOT USE - this is unfortunately necessary only for testing.
  */
 export const getDefaultImplementation = (
-  resolver: RequireResolve = require.resolve
+  resolver: RequireResolve = newRequire.resolve
 ): Implementations => {
   let pkg: Implementations = "node-sass";
 
@@ -46,8 +48,8 @@ export const getImplementation = (
   implementation?: Implementations
 ): Implementation => {
   if (implementation === "sass") {
-    return require("sass");
+    return newRequire("sass");
   } else {
-    return require("node-sass");
+    return newRequire("node-sass");
   }
 };
