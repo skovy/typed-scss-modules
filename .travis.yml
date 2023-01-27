@@ -7,6 +7,8 @@ node_js:
   - "16"
   - "18"
 
+name: "Unit tests, type checking"
+
 script: 
   - yarn check-types
   - yarn test
@@ -14,7 +16,7 @@ script:
 jobs:
   include:
     - stage: lint
-      name: "Unit tests, type checking, linting, etc."
+      name: "Linting, etc."
       node_js: 18
       script:
         - git reset --hard HEAD
