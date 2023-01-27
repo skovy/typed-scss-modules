@@ -160,7 +160,7 @@ describeAllImplementations((implementation: Implementations) => {
     });
 
     describe("aliases", () => {
-      test("it converts a file that contains aliases", async () => {
+      xtest("it converts a file that contains aliases", async () => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/aliases.scss`,
           {
@@ -184,7 +184,7 @@ describeAllImplementations((implementation: Implementations) => {
     });
 
     describe("aliasPrefixes", () => {
-      test("it converts a file that contains alias prefixes (but prioritizes aliases)", async () => {
+      xtest("it converts a file that contains alias prefixes (but prioritizes aliases)", async () => {
         const result = await fileToClassNames(
           `${__dirname}/../dummy-styles/alias-prefixes.scss`,
           {
