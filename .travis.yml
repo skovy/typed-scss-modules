@@ -4,7 +4,7 @@ dist: jammy
 
 language: node_js
 
-install: yarn
+install: yarn --immutable
 
 node_js:
   - "14"
