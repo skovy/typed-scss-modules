@@ -5,4 +5,7 @@ export default defineConfig({
   minify: true,
   dts: true,
   format: "esm",
+  esbuildOptions(options, context) {
+    options.legalComments = "none";
+  },
 });

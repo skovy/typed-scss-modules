@@ -1,6 +1,6 @@
 import os from "os";
 
-import reserved from "reserved-words";
+import { check } from "@frida/reserved-words";
 
 import { ClassName } from "../sass/file-to-class-names.js";
 import { alerts } from "../core/index.js";
@@ -36,8 +36,7 @@ const classNameToType = (className: ClassName, quoteType: QuoteType) => {
 };
 
 const isReservedKeyword = (className: ClassName) =>
-  reserved.check(className, "es5", true) ||
-  reserved.check(className, "es6", true);
+  check(className, "es5", true) || check(className, "es6", true);
 
 const isValidName = (className: ClassName) => {
   if (isReservedKeyword(className)) {
