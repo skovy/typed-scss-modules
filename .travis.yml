@@ -4,6 +4,8 @@ dist: jammy
 
 language: node_js
 
+install: yarn
+
 node_js:
   - "14"
   - "16"
