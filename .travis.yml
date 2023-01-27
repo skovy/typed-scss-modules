@@ -15,7 +15,7 @@ name: "Unit tests, type checking"
 
 script: 
   - yarn check-types
-  - yarn test
+  - yarn test --runInBand
 
 jobs:
   include:
