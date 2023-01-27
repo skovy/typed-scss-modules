@@ -5,15 +5,12 @@ import {
 } from "../../lib/typescript/index.js";
 import { jest } from "@jest/globals";
 
-import { createRequire } from "node:module";
-
-const newRequire = createRequire(import.meta.url);
-
-newRequire("./mock.js");
-
 describe("classNamesToTypeDefinitions (without Prettier)", () => {
   beforeEach(() => {
     console.log = jest.fn();
+    jest.mock("prettier", () => () => ({
+      fakePrettier: () => false,
+    }));
   });
 
   describe("named", () => {

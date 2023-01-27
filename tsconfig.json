@@ -19,6 +19,7 @@
     "./lib/**/*.ts",
     "./examples/**/*.ts",
     "./__tests__/**/*.ts",
-    "./jest.config.ts"
+    "./jest.config.ts",
+    "__tests__/typescript/mock.ts"
   ]
 }

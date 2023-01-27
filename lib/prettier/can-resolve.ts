@@ -3,7 +3,7 @@
 
 import { createRequire } from "node:module";
 
-export function canResolvePrettier() {
+function canResolvePrettier() {
   try {
     const newRequire = createRequire(import.meta.url);
     newRequire.resolve("prettier");
@@ -13,3 +13,5 @@ export function canResolvePrettier() {
     return false;
   }
 }
+
+export { canResolvePrettier };
