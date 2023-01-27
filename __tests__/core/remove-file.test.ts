@@ -34,10 +34,8 @@ describe("removeFile", () => {
           path === outputFolderExistingTypes
       );
 
-    // @ts-expect-error - mockImplementation expects 1 argument
-    unlinkSpy = jest.spyOn(fs, "unlinkSync").mockImplementation();
-    // @ts-expect-error - mockImplementation expects 1 argument
-    alertsSpy = jest.spyOn(alerts, "success").mockImplementation();
+    unlinkSpy = jest.spyOn(fs, "unlinkSync").mockImplementation(() => {});
+    alertsSpy = jest.spyOn(alerts, "success").mockImplementation(() => {});
   });
 
   afterEach(() => {

@@ -11,22 +11,20 @@ import { Implementations } from "lib/implementations/index.js";
 import { type SpiedFunction } from "jest-mock";
 describeAllImplementations((implementation: Implementations) => {
   describe("main", () => {
-    let writeFileSyncSpy: SpiedFunction;
+    let writeFileSyncSpy: SpiedFunction<typeof fs.writeFileSync>;
 
     beforeEach(() => {
       // Only mock the writes, so the example files can still be read.
-      //@ts-expect-error - mockImplementation expects 1 argument
-      writeFileSyncSpy = jest.spyOn(fs, "writeFileSync").mockImplementation();
+      writeFileSyncSpy = jest
+        .spyOn(fs, "writeFileSync")
+        .mockImplementation(() => "{}");
 
       // Avoid creating directories while running tests.
-      //@ts-expect-error - mockImplementation expects 1 argument
-      jest.spyOn(fs, "mkdirSync").mockImplementation();
+      jest.spyOn(fs, "mkdirSync").mockImplementation(() => "{}");
 
       // Avoid console logs showing up.
-      //@ts-expect-error - mockImplementation expects 1 argument
-      jest.spyOn(console, "log").mockImplementation();
-      //@ts-expect-error - mockImplementation expects 1 argument
-      jest.spyOn(alerts, "error").mockImplementation();
+      jest.spyOn(console, "log").mockImplementation(() => {});
+      jest.spyOn(alerts, "error").mockImplementation(() => {});
     });
 
     afterEach(() => {

@@ -11,12 +11,10 @@ describeAllImplementations((implementation: Implementations) => {
   describe("writeFile", () => {
     beforeEach(() => {
       // Only mock the write, so the example files can still be read.
-      // @ts-expect-error - mockImplementation expects 1 argument
-      jest.spyOn(fs, "writeFileSync").mockImplementation();
+      jest.spyOn(fs, "writeFileSync").mockImplementation(() => {});
 
       // Avoid creating new directories while running tests.
-      // @ts-expect-error - mockImplementation expects 1 argument
-      jest.spyOn(fs, "mkdirSync").mockImplementation();
+      jest.spyOn(fs, "mkdirSync").mockImplementation(() => "{}");
 
       console.log = jest.fn();
     });

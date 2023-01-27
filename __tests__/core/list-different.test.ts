@@ -8,11 +8,11 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 describeAllImplementations((implementation: Implementations) => {
   describe("listDifferent", () => {
     let exit: SpyInstance<(code?: number | undefined) => never>;
-
     beforeEach(() => {
       console.log = jest.fn();
-      // @ts-expect-error mockImplementation expects 1 argument
-      exit = jest.spyOn(process, "exit").mockImplementation();
+      exit = jest
+        .spyOn(process, "exit")
+        .mockImplementation(() => undefined as never);
     });
 
     afterEach(() => {

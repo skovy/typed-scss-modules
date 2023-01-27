@@ -6,8 +6,7 @@ describe("alerts", () => {
   let logSpy: SpyInstance;
 
   beforeEach(() => {
-    // @ts-expect-error mockImplementation expects 1 argument
-    logSpy = jest.spyOn(console, "log").mockImplementation();
+    logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
   });
 
   afterEach(() => {

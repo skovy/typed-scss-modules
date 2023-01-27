@@ -1,5 +1,11 @@
 import path from "path";
-import JoyCon from "joycon";
+import JoyCon, {
+  type AsyncLoader,
+  type LoadResult,
+  type MultiLoader,
+  type Options,
+  type SyncLoader,
+} from "joycon";
 import { bundleRequire } from "bundle-require";
 
 import { alerts, CLIOptions, ConfigOptions } from "./core/index.js";
@@ -18,8 +24,42 @@ const VALID_CONFIG_FILES = [
   "typed-scss-modules.config.ts",
   "typed-scss-modules.config.js",
 ];
-//@ts-expect-error - JoyCon is not typed.
-const joycon = new JoyCon();
+
+declare class JoyConClass {
+  constructor(options?: Options);
+
+  options: Options;
+
+  resolve(
+    files?: string[] | Options,
+    cwd?: string,
+    stopDir?: string
+  ): Promise<string | null>;
+  resolveSync(
+    files?: string[] | Options,
+    cwd?: string,
+    stopDir?: string
+  ): string | null;
+
+  load(
+    files?: string[] | Options,
+    cwd?: string,
+    stopDir?: string
+  ): Promise<LoadResult>;
+  loadSync(
+    files?: string[] | Options,
+    cwd?: string,
+    stopDir?: string
+  ): LoadResult;
+
+  addLoader(loader: AsyncLoader | SyncLoader | MultiLoader): this;
+  removeLoader(name: string): this;
+
+  /** Clear internal cache */
+  clearCache(): this;
+}
+
+const joycon = new (JoyCon as any)() as JoyConClass;
 
 /**
  * Load a custom config file in the project root directory with any options for this package.
