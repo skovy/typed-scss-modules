@@ -8,4 +8,7 @@ export default defineConfig({
   esbuildOptions(options, context) {
     options.legalComments = "none";
   },
+  banner: {
+    js: 'import { createRequire } from "module"; const require = createRequire(import.meta.url);',
+  },
 });
