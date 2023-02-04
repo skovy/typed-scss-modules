@@ -33,9 +33,7 @@
   "files": [
     "dist/lib"
   ],
-  "bin": {
-    "typed-scss-modules": "./dist/lib/cli.js"
-  },
+  "bin": "./dist/lib/cli.js",
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
@@ -94,5 +92,6 @@
     "*.{js,json,css,md,scss,tsx,ts}": [
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "yarn@3.4.1"
 }
