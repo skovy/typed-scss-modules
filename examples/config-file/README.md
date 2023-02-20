@@ -7,5 +7,5 @@ This example contains:
 The command to generate the proper type files would look like this (_in the root of this example, not repository_):
 
 ```bash
-yarn typed-scss-modules "./**/*.scss"
+npm run typed-scss-modules "./**/*.scss"
 ```
