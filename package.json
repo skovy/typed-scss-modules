@@ -24,8 +24,8 @@
     "test:watch": "jest --watch",
     "typed-scss-modules": "ts-node ./lib/cli.ts",
     "clean": "rm -rf ./dist",
-    "build": "yarn clean && tsc && chmod +x dist/lib/cli.js",
-    "prepare": "yarn build && husky install",
+    "build": "npm run clean && tsc && chmod +x dist/lib/cli.js",
+    "prepare": "npm run build && husky install",
     "check-types": "tsc --noEmit",
     "check-formatting": "prettier --check '**/*.{js,json,css,md,scss,tsx,ts}'",
     "commit": "commit"
@@ -93,5 +93,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "npm@3.19.2"
 }
