@@ -1,0 +1,35 @@
+name: Build
+on:
+  push:
+    branches:
+      - "**"
+jobs:
+  release:
+    name: Test and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "12"
+      - name: Install dependencies
+        run: yarn install
+      - name: "Unit tests"
+        run: yarn test
+      - name: "Build"
+        run: yarn build
+      - name: "Type check"
+        run: yarn check-types
+      - name: "Code formatting check"
+        run: git reset --hard HEAD &&  yarn check-formatting
+      - name: "Commit formatting check"
+        uses: wagoid/commitlint-github-action@v5
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn semantic-release
