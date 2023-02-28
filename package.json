@@ -28,7 +28,8 @@
     "prepare": "npm run build && husky install",
     "check-types": "tsc --noEmit",
     "check-formatting": "prettier --check '**/*.{js,json,css,md,scss,tsx,ts}'",
-    "commit": "commit"
+    "commit": "commit",
+    "semantic-release": "semantic-release"
   },
   "files": [
     "dist/lib"
