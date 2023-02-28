@@ -15,21 +15,23 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "12"
+          node-version: "16"
       - name: Install dependencies
-        run: yarn install
+        run: npm ci
       - name: "Unit tests"
-        run: yarn test
+        run: npm test
+      - name: "Reset changes from integration unit tests"
+        run: git reset --hard HEAD
       - name: "Build"
-        run: yarn build
+        run: npm run build
       - name: "Type check"
-        run: yarn check-types
+        run: npm run check-types
       - name: "Code formatting check"
-        run: git reset --hard HEAD &&  yarn check-formatting
+        run: npm run check-formatting
       - name: "Commit formatting check"
         uses: wagoid/commitlint-github-action@v5
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn semantic-release
+        run: npm run semantic-release
