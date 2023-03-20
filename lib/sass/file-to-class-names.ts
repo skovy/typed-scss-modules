@@ -75,9 +75,7 @@ export const fileToClassNames = async (
     importer: customImporters({ aliases, aliasPrefixes, importer }),
   });
 
-  const { exportTokens } = await sourceToClassNames(result.css);
-
-  const classNames = Object.keys(exportTokens);
+  const classNames = sourceToClassNames(result.css.toString());
   const transformers = nameFormats.map((item) => transformersMap[item]);
   const transformedClassNames = new Set<ClassName>([]);
   classNames.forEach((className: ClassName) => {

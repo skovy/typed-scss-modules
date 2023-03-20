@@ -2,7 +2,12 @@ name: Build
 on:
   push:
     branches:
+      - "master"
+      - "alpha"
+  pull_request:
+    branches:
       - "**"
+
 jobs:
   release:
     name: Test and Release

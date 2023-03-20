@@ -1,9 +1,21 @@
-import Core, { Source } from "css-modules-loader-core";
+import csstree from "css-tree";
 
-const core = new Core();
+export const sourceToClassNames = (source: string) => {
+  const ast = csstree.parse(source, {
+    parseAtrulePrelude: false,
+    parseValue: false,
+  });
+  const classNames: string[] = [];
 
-export const sourceToClassNames = (source: Source) => {
-  return core.load(source, undefined, undefined, noOpPathFetcher);
+  csstree.walk(ast, (node) => {
+    if (node.type === 'Selector') {
+      node.children.forEach((item) => {
+        if (item.type === 'ClassSelector') {
+          classNames.push(item.name);
+        }
+      });
+    }
+  });
+
+  return classNames;
 };
-
-const noOpPathFetcher = () => Promise.resolve({});
