@@ -12,6 +12,7 @@ import { customImporters, Aliases, SASSImporterOptions } from "./importer";
 
 export { Aliases };
 export type ClassName = string;
+export type ClassNameWithContent = [ClassName, string];
 interface Transformer {
   (className: ClassName): string;
 }
@@ -40,6 +41,7 @@ export interface SASSOptions extends SASSImporterOptions {
   includePaths?: string[];
   nameFormat?: string | string[];
   implementation: Implementations;
+  withContent?: boolean;
 }
 export const nameFormatDefault: NameFormatWithTransformer = "camel";
 
@@ -53,6 +55,7 @@ export const fileToClassNames = async (
     aliases,
     aliasPrefixes,
     importer,
+    withContent = true,
   }: SASSOptions = {} as SASSOptions
 ) => {
   const { renderSync } = getImplementation(implementation);
@@ -75,16 +78,33 @@ export const fileToClassNames = async (
     importer: customImporters({ aliases, aliasPrefixes, importer }),
   });
 
-  const { exportTokens } = await sourceToClassNames(result.css);
-
-  const classNames = Object.keys(exportTokens);
+  const { exportTokens, injectableSource } = await sourceToClassNames(result.css);
+  // const classNames = Object.keys(exportTokens);
   const transformers = nameFormats.map((item) => transformersMap[item]);
-  const transformedClassNames = new Set<ClassName>([]);
-  classNames.forEach((className: ClassName) => {
-    transformers.forEach((transformer: Transformer) => {
-      transformedClassNames.add(transformer(className));
-    });
-  });
+  const transformedClassNames = new Set<ClassNameWithContent>([]);
+  // classNames.forEach((className: ClassName) => {
+  //   transformers.forEach((transformer: Transformer) => {
+  //     transformedClassNames.add(transformer(className));
+  //   });
+  // });
+  for (const [classname, value] of Object.entries(exportTokens)) {
+    const stringToMatch = `${value} {`;
+    const indexOfStart = injectableSource.indexOf(stringToMatch) + stringToMatch.length;
+    const indexOfEnd = injectableSource.indexOf("}", indexOfStart);
+    const sub = injectableSource.substring(
+      indexOfStart, 
+      indexOfEnd
+    );
+    if (withContent) {
+      transformers.forEach((transformer: Transformer) => {
+        transformedClassNames.add([transformer(classname), sub.trim()]);
+      });
+    } else {
+      transformers.forEach((transformer: Transformer) => {
+        transformedClassNames.add([transformer(classname), 'string;']);
+      });
+    }
+  }
 
-  return Array.from(transformedClassNames).sort((a, b) => a.localeCompare(b));
+  return Array.from(transformedClassNames).sort((a, b) => a[0].localeCompare(b[0]));
 };

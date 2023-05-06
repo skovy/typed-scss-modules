@@ -3,8 +3,15 @@
 
   &-am {
     &-kebab {
+      color: green;
+      background-color: rgb(255, 0, 0);
+      
       &-cased {
         color: red;
+      }
+
+      &:hover {
+        color: yellow;
       }
     }
   }

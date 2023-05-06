@@ -1,5 +1,7 @@
 import styles, { Styles, ClassNames } from "./style.scss";
 
+styles['i-am-kebab-cased']
+
 console.log(styles.i);
 console.log(styles["i-am-kebab-cased"]);
 

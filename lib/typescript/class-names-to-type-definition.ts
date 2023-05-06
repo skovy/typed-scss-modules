@@ -2,7 +2,7 @@ import os from "os";
 
 import reserved from "reserved-words";
 
-import { ClassName } from "lib/sass/file-to-class-names";
+import { ClassName, ClassNameWithContent } from "lib/sass/file-to-class-names";
 import { alerts } from "../core";
 import { attemptPrettier } from "../prettier";
 
@@ -14,7 +14,7 @@ export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
 
 export interface TypeDefinitionOptions {
   banner: string;
-  classNames: ClassName[];
+  classNames: ClassNameWithContent[];
   exportType: ExportType;
   exportTypeName?: string;
   exportTypeInterface?: string;
@@ -27,12 +27,13 @@ export const exportTypeInterfaceDefault: string = "Styles";
 export const quoteTypeDefault: QuoteType = "single";
 export const bannerTypeDefault: string = "";
 
-const classNameToNamedTypeDefinition = (className: ClassName) =>
-  `export const ${className}: string;`;
+const classNameToNamedTypeDefinition = (classNameWithContent: ClassNameWithContent, quoteType: QuoteType) =>
+  `export const ${classNameWithContent[0]}: ${quoteType}${classNameWithContent[1]}${quoteType};`;
 
-const classNameToType = (className: ClassName, quoteType: QuoteType) => {
-  const quote = quoteType === "single" ? "'" : '"';
-  return `  ${quote}${className}${quote}: string;`;
+const classNameToType = (classNameWithContent: ClassNameWithContent, quoteType: QuoteType) => {
+  const quote = quoteType === "single" ? "'" : '"'; 
+  const contentQuote = classNameWithContent[1].includes('\n') ? '`' : quote;
+  return `  ${quote}${classNameWithContent[0]}${quote}: ${contentQuote}${classNameWithContent[1]}${contentQuote};`;
 };
 
 const isReservedKeyword = (className: ClassName) =>
@@ -88,8 +89,12 @@ export const classNamesToTypeDefinitions = async (
 
         lines.push(
           ...options.classNames
-            .filter(isValidName)
-            .map(classNameToNamedTypeDefinition)
+            .filter((className) => isValidName(className[0]))
+            .map((classNameWithContent) => classNameToNamedTypeDefinition(
+                classNameWithContent,
+                options.quoteType || quoteTypeDefault
+              )
+            )
         );
 
         break;

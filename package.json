@@ -23,6 +23,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "typed-scss-modules": "ts-node ./lib/cli.ts",
+    "generate-example": "yarn typed-scss-modules 'examples/default-export/**/*.scss' --exportType default --nameFormat kebab",
     "clean": "rm -rf ./dist",
     "build": "yarn clean && tsc && chmod +x dist/lib/cli.js",
     "prepare": "yarn build && husky install",
@@ -33,9 +34,7 @@
   "files": [
     "dist/lib"
   ],
-  "bin": {
-    "typed-scss-modules": "./dist/lib/cli.js"
-  },
+  "bin": "./dist/lib/cli.js",
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
