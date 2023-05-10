@@ -3,62 +3,62 @@
 exports[`node-sass implementation main outputs the correct files when outputFolder is passed 1`] = `
 Array [
   Object {
-    "contents": "export const myCustomClass: string;
-export const nestedAnother: string;
-export const nestedClass: string;
-export const nestedStyles: string;
-export const number1: string;
-export const someStyles: string;
+    "contents": "export declare const myCustomClass: string;
+export declare const nestedAnother: string;
+export declare const nestedClass: string;
+export declare const nestedStyles: string;
+export declare const number1: string;
+export declare const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/alias-prefixes.scss.d.ts",
   },
   Object {
-    "contents": "export const myCustomClass: string;
-export const nestedAnother: string;
-export const nestedClass: string;
-export const number1: string;
-export const someClass: string;
-export const someStyles: string;
+    "contents": "export declare const myCustomClass: string;
+export declare const nestedAnother: string;
+export declare const nestedClass: string;
+export declare const number1: string;
+export declare const someClass: string;
+export declare const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/aliases.scss.d.ts",
   },
   Object {
-    "contents": "export const nestedAnother: string;
-export const nestedClass: string;
-export const number1: string;
-export const someStyles: string;
+    "contents": "export declare const nestedAnother: string;
+export declare const nestedClass: string;
+export declare const number1: string;
+export declare const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
   },
   Object {
-    "contents": "export const composedClass: string;
+    "contents": "export declare const composedClass: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/composes.scss.d.ts",
   },
   Object {
-    "contents": "export const app: string;
-export const appHeader: string;
-export const logo: string;
+    "contents": "export declare const app: string;
+export declare const appHeader: string;
+export declare const logo: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/dashes.scss.d.ts",
   },
   Object {
-    "contents": "export const globalStyle: string;
+    "contents": "export declare const globalStyle: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/global-variables.scss.d.ts",
   },
   Object {
-    "contents": "export const randomClass: string;
+    "contents": "export declare const randomClass: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/invalid.scss.d.ts",
   },
   Object {
-    "contents": "export const nestedStyles: string;
+    "contents": "export declare const nestedStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/nested-styles/style.scss.d.ts",
   },
   Object {
-    "contents": "export const someClass: string;
+    "contents": "export declare const someClass: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/style.scss.d.ts",
   },
@@ -205,62 +205,62 @@ export default styles;
 exports[`sass implementation main outputs the correct files when outputFolder is passed 1`] = `
 Array [
   Object {
-    "contents": "export const myCustomClass: string;
-export const nestedAnother: string;
-export const nestedClass: string;
-export const nestedStyles: string;
-export const number1: string;
-export const someStyles: string;
+    "contents": "export declare const myCustomClass: string;
+export declare const nestedAnother: string;
+export declare const nestedClass: string;
+export declare const nestedStyles: string;
+export declare const number1: string;
+export declare const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/alias-prefixes.scss.d.ts",
   },
   Object {
-    "contents": "export const myCustomClass: string;
-export const nestedAnother: string;
-export const nestedClass: string;
-export const number1: string;
-export const someClass: string;
-export const someStyles: string;
+    "contents": "export declare const myCustomClass: string;
+export declare const nestedAnother: string;
+export declare const nestedClass: string;
+export declare const number1: string;
+export declare const someClass: string;
+export declare const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/aliases.scss.d.ts",
   },
   Object {
-    "contents": "export const nestedAnother: string;
-export const nestedClass: string;
-export const number1: string;
-export const someStyles: string;
+    "contents": "export declare const nestedAnother: string;
+export declare const nestedClass: string;
+export declare const number1: string;
+export declare const someStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
   },
   Object {
-    "contents": "export const composedClass: string;
+    "contents": "export declare const composedClass: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/composes.scss.d.ts",
   },
   Object {
-    "contents": "export const app: string;
-export const appHeader: string;
-export const logo: string;
+    "contents": "export declare const app: string;
+export declare const appHeader: string;
+export declare const logo: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/dashes.scss.d.ts",
   },
   Object {
-    "contents": "export const globalStyle: string;
+    "contents": "export declare const globalStyle: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/global-variables.scss.d.ts",
   },
   Object {
-    "contents": "export const randomClass: string;
+    "contents": "export declare const randomClass: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/invalid.scss.d.ts",
   },
   Object {
-    "contents": "export const nestedStyles: string;
+    "contents": "export declare const nestedStyles: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/nested-styles/style.scss.d.ts",
   },
   Object {
-    "contents": "export const someClass: string;
+    "contents": "export declare const someClass: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/style.scss.d.ts",
   },

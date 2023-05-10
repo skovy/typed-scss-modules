@@ -42,7 +42,7 @@ describeAllImplementations((implementation) => {
       );
       expect(fs.writeFileSync).toBeCalledWith(
         expectedPath,
-        "export const someClass: string;\n"
+        "export declare const someClass: string;\n"
       );
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[GENERATED TYPES] ${expectedPath}`)
@@ -104,7 +104,7 @@ describeAllImplementations((implementation) => {
         );
         expect(fs.writeFileSync).toBeCalledWith(
           expectedPath,
-          "export const someClass: string;\n"
+          "export declare const someClass: string;\n"
         );
         expect(console.log).toBeCalledWith(
           expect.stringContaining(`[GENERATED TYPES] ${expectedPath}`)

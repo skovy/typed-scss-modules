@@ -1,3 +1,3 @@
-export const app: string;
-export const logo: string;
-export const appHeader: string;
+export declare const app: string;
+export declare const logo: string;
+export declare const appHeader: string;

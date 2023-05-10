@@ -1,1 +1,1 @@
-export const nested: string;
+export declare const nested: string;

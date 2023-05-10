@@ -1,2 +1,2 @@
 // example banner
-export const topBanner: string;
+export declare const topBanner: string;
