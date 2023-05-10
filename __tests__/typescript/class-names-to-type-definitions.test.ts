@@ -19,7 +19,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        "export const myClass: string;\nexport const yourClass: string;\n"
+        "export declare const myClass: string;\nexport declare const yourClass: string;\n"
       );
     });
 
@@ -40,7 +40,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         exportType: "named",
       });
 
-      expect(definition).toEqual("export const myClass: string;\n");
+      expect(definition).toEqual("export declare const myClass: string;\n");
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[SKIPPING] 'if' is a reserved keyword`)
       );
@@ -53,7 +53,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         exportType: "named",
       });
 
-      expect(definition).toEqual("export const myClass: string;\n");
+      expect(definition).toEqual("export declare const myClass: string;\n");
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[SKIPPING] 'invalid-variable' contains dashes`)
       );
@@ -119,7 +119,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        "export const myClass: string;\nexport const yourClass: string;\n"
+        "export declare const myClass: string;\nexport declare const yourClass: string;\n"
       );
     });
   });

@@ -1,1 +1,1 @@
-export const c: string;
+export declare const c: string;

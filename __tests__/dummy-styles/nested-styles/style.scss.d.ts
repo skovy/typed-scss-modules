@@ -1,1 +1,1 @@
-export const nestedStyles: string;
+export declare const nestedStyles: string;

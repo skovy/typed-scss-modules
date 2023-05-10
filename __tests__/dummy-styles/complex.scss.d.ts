@@ -1,3 +1,3 @@
-export const someStyles: string;
-export const nestedClass: string;
-export const nestedAnother: string;
+export declare const someStyles: string;
+export declare const nestedClass: string;
+export declare const nestedAnother: string;

@@ -1,1 +1,1 @@
-export const nope: string;
+export declare const nope: string;

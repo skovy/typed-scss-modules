@@ -1,1 +1,1 @@
-export const composedClass: string;
+export declare const composedClass: string;

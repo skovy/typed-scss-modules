@@ -23,8 +23,8 @@ For example, given the following SCSS:
 The following type definitions will be generated:
 
 ```typescript
-export const text: string;
-export const textHighlighted: string;
+export declare const text: string;
+export declare const textHighlighted: string;
 ```
 
 ## Basic Usage
@@ -162,8 +162,8 @@ Given the following SCSS:
 The following type definitions will be generated:
 
 ```typescript
-export const text: string;
-export const textHighlighted: string;
+export declare const text: string;
+export declare const textHighlighted: string;
 ```
 
 #### `default`
