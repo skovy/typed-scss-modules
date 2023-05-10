@@ -28,7 +28,7 @@ export const quoteTypeDefault: QuoteType = "single";
 export const bannerTypeDefault: string = "";
 
 const classNameToNamedTypeDefinition = (className: ClassName) =>
-  `export const ${className}: string;`;
+  `export declare const ${className}: string;`;
 
 const classNameToType = (className: ClassName, quoteType: QuoteType) => {
   const quote = quoteType === "single" ? "'" : '"';
