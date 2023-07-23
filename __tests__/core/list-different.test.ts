@@ -70,7 +70,10 @@ describeAllImplementations((implementation) => {
         outputFolder: null,
       });
 
-      expect(console.log).not.toHaveBeenCalled();
+      expect(console.log).toHaveBeenCalledTimes(1);
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`Only 1 file found for`)
+      );
       expect(exit).not.toHaveBeenCalled();
     });
 
@@ -124,6 +127,32 @@ describeAllImplementations((implementation) => {
       );
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`no-generated.scss`)
+      );
+    });
+
+    test("ignores ignored files", async () => {
+      const pattern = `${__dirname}/list-different/no-generated.scss`;
+
+      await listDifferent(pattern, {
+        banner: "",
+        watch: false,
+        ignoreInitial: false,
+        exportType: "named",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
+        listDifferent: true,
+        ignore: ["**/no-generated.scss"],
+        implementation,
+        quoteType: "single",
+        updateStaleOnly: false,
+        logLevel: "verbose",
+        outputFolder: null,
+      });
+
+      expect(exit).not.toHaveBeenCalled();
+      expect(console.log).toHaveBeenCalledTimes(1);
+      expect(console.log).toBeCalledWith(
+        expect.stringContaining(`No files found`)
       );
     });
   });

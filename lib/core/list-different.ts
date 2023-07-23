@@ -1,4 +1,3 @@
-import glob from "glob";
 import fs from "fs";
 
 import { alerts } from "./alerts";
@@ -8,18 +7,13 @@ import {
   classNamesToTypeDefinitions,
   getTypeDefinitionPath,
 } from "../typescript";
+import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks";
 
 export const listDifferent = async (
   pattern: string,
   options: ConfigOptions
 ): Promise<void> => {
-  // Find all the files that match the provided pattern.
-  const files = glob.sync(pattern);
-
-  if (!files || !files.length) {
-    alerts.notice("No files found.");
-    return;
-  }
+  const files = listFilesAndPerformSanityChecks(pattern, options);
 
   // Wait for all the files to be checked.
   await Promise.all(files.map((file) => checkFile(file, options))).then(
