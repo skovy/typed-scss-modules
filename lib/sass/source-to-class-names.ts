@@ -1,9 +1,20 @@
-import Core, { Source } from "css-modules-loader-core";
+import postcss from "postcss";
+import PostcssModulesPlugin from "postcss-modules";
 
-const core = new Core();
-
-export const sourceToClassNames = (source: Source) => {
-  return core.load(source, undefined, undefined, noOpPathFetcher);
+/**
+ * Converts a CSS source string to a list of exports (class names, keyframes, etc.)
+ */
+export const sourceToClassNames = async (
+  source: { toString(): string },
+  file: string
+) => {
+  let result: Record<string, string> = {};
+  await postcss([
+    PostcssModulesPlugin({
+      getJSON: (_, json) => {
+        result = json;
+      },
+    }),
+  ]).process(source, { from: file });
+  return Object.keys(result);
 };
-
-const noOpPathFetcher = () => Promise.resolve({});

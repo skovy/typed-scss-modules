@@ -9,6 +9,7 @@ export declare const nestedClass: string;
 export declare const nestedStyles: string;
 export declare const number1: string;
 export declare const someStyles: string;
+export declare const whereSelector: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/alias-prefixes.scss.d.ts",
   },
@@ -19,6 +20,7 @@ export declare const nestedClass: string;
 export declare const number1: string;
 export declare const someClass: string;
 export declare const someStyles: string;
+export declare const whereSelector: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/aliases.scss.d.ts",
   },
@@ -27,6 +29,7 @@ export declare const someStyles: string;
 export declare const nestedClass: string;
 export declare const number1: string;
 export declare const someStyles: string;
+export declare const whereSelector: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
   },
@@ -75,6 +78,7 @@ Array [
   nestedStyles: string;
   number1: string;
   someStyles: string;
+  whereSelector: string;
 };
 
 export type ClassNames = keyof Styles;
@@ -93,6 +97,7 @@ export default styles;
   number1: string;
   someClass: string;
   someStyles: string;
+  whereSelector: string;
 };
 
 export type ClassNames = keyof Styles;
@@ -109,6 +114,7 @@ export default styles;
   nestedClass: string;
   number1: string;
   someStyles: string;
+  whereSelector: string;
 };
 
 export type ClassNames = keyof Styles;
@@ -211,6 +217,7 @@ export declare const nestedClass: string;
 export declare const nestedStyles: string;
 export declare const number1: string;
 export declare const someStyles: string;
+export declare const whereSelector: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/alias-prefixes.scss.d.ts",
   },
@@ -221,6 +228,7 @@ export declare const nestedClass: string;
 export declare const number1: string;
 export declare const someClass: string;
 export declare const someStyles: string;
+export declare const whereSelector: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/aliases.scss.d.ts",
   },
@@ -229,6 +237,7 @@ export declare const someStyles: string;
 export declare const nestedClass: string;
 export declare const number1: string;
 export declare const someStyles: string;
+export declare const whereSelector: string;
 ",
     "path": "../__generated__/__tests__/dummy-styles/complex.scss.d.ts",
   },
@@ -277,6 +286,7 @@ Array [
   nestedStyles: string;
   number1: string;
   someStyles: string;
+  whereSelector: string;
 };
 
 export type ClassNames = keyof Styles;
@@ -295,6 +305,7 @@ export default styles;
   number1: string;
   someClass: string;
   someStyles: string;
+  whereSelector: string;
 };
 
 export type ClassNames = keyof Styles;
@@ -311,6 +322,7 @@ export default styles;
   nestedClass: string;
   number1: string;
   someStyles: string;
+  whereSelector: string;
 };
 
 export type ClassNames = keyof Styles;
