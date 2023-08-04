@@ -14,6 +14,7 @@ describeAllImplementations((implementation) => {
         "nestedClass",
         "number1",
         "someStyles",
+        "whereSelector",
       ]);
     });
 
@@ -32,6 +33,7 @@ describeAllImplementations((implementation) => {
           "nested-class",
           "number-1",
           "some-styles",
+          "where-selector",
         ]);
       });
 
@@ -49,6 +51,7 @@ describeAllImplementations((implementation) => {
           "nested-class",
           "number-1",
           "some-styles",
+          "where-selector",
         ]);
       });
 
@@ -66,6 +69,7 @@ describeAllImplementations((implementation) => {
           "nested_class",
           "number_1",
           "some_styles",
+          "where_selector",
         ]);
       });
 
@@ -115,6 +119,9 @@ describeAllImplementations((implementation) => {
           "some_styles",
           "some-styles",
           "someStyles",
+          "where_selector",
+          "where-selector",
+          "whereSelector",
         ]);
       });
 
@@ -136,6 +143,8 @@ describeAllImplementations((implementation) => {
           "number-1",
           "some_styles",
           "some-styles",
+          "where_selector",
+          "where-selector",
         ]);
       });
 
@@ -153,6 +162,7 @@ describeAllImplementations((implementation) => {
           "nested_class",
           "number_1",
           "some_styles",
+          "where_selector",
         ]);
       });
     });
@@ -177,6 +187,7 @@ describeAllImplementations((implementation) => {
           "number1",
           "someClass",
           "someStyles",
+          "whereSelector",
         ]);
       });
     });
@@ -203,6 +214,7 @@ describeAllImplementations((implementation) => {
           "nestedStyles",
           "number1",
           "someStyles",
+          "whereSelector",
         ]);
       });
     });
