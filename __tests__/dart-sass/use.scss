@@ -1,0 +1,5 @@
+@use "variables";
+
+.foo {
+  color: variables.$red;
+}
