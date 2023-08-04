@@ -8,7 +8,7 @@ This example contains:
 The command to generate the proper type files would look like this (_in the root of this repository_):
 
 ```bash
-npm run typed-scss-modules "examples/basic/**/*.scss" --includePaths examples/basic/core --aliases.~alias variables --banner "// example banner"
+npm run typed-scss-modules "examples/basic/**/*.scss" -- --includePaths examples/basic/core --aliases.~alias variables --banner '// example banner'
 ```
 
 - The glob pattern is wrapped in quotes to pass it as a string and avoid executing.

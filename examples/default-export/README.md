@@ -8,5 +8,5 @@ This example contains:
 The command to generate the proper type files would look like this (_in the root of this repository_):
 
 ```bash
-npm run typed-scss-modules "examples/default-export/**/*.scss" --exportType default --nameFormat kebab
+npm run typed-scss-modules "examples/default-export/**/*.scss" -- --exportType default --nameFormat kebab --banner '// example banner'
 ```
