@@ -239,7 +239,7 @@ Specify a quote type to match your TypeScript configuration. Only default export
 - **Default**: `false`
 - **Example**: `typed-scss-modules src --updateStaleOnly`
 
-Overwrite generated files only if the source file has more recent changes. This can be useful if you want to avoid extraneous file updates, which can cause watcher processes to trigger unnecessarily (e.g. `tsc --watch`).
+Overwrite generated files only if the source file has more recent changes. This can be useful if you want to avoid extraneous file updates, which can cause watcher processes to trigger unnecessarily (e.g. `tsc --watch`). This is done by first checking if the generated file was modified more recently than the source file, and secondly by comparing the existing file contents to the generated file contents.
 
 Caveat: If a generated type definition file is updated manually, it won't be re-generated until the corresponding scss file is also updated.
 

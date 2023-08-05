@@ -31,11 +31,19 @@ export const writeFile = (file: string, options: CLIOptions): Promise<void> => {
 
       const typesPath = getTypeDefinitionPath(file, options);
 
+      // Avoid re-writing the file if it hasn't changed.
+      // First by checking the file modification time, then
+      // by comparing the file contents.
       if (options.updateStaleOnly && fs.existsSync(typesPath)) {
         const fileModified = fs.statSync(file).mtime;
         const typeDefinitionModified = fs.statSync(typesPath).mtime;
 
         if (fileModified < typeDefinitionModified) {
+          return;
+        }
+
+        const existingTypeDefinition = fs.readFileSync(typesPath, "utf8");
+        if (existingTypeDefinition === typeDefinition) {
           return;
         }
       }

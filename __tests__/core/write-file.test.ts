@@ -113,6 +113,7 @@ describeAllImplementations((implementation) => {
     });
 
     describe("when --updateStaleOnly is passed", () => {
+      const originalReadFileSync = fs.readFileSync;
       const testFile = path.resolve(__dirname, "..", "dummy-styles/style.scss");
       const expectedPath = path.join(
         process.cwd(),
@@ -121,12 +122,14 @@ describeAllImplementations((implementation) => {
       beforeEach(() => {
         jest.spyOn(fs, "statSync");
         jest.spyOn(fs, "existsSync");
+        jest.spyOn(fs, "readFileSync");
         (fs.existsSync as jest.Mock).mockImplementation(() => true);
       });
 
       afterEach(() => {
         (fs.statSync as jest.Mock).mockRestore();
         (fs.existsSync as jest.Mock).mockRestore();
+        (fs.readFileSync as jest.Mock).mockRestore();
       });
 
       test("it skips stale files", async () => {
@@ -159,6 +162,11 @@ describeAllImplementations((implementation) => {
           () => new Date(2020, 0, 1)
         );
 
+        // Mock outdated file contents.
+        (fs.readFileSync as jest.Mock).mockImplementation((p, opts) =>
+          p === expectedPath ? `` : originalReadFileSync(p, opts)
+        );
+
         await writeFile(testFile, {
           banner: "",
           watch: false,
@@ -176,6 +184,30 @@ describeAllImplementations((implementation) => {
         });
 
         expect(fs.writeFileSync).toBeCalled();
+      });
+
+      test("it skips files that aren't stale but type definition contents haven't changed", async () => {
+        (fs.statSync as jest.Mock).mockImplementation(
+          () => new Date(2020, 0, 1)
+        );
+
+        await writeFile(testFile, {
+          banner: "",
+          watch: false,
+          ignoreInitial: false,
+          exportType: "named",
+          exportTypeName: "ClassNames",
+          exportTypeInterface: "Styles",
+          listDifferent: false,
+          ignore: [],
+          implementation,
+          quoteType: "single",
+          updateStaleOnly: true,
+          logLevel: "verbose",
+          outputFolder: null,
+        });
+
+        expect(fs.writeFileSync).not.toBeCalled();
       });
 
       test("it doesn't attempt to access a non-existent file", async () => {
