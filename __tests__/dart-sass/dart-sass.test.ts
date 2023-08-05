@@ -1,5 +1,4 @@
 import fs from "fs";
-import path from "path";
 import slash from "slash";
 
 import { alerts } from "../../lib/core";
