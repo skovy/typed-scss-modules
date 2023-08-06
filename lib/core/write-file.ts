@@ -9,6 +9,7 @@ import {
 } from "../typescript";
 import { fileToClassNames } from "../sass";
 import { CLIOptions } from "./types";
+import { removeSCSSTypeDefinitionFile } from "./remove-file";
 
 /**
  * Given a single file generate the proper types.
@@ -24,17 +25,24 @@ export const writeFile = (file: string, options: CLIOptions): Promise<void> => {
         ...options,
       });
 
+      const typesPath = getTypeDefinitionPath(file, options);
+      const typesExist = fs.existsSync(typesPath);
+
+      // Avoid outputting empty type definition files.
+      // If the file exists and the type definition is now empty, remove the file.
       if (!typeDefinition) {
-        alerts.notice(`[NO GENERATED TYPES] ${file}`);
+        if (typesExist) {
+          removeSCSSTypeDefinitionFile(file, options);
+        } else {
+          alerts.notice(`[NO GENERATED TYPES] ${file}`);
+        }
         return;
       }
-
-      const typesPath = getTypeDefinitionPath(file, options);
 
       // Avoid re-writing the file if it hasn't changed.
       // First by checking the file modification time, then
       // by comparing the file contents.
-      if (options.updateStaleOnly && fs.existsSync(typesPath)) {
+      if (options.updateStaleOnly && typesExist) {
         const fileModified = fs.statSync(file).mtime;
         const typeDefinitionModified = fs.statSync(typesPath).mtime;
 
