@@ -14,6 +14,9 @@ describeAllImplementations((implementation) => {
       // Avoid creating new directories while running tests.
       jest.spyOn(fs, "mkdirSync").mockImplementation();
 
+      // Test removing existing types.
+      jest.spyOn(fs, "unlinkSync").mockImplementation();
+
       console.log = jest.fn();
     });
 
@@ -72,6 +75,50 @@ describeAllImplementations((implementation) => {
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[NO GENERATED TYPES] ${testFile}`)
       );
+    });
+
+    describe("when a file already exists with type definitions", () => {
+      const testFile = path.resolve(__dirname, "..", "dummy-styles/empty.scss");
+      const existingTypes = path.join(
+        process.cwd(),
+        "__tests__/dummy-styles/empty.scss.d.ts"
+      );
+      const originalExistsSync = fs.existsSync;
+
+      beforeEach(() => {
+        jest
+          .spyOn(fs, "existsSync")
+          .mockImplementation((p) =>
+            p === existingTypes ? true : originalExistsSync(p)
+          );
+      });
+
+      afterEach(() => {
+        (fs.existsSync as jest.Mock).mockRestore();
+      });
+
+      test("it removes existing type definitions if no classes are found", async () => {
+        await writeFile(testFile, {
+          banner: "",
+          watch: false,
+          ignoreInitial: false,
+          exportType: "named",
+          exportTypeName: "ClassNames",
+          exportTypeInterface: "Styles",
+          listDifferent: false,
+          ignore: [],
+          implementation,
+          quoteType: "single",
+          updateStaleOnly: false,
+          logLevel: "verbose",
+          outputFolder: null,
+        });
+
+        expect(fs.unlinkSync).toBeCalledWith(existingTypes);
+        expect(console.log).toBeCalledWith(
+          expect.stringContaining(`[REMOVED] ${existingTypes}`)
+        );
+      });
     });
 
     describe("when outputFolder is passed", () => {
