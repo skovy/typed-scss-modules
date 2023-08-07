@@ -15,57 +15,49 @@ export const listDifferent = async (
   const files = listFilesAndPerformSanityChecks(pattern, options);
 
   // Wait for all the files to be checked.
-  await Promise.all(files.map((file) => checkFile(file, options))).then(
-    (results) => {
-      results.includes(false) && process.exit(1);
-    }
+  const validChecks = await Promise.all(
+    files.map((file) => checkFile(file, options))
   );
+  if (validChecks.includes(false)) {
+    process.exit(1);
+  }
 };
 
-export const checkFile = (
+export const checkFile = async (
   file: string,
   options: ConfigOptions
 ): Promise<boolean> => {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return new Promise((resolve) =>
-    fileToClassNames(file, options)
-      .then(async (classNames) => {
-        const typeDefinition = await classNamesToTypeDefinitions({
-          classNames: classNames,
-          ...options,
-        });
+  try {
+    const classNames = await fileToClassNames(file, options);
+    const typeDefinition = await classNamesToTypeDefinitions({
+      classNames: classNames,
+      ...options,
+    });
 
-        if (!typeDefinition) {
-          // Assume if no type defs are necessary it's fine
-          resolve(true);
-          return;
-        }
+    if (!typeDefinition) {
+      // Assume if no type defs are necessary it's fine
+      return true;
+    }
 
-        const path = getTypeDefinitionPath(file, options);
+    const path = getTypeDefinitionPath(file, options);
+    if (!fs.existsSync(path)) {
+      alerts.error(
+        `[INVALID TYPES] Type file needs to be generated for ${file} `
+      );
+      return false;
+    }
 
-        if (!fs.existsSync(path)) {
-          alerts.error(
-            `[INVALID TYPES] Type file needs to be generated for ${file} `
-          );
-          resolve(false);
-          return;
-        }
+    const content = fs.readFileSync(path, { encoding: "utf8" });
+    if (content !== typeDefinition) {
+      alerts.error(`[INVALID TYPES] Check type definitions for ${file}`);
+      return false;
+    }
 
-        const content = fs.readFileSync(path, { encoding: "utf8" });
-
-        if (content !== typeDefinition) {
-          alerts.error(`[INVALID TYPES] Check type definitions for ${file}`);
-          resolve(false);
-          return;
-        }
-
-        resolve(true);
-      })
-      .catch((error) => {
-        alerts.error(
-          `An error occurred checking ${file}:\n${JSON.stringify(error)}`
-        );
-        resolve(false);
-      })
-  );
+    return true;
+  } catch (error) {
+    alerts.error(
+      `An error occurred checking ${file}:\n${JSON.stringify(error)}`
+    );
+    return false;
+  }
 };
