@@ -3,19 +3,20 @@ module.exports = {
   root: true,
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "promise"],
   ignorePatterns: ["dist/**"],
   overrides: [
     {
       files: ["*.ts", "*.tsx"],
-
       extends: [
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
       ],
-
       parserOptions: {
         project: ["./tsconfig.json"],
       },
     },
   ],
+  rules: {
+    "promise/prefer-await-to-then": "error",
+  },
 };
