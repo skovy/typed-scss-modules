@@ -8,6 +8,7 @@ const input =
 describe("attemptPrettier", () => {
   it("should locate and apply prettier.format", async () => {
     const output = await attemptPrettier(input);
+
     expect(prettier.format(input, { parser: "typescript" })).toMatch(output);
   });
 
@@ -23,6 +24,7 @@ describe("attemptPrettier", () => {
     }
 
     const output = await attemptPrettier(typeDefinition);
+
     expect(output).toMatchSnapshot();
   });
 });
@@ -36,6 +38,7 @@ describe("attemptPrettier - mock prettier", () => {
 
   it("should fail to recognize prettier and return input", async () => {
     const output = await attemptPrettier(input);
+
     expect(input).toMatch(output);
   });
 });
@@ -47,6 +50,7 @@ describe("attemptPrettier - mock resolution check", () => {
 
   it("should fail to resolve prettier and return input", async () => {
     const output = await attemptPrettier(input);
+
     expect(input).toMatch(output);
   });
 });

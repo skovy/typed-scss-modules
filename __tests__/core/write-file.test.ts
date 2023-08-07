@@ -18,7 +18,7 @@ describeAllImplementations((implementation) => {
       console.log = jest.fn();
     });
 
-    test("writes the corresponding type definitions for a file and logs", async () => {
+    it("writes the corresponding type definitions for a file and logs", async () => {
       const testFile = path.resolve(__dirname, "..", "dummy-styles/style.scss");
 
       await writeFile(testFile, {
@@ -41,16 +41,17 @@ describeAllImplementations((implementation) => {
         process.cwd(),
         "__tests__/dummy-styles/style.scss.d.ts"
       );
-      expect(fs.writeFileSync).toBeCalledWith(
+
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
         expectedPath,
         "export declare const someClass: string;\n"
       );
-      expect(console.log).toBeCalledWith(
+      expect(console.log).toHaveBeenCalledWith(
         expect.stringContaining(`[GENERATED TYPES] ${expectedPath}`)
       );
     });
 
-    test("it skips files with no classes", async () => {
+    it("skips files with no classes", async () => {
       const testFile = path.resolve(__dirname, "..", "dummy-styles/empty.scss");
 
       await writeFile(testFile, {
@@ -69,8 +70,8 @@ describeAllImplementations((implementation) => {
         outputFolder: null,
       });
 
-      expect(fs.writeFileSync).not.toBeCalled();
-      expect(console.log).toBeCalledWith(
+      expect(fs.writeFileSync).not.toHaveBeenCalled();
+      expect(console.log).toHaveBeenCalledWith(
         expect.stringContaining(`[NO GENERATED TYPES] ${testFile}`)
       );
     });
@@ -95,7 +96,7 @@ describeAllImplementations((implementation) => {
         (fs.existsSync as jest.Mock).mockRestore();
       });
 
-      test("it removes existing type definitions if no classes are found", async () => {
+      it("removes existing type definitions if no classes are found", async () => {
         await writeFile(testFile, {
           banner: "",
           watch: false,
@@ -112,8 +113,8 @@ describeAllImplementations((implementation) => {
           outputFolder: null,
         });
 
-        expect(fs.unlinkSync).toBeCalledWith(existingTypes);
-        expect(console.log).toBeCalledWith(
+        expect(fs.unlinkSync).toHaveBeenCalledWith(existingTypes);
+        expect(console.log).toHaveBeenCalledWith(
           expect.stringContaining(`[REMOVED] ${existingTypes}`)
         );
       });
@@ -147,11 +148,12 @@ describeAllImplementations((implementation) => {
           process.cwd(),
           "__generated__/__tests__/dummy-styles/style.scss.d.ts"
         );
-        expect(fs.writeFileSync).toBeCalledWith(
+
+        expect(fs.writeFileSync).toHaveBeenCalledWith(
           expectedPath,
           "export declare const someClass: string;\n"
         );
-        expect(console.log).toBeCalledWith(
+        expect(console.log).toHaveBeenCalledWith(
           expect.stringContaining(`[GENERATED TYPES] ${expectedPath}`)
         );
       });
@@ -164,6 +166,7 @@ describeAllImplementations((implementation) => {
         process.cwd(),
         "__tests__/dummy-styles/style.scss.d.ts"
       );
+
       beforeEach(() => {
         jest.spyOn(fs, "statSync");
         jest.spyOn(fs, "existsSync");
@@ -177,7 +180,7 @@ describeAllImplementations((implementation) => {
         (fs.readFileSync as jest.Mock).mockRestore();
       });
 
-      test("it skips stale files", async () => {
+      it("skips stale files", async () => {
         (fs.statSync as jest.Mock).mockImplementation((p) => ({
           mtime:
             p === expectedPath ? new Date(2020, 0, 2) : new Date(2020, 0, 1),
@@ -199,10 +202,10 @@ describeAllImplementations((implementation) => {
           outputFolder: null,
         });
 
-        expect(fs.writeFileSync).not.toBeCalled();
+        expect(fs.writeFileSync).not.toHaveBeenCalled();
       });
 
-      test("it updates files that aren't stale", async () => {
+      it("updates files that aren't stale", async () => {
         (fs.statSync as jest.Mock).mockImplementation(
           () => new Date(2020, 0, 1)
         );
@@ -234,10 +237,10 @@ describeAllImplementations((implementation) => {
           outputFolder: null,
         });
 
-        expect(fs.writeFileSync).toBeCalled();
+        expect(fs.writeFileSync).toHaveBeenCalled();
       });
 
-      test("it skips files that aren't stale but type definition contents haven't changed", async () => {
+      it("skips files that aren't stale but type definition contents haven't changed", async () => {
         (fs.statSync as jest.Mock).mockImplementation(
           () => new Date(2020, 0, 1)
         );
@@ -258,10 +261,10 @@ describeAllImplementations((implementation) => {
           outputFolder: null,
         });
 
-        expect(fs.writeFileSync).not.toBeCalled();
+        expect(fs.writeFileSync).not.toHaveBeenCalled();
       });
 
-      test("it doesn't attempt to access a non-existent file", async () => {
+      it("doesn't attempt to access a non-existent file", async () => {
         (fs.existsSync as jest.Mock).mockImplementation(() => false);
 
         await writeFile(testFile, {

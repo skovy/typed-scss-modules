@@ -22,15 +22,8 @@ describe("#loadConfig", () => {
 
       const config = await loadConfig();
 
-      if (config && "banner" in config) {
-        expect(config).toEqual({ banner: `// ${configCaseName}` });
-      } else {
-        throw new Error(
-          `Failed to load the correct config. The loaded config was: ${JSON.stringify(
-            config
-          )}`
-        );
-      }
+      expect(config).toHaveProperty("banner");
+      expect(config).toEqual({ banner: `// ${configCaseName}` });
     }
   );
 });

@@ -26,7 +26,7 @@ describeAllImplementations((implementation) => {
       writeFileSyncSpy.mockReset();
     });
 
-    test("generates types for all .scss files when the pattern is a directory", async () => {
+    it("generates types for all .scss files when the pattern is a directory", async () => {
       const pattern = `${__dirname}/dummy-styles`;
 
       await main(pattern, {
@@ -53,21 +53,21 @@ describeAllImplementations((implementation) => {
       });
 
       expect(alerts.error).not.toHaveBeenCalled();
-      expect(fs.writeFileSync).toBeCalledTimes(9);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(9);
 
       const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
 
-      expect(fs.writeFileSync).toBeCalledWith(
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
         "export declare const nestedAnother: string;\nexport declare const nestedClass: string;\nexport declare const number1: string;\nexport declare const someStyles: string;\nexport declare const whereSelector: string;\n"
       );
-      expect(fs.writeFileSync).toBeCalledWith(
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
         `${expectedDirname}/style.scss.d.ts`,
         "export declare const someClass: string;\n"
       );
     });
 
-    test("generates types for all .scss files and ignores files that match the ignore pattern", async () => {
+    it("generates types for all .scss files and ignores files that match the ignore pattern", async () => {
       const pattern = `${__dirname}/dummy-styles`;
 
       await main(pattern, {
@@ -94,27 +94,27 @@ describeAllImplementations((implementation) => {
       });
 
       expect(alerts.error).not.toHaveBeenCalled();
-      expect(fs.writeFileSync).toBeCalledTimes(7);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(7);
 
       const expectedDirname = slash(path.join(__dirname, "dummy-styles"));
 
-      expect(fs.writeFileSync).toBeCalledWith(
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
         "export declare const nestedAnother: string;\nexport declare const nestedClass: string;\nexport declare const number1: string;\nexport declare const someStyles: string;\nexport declare const whereSelector: string;\n"
       );
 
       // Files that should match the ignore pattern.
-      expect(fs.writeFileSync).not.toBeCalledWith(
+      expect(fs.writeFileSync).not.toHaveBeenCalledWith(
         `${expectedDirname}/style.scss.d.ts`,
         expect.anything()
       );
-      expect(fs.writeFileSync).not.toBeCalledWith(
+      expect(fs.writeFileSync).not.toHaveBeenCalledWith(
         `${expectedDirname}/nested-styles/style.scss.d.ts`,
         expect.anything()
       );
     });
 
-    test("reads options from the configuration file", async () => {
+    it("reads options from the configuration file", async () => {
       const pattern = `${__dirname}/dummy-styles`;
 
       jest.spyOn(process, "cwd").mockReturnValue(path.resolve(pattern));
@@ -132,7 +132,8 @@ describeAllImplementations((implementation) => {
       });
 
       expect(alerts.error).not.toHaveBeenCalled();
-      expect(fs.writeFileSync).toBeCalledTimes(9);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(9);
+
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
         .map(([fullFilePath, contents]: [string, string]) => ({
@@ -141,10 +142,11 @@ describeAllImplementations((implementation) => {
         }))
         // Sort to avoid flakey snapshot tests if call order changes.
         .sort((a, b) => a.path.localeCompare(b.path));
+
       expect(contents).toMatchSnapshot();
     });
 
-    test("outputs the correct files when outputFolder is passed", async () => {
+    it("outputs the correct files when outputFolder is passed", async () => {
       const pattern = path.resolve(__dirname, "dummy-styles");
 
       await main(pattern, {
@@ -160,8 +162,9 @@ describeAllImplementations((implementation) => {
       });
 
       expect(alerts.error).not.toHaveBeenCalled();
-      expect(fs.writeFileSync).toBeCalledTimes(9);
-      expect(fs.mkdirSync).toBeCalledTimes(9);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(9);
+      expect(fs.mkdirSync).toHaveBeenCalledTimes(9);
+
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
         .map(([fullFilePath, contents]: [string, string]) => ({
@@ -170,6 +173,7 @@ describeAllImplementations((implementation) => {
         }))
         // Sort to avoid flakey snapshot tests if call order changes.
         .sort((a, b) => a.path.localeCompare(b.path));
+
       expect(contents).toMatchSnapshot();
     });
   });

@@ -23,7 +23,7 @@ describe("dart-sass", () => {
     writeFileSyncSpy.mockReset();
   });
 
-  test("@use support", async () => {
+  it("@use support", async () => {
     const pattern = `${__dirname}`;
 
     await main(pattern, {
@@ -50,10 +50,11 @@ describe("dart-sass", () => {
     });
 
     expect(alerts.error).not.toHaveBeenCalled();
-    expect(fs.writeFileSync).toBeCalledTimes(1);
+    expect(fs.writeFileSync).toHaveBeenCalledTimes(1);
 
     const expectedDirname = slash(__dirname);
-    expect(fs.writeFileSync).toBeCalledWith(
+
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
       `${expectedDirname}/use.scss.d.ts`,
       "export declare const foo: string;\n"
     );
