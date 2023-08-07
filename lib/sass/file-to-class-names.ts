@@ -5,8 +5,8 @@ import {
   snakeCase,
 } from "change-case";
 import fs from "fs";
-import { getImplementation, Implementations } from "../implementations";
-import { Aliases, customImporters, SASSImporterOptions } from "./importer";
+import { Implementations, getImplementation } from "../implementations";
+import { Aliases, SASSImporterOptions, customImporters } from "./importer";
 import { sourceToClassNames } from "./source-to-class-names";
 
 export { Aliases };
