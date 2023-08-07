@@ -135,7 +135,7 @@ describeAllImplementations((implementation) => {
       expect(fs.writeFileSync).toBeCalledTimes(9);
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
-        .map(([fullFilePath, contents]) => ({
+        .map(([fullFilePath, contents]: [string, string]) => ({
           path: path.relative(__dirname, fullFilePath),
           contents,
         }))
@@ -164,7 +164,7 @@ describeAllImplementations((implementation) => {
       expect(fs.mkdirSync).toBeCalledTimes(9);
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
-        .map(([fullFilePath, contents]) => ({
+        .map(([fullFilePath, contents]: [string, string]) => ({
           path: path.relative(__dirname, fullFilePath),
           contents,
         }))

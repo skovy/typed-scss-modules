@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs, { PathOrFileDescriptor } from "fs";
 import path from "path";
 import { writeFile } from "../../lib/core";
 import { describeAllImplementations } from "../helpers";
@@ -208,8 +208,14 @@ describeAllImplementations((implementation) => {
         );
 
         // Mock outdated file contents.
-        (fs.readFileSync as jest.Mock).mockImplementation((p, opts) =>
-          p === expectedPath ? `` : originalReadFileSync(p, opts)
+        (fs.readFileSync as jest.Mock).mockImplementation(
+          (
+            p: PathOrFileDescriptor,
+            opts?: {
+              encoding?: null | undefined;
+              flag?: string | undefined;
+            } | null
+          ) => (p === expectedPath ? `` : originalReadFileSync(p, opts))
         );
 
         await writeFile(testFile, {

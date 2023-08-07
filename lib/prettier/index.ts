@@ -27,7 +27,7 @@ export const attemptPrettier = async (input: string) => {
     return input;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-assignment
   const prettier = require("prettier");
   if (!isPrettier(prettier)) {
     // doesn't look like prettier
@@ -41,6 +41,7 @@ export const attemptPrettier = async (input: string) => {
     // try to return formatted output
     return prettier.format(input, { ...config, parser: "typescript" });
   } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     alerts.notice(`Tried using prettier, but failed with error: ${error}`);
   }
 

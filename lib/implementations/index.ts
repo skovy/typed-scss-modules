@@ -46,8 +46,10 @@ export const getImplementation = (
   implementation?: Implementations
 ): Implementation => {
   if (implementation === "sass") {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return require("sass");
   } else {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return require("node-sass");
   }
 };

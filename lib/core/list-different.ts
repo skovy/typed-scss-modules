@@ -26,6 +26,7 @@ export const checkFile = (
   file: string,
   options: ConfigOptions
 ): Promise<boolean> => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return new Promise((resolve) =>
     fileToClassNames(file, options)
       .then(async (classNames) => {
