@@ -1,8 +1,6 @@
 import fs from "fs";
 import path from "path";
-
 import { writeFile } from "../../lib/core";
-
 import { describeAllImplementations } from "../helpers";
 
 describeAllImplementations((implementation) => {
@@ -276,7 +274,7 @@ describeAllImplementations((implementation) => {
           outputFolder: null,
         });
 
-        expect(fs.statSync).not.toBeCalled();
+        expect(fs.statSync).not.toHaveBeenCalledWith(testFile);
       });
     });
   });

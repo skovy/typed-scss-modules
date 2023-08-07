@@ -1,5 +1,4 @@
 import fs from "fs";
-
 import { generate } from "../../lib/core";
 import { describeAllImplementations } from "../helpers";
 

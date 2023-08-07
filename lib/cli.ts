@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
 import yargs from "yargs";
-
-import { Aliases, NAME_FORMATS } from "./sass";
-import { EXPORT_TYPES, QUOTE_TYPES, LOG_LEVELS } from "./typescript";
-import { main } from "./main";
 import { IMPLEMENTATIONS } from "./implementations";
+import { main } from "./main";
+import { Aliases, NAME_FORMATS } from "./sass";
+import { EXPORT_TYPES, LOG_LEVELS, QUOTE_TYPES } from "./typescript";
 
 const { _: patterns, ...rest } = yargs
   .usage(

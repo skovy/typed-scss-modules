@@ -1,6 +1,5 @@
-import sass from "sass";
 import nodeSass from "node-sass";
-
+import sass from "sass";
 import { getImplementation } from "../../lib/implementations";
 
 describe("getImplementation", () => {

@@ -1,10 +1,9 @@
 import chokidar from "chokidar";
-
 import { alerts } from "./alerts";
-import { removeSCSSTypeDefinitionFile } from "./remove-file";
-import { writeFile } from "./write-file";
-import { ConfigOptions } from "./types";
 import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks";
+import { removeSCSSTypeDefinitionFile } from "./remove-file";
+import { ConfigOptions } from "./types";
+import { writeFile } from "./write-file";
 
 /**
  * Watch a file glob and generate the corresponding types.

@@ -1,8 +1,7 @@
 import fs from "fs";
-
-import { alerts } from "./alerts";
-import { getTypeDefinitionPath } from "../typescript";
 import { ConfigOptions } from ".";
+import { getTypeDefinitionPath } from "../typescript";
+import { alerts } from "./alerts";
 
 /**
  * Given a single file remove the file

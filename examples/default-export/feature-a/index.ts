@@ -1,4 +1,4 @@
-import styles, { Styles, ClassNames } from "./style.scss";
+import styles, { ClassNames, Styles } from "./style.scss";
 
 console.log(styles.i);
 console.log(styles["i-am-kebab-cased"]);

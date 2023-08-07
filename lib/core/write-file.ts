@@ -1,13 +1,12 @@
 import fs from "fs";
-import path from "path";
 import { SassError } from "node-sass";
-
-import { alerts } from "./alerts";
-import {
-  getTypeDefinitionPath,
-  classNamesToTypeDefinitions,
-} from "../typescript";
+import path from "path";
 import { fileToClassNames } from "../sass";
+import {
+  classNamesToTypeDefinitions,
+  getTypeDefinitionPath,
+} from "../typescript";
+import { alerts } from "./alerts";
 import { CLIOptions } from "./types";
 import { removeSCSSTypeDefinitionFile } from "./remove-file";
 

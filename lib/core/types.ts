@@ -1,5 +1,5 @@
 import { SASSOptions } from "../sass";
-import { ExportType, QuoteType, LogLevel } from "../typescript";
+import { ExportType, LogLevel, QuoteType } from "../typescript";
 
 type CLIOnlyOptions = Extract<keyof SASSOptions, "importer">;
 

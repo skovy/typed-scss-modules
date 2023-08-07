@@ -1,5 +1,4 @@
 import glob from "glob";
-
 import { alerts } from "./alerts";
 import { ConfigOptions } from "./types";
 

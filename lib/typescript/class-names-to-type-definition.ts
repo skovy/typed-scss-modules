@@ -1,8 +1,6 @@
-import os from "os";
-
-import reserved from "reserved-words";
-
 import { ClassName } from "lib/sass/file-to-class-names";
+import os from "os";
+import reserved from "reserved-words";
 import { alerts } from "../core";
 import { attemptPrettier } from "../prettier";
 

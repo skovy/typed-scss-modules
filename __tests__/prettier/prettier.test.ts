@@ -1,7 +1,6 @@
+import prettier from "prettier";
 import { attemptPrettier } from "../../lib/prettier";
 import { classNamesToTypeDefinitions } from "../../lib/typescript";
-
-import prettier from "prettier";
 
 const input =
   "export type Styles = {'myClass': string;'yourClass': string;}; export type Classes = keyof Styles; declare const styles: Styles; export default styles;";
