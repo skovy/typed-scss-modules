@@ -31,6 +31,8 @@ jobs:
         run: npm run build
       - name: "Type check"
         run: npm run check-types
+      - name: "Code linting check"
+        run: npm run check-linting
       - name: "Code formatting check"
         run: npm run check-formatting
       - name: "Commit formatting check"

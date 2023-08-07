@@ -27,7 +27,9 @@ const joycon = new JoyCon();
  *  - Default export: `export default {}`
  *  - `module.exports = {}`
  */
-export const loadConfig = async (): Promise<{} | ConfigOptions> => {
+export const loadConfig = async (): Promise<
+  Record<string, never> | ConfigOptions
+> => {
   const CURRENT_WORKING_DIRECTORY = process.cwd();
 
   const configPath = await joycon.resolve(
@@ -76,8 +78,10 @@ export const DEFAULT_OPTIONS: CLIOptions = {
   outputFolder: null,
 };
 
-const removedUndefinedValues = <Obj extends {}>(obj: Obj): Obj => {
-  for (let key in obj) {
+const removedUndefinedValues = <Obj extends Record<string, unknown>>(
+  obj: Obj
+): Obj => {
+  for (const key in obj) {
     if (obj[key] === undefined) {
       delete obj[key];
     }

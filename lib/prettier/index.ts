@@ -7,8 +7,8 @@ interface Prettier {
   resolveConfig: typeof resolveConfig;
 }
 
-const isPrettier = (t: any): t is Prettier =>
-  t &&
+const isPrettier = (t: unknown): t is Prettier =>
+  !!t &&
   typeof t === "object" &&
   t !== null &&
   "format" in t &&
@@ -27,6 +27,7 @@ export const attemptPrettier = async (input: string) => {
     return input;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const prettier = require("prettier");
   if (!isPrettier(prettier)) {
     // doesn't look like prettier

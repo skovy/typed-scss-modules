@@ -60,7 +60,7 @@ export const fileToClassNames = async (
     typeof rawNameFormat === "string" ? [rawNameFormat] : rawNameFormat
   ) as NameFormat[];
 
-  let nameFormats: NameFormatWithTransformer[] = nameFormat
+  const nameFormats: NameFormatWithTransformer[] = nameFormat
     ? nameFormat.includes("all")
       ? NAME_FORMATS_WITH_TRANSFORMER
       : (nameFormat as NameFormatWithTransformer[])

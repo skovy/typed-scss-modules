@@ -9,7 +9,12 @@ describe("getImplementation", () => {
   });
 
   it("returns the correct default implementation if it is invalid", () => {
-    expect(getImplementation("wat-sass" as any)).toEqual(nodeSass);
+    expect(
+      getImplementation(
+        // @ts-expect-error invalid implementation
+        "wat-sass"
+      )
+    ).toEqual(nodeSass);
     expect(getImplementation()).toEqual(nodeSass);
   });
 });
