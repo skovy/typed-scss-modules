@@ -6,6 +6,9 @@
   "types": "dist/lib/index.d.ts",
   "author": "Spencer Miskoviak <smiskoviak@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/skovy/typed-scss-modules.git"
@@ -19,6 +22,10 @@
     "type generator",
     "scss modules"
   ],
+  "files": [
+    "dist/lib"
+  ],
+  "bin": "./dist/lib/cli.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -31,10 +38,6 @@
     "commit": "commit",
     "semantic-release": "semantic-release"
   },
-  "files": [
-    "dist/lib"
-  ],
-  "bin": "./dist/lib/cli.js",
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
@@ -93,6 +96,5 @@
     "*.{js,json,css,md,scss,tsx,ts}": [
       "prettier --write"
     ]
-  },
-  "packageManager": "npm@3.19.2"
+  }
 }
