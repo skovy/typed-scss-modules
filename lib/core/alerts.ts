@@ -11,6 +11,7 @@ export const setAlertsLogLevel = (logLevel: LogLevel) => {
   currentLogLevel = logLevel;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CbFunc = (...args: any[]) => any;
 type WrappedCbFunc<T extends CbFunc> = (
   ...args: Parameters<T>

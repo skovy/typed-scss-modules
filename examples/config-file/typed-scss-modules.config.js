@@ -1,3 +1,5 @@
+/* eslint-env node */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const jsonImporter = require("node-sass-json-importer");
 
 export const config = {
