@@ -1,5 +1,4 @@
 import path from "path";
-
 import { DEFAULT_OPTIONS } from "../../lib/load";
 import { getTypeDefinitionPath } from "../../lib/typescript";
 

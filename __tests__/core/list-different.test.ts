@@ -1,5 +1,4 @@
 import { listDifferent } from "../../lib/core";
-
 import { describeAllImplementations } from "../helpers";
 
 describeAllImplementations((implementation) => {

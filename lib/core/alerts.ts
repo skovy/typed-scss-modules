@@ -1,7 +1,7 @@
 import chalk from "chalk";
 
 export const LOG_LEVELS = ["verbose", "error", "info", "silent"] as const;
-export type LogLevel = typeof LOG_LEVELS[number];
+export type LogLevel = (typeof LOG_LEVELS)[number];
 
 export const logLevelDefault: LogLevel = "verbose";
 

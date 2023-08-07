@@ -1,6 +1,5 @@
 import fs from "fs";
 import slash from "slash";
-
 import { alerts } from "../../lib/core";
 import { main } from "../../lib/main";
 

@@ -1,5 +1,5 @@
 import path from "path";
-import { loadConfig, mergeOptions, DEFAULT_OPTIONS } from "../lib/load";
+import { DEFAULT_OPTIONS, loadConfig, mergeOptions } from "../lib/load";
 
 const CONFIG_CASES = [
   "js-default-export",

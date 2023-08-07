@@ -1,7 +1,6 @@
+import { format, resolveConfig } from "prettier";
 import { alerts } from "../core";
 import { canResolvePrettier } from "./can-resolve";
-
-import { format, resolveConfig } from "prettier";
 
 interface Prettier {
   format: typeof format;

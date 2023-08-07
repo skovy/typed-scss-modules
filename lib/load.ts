@@ -1,18 +1,17 @@
-import path from "path";
-import JoyCon from "joycon";
 import { bundleRequire } from "bundle-require";
-
+import JoyCon from "joycon";
+import path from "path";
 import { alerts, CLIOptions, ConfigOptions } from "./core";
+import { getDefaultImplementation } from "./implementations";
 import { nameFormatDefault } from "./sass";
 import {
   bannerTypeDefault,
   exportTypeDefault,
   exportTypeInterfaceDefault,
   exportTypeNameDefault,
-  quoteTypeDefault,
   logLevelDefault,
+  quoteTypeDefault,
 } from "./typescript";
-import { getDefaultImplementation } from "./implementations";
 
 const VALID_CONFIG_FILES = [
   "typed-scss-modules.config.ts",

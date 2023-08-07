@@ -8,7 +8,7 @@ import sass from "sass";
  * all of the same logic can be reused.
  */
 export const IMPLEMENTATIONS = ["node-sass", "sass"] as const;
-export type Implementations = typeof IMPLEMENTATIONS[number];
+export type Implementations = (typeof IMPLEMENTATIONS)[number];
 
 type Implementation = typeof nodeSass | typeof sass;
 

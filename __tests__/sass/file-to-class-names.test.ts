@@ -1,5 +1,4 @@
 import { fileToClassNames } from "../../lib/sass";
-
 import { describeAllImplementations } from "../helpers";
 
 describeAllImplementations((implementation) => {

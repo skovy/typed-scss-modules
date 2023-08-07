@@ -1,14 +1,14 @@
+export { LogLevel, logLevelDefault, LOG_LEVELS } from "../core/alerts";
 export {
   bannerTypeDefault,
   classNamesToTypeDefinitions,
+  ExportType,
   exportTypeDefault,
   exportTypeInterfaceDefault,
   exportTypeNameDefault,
-  quoteTypeDefault,
-  ExportType,
-  QuoteType,
   EXPORT_TYPES,
+  QuoteType,
+  quoteTypeDefault,
   QUOTE_TYPES,
 } from "./class-names-to-type-definition";
-export { logLevelDefault, LogLevel, LOG_LEVELS } from "../core/alerts";
 export { getTypeDefinitionPath } from "./get-type-definition-path";

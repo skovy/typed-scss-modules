@@ -1,15 +1,14 @@
 import fs from "fs";
 import path from "path";
 import slash from "slash";
-import { loadConfig, mergeOptions } from "./load";
-
 import {
-  watch,
   CLIOptions,
   generate,
   listDifferent,
   setAlertsLogLevel,
+  watch,
 } from "./core";
+import { loadConfig, mergeOptions } from "./load";
 
 export const main = async (
   pattern: string,
