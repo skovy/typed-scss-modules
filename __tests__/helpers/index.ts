@@ -4,6 +4,8 @@ export const describeAllImplementations = (
   fn: (implementation: Implementations) => void
 ) => {
   IMPLEMENTATIONS.forEach((implementation) => {
-    describe(`${implementation} implementation`, () => fn(implementation));
+    describe(`${implementation} implementation`, () => {
+      fn(implementation);
+    });
   });
 };

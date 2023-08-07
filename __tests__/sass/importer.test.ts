@@ -61,6 +61,7 @@ describe("#customImporters", () => {
     expect(importers).toHaveLength(1);
 
     const [aliasImporter] = importers;
+
     expect(aliasImporter.call(fakeImporterThis, "~package", fakePrev)).toEqual({
       file: "node_modules/package",
     });

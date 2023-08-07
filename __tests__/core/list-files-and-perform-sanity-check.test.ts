@@ -27,7 +27,7 @@ describe("listAllFilesAndPerformSanityCheck", () => {
 
     listFilesAndPerformSanityChecks(pattern, options);
 
-    expect(console.log).toBeCalledWith(
+    expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining("No files found.")
     );
   });
@@ -37,7 +37,7 @@ describe("listAllFilesAndPerformSanityCheck", () => {
 
     listFilesAndPerformSanityChecks(pattern, options);
 
-    expect(console.log).toBeCalledWith(
+    expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining("Only 1 file found for")
     );
   });

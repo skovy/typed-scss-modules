@@ -48,19 +48,27 @@ describe("removeFile", () => {
 
     removeSCSSTypeDefinitionFile(nonExistingFile, DEFAULT_OPTIONS);
 
-    expect(existsSpy).toBeCalledWith(expect.stringMatching(nonExistingFile));
-    expect(existsSpy).toBeCalledWith(expect.stringMatching(nonExistingTypes));
-    expect(unlinkSpy).not.toBeCalled();
-    expect(alertsSpy).not.toBeCalled();
+    expect(existsSpy).toHaveBeenCalledWith(
+      expect.stringMatching(nonExistingFile)
+    );
+    expect(existsSpy).toHaveBeenCalledWith(
+      expect.stringMatching(nonExistingTypes)
+    );
+    expect(unlinkSpy).not.toHaveBeenCalled();
+    expect(alertsSpy).not.toHaveBeenCalled();
   });
 
   it("removes *.scss.d.ts types file for *.scss", () => {
     removeSCSSTypeDefinitionFile(originalTestFile, DEFAULT_OPTIONS);
 
-    expect(existsSpy).toBeCalledWith(expect.stringMatching(existingTypes));
-    expect(unlinkSpy).toBeCalled();
-    expect(unlinkSpy).toBeCalledWith(expect.stringMatching(existingTypes));
-    expect(alertsSpy).toBeCalled();
+    expect(existsSpy).toHaveBeenCalledWith(
+      expect.stringMatching(existingTypes)
+    );
+    expect(unlinkSpy).toHaveBeenCalled();
+    expect(unlinkSpy).toHaveBeenCalledWith(
+      expect.stringMatching(existingTypes)
+    );
+    expect(alertsSpy).toHaveBeenCalled();
   });
 
   describe("when outputFolder is passed", () => {
@@ -70,14 +78,14 @@ describe("removeFile", () => {
         outputFolder: "__generated__",
       });
 
-      expect(existsSpy).toBeCalledWith(
+      expect(existsSpy).toHaveBeenCalledWith(
         expect.stringMatching(outputFolderExistingTypes)
       );
-      expect(unlinkSpy).toBeCalled();
-      expect(unlinkSpy).toBeCalledWith(
+      expect(unlinkSpy).toHaveBeenCalled();
+      expect(unlinkSpy).toHaveBeenCalledWith(
         expect.stringMatching(outputFolderExistingTypes)
       );
-      expect(alertsSpy).toBeCalled();
+      expect(alertsSpy).toHaveBeenCalled();
     });
   });
 });

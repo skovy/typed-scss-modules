@@ -10,7 +10,7 @@ describeAllImplementations((implementation) => {
       console.log = jest.fn(); // avoid console logs showing up
     });
 
-    test("generates types for all files matching the pattern", async () => {
+    it("generates types for all files matching the pattern", async () => {
       const pattern = `${__dirname}/../dummy-styles/**/*.scss`;
 
       await generate(pattern, {
@@ -29,7 +29,7 @@ describeAllImplementations((implementation) => {
         outputFolder: null,
       });
 
-      expect(fs.writeFileSync).toBeCalledTimes(6);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(6);
     });
   });
 });
