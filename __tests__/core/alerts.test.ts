@@ -12,6 +12,7 @@ describe("alerts", () => {
   });
 
   const TEST_ALERT_MSG = "TEST ALERT MESSAGE";
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const EXPECTED = expect.stringContaining(TEST_ALERT_MSG);
 
   test("should print all messages with verbose log level", () => {

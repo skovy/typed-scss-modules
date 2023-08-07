@@ -51,12 +51,12 @@ const { _: patterns, ...rest } = yargs
     describe: "Prepends the SCSS code before each file.",
   })
   .option("aliases", {
-    coerce: (obj): Aliases => obj,
+    coerce: (obj: Aliases): Aliases => obj,
     alias: "a",
     describe: "Alias any import to any other value.",
   })
   .option("aliasPrefixes", {
-    coerce: (obj): Aliases => obj,
+    coerce: (obj: Aliases): Aliases => obj,
     alias: "p",
     describe: "A prefix for any import to rewrite to another value.",
   })
@@ -144,4 +144,5 @@ const { _: patterns, ...rest } = yargs
   })
   .parseSync();
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 main(patterns[0] as string, { ...rest });

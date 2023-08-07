@@ -44,12 +44,15 @@ export const loadConfig = async (): Promise<
         filepath: configPath,
       });
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const config: ConfigOptions =
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         configModule.mod.config || configModule.mod.default || configModule.mod;
 
       return config;
     } catch (error) {
       alerts.error(
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `An error occurred loading the config file "${configPath}":\n${error}`
       );
 

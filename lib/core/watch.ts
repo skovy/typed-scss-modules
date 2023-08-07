@@ -23,10 +23,12 @@ export const watch = (pattern: string, options: ConfigOptions): void => {
     })
     .on("change", (path) => {
       alerts.info(`[CHANGED] ${path}`);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       writeFile(path, options);
     })
     .on("add", (path) => {
       alerts.info(`[ADDED] ${path}`);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       writeFile(path, options);
     })
     .on("unlink", (path) => {

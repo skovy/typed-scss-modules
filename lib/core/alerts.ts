@@ -12,7 +12,7 @@ export const setAlertsLogLevel = (logLevel: LogLevel) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type CbFunc = (...args: any[]) => any;
+type CbFunc = (...args: any[]) => void;
 type WrappedCbFunc<T extends CbFunc> = (
   ...args: Parameters<T>
 ) => ReturnType<T> | void;

@@ -39,7 +39,7 @@ describe("removeFile", () => {
     jest.clearAllMocks();
   });
 
-  it("does nothing if types file doesn't exist", async () => {
+  it("does nothing if types file doesn't exist", () => {
     const nonExistingFile = path.resolve(__dirname, "..", "deleted.scss");
     const nonExistingTypes = path.join(
       process.cwd(),
@@ -64,7 +64,7 @@ describe("removeFile", () => {
   });
 
   describe("when outputFolder is passed", () => {
-    it("removes the correct files", async () => {
+    it("removes the correct files", () => {
       removeSCSSTypeDefinitionFile(originalTestFile, {
         ...DEFAULT_OPTIONS,
         outputFolder: "__generated__",
