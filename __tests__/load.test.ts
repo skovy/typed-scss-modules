@@ -1,5 +1,5 @@
 import path from "path";
-import { DEFAULT_OPTIONS, loadConfig, mergeOptions } from "../lib/load";
+import { DEFAULT_OPTIONS, loadConfig, mergeOptions } from "../lib/load.js";
 
 const CONFIG_CASES = [
   "js-default-export",
@@ -24,7 +24,7 @@ describe("#loadConfig", () => {
 
       expect(config).toHaveProperty("banner");
       expect(config).toEqual({ banner: `// ${configCaseName}` });
-    }
+    },
   );
 });
 
@@ -52,8 +52,8 @@ describe("#mergeOptions", () => {
           outputFolder: "__generated__",
           banner: "// override",
         },
-        {}
-      )
+        {},
+      ),
     ).toEqual({
       nameFormat: ["kebab"],
       implementation: "sass",
@@ -94,8 +94,8 @@ describe("#mergeOptions", () => {
           banner: "// override",
           outputFolder: "__generated__",
           importer,
-        }
-      )
+        },
+      ),
     ).toEqual({
       nameFormat: ["kebab"],
       implementation: "sass",
@@ -152,8 +152,8 @@ describe("#mergeOptions", () => {
           banner: "// not override",
           outputFolder: "__generated__",
           importer,
-        }
-      )
+        },
+      ),
     ).toEqual({
       nameFormat: ["kebab"],
       implementation: "sass",
@@ -214,8 +214,8 @@ describe("#mergeOptions", () => {
           banner: "// banner",
           outputFolder: "__generated__",
           importer,
-        }
-      )
+        },
+      ),
     ).toEqual({
       aliases: {},
       aliasPrefixes: {},

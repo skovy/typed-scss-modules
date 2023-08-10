@@ -1,9 +1,8 @@
 import { bundleRequire } from "bundle-require";
-import JoyCon from "joycon";
 import path from "path";
-import { alerts, CLIOptions, ConfigOptions } from "./core";
-import { getDefaultImplementation } from "./implementations";
-import { nameFormatDefault } from "./sass";
+import { alerts, CLIOptions, ConfigOptions } from "./core/index.js";
+import { getDefaultImplementation } from "./implementations/index.js";
+import { nameFormatDefault } from "./sass/index.js";
 import {
   bannerTypeDefault,
   exportTypeDefault,
@@ -11,13 +10,15 @@ import {
   exportTypeNameDefault,
   logLevelDefault,
   quoteTypeDefault,
-} from "./typescript";
+} from "./typescript/index.js";
+import JoyCon = require("joycon");
 
 const VALID_CONFIG_FILES = [
   "typed-scss-modules.config.ts",
   "typed-scss-modules.config.js",
 ];
-const joycon = new JoyCon();
+
+const joycon = new JoyCon.default();
 
 /**
  * Load a custom config file in the project root directory with any options for this package.
@@ -35,7 +36,7 @@ export const loadConfig = async (): Promise<
   const configPath = await joycon.resolve(
     VALID_CONFIG_FILES,
     CURRENT_WORKING_DIRECTORY,
-    path.parse(CURRENT_WORKING_DIRECTORY).root
+    path.parse(CURRENT_WORKING_DIRECTORY).root,
   );
 
   if (configPath) {
@@ -53,7 +54,7 @@ export const loadConfig = async (): Promise<
     } catch (error) {
       alerts.error(
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        `An error occurred loading the config file "${configPath}":\n${error}`
+        `An error occurred loading the config file "${configPath}":\n${error}`,
       );
 
       return {};
@@ -82,7 +83,7 @@ export const DEFAULT_OPTIONS: CLIOptions = {
 };
 
 const removedUndefinedValues = <Obj extends Record<string, unknown>>(
-  obj: Obj
+  obj: Obj,
 ): Obj => {
   for (const key in obj) {
     if (obj[key] === undefined) {
@@ -103,7 +104,7 @@ const removedUndefinedValues = <Obj extends Record<string, unknown>>(
  */
 export const mergeOptions = (
   cliOptions: Partial<CLIOptions>,
-  configOptions: Partial<ConfigOptions>
+  configOptions: Partial<ConfigOptions>,
 ): ConfigOptions => {
   return {
     ...DEFAULT_OPTIONS,

@@ -1,6 +1,6 @@
 import nodeSass from "node-sass";
 import sass from "sass";
-import { getImplementation } from "../../lib/implementations";
+import { getImplementation } from "../../lib/implementations/index.js";
 
 describe("getImplementation", () => {
   it("returns the correct implementation when explicitly passed", () => {
@@ -12,8 +12,8 @@ describe("getImplementation", () => {
     expect(
       getImplementation(
         // @ts-expect-error invalid implementation
-        "wat-sass"
-      )
+        "wat-sass",
+      ),
     ).toEqual(nodeSass);
     expect(getImplementation()).toEqual(nodeSass);
   });

@@ -1,9 +1,9 @@
 import chokidar from "chokidar";
-import { alerts } from "./alerts";
-import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks";
-import { removeSCSSTypeDefinitionFile } from "./remove-file";
-import { ConfigOptions } from "./types";
-import { writeFile } from "./write-file";
+import { alerts } from "./alerts.js";
+import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks.js";
+import { removeSCSSTypeDefinitionFile } from "./remove-file.js";
+import { ConfigOptions } from "./types.js";
+import { writeFile } from "./write-file.js";
 
 /**
  * Watch a file glob and generate the corresponding types.

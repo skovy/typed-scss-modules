@@ -1,25 +1,28 @@
+import { jest } from "@jest/globals";
 import fs from "fs";
 import path from "path";
 import slash from "slash";
-import { alerts } from "../lib/core";
-import { main } from "../lib/main";
-import { describeAllImplementations } from "./helpers";
+import { alerts } from "../lib/core/index.js";
+import { main } from "../lib/main.js";
+import { describeAllImplementations } from "./helpers/index.js";
 
 describeAllImplementations((implementation) => {
   describe("main", () => {
-    let writeFileSyncSpy: jest.SpyInstance;
+    let writeFileSyncSpy: jest.SpiedFunction<typeof fs.writeFileSync>;
 
     beforeEach(() => {
       // Only mock the writes, so the example files can still be read.
-      writeFileSyncSpy = jest.spyOn(fs, "writeFileSync").mockImplementation();
+      writeFileSyncSpy = jest
+        .spyOn(fs, "writeFileSync")
+        .mockImplementation(() => null);
 
       // Avoid creating directories while running tests.
-      jest.spyOn(fs, "mkdirSync").mockImplementation();
+      jest.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
 
       // Avoid console logs showing up.
-      jest.spyOn(console, "log").mockImplementation();
+      jest.spyOn(console, "log").mockImplementation(() => undefined);
 
-      jest.spyOn(alerts, "error").mockImplementation();
+      jest.spyOn(alerts, "error").mockImplementation(() => undefined);
     });
 
     afterEach(() => {
@@ -59,11 +62,11 @@ describeAllImplementations((implementation) => {
 
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
-        "export declare const nestedAnother: string;\nexport declare const nestedClass: string;\nexport declare const number1: string;\nexport declare const someStyles: string;\nexport declare const whereSelector: string;\n"
+        "export declare const nestedAnother: string;\nexport declare const nestedClass: string;\nexport declare const number1: string;\nexport declare const someStyles: string;\nexport declare const whereSelector: string;\n",
       );
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         `${expectedDirname}/style.scss.d.ts`,
-        "export declare const someClass: string;\n"
+        "export declare const someClass: string;\n",
       );
     });
 
@@ -100,17 +103,17 @@ describeAllImplementations((implementation) => {
 
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         `${expectedDirname}/complex.scss.d.ts`,
-        "export declare const nestedAnother: string;\nexport declare const nestedClass: string;\nexport declare const number1: string;\nexport declare const someStyles: string;\nexport declare const whereSelector: string;\n"
+        "export declare const nestedAnother: string;\nexport declare const nestedClass: string;\nexport declare const number1: string;\nexport declare const someStyles: string;\nexport declare const whereSelector: string;\n",
       );
 
       // Files that should match the ignore pattern.
       expect(fs.writeFileSync).not.toHaveBeenCalledWith(
         `${expectedDirname}/style.scss.d.ts`,
-        expect.anything()
+        expect.anything(),
       );
       expect(fs.writeFileSync).not.toHaveBeenCalledWith(
         `${expectedDirname}/nested-styles/style.scss.d.ts`,
-        expect.anything()
+        expect.anything(),
       );
     });
 
@@ -136,8 +139,8 @@ describeAllImplementations((implementation) => {
 
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
-        .map(([fullFilePath, contents]: [string, string]) => ({
-          path: path.relative(__dirname, fullFilePath),
+        .map(([fullFilePath, contents]) => ({
+          path: path.relative(__dirname, fullFilePath.toString()),
           contents,
         }))
         // Sort to avoid flakey snapshot tests if call order changes.
@@ -167,8 +170,8 @@ describeAllImplementations((implementation) => {
 
       // Transform the calls into a more readable format for the snapshot.
       const contents = writeFileSyncSpy.mock.calls
-        .map(([fullFilePath, contents]: [string, string]) => ({
-          path: path.relative(__dirname, fullFilePath),
+        .map(([fullFilePath, contents]) => ({
+          path: path.relative(__dirname, fullFilePath.toString()),
           contents,
         }))
         // Sort to avoid flakey snapshot tests if call order changes.

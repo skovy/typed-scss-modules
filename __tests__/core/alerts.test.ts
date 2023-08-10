@@ -1,4 +1,4 @@
-import { alerts, setAlertsLogLevel } from "../../lib/core";
+import { alerts, setAlertsLogLevel } from "../../lib/core/index.js";
 
 describe("alerts", () => {
   let logSpy: jest.SpyInstance;

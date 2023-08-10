@@ -4,4 +4,4 @@ export {
   SASSOptions,
   fileToClassNames,
   nameFormatDefault,
-} from "./file-to-class-names";
+} from "./file-to-class-names.js";

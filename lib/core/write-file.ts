@@ -1,14 +1,14 @@
 import fs from "fs";
 import { SassError } from "node-sass";
 import path from "path";
-import { fileToClassNames } from "../sass";
+import { fileToClassNames } from "../sass/index.js";
 import {
   classNamesToTypeDefinitions,
   getTypeDefinitionPath,
-} from "../typescript";
-import { alerts } from "./alerts";
-import { removeSCSSTypeDefinitionFile } from "./remove-file";
-import { CLIOptions } from "./types";
+} from "../typescript/index.js";
+import { alerts } from "./alerts.js";
+import { removeSCSSTypeDefinitionFile } from "./remove-file.js";
+import { CLIOptions } from "./types.js";
 
 /**
  * Given a single file generate the proper types.
@@ -18,7 +18,7 @@ import { CLIOptions } from "./types";
  */
 export const writeFile = async (
   file: string,
-  options: CLIOptions
+  options: CLIOptions,
 ): Promise<void> => {
   try {
     const classNames = await fileToClassNames(file, options);

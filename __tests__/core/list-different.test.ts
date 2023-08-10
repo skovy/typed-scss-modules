@@ -1,13 +1,20 @@
-import { listDifferent } from "../../lib/core";
-import { describeAllImplementations } from "../helpers";
+import { jest } from "@jest/globals";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { listDifferent } from "../../lib/core/index.js";
+import { describeAllImplementations } from "../helpers/index.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describeAllImplementations((implementation) => {
   describe("listDifferent", () => {
-    let exit: jest.SpyInstance;
+    let exit: jest.SpiedFunction<typeof process.exit>;
 
     beforeEach(() => {
       console.log = jest.fn();
-      exit = jest.spyOn(process, "exit").mockImplementation();
+      exit = jest
+        .spyOn(process, "exit")
+        .mockImplementation((() => {}) as () => never);
     });
 
     afterEach(() => {
@@ -42,10 +49,10 @@ describeAllImplementations((implementation) => {
 
       expect(exit).toHaveBeenCalledWith(1);
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining(`[INVALID TYPES] Check type definitions for`)
+        expect.stringContaining(`[INVALID TYPES] Check type definitions for`),
       );
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining(`invalid.scss`)
+        expect.stringContaining(`invalid.scss`),
       );
     });
 
@@ -71,7 +78,7 @@ describeAllImplementations((implementation) => {
 
       expect(console.log).toHaveBeenCalledTimes(1);
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining(`Only 1 file found for`)
+        expect.stringContaining(`Only 1 file found for`),
       );
       expect(exit).not.toHaveBeenCalled();
     });
@@ -121,11 +128,11 @@ describeAllImplementations((implementation) => {
       expect(exit).toHaveBeenCalledWith(1);
       expect(console.log).toHaveBeenCalledWith(
         expect.stringContaining(
-          `[INVALID TYPES] Type file needs to be generated for`
-        )
+          `[INVALID TYPES] Type file needs to be generated for`,
+        ),
       );
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining(`no-generated.scss`)
+        expect.stringContaining(`no-generated.scss`),
       );
     });
 
@@ -151,7 +158,7 @@ describeAllImplementations((implementation) => {
       expect(exit).not.toHaveBeenCalled();
       expect(console.log).toHaveBeenCalledTimes(1);
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining(`No files found`)
+        expect.stringContaining(`No files found`),
       );
     });
   });

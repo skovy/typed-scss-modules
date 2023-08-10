@@ -1,10 +1,9 @@
 import { SyncContext } from "node-sass";
-import { LegacyImporterThis } from "sass";
-import { aliasImporter, customImporters } from "../../lib/sass/importer";
+import { aliasImporter, customImporters } from "../../lib/sass/importer.js";
 
 // SASS importers receive two other arguments that this package doesn't care about.
 // Fake `this` which the type definitions both define for importers.
-const fakeImporterThis = {} as LegacyImporterThis & SyncContext;
+const fakeImporterThis = {} as SyncContext;
 const fakePrev = "";
 
 describe("#aliasImporter", () => {
@@ -22,7 +21,7 @@ describe("#aliasImporter", () => {
     });
     expect(importer.call(fakeImporterThis, "output", fakePrev)).toBeNull();
     expect(
-      importer.call(fakeImporterThis, "input-substring", fakePrev)
+      importer.call(fakeImporterThis, "input-substring", fakePrev),
     ).toBeNull();
     expect(importer.call(fakeImporterThis, "other", fakePrev)).toBeNull();
   });
@@ -41,7 +40,7 @@ describe("#aliasImporter", () => {
     });
     expect(importer.call(fakeImporterThis, "output~", fakePrev)).toBeNull();
     expect(
-      importer.call(fakeImporterThis, "input-substring-abc", fakePrev)
+      importer.call(fakeImporterThis, "input-substring-abc", fakePrev),
     ).toBeNull();
     expect(importer.call(fakeImporterThis, "other", fakePrev)).toBeNull();
   });

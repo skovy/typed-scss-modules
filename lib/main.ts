@@ -7,12 +7,12 @@ import {
   listDifferent,
   setAlertsLogLevel,
   watch,
-} from "./core";
-import { loadConfig, mergeOptions } from "./load";
+} from "./core/index.js";
+import { loadConfig, mergeOptions } from "./load.js";
 
 export const main = async (
   pattern: string,
-  cliOptions: Partial<CLIOptions>
+  cliOptions: Partial<CLIOptions>,
 ) => {
   const configOptions = await loadConfig();
   const options = mergeOptions(cliOptions, configOptions);

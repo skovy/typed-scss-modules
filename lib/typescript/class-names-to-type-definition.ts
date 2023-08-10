@@ -1,8 +1,8 @@
-import { ClassName } from "lib/sass/file-to-class-names";
+import { ClassName } from "lib/sass/file-to-class-names.js";
 import os from "os";
 import reserved from "reserved-words";
-import { alerts } from "../core";
-import { attemptPrettier } from "../prettier";
+import { alerts } from "../core/index.js";
+import { attemptPrettier } from "../prettier/index.js";
 
 export type ExportType = "named" | "default";
 export const EXPORT_TYPES: ExportType[] = ["named", "default"];
@@ -40,12 +40,12 @@ const isReservedKeyword = (className: ClassName) =>
 const isValidName = (className: ClassName) => {
   if (isReservedKeyword(className)) {
     alerts.warn(
-      `[SKIPPING] '${className}' is a reserved keyword (consider renaming or using --exportType default).`
+      `[SKIPPING] '${className}' is a reserved keyword (consider renaming or using --exportType default).`,
     );
     return false;
   } else if (/-/.test(className)) {
     alerts.warn(
-      `[SKIPPING] '${className}' contains dashes (consider using 'camelCase' or 'dashes' for --nameFormat or using --exportType default).`
+      `[SKIPPING] '${className}' contains dashes (consider using 'camelCase' or 'dashes' for --nameFormat or using --exportType default).`,
     );
     return false;
   }
@@ -54,7 +54,7 @@ const isValidName = (className: ClassName) => {
 };
 
 export const classNamesToTypeDefinitions = async (
-  options: TypeDefinitionOptions
+  options: TypeDefinitionOptions,
 ): Promise<string | null> => {
   if (options.classNames.length) {
     const lines: string[] = [];
@@ -71,8 +71,8 @@ export const classNamesToTypeDefinitions = async (
         lines.push(`export type ${Styles} = {`);
         lines.push(
           ...options.classNames.map((className) =>
-            classNameToType(className, options.quoteType || quoteTypeDefault)
-          )
+            classNameToType(className, options.quoteType || quoteTypeDefault),
+          ),
         );
         lines.push(`};${os.EOL}`);
 
@@ -87,7 +87,7 @@ export const classNamesToTypeDefinitions = async (
         lines.push(
           ...options.classNames
             .filter(isValidName)
-            .map(classNameToNamedTypeDefinition)
+            .map(classNameToNamedTypeDefinition),
         );
 
         break;

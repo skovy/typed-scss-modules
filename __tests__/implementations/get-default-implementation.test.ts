@@ -1,4 +1,4 @@
-import { getDefaultImplementation } from "../../lib/implementations";
+import { getDefaultImplementation } from "../../lib/implementations/index.js";
 
 describe("getDefaultImplementation", () => {
   it("returns node-sass if it exists", () => {

@@ -1,8 +1,8 @@
 import { SyncImporter } from "node-sass";
-import { LegacySyncImporter } from "sass";
+import { Importer as SassImporter } from "sass";
 
 // Hacky way to merge both dart-sass and node-sass importer definitions.
-type Importer = LegacySyncImporter & SyncImporter;
+type Importer = SassImporter & SyncImporter;
 
 export { Importer };
 
@@ -30,7 +30,7 @@ export const aliasImporter =
     }
 
     const prefixMatch = Object.keys(aliasPrefixes).find((prefix) =>
-      url.startsWith(prefix)
+      url.startsWith(prefix),
     );
 
     if (prefixMatch) {

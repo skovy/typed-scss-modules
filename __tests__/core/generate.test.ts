@@ -1,6 +1,10 @@
 import fs from "fs";
-import { generate } from "../../lib/core";
-import { describeAllImplementations } from "../helpers";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { generate } from "../../lib/core/index.js";
+import { describeAllImplementations } from "../helpers/index.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describeAllImplementations((implementation) => {
   describe("generate", () => {

@@ -1,19 +1,21 @@
 import fs from "fs";
-import path from "path";
-import { alerts } from "../../lib/core/alerts";
-import { removeSCSSTypeDefinitionFile } from "../../lib/core/remove-file";
-import { DEFAULT_OPTIONS } from "../../lib/load";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import { alerts, removeSCSSTypeDefinitionFile } from "../../lib/core/index.js";
+import { DEFAULT_OPTIONS } from "../../lib/load.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe("removeFile", () => {
   const originalTestFile = path.resolve(__dirname, "..", "removable.scss");
   const existingFile = path.resolve(__dirname, "..", "style.scss");
   const existingTypes = path.join(
     process.cwd(),
-    "__tests__/removable.scss.d.ts"
+    "__tests__/removable.scss.d.ts",
   );
   const outputFolderExistingTypes = path.resolve(
     process.cwd(),
-    "__generated__/__tests__/removable.scss.d.ts"
+    "__generated__/__tests__/removable.scss.d.ts",
   );
 
   let existsSpy: jest.SpyInstance;
@@ -27,7 +29,7 @@ describe("removeFile", () => {
         (path) =>
           path === existingTypes ||
           path === existingFile ||
-          path === outputFolderExistingTypes
+          path === outputFolderExistingTypes,
       );
 
     unlinkSpy = jest.spyOn(fs, "unlinkSync").mockImplementation();
@@ -43,16 +45,16 @@ describe("removeFile", () => {
     const nonExistingFile = path.resolve(__dirname, "..", "deleted.scss");
     const nonExistingTypes = path.join(
       process.cwd(),
-      "__tests__/deleted.scss.d.ts"
+      "__tests__/deleted.scss.d.ts",
     );
 
     removeSCSSTypeDefinitionFile(nonExistingFile, DEFAULT_OPTIONS);
 
     expect(existsSpy).toHaveBeenCalledWith(
-      expect.stringMatching(nonExistingFile)
+      expect.stringMatching(nonExistingFile),
     );
     expect(existsSpy).toHaveBeenCalledWith(
-      expect.stringMatching(nonExistingTypes)
+      expect.stringMatching(nonExistingTypes),
     );
     expect(unlinkSpy).not.toHaveBeenCalled();
     expect(alertsSpy).not.toHaveBeenCalled();
@@ -62,11 +64,11 @@ describe("removeFile", () => {
     removeSCSSTypeDefinitionFile(originalTestFile, DEFAULT_OPTIONS);
 
     expect(existsSpy).toHaveBeenCalledWith(
-      expect.stringMatching(existingTypes)
+      expect.stringMatching(existingTypes),
     );
     expect(unlinkSpy).toHaveBeenCalled();
     expect(unlinkSpy).toHaveBeenCalledWith(
-      expect.stringMatching(existingTypes)
+      expect.stringMatching(existingTypes),
     );
     expect(alertsSpy).toHaveBeenCalled();
   });
@@ -79,11 +81,11 @@ describe("removeFile", () => {
       });
 
       expect(existsSpy).toHaveBeenCalledWith(
-        expect.stringMatching(outputFolderExistingTypes)
+        expect.stringMatching(outputFolderExistingTypes),
       );
       expect(unlinkSpy).toHaveBeenCalled();
       expect(unlinkSpy).toHaveBeenCalledWith(
-        expect.stringMatching(outputFolderExistingTypes)
+        expect.stringMatching(outputFolderExistingTypes),
       );
       expect(alertsSpy).toHaveBeenCalled();
     });

@@ -1,6 +1,6 @@
 import glob from "glob";
-import { alerts } from "./alerts";
-import { ConfigOptions } from "./types";
+import { alerts } from "./alerts.js";
+import { ConfigOptions } from "./types.js";
 
 /**
  * Return the files matching the given pattern and alert the user if only 0 or 1
@@ -11,7 +11,7 @@ import { ConfigOptions } from "./types";
  */
 export function listFilesAndPerformSanityChecks(
   pattern: string,
-  options: ConfigOptions
+  options: ConfigOptions,
 ): string[] {
   // Find all the files that match the provided pattern.
   const files = glob.sync(pattern, { ignore: options.ignore });
@@ -24,7 +24,7 @@ export function listFilesAndPerformSanityChecks(
   // provide a (hopefully) helpful warning.
   if (files.length === 1) {
     alerts.warn(
-      `Only 1 file found for ${pattern}. If using a glob pattern (eg: dir/**/*.scss) make sure to wrap in quotes (eg: "dir/**/*.scss").`
+      `Only 1 file found for ${pattern}. If using a glob pattern (eg: dir/**/*.scss) make sure to wrap in quotes (eg: "dir/**/*.scss").`,
     );
   }
 

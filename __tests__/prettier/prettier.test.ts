@@ -1,6 +1,7 @@
+import { jest } from "@jest/globals";
 import prettier from "prettier";
-import { attemptPrettier } from "../../lib/prettier";
-import { classNamesToTypeDefinitions } from "../../lib/typescript";
+import { attemptPrettier } from "../../lib/prettier/index.js";
+import { classNamesToTypeDefinitions } from "../../lib/typescript/index.js";
 
 const input =
   "export type Styles = {'myClass': string;'yourClass': string;}; export type Classes = keyof Styles; declare const styles: Styles; export default styles;";

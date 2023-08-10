@@ -1,7 +1,11 @@
 import fs from "fs";
+import { dirname } from "path";
 import slash from "slash";
-import { alerts } from "../../lib/core";
-import { main } from "../../lib/main";
+import { fileURLToPath } from "url";
+import { alerts } from "../../lib/core/index.js";
+import { main } from "../../lib/main.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe("dart-sass", () => {
   let writeFileSyncSpy: jest.SpyInstance;
@@ -56,7 +60,7 @@ describe("dart-sass", () => {
 
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       `${expectedDirname}/use.scss.d.ts`,
-      "export declare const foo: string;\n"
+      "export declare const foo: string;\n",
     );
   });
 });

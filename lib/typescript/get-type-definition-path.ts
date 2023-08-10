@@ -1,5 +1,5 @@
 import path from "path";
-import { ConfigOptions } from "../core";
+import { ConfigOptions } from "../core/index.js";
 
 const CURRENT_WORKING_DIRECTORY = process.cwd();
 
@@ -11,14 +11,14 @@ const CURRENT_WORKING_DIRECTORY = process.cwd();
  */
 export const getTypeDefinitionPath = (
   file: string,
-  options: ConfigOptions
+  options: ConfigOptions,
 ): string => {
   if (options.outputFolder) {
     const relativePath = path.relative(CURRENT_WORKING_DIRECTORY, file);
     const resolvedPath = path.resolve(
       CURRENT_WORKING_DIRECTORY,
       options.outputFolder,
-      relativePath
+      relativePath,
     );
 
     return `${resolvedPath}.d.ts`;

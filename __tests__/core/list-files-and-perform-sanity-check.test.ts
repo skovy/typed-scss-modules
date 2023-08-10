@@ -1,5 +1,11 @@
-import { ConfigOptions } from "../../lib/core";
-import { listFilesAndPerformSanityChecks } from "../../lib/core/list-files-and-perform-sanity-checks";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import {
+  ConfigOptions,
+  listFilesAndPerformSanityChecks,
+} from "../../lib/core/index.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const options: ConfigOptions = {
   banner: "",
@@ -28,7 +34,7 @@ describe("listAllFilesAndPerformSanityCheck", () => {
     listFilesAndPerformSanityChecks(pattern, options);
 
     expect(console.log).toHaveBeenCalledWith(
-      expect.stringContaining("No files found.")
+      expect.stringContaining("No files found."),
     );
   });
 
@@ -38,7 +44,7 @@ describe("listAllFilesAndPerformSanityCheck", () => {
     listFilesAndPerformSanityChecks(pattern, options);
 
     expect(console.log).toHaveBeenCalledWith(
-      expect.stringContaining("Only 1 file found for")
+      expect.stringContaining("Only 1 file found for"),
     );
   });
 });
