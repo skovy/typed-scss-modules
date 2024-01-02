@@ -19,7 +19,7 @@ const options: ConfigOptions = {
 
 describe("listAllFilesAndPerformSanityCheck", () => {
   beforeEach(() => {
-    console.log = jest.fn();
+    console.warn = jest.fn();
   });
 
   it("prints a warning if the pattern matches 0 files", () => {
@@ -27,7 +27,7 @@ describe("listAllFilesAndPerformSanityCheck", () => {
 
     listFilesAndPerformSanityChecks(pattern, options);
 
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.warn).toHaveBeenCalledWith(
       expect.stringContaining("No files found.")
     );
   });
@@ -37,7 +37,7 @@ describe("listAllFilesAndPerformSanityCheck", () => {
 
     listFilesAndPerformSanityChecks(pattern, options);
 
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.warn).toHaveBeenCalledWith(
       expect.stringContaining("Only 1 file found for")
     );
   });

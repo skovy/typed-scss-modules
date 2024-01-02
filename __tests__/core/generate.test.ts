@@ -27,9 +27,16 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        aliases: {
+          "~fancy-import": "complex",
+          "~another": "style",
+        },
+        aliasPrefixes: {
+          "~": "nested-styles/",
+        },
       });
 
-      expect(fs.writeFileSync).toHaveBeenCalledTimes(6);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(9);
     });
   });
 });

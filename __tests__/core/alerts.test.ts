@@ -2,13 +2,16 @@ import { alerts, setAlertsLogLevel } from "../../lib/core";
 
 describe("alerts", () => {
   let logSpy: jest.SpyInstance;
+  let warnSpy: jest.SpyInstance;
 
   beforeEach(() => {
     logSpy = jest.spyOn(console, "log").mockImplementation();
+    warnSpy = jest.spyOn(console, "warn").mockImplementation();
   });
 
   afterEach(() => {
     logSpy.mockRestore();
+    warnSpy.mockRestore();
   });
 
   const TEST_ALERT_MSG = "TEST ALERT MESSAGE";
@@ -20,29 +23,29 @@ describe("alerts", () => {
 
     alerts.error(TEST_ALERT_MSG);
 
-    expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
+    expect(console.warn).toHaveBeenLastCalledWith(EXPECTED);
     //make sure each alert only calls console.log once
-    expect(console.log).toHaveBeenCalledTimes(1);
+    expect(console.warn).toHaveBeenCalledTimes(1);
 
     alerts.warn(TEST_ALERT_MSG);
 
-    expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(2);
+    expect(console.warn).toHaveBeenLastCalledWith(EXPECTED);
+    expect(console.warn).toHaveBeenCalledTimes(2);
 
     alerts.notice(TEST_ALERT_MSG);
 
     expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(3);
+    expect(console.log).toHaveBeenCalledTimes(1);
 
     alerts.info(TEST_ALERT_MSG);
 
     expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(4);
+    expect(console.log).toHaveBeenCalledTimes(2);
 
     alerts.success(TEST_ALERT_MSG);
 
     expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(5);
+    expect(console.log).toHaveBeenCalledTimes(3);
   });
 
   it("should only print error messages with error log level", () => {
@@ -50,8 +53,8 @@ describe("alerts", () => {
 
     alerts.error(TEST_ALERT_MSG);
 
-    expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(1);
+    expect(console.warn).toHaveBeenLastCalledWith(EXPECTED);
+    expect(console.warn).toHaveBeenCalledTimes(1);
 
     alerts.warn(TEST_ALERT_MSG);
     alerts.notice(TEST_ALERT_MSG);
@@ -59,7 +62,7 @@ describe("alerts", () => {
     alerts.success(TEST_ALERT_MSG);
 
     //shouldn't change
-    expect(console.log).toHaveBeenCalledTimes(1);
+    expect(console.warn).toHaveBeenCalledTimes(1);
   });
 
   it("should print all but warning messages with info log level", () => {
@@ -67,27 +70,27 @@ describe("alerts", () => {
 
     alerts.error(TEST_ALERT_MSG);
 
-    expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(1);
+    expect(console.warn).toHaveBeenLastCalledWith(EXPECTED);
+    expect(console.warn).toHaveBeenCalledTimes(1);
 
     alerts.notice(TEST_ALERT_MSG);
 
     expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(2);
+    expect(console.log).toHaveBeenCalledTimes(1);
 
     alerts.info(TEST_ALERT_MSG);
 
     expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(3);
+    expect(console.log).toHaveBeenCalledTimes(2);
 
     alerts.success(TEST_ALERT_MSG);
 
     expect(console.log).toHaveBeenLastCalledWith(EXPECTED);
-    expect(console.log).toHaveBeenCalledTimes(4);
+    expect(console.log).toHaveBeenCalledTimes(3);
 
     alerts.warn(TEST_ALERT_MSG);
 
-    expect(console.log).toHaveBeenCalledTimes(4);
+    expect(console.warn).toHaveBeenCalledTimes(1);
   });
 
   it("should print no messages with silent log level", () => {
@@ -100,5 +103,6 @@ describe("alerts", () => {
     alerts.success(TEST_ALERT_MSG);
 
     expect(console.log).not.toHaveBeenCalled();
+    expect(console.warn).not.toHaveBeenCalled();
   });
 });
