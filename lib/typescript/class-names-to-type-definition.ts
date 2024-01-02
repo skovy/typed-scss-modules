@@ -11,9 +11,9 @@ export type QuoteType = "single" | "double";
 export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
 
 export interface TypeDefinitionOptions {
-  banner: string;
+  banner?: string;
   classNames: ClassName[];
-  exportType: ExportType;
+  exportType?: ExportType;
   exportTypeName?: string;
   exportTypeInterface?: string;
   quoteType?: QuoteType;

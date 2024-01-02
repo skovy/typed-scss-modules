@@ -2,9 +2,9 @@ import type PostCSSModulesPlugin from "postcss-modules";
 import { SASSOptions } from "../sass";
 import { ExportType, LogLevel, QuoteType } from "../typescript";
 
-type CLIOnlyOptions = Extract<keyof SASSOptions, "importer">;
+type NonCLIOptions = "importer";
 
-export interface CLIOptions extends Exclude<SASSOptions, CLIOnlyOptions> {
+export interface CLIOptions extends Exclude<SASSOptions, NonCLIOptions> {
   banner: string;
   ignore: string[];
   ignoreInitial: boolean;

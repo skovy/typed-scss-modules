@@ -39,13 +39,18 @@ export interface SASSOptions extends SASSImporterOptions {
   additionalData?: string;
   includePaths?: string[];
   nameFormat?: string | string[];
-  implementation: Implementations;
+  implementation?: Implementations;
 }
 export const nameFormatDefault: NameFormatWithTransformer = "camel";
 
+export type FileToClassNameOptions = Pick<
+  ConfigOptions,
+  keyof SASSOptions | "nameFormat" | "modules"
+>;
+
 export const fileToClassNames = async (
   file: string,
-  options: ConfigOptions = {} as ConfigOptions
+  options: FileToClassNameOptions = {} as FileToClassNameOptions
 ) => {
   const {
     additionalData,

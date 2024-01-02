@@ -22,7 +22,11 @@ export const writeFile = async (
   const classNames = await fileToClassNames(file, options);
   const typeDefinition = await classNamesToTypeDefinitions({
     classNames,
-    ...options,
+    banner: options.banner,
+    exportType: options.exportType,
+    exportTypeInterface: options.exportTypeInterface,
+    exportTypeName: options.exportTypeName,
+    quoteType: options.quoteType,
   });
 
   const typesPath = getTypeDefinitionPath(file, options);
