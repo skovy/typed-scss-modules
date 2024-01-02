@@ -38,17 +38,21 @@ const normalizeErrorMessage = (error: string | Error) => {
     const { message, file, line, column } = error as SassError;
     const location = file ? ` (${file}[${line}:${column}])` : "";
 
-    const wrappedError = new Error(`SASS Error ${location}\n${message}`);
-    wrappedError.stack = error.stack;
+    const wrappedError = new Error(`SASS Error ${location}\n${message}`, {
+      cause: error,
+    });
+
+    wrappedError.stack = chalk.red(wrappedError.stack);
+
     return wrappedError;
   }
 
-  return error;
+  return chalk.red(error);
 };
 const error = withLogLevelsRestriction(
   ["verbose", "error", "info"],
   (message: string | Error) => {
-    console.warn(chalk.red(normalizeErrorMessage(message)));
+    console.warn(normalizeErrorMessage(message));
   }
 );
 const warn = withLogLevelsRestriction(["verbose"], (message: string) =>
