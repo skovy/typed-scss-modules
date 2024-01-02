@@ -34,10 +34,10 @@ const withLogLevelsRestriction =
 
 const error = withLogLevelsRestriction(
   ["verbose", "error", "info"],
-  (message: string) => console.log(chalk.red(message))
+  (message: string) => console.warn(chalk.red(message))
 );
 const warn = withLogLevelsRestriction(["verbose"], (message: string) =>
-  console.log(chalk.yellowBright(message))
+  console.warn(chalk.yellowBright(message))
 );
 const notice = withLogLevelsRestriction(
   ["verbose", "info"],
