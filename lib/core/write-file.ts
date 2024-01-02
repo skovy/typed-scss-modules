@@ -7,7 +7,7 @@ import {
 } from "../typescript";
 import { alerts } from "./alerts";
 import { removeSCSSTypeDefinitionFile } from "./remove-file";
-import { CLIOptions } from "./types";
+import { ConfigOptions } from "./types";
 
 /**
  * Given a single file generate the proper types.
@@ -17,7 +17,7 @@ import { CLIOptions } from "./types";
  */
 export const writeFile = async (
   file: string,
-  options: CLIOptions
+  options: ConfigOptions
 ): Promise<void> => {
   const classNames = await fileToClassNames(file, options);
   const typeDefinition = await classNamesToTypeDefinitions({

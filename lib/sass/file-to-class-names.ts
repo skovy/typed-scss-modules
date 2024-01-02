@@ -5,6 +5,7 @@ import {
   snakeCase,
 } from "change-case";
 import fs from "fs";
+import { ConfigOptions } from "../core/types";
 import { Implementations, getImplementation } from "../implementations";
 import { Aliases, SASSImporterOptions, customImporters } from "./importer";
 import { sourceToClassNames } from "./source-to-class-names";
@@ -44,7 +45,9 @@ export const nameFormatDefault: NameFormatWithTransformer = "camel";
 
 export const fileToClassNames = async (
   file: string,
-  {
+  options: ConfigOptions = {} as ConfigOptions
+) => {
+  const {
     additionalData,
     includePaths = [],
     nameFormat: rawNameFormat,
@@ -52,8 +55,8 @@ export const fileToClassNames = async (
     aliases,
     aliasPrefixes,
     importer,
-  }: SASSOptions = {} as SASSOptions
-) => {
+  } = options;
+
   const { renderSync } = getImplementation(implementation);
 
   const nameFormat = (
@@ -74,7 +77,7 @@ export const fileToClassNames = async (
     importer: customImporters({ aliases, aliasPrefixes, importer }),
   });
 
-  const classNames = await sourceToClassNames(result.css, file);
+  const classNames = await sourceToClassNames(result.css, file, options);
   const transformers = nameFormats.map((item) => transformersMap[item]);
   const transformedClassNames = new Set<ClassName>([]);
   classNames.forEach((className: ClassName) => {

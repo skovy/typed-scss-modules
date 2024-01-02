@@ -1,3 +1,4 @@
+import type PostCSSModulesPlugin from "postcss-modules";
 import { SASSOptions } from "../sass";
 import { ExportType, LogLevel, QuoteType } from "../typescript";
 
@@ -18,4 +19,7 @@ export interface CLIOptions extends Exclude<SASSOptions, CLIOnlyOptions> {
   outputFolder: string | null;
 }
 
-export interface ConfigOptions extends CLIOptions, SASSOptions {}
+type PostCSSModulesOptions = Parameters<PostCSSModulesPlugin>[0];
+export interface ConfigOptions extends CLIOptions, SASSOptions {
+  modules?: PostCSSModulesOptions;
+}
