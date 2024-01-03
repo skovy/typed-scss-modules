@@ -34,16 +34,21 @@ const withLogLevelsRestriction =
   };
 
 const normalizeErrorMessage = (error: string | Error) => {
-  if (error && error instanceof Error && "file" in error) {
-    const { message, file, line, column } = error as SassError;
-    const location = file ? ` (${file}[${line}:${column}])` : "";
+  if (error && error instanceof Error) {
+    if ("file" in error) {
+      const { message, file, line, column } = error as SassError;
+      const location = file ? ` (${file}[${line}:${column}])` : "";
+      const wrappedError = new Error(`SASS Error ${location}\n${message}`, {
+        cause: error,
+      });
 
-    const wrappedError = new Error(`SASS Error ${location}\n${message}`, {
-      cause: error,
-    });
+      wrappedError.stack = chalk.red(wrappedError.stack);
 
-    wrappedError.stack = chalk.red(wrappedError.stack);
+      return wrappedError;
+    }
 
+    const wrappedError = new Error(error.message);
+    wrappedError.stack = chalk.red(error.stack);
     return wrappedError;
   }
 
