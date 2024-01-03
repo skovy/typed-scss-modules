@@ -8,8 +8,8 @@ export type SourceToClassNamesOptions = Pick<ConfigOptions, "modules">;
 /**
  * Use identity-obj-proxy for any imported CSS modules
  *
- * This should not affect the final for a given file, since the types are
- * generated only using the classes defined in the current file.
+ * This should not affect the final types for a given file, since the types are
+ * generated only using the classes defined in the current file and not its imports.
  *
  * This has the added benefit of reducing system calls and disk access,
  * so may perform faster in large projects.
