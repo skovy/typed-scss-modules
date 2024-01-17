@@ -7,6 +7,24 @@ import PostcssModulesPlugin from "postcss-modules";
  * css module imports via `composes: ` or `@value` statements as the rules to propoerly
  * resolve these requests may be totally arbitrary and different accross projects.
  *
+ * The identity-obj-proxy is a simple object that returns the requested key as the value.
+ *
+ * So files with the following request
+ *
+ * ```css
+ * .foo {
+ *   composes: bar from "./baz.css";
+ * }
+ * ```
+ *
+ * will generate something like
+ *
+ * ```js
+ * {
+ *   foo: "foo-HASH123 bar", // the `bar` class is not resolved, and stubbed by the proxy
+ * }
+ * ```
+ *
  * This should not affect the final types for a given file, since the types are
  * generated only using the classes defined in the current file and not its imports.
  *
