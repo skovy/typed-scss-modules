@@ -1,10 +1,12 @@
-import { execSync } from "child_process";
+import { execSync, spawnSync } from "child_process";
 
 describe("cli", () => {
   it("should run when no files are found", () => {
-    const result = execSync("npm run typed-scss-modules src").toString();
+    const result = spawnSync("npm run typed-scss-modules src", {
+      shell: true,
+    });
 
-    expect(result).toContain("No files found.");
+    expect(result.stderr.toString()).toContain("No files found.");
   });
 
   describe("examples", () => {

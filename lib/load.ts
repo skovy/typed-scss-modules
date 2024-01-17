@@ -1,7 +1,7 @@
 import { bundleRequire } from "bundle-require";
 import JoyCon from "joycon";
 import path from "path";
-import { alerts, CLIOptions, ConfigOptions } from "./core";
+import { CLIOptions, ConfigOptions } from "./core";
 import { getDefaultImplementation } from "./implementations";
 import { nameFormatDefault } from "./sass";
 import {
@@ -39,25 +39,16 @@ export const loadConfig = async (): Promise<
   );
 
   if (configPath) {
-    try {
-      const configModule = await bundleRequire({
-        filepath: configPath,
-      });
+    const configModule = await bundleRequire({
+      filepath: configPath,
+    });
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const config: ConfigOptions =
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        configModule.mod.config || configModule.mod.default || configModule.mod;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const config: ConfigOptions =
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      configModule.mod.config || configModule.mod.default || configModule.mod;
 
-      return config;
-    } catch (error) {
-      alerts.error(
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        `An error occurred loading the config file "${configPath}":\n${error}`
-      );
-
-      return {};
-    }
+    return config;
   }
 
   return {};
