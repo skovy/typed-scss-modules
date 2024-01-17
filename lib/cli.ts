@@ -146,7 +146,7 @@ const { _: patterns, ...rest } = yargs
   .parseSync();
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-main(patterns[0] as string, { ...rest }).catch((error) => {
+main(patterns[0] as string, { ...rest }).catch((error: Error) => {
   alerts.error("Encountered an error while generating type definitions.");
   alerts.error(error);
   process.exitCode = 1;
