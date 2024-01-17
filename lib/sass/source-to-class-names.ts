@@ -5,7 +5,9 @@ import PostcssModulesPlugin from "postcss-modules";
 /**
  * Use identity-obj-proxy for any imported CSS modules. This is to ignore any
  * css module imports via `composes: ` or `@value` statements as the rules to propoerly
- * resolve these requests may be totally arbitrary and different accross projects.
+ * resolve these requests may be totally arbitrary and different accross projects. Additionally,
+ * this is a simple way to avoid needing to write a sass loader for this tool. (To handle import of
+ * css modules written in SASS).
  *
  * The identity-obj-proxy is a simple object that returns the requested key as the value.
  *
