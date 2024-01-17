@@ -29,7 +29,7 @@ import PostcssModulesPlugin from "postcss-modules";
  * generated only using the classes defined in the current file and not its imports.
  *
  * This has the added benefit of reducing system calls and disk access,
- * so may perform faster in large projects.
+ * so may perform faster in large projects in comparison to properly resolving these requests.
  *
  * The only drawback is that this does not process the import tree
  * the way in which it is intended to be used, so broken imports
