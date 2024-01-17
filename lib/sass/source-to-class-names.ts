@@ -3,7 +3,9 @@ import postcss from "postcss";
 import PostcssModulesPlugin from "postcss-modules";
 
 /**
- * Use identity-obj-proxy for any imported CSS modules
+ * Use identity-obj-proxy for any imported CSS modules. This is to ignore any
+ * css module imports via `composes: ` or `@value` statements as the rules to propoerly
+ * resolve these requests may be totally arbitrary and different accross projects.
  *
  * This should not affect the final types for a given file, since the types are
  * generated only using the classes defined in the current file and not its imports.
