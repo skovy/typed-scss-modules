@@ -7,3 +7,7 @@
     color: $yellow;
   }
 }
+
+.class-with-composes {
+  composes: composed-class-red from "./another-style.scss";
+}
