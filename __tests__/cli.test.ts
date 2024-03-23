@@ -13,7 +13,7 @@ describe("cli", () => {
         `npm run typed-scss-modules "examples/basic/**/*.scss" -- --includePaths examples/basic/core --aliases.~alias variables --banner '// example banner'`
       ).toString();
 
-      expect(result).toContain("Found 3 files. Generating type definitions...");
+      expect(result).toContain("Found 4 files. Generating type definitions...");
     });
 
     it("should run the default-export example without errors", () => {
