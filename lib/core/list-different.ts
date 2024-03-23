@@ -31,6 +31,7 @@ export const checkFile = async (
     const classNames = await fileToClassNames(file, options);
     const typeDefinition = await classNamesToTypeDefinitions({
       classNames: classNames,
+      file,
       ...options,
     });
 

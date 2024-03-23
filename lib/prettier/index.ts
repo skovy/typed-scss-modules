@@ -20,9 +20,10 @@ const isPrettier = (t: unknown): t is Prettier =>
  * Try to load prettier and config from project to format input,
  * fall back to input if prettier is not found or failed
  *
+ * @param {file} file
  * @param {string} input
  */
-export const attemptPrettier = async (input: string) => {
+export const attemptPrettier = async (file: string, input: string) => {
   if (!canResolvePrettier()) {
     return input;
   }
@@ -35,7 +36,7 @@ export const attemptPrettier = async (input: string) => {
   }
 
   try {
-    const config = await prettier.resolveConfig(process.cwd(), {
+    const config = await prettier.resolveConfig(file, {
       editorconfig: true,
     });
     // try to return formatted output

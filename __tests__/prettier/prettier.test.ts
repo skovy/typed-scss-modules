@@ -1,13 +1,15 @@
+import { join } from "path";
 import prettier from "prettier";
 import { attemptPrettier } from "../../lib/prettier";
 import { classNamesToTypeDefinitions } from "../../lib/typescript";
 
+const file = join(__dirname, "test.d.ts");
 const input =
   "export type Styles = {'myClass': string;'yourClass': string;}; export type Classes = keyof Styles; declare const styles: Styles; export default styles;";
 
 describe("attemptPrettier", () => {
   it("should locate and apply prettier.format", async () => {
-    const output = await attemptPrettier(input);
+    const output = await attemptPrettier(file, input);
 
     expect(prettier.format(input, { parser: "typescript" })).toMatch(output);
   });
@@ -16,6 +18,7 @@ describe("attemptPrettier", () => {
     const typeDefinition = await classNamesToTypeDefinitions({
       banner: "",
       classNames: ["nestedAnother", "nestedClass", "someStyles"],
+      file,
       exportType: "default",
     });
 
@@ -23,7 +26,7 @@ describe("attemptPrettier", () => {
       throw new Error("failed to collect typeDefinition");
     }
 
-    const output = await attemptPrettier(typeDefinition);
+    const output = await attemptPrettier(file, typeDefinition);
 
     expect(output).toMatchSnapshot();
   });
@@ -37,7 +40,7 @@ describe("attemptPrettier - mock prettier", () => {
   });
 
   it("should fail to recognize prettier and return input", async () => {
-    const output = await attemptPrettier(input);
+    const output = await attemptPrettier(file, input);
 
     expect(input).toMatch(output);
   });
@@ -49,7 +52,7 @@ describe("attemptPrettier - mock resolution check", () => {
   });
 
   it("should fail to resolve prettier and return input", async () => {
-    const output = await attemptPrettier(input);
+    const output = await attemptPrettier(file, input);
 
     expect(input).toMatch(output);
   });
