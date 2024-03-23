@@ -24,6 +24,7 @@ export const writeFile = async (
     const classNames = await fileToClassNames(file, options);
     const typeDefinition = await classNamesToTypeDefinitions({
       classNames,
+      file,
       ...options,
     });
 

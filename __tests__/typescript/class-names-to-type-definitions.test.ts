@@ -1,9 +1,11 @@
 import os from "os";
-import { classNamesToTypeDefinitions, ExportType } from "../../lib/typescript";
+import { join } from "path";
+import { classNamesToTypeDefinitions } from "../../lib/typescript";
 
 jest.mock("../../lib/prettier/can-resolve", () => ({
   canResolvePrettier: () => false,
 }));
+const file = join(__dirname, "test.d.ts");
 
 describe("classNamesToTypeDefinitions (without Prettier)", () => {
   beforeEach(() => {
@@ -16,6 +18,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "named",
+        file,
       });
 
       expect(definition).toEqual(
@@ -28,6 +31,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner: "",
         classNames: [],
         exportType: "named",
+        file,
       });
 
       expect(definition).toBeNull();
@@ -38,6 +42,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner: "",
         classNames: ["myClass", "if"],
         exportType: "named",
+        file,
       });
 
       expect(definition).toEqual("export declare const myClass: string;\n");
@@ -51,6 +56,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner: "",
         classNames: ["myClass", "invalid-variable"],
         exportType: "named",
+        file,
       });
 
       expect(definition).toEqual("export declare const myClass: string;\n");
@@ -66,6 +72,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner: "",
         classNames: ["myClass", "yourClass"],
         exportType: "default",
+        file,
       });
 
       expect(definition).toEqual(
@@ -78,6 +85,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner: "",
         classNames: [],
         exportType: "default",
+        file,
       });
 
       expect(definition).toBeNull();
@@ -89,7 +97,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       const definition = await classNamesToTypeDefinitions({
         banner: "",
         classNames: ["myClass"],
-        exportType: "invalid" as ExportType,
+        // @ts-expect-error -- invalid export type
+        exportType: "invalid",
+        file,
       });
 
       expect(definition).toBeNull();
@@ -103,6 +113,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         classNames: ["myClass", "yourClass"],
         exportType: "default",
         quoteType: "double",
+        file,
       });
 
       expect(definition).toEqual(
@@ -116,6 +127,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         classNames: ["myClass", "yourClass"],
         exportType: "named",
         quoteType: "double",
+        file,
       });
 
       expect(definition).toEqual(
@@ -131,6 +143,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         classNames: ["myClass", "yourClass"],
         exportType: "default",
         exportTypeName: "Classes",
+        file,
       });
 
       expect(definition).toEqual(
@@ -144,6 +157,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         classNames: ["myClass", "yourClass"],
         exportType: "default",
         exportTypeInterface: "IStyles",
+        file,
       });
 
       expect(definition).toEqual(
@@ -161,6 +175,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner,
         classNames: ["myClass", "yourClass"],
         exportType: "default",
+        file,
       });
 
       expect(firstLine(definition!)).toBe(banner);
@@ -172,6 +187,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         banner,
         classNames: ["myClass", "yourClass"],
         exportType: "named",
+        file,
       });
 
       expect(firstLine(definition!)).toBe(banner);

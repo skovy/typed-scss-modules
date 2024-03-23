@@ -13,6 +13,7 @@ export const QUOTE_TYPES: QuoteType[] = ["single", "double"];
 export interface TypeDefinitionOptions {
   banner: string;
   classNames: ClassName[];
+  file: string;
   exportType: ExportType;
   exportTypeName?: string;
   exportTypeInterface?: string;
@@ -95,7 +96,7 @@ export const classNamesToTypeDefinitions = async (
 
     if (lines.length) {
       const typeDefinition = lines.join(`${os.EOL}`) + `${os.EOL}`;
-      return await attemptPrettier(typeDefinition);
+      return await attemptPrettier(options.file, typeDefinition);
     } else {
       return null;
     }
