@@ -1,3 +1,4 @@
+import { exit } from "process";
 import { alerts } from "./alerts";
 import { listFilesAndPerformSanityChecks } from "./list-files-and-perform-sanity-checks";
 import { ConfigOptions } from "./types";
@@ -26,5 +27,10 @@ export const generate = async (
   );
 
   // Wait for all the type definitions to be written.
-  await Promise.all(files.map((file) => writeFile(file, options)));
+  const result = await Promise.allSettled(
+    files.map((file) => writeFile(file, options))
+  );
+  if (result.some(({ status }) => status === "rejected")) {
+    exit(1);
+  }
 };

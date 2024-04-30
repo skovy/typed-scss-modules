@@ -73,5 +73,6 @@ export const writeFile = async (
     const { message, file, line, column } = error as SassError;
     const location = file ? ` (${file}[${line}:${column}])` : "";
     alerts.error(`${message}${location}`);
+    throw error;
   }
 };
