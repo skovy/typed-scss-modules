@@ -10,6 +10,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
+    "declarationMap": true,
     "outDir": "./dist",
     "rootDirs": [".", "examples/output-folder/__generated__"]
   }
