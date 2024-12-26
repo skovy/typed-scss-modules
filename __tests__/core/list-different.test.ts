@@ -38,6 +38,7 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       expect(exit).toHaveBeenCalledWith(1);
@@ -67,6 +68,7 @@ describeAllImplementations((implementation) => {
         logLevel: "verbose",
         nameFormat: ["kebab"],
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       expect(console.log).toHaveBeenCalledTimes(1);
@@ -93,6 +95,7 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       expect(exit).not.toHaveBeenCalled();
@@ -116,6 +119,7 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       expect(exit).toHaveBeenCalledWith(1);
@@ -146,6 +150,7 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       expect(exit).not.toHaveBeenCalled();
