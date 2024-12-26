@@ -360,7 +360,7 @@ Refer to [`lib/sass/importer.ts`](/blob/master/lib/sass/importer.ts) for more de
 
 Output filenames that will be compatible with the "arbitrary file extensions" feature that was introduced in TypeScript 5.0. See [the docs](https://www.typescriptlang.org/tsconfig#allowArbitraryExtensions) for more info.
 
-In essence, the `*.scss.d.ts` extension now becomes `*.d.scss.ts` so that you can import CSS modules in projects using ESM module resolution.
+In essence, the `*.scss.d.ts` extension now becomes `*.d.scss.ts` so that you can import SCSS modules in projects using ESM module resolution.
 
 ## Examples
 
