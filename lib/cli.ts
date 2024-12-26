@@ -142,6 +142,11 @@ const { _: patterns, ...rest } = yargs
     describe:
       "Inserts text at the top of every output file for documentation purposes.",
   })
+  .options("allowArbitraryExtensions", {
+    boolean: true,
+    describe:
+      'Output filenames that will be compatible with the "arbitrary file extensions" feature that was introduced in TypeScript 5.0.',
+  })
   .parseSync();
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

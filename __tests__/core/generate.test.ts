@@ -27,6 +27,7 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       expect(fs.writeFileSync).toHaveBeenCalledTimes(6);

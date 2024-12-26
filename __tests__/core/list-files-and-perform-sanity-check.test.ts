@@ -15,6 +15,7 @@ const options: ConfigOptions = {
   updateStaleOnly: false,
   logLevel: "verbose",
   outputFolder: null,
+  allowArbitraryExtensions: false,
 };
 
 describe("listAllFilesAndPerformSanityCheck", () => {

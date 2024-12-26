@@ -51,6 +51,7 @@ describe("#mergeOptions", () => {
           logLevel: "silent",
           outputFolder: "__generated__",
           banner: "// override",
+          allowArbitraryExtensions: true,
         },
         {}
       )
@@ -69,6 +70,7 @@ describe("#mergeOptions", () => {
       logLevel: "silent",
       outputFolder: "__generated__",
       banner: "// override",
+      allowArbitraryExtensions: true,
     });
   });
 
@@ -94,6 +96,7 @@ describe("#mergeOptions", () => {
           banner: "// override",
           outputFolder: "__generated__",
           importer,
+          allowArbitraryExtensions: true,
         }
       )
     ).toEqual({
@@ -112,6 +115,7 @@ describe("#mergeOptions", () => {
       banner: "// override",
       outputFolder: "__generated__",
       importer,
+      allowArbitraryExtensions: true,
     });
   });
 
@@ -135,6 +139,7 @@ describe("#mergeOptions", () => {
           logLevel: "silent",
           banner: "// override",
           outputFolder: "__cli-generated__",
+          allowArbitraryExtensions: true,
         },
         {
           nameFormat: ["param"],
@@ -170,6 +175,7 @@ describe("#mergeOptions", () => {
       banner: "// override",
       outputFolder: "__cli-generated__",
       importer,
+      allowArbitraryExtensions: true,
     });
   });
 
@@ -195,6 +201,7 @@ describe("#mergeOptions", () => {
           logLevel: "silent",
           banner: undefined,
           outputFolder: "__cli-generated__",
+          allowArbitraryExtensions: true,
         },
         {
           aliases: {},
@@ -214,6 +221,7 @@ describe("#mergeOptions", () => {
           banner: "// banner",
           outputFolder: "__generated__",
           importer,
+          allowArbitraryExtensions: false,
         }
       )
     ).toEqual({
@@ -234,6 +242,7 @@ describe("#mergeOptions", () => {
       banner: "// banner",
       outputFolder: "__cli-generated__",
       importer,
+      allowArbitraryExtensions: true,
     });
   });
 });

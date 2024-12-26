@@ -352,6 +352,16 @@ Define a [single custom SASS importer or an array of SASS importers](https://git
 
 Refer to [`lib/sass/importer.ts`](/blob/master/lib/sass/importer.ts) for more details and the `node-sass` and `sass` importer type definitions.
 
+### `--allowArbitraryExtensions`
+
+- **Type**: `boolean`
+- **Default**: `false`
+- **Example**: `typed-scss-modules src --allowArbitraryExtensions`
+
+Output filenames that will be compatible with the "arbitrary file extensions" feature that was introduced in TypeScript 5.0. See [the docs](https://www.typescriptlang.org/tsconfig#allowArbitraryExtensions) for more info.
+
+In essence, the `*.scss.d.ts` extension now becomes `*.d.scss.ts` so that you can import CSS modules in projects using ESM module resolution.
+
 ## Examples
 
 For examples of how this tool can be used and configured, see the `examples` directory:

@@ -35,11 +35,46 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       const expectedPath = path.join(
         process.cwd(),
         "__tests__/dummy-styles/style.scss.d.ts"
+      );
+
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        expectedPath,
+        "export declare const someClass: string;\n"
+      );
+      expect(console.log).toHaveBeenCalledWith(
+        expect.stringContaining(`[GENERATED TYPES] ${expectedPath}`)
+      );
+    });
+
+    it("writes the corresponding type definitions for a file and logs when allowArbitraryExtensions is set", async () => {
+      const testFile = path.resolve(__dirname, "..", "dummy-styles/style.scss");
+
+      await writeFile(testFile, {
+        banner: "",
+        watch: false,
+        ignoreInitial: false,
+        exportType: "named",
+        exportTypeName: "ClassNames",
+        exportTypeInterface: "Styles",
+        listDifferent: false,
+        ignore: [],
+        implementation,
+        quoteType: "single",
+        updateStaleOnly: false,
+        logLevel: "verbose",
+        outputFolder: null,
+        allowArbitraryExtensions: true,
+      });
+
+      const expectedPath = path.join(
+        process.cwd(),
+        "__tests__/dummy-styles/style.d.scss.ts"
       );
 
       expect(fs.writeFileSync).toHaveBeenCalledWith(
@@ -68,6 +103,7 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         outputFolder: null,
+        allowArbitraryExtensions: false,
       });
 
       expect(fs.writeFileSync).not.toHaveBeenCalled();
@@ -111,6 +147,7 @@ describeAllImplementations((implementation) => {
           updateStaleOnly: false,
           logLevel: "verbose",
           outputFolder: null,
+          allowArbitraryExtensions: false,
         });
 
         expect(fs.unlinkSync).toHaveBeenCalledWith(existingTypes);
@@ -142,6 +179,7 @@ describeAllImplementations((implementation) => {
           updateStaleOnly: false,
           logLevel: "verbose",
           outputFolder: "__generated__",
+          allowArbitraryExtensions: false,
         });
 
         const expectedPath = path.join(
@@ -200,6 +238,7 @@ describeAllImplementations((implementation) => {
           updateStaleOnly: true,
           logLevel: "verbose",
           outputFolder: null,
+          allowArbitraryExtensions: false,
         });
 
         expect(fs.writeFileSync).not.toHaveBeenCalled();
@@ -235,6 +274,7 @@ describeAllImplementations((implementation) => {
           updateStaleOnly: true,
           logLevel: "verbose",
           outputFolder: null,
+          allowArbitraryExtensions: false,
         });
 
         expect(fs.writeFileSync).toHaveBeenCalled();
@@ -259,6 +299,7 @@ describeAllImplementations((implementation) => {
           updateStaleOnly: true,
           logLevel: "verbose",
           outputFolder: null,
+          allowArbitraryExtensions: false,
         });
 
         expect(fs.writeFileSync).not.toHaveBeenCalled();
@@ -281,6 +322,7 @@ describeAllImplementations((implementation) => {
           updateStaleOnly: true,
           logLevel: "verbose",
           outputFolder: null,
+          allowArbitraryExtensions: false,
         });
 
         expect(fs.statSync).not.toHaveBeenCalledWith(testFile);

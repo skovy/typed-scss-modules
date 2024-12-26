@@ -79,6 +79,7 @@ export const DEFAULT_OPTIONS: CLIOptions = {
   logLevel: logLevelDefault,
   banner: bannerTypeDefault,
   outputFolder: null,
+  allowArbitraryExtensions: false,
 };
 
 const removedUndefinedValues = <Obj extends Record<string, unknown>>(
